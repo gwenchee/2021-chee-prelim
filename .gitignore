@@ -21,3 +21,4 @@
 *.fls 
 *.lof 
 *.fdb_latexmk
+*.DS_Store
