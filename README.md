@@ -1,2 +1,2 @@
 # prelim-generative-reactor-designs
-Repository holds prelim documents related to my prelim
+Repository holds documents related to my prelim
