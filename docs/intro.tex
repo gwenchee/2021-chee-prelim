@@ -102,7 +102,10 @@ The \gls{SLM} and \gls{EBM} techniques have been used for automotive and aircraf
 fabrication \cite{murr_frontiers_2016}.  
 Successful examples of additive manufacturing applied in the the aircraft industry 
 are Boeing’s use of additive manufacturing to reduce weight in the 787 Dreamliner
-\cite{noauthor_printed_2017} and SES-15 spacecraft \cite{noauthor_boeing_nodate}.  
+\cite{noauthor_printed_2017} and SES-15 spacecraft \cite{noauthor_boeing_nodate}. 
+Similar to the nuclear industry, the aerospace industry is highly regulated, and 
+so success in applications of additive manufacturing to the aerospace industry 
+is promising for the nuclear industry.  
 Using additive manufacturing to fabricate nuclear reactor components will 
 drastically reduce cost, timelines, increase safety and performance by 
 tailoring local material properties and redesigning geometries for optimal load paths 
@@ -111,14 +114,73 @@ With further advancement of these additive manufacturing technologies, a reactor
 core could be 3D printed in the near future. 
 \gls{ORNL} is leading this initiative through the 2019 \gls{TCR} Demonstration 
 Program. 
+The \gls{TCR} program will leverage recent scientific achievements in advanced 
+manufacturing, nuclear materials, machine learning, and computational modeling 
+and simulation to build a microreactor. 
 The program targets to design, manufacture, and operate a demonstration reactor 
 by 2023 \cite{terrani_transformational_2019}. 
 % explore funky designs :D 
+Applying additive manufacturing to nuclear reactor design will enable complex 
+reactor geometries that are not limited by previous manufacturing constraints. 
+This opens the door for re-examination of nuclear reactor optimization 
+\cite{sobes_artificial_2020}. 
+% types of optimization and ML tools (see Chapter 4 of Deb's Textbook) 
+% why we choose evolutionary algorithms 
+
+
 
 \section{Objectives}
-This dissertation's objectives were developed based on leveraging open-source 
+The main objectives of the proposed work were developed based on leveraging open-source 
 artificial intelligence tools with validated open-source nuclear transport and 
 thermal hydraulics software to create an open-source tool to easily generate 
 optimal reactor designs. 
-Accordingly, an outline of the steps to accomplish the motivation and goals 
-of this dissertation are listed below. 
+Accordingly, the objectives are listed below. 
+\vspace{0.2cm} 
+
+\noindent
+\textbf{Develop a tool that applies evolutionary algorithms to nuclear 
+reactor design optimization}. 
+This tool will not re-invent the wheel, it will utilize a well-documented 
+and validated open-source evolutionary algorithm python package with established 
+nuclear transport and thermal hydraulics software. This tool will run parallel on 
+\gls{HPC} machines. This tool will be open-source and follow rules for ensuring 
+reproducibility, effectiveness, and usability 
+\cite{list_ten_2017,osborne_ten_2014,sandve_ten_2013}. 
+
+\vspace{0.2cm} 
+\noindent
+\textbf{Model Fluoride-Salt-Cooled High-Temperature Reactor with established 
+nuclear transport and thermal hydraulics software}.
+The optimization tool will be applied to the \gls{FHR} concept. 
+To demonstrate success in modeling the \gls{FHR} with the nuclear transport and 
+thermal hydraulics software to be used with the optimization tool, I will participate 
+in the \gls{NEA}'s \gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
+
+\vspace{0.2cm} 
+\noindent
+\textbf{Demonstrate nuclear reactor design optimization with tool for neutronics problem}. 
+We will demonstrate successful implementation of the optimization tool with the 
+nuclear transport software by optimizing a simple \gls{FHR} model for a single 
+objective function. 
+
+\vspace{0.2cm} 
+\noindent
+\textbf{Demonstrate hyperparameter tuning with tool for neutronics problem}.
+There are many hyperparameters required for an evolutionary algorithm. 
+The hyperparameter selection will impact the effective-ness of the algorithm 
+for our problem. 
+Therefore, we must conduct hyperparameter tuning to find hyperparameters that work 
+best for our problem. 
+
+\vspace{0.2cm} 
+\noindent
+\textbf{Demonstrate nuclear reactor design optimization and hyperparameter 
+search with tool for neutronics and thermal hydraulics problem}.
+We will demonstrate successful implementation of the optimization tool and 
+hyperparameter tuning with the nuclear transport and thermal hydraulics tools 
+for a \gls{FHR} model.  
+
+
+\section{Outline}
+This document outlines the motivation, preliminary work, and future work proposed 
+towards developing 
