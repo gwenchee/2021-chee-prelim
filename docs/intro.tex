@@ -78,19 +78,34 @@ Based on the goals, an evaluation and selection methodology was developed which
 culminated in the selection of six Generation IV systems: \gls{GFR}, 
 \gls{LFR}, \gls{MSR}, \gls{SFR}, \gls{SCWR}, and \gls{VHTR} \cite{gif_technology_2002}. 
 The reactor systems of interest in this dissertation are the \gls{MSR} and \gls{VHTR} systems. 
-The \gls{GFR} system features a fast-neutron spectrum and an outlet temperature of 
-$\sim 850 ^{\circ}C$. 
-Several fuel forms are considered in this system for their potential to operate 
-at high temperatures and ensure an excellent retention of fission products:
-composite ceramic fuel, advanced fuel particles, etc \cite{gif_technology_2002}.   
-The \gls{MSR} system ... 
-The \gls{VHTR} system ... 
-% Describe MSR and VHTR systems 
+The \gls{MSR} system produces fission power in a circulating molten salt 
+fuel mixture and has a closed fuel cycle tailored to the efficient 
+utilization of plutonium and minor actinides. 
+Molten fluoride salts have very low vapor pressure which reduces stress on the 
+system and there is also inherent system safety due to fail-safe drainage, passive 
+cooling, and a low inventory of volatile fission products in the fuel.  
+The \gls{MSR} system is top-ranked in sustainability because of its closed 
+fuel cycle and excellent performance in waste burndown. 
+It is rated good in safety, and in proliferation resistance and physical 
+protection due to its inherent safety features, and its rated neutral in economics 
+because of its large number of subsystems \cite{gif_technology_2002}.  
+The \gls{VHTR} system has a once-through uranium cycle and is primarily aimed 
+at use with high-temperature process heat applications, such as hydrogen 
+production. 
+It is a graphite-moderated, helium-cooled reactor that uses \gls{TRISO} fuel 
+which does not degrade at high burnup and temperature.  
+The \gls{VHTR} system is highly ranked in economics because of its high hydrogen 
+production efficiency, and in safety and reliability because of the inherent 
+safety features of the fuel and reactor. 
+It is rated good in proliferation resistance and physical protection, and 
+neutral in sustainability because of its open fuel cycle \cite{gif_technology_2002}. 
 
-In this dissertation, I will be exploring the \gls{FHR} reactor concept. 
-The \gls{FHR} uses high-temperature coated-particle fuel and a low pressure 
-liquid fluoride-salt coolant, which is a combination of the best aspects of 
-\gls{MSR} and \gls{HTGR} (also known as \gls{VHTR}) technologies
+The \gls{MSR} and \gls{VHTR} systems both perform well in sustainability, economics 
+safety and reliability, and proliferation resistance and physical protection. 
+In this dissertation, we will be exploring the \gls{FHR} reactor concept, which 
+is a combination of the best aspects of \gls{MSR} and \gls{VHTR} technologies. 
+The \gls{FHR} uses high-temperature coated-particle fuel (similar to the \gls{VHTR}) 
+and a low pressure liquid fluoride-salt coolant (similar to the \gls{MSR})
 \cite{forsberg_fluoride-salt-cooled_2012,facilitators_fluoride-salt-cooled_2013}.
 
 In recent years, additive manufacturing technology has advanced and  
@@ -126,8 +141,47 @@ reactor geometries that are not limited by previous manufacturing constraints.
 This opens the door for re-examination of nuclear reactor optimization 
 \cite{sobes_artificial_2020}. 
 
-% types of optimization and ML tools (see Chapter 4 of Deb's Textbook) 
-% why we choose evolutionary algorithms 
+Optimization efforts towards classically-manufactured nuclear reactors and now
+3D printed nuclear reactors have focused on uniform shapes such as radius of the 
+core, height of cylinder, enrichment of fuel, etc 
+\cite{sobes_artificial_2020,sacco_two_2006,kumar_new_2015,pereira_parallel_2008}. 
+Leveraging additive manufacturing technology enables us to surpass manufacturing 
+constraints such as straight fuel channels or homogenous fuel enrichment, 
+and look forwards to optimize for non-uniform channel shapes, inhomogeneous 
+fuel enrichment throughout the core, etc. 
+
+Multi-objective design problems inevitably require a trade off between 
+desirable attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
+In nuclear reactor design there are many trade offs, one example is the 
+trade-off between neutron economy and fuel enrichment. 
+A reactor design must have sufficient neutron economy to ensure criticality, 
+but must also have a low fuel enrichment to reduce proliferation risk.
+Conflicting objectives means that there is no one perfect solution, but a set
+of equally optimal solutions \cite{byrne_evolving_2014}.
+Multi-objective problems are difficult to optimize, such problems 
+cannot be handled by classical optimization methods such as gradient 
+methods, because only the local optimum will be found \cite{renner_genetic_2003}. 
+Evolutionary algorithms have proven to be successful 
+methods to optimize multi-objective problems \cite{krish_practical_2011} as 
+they can find a solution near the global optimum \cite{renner_genetic_2003}
+and they also take advantage of parallel systems for reduced computational 
+cost. 
+The most popular evolutionary algorithms used to solve multi-objective 
+problems are genetic algorithms 
+\cite{byrne_evolving_2014, krish_practical_2011}. 
+Genetic algorithms imitate natural selection to evolve solutions 
+by (1) maintaining a population of solutions, (2) allowing 
+fitter solutions reproduce, and (3) letting lesser fit solutions die off, 
+resulting in final solutions that are better than the previous generations 
+\cite{renner_genetic_2003}. 
+Thus, we chose to pursue the evolutionary algorithm optimization technique 
+in this work. 
+
+Therefore, we propose the design of an optimization tool that uses the evolutionary 
+algorithm optimization technique with nuclear transport and thermal hydraulics 
+software to explore non-uniform \gls{FHR} reactor core parameters in an effort to 
+further optimize reactor systems and fully take advantage of additive manufacturing 
+technology.  
 
 
 \section{Objectives}
@@ -154,19 +208,20 @@ reproducibility, effectiveness, and usability
 nuclear transport and thermal hydraulics software}.
 The optimization tool will be applied to the \gls{FHR} concept. 
 To demonstrate success in modeling the \gls{FHR} with the nuclear transport and 
-thermal hydraulics software to be used with the optimization tool, I will participate 
+thermal hydraulics software prior to use with the optimization tool, I will participate 
 in the \gls{NEA}'s \gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
 
 \vspace{0.2cm} 
 \noindent
-\textbf{Demonstrate nuclear reactor design optimization with tool for neutronics problem}. 
+\textbf{Demonstrate nuclear reactor design optimization with developed tool 
+for a neutronics problem}. 
 We will demonstrate successful implementation of the optimization tool with the 
 nuclear transport software by optimizing a simple \gls{FHR} model for a single 
 objective function. 
 
 \vspace{0.2cm} 
 \noindent
-\textbf{Demonstrate hyperparameter tuning with tool for neutronics problem}.
+\textbf{Demonstrate hyperparameter tuning with developed tool for neutronics problem}.
 There are many hyperparameters required for an evolutionary algorithm. 
 The hyperparameter selection will impact the effective-ness of the algorithm 
 for our problem. 
