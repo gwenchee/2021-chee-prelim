@@ -50,14 +50,89 @@ Therefore, by combining the FLiBE coolant from \gls{MSR} technology and
 the low operating pressure and large thermal margin provided by using a molten 
 salt coolant and the accident-tolerant qualities of \gls{TRISO} particle fuel. 
 
-There are several types of \gls{FHR} conceptual designs that are being developed 
+There are several types of \gls{FHR} conceptual designs that exist
 worldwide: \gls{PBFHR} at UCB \cite{scarlat_current_2014,krumwiede_three-dimensional_2013}, 
 the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varma_ahtr_2012}, 
 the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010}, and the \gls{SF-TMSR}
 at the \gls{SINAP} in China \cite{liu_preliminary_2016}. 
-% More descriptions about these different FHR designs. ?? RAMEY one?
 
-\subsection{FHR Modeling Challenges}
+% needs more oomph 
+Verification and validation of a simulation tool is a crucial step to successfully 
+model a reactor with the goal of deployment \cite{rahnema_phenomena_2019}. 
+The \gls{FHR} has a complex core design due to the multiple heterogeneity present 
+in the fuel introduced by presence of \gls{TRISO} particles and other moderating 
+materials (i.e.in the \gls{AHTR}, \gls{TRISO} particles pressed into plates, which 
+are bundled into assembles) \cite{ramey_monte_2018,rahnema_phenomena_2019}.
+Traditional homogenization methods are insufficient to capture the correct physics 
+in \glspl{FHR}, due to the multiple heterogeneity \cite{ramey_monte_2018}. 
+For example, in the \gls{PBFHR}, pebble packing variation effects are significant, 
+resulting in large errors at the outer edge of the core when homogenized 
+\cite{rahnema_phenomena_2019}. 
+In the \gls{AHTR}, single and multiple slab homogenization decreased computation time 
+by 10, however they introduce a nontrivial error of $\sim$3\%
+\cite{ramey_monte_2018,cisneros_neutronics_2012}.
+
+\subsection{FHR with fuel plates} % need a better section title 
+
+This proposed work is focused on the FHR design with hexagonal fuel elements 
+consisting of \gls{TRISO} fuel particles embedded in plates ("planks"), i.e., the 
+\gls{AHTR} design developed by ORNL. 
+The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power 
+\cite{varma_ahtr_2012}. 
+The prismatic \gls{AHTR}'s fuel element is shown in Figure \ref{fig:ahtr-fuel-element}.  
+It features plate-type fuel with hexagonal fuel assembly consisting of eighteen plates 
+arranged in three diamond-shaped sectors, with a central Y-shaped structure 
+and external channel (wrapper).
+The diamond-shaped sections have 120-deg rotational symmetry with each other 
+\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}. 
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.5\linewidth]{ahtr-fuel-element.png} 
+    \caption{FHR fuel element.}
+    \label{fig:ahtr-fuel-element}
+\end{figure}
+
+The external channel wrapper and structural Y-shape as seen in Figure 
+\ref{fig:y-shape} are made of C-C composite and have extra notches for the 
+fuel plates to slide in. 
+The gap between the fuel elements and fuel plates are filled with \gls{FLiBe}
+coolant. 
+At the center of the Y-shape structure is the Y-shaped control blade slot, 
+which contains \gls{FLiBe} coolant when the control blade is not in the slot
+\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\linewidth]{y-shape.png} 
+    \caption{FHR fuel element's structural components \cite{noauthor_fluoride_nodate}.}
+    \label{fig:y-shape}
+\end{figure}
+
+Each fuel plank is made of an isostatically pressed carbon with fuel stripes 
+on each outer side of the plank as seen in Figure \ref{fig:ahtr-fuel-plank}. 
+The fuel stripes are prismatic regions composed of a graphite matrix filled with 
+a cubic lattice of \gls{TRISO} particles. 
+The lattice is 210 \gls{TRISO} particles wide in x-direction, 4 particles deep in 
+the y-direction, and 5936 particles tall in the z-direction. 
+Each \gls{TRISO} particle has 5 layers: Oxycarbide fuel kernel, porous carbon 
+buffer, inner pyrolytic carbon, silicon carbide layer, and the outer pyrolitic 
+carbon as seen in Figure \ref{fig:ahtr-triso}
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\linewidth]{ahtr-fuel-plank.png} 
+    \caption{2D view of FHR fuel plank.}
+    \label{fig:ahtr-fuel-plank}
+\end{figure}
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.4\linewidth]{ahtr-triso.png} 
+    \caption{TRISO particle schematic \cite{noauthor_fluoride_nodate}.}
+    \label{fig:ahtr-triso}
+\end{figure}
+
 
 \subsection{FHR Benchmark}
 
