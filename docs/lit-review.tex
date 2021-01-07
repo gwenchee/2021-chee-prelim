@@ -51,18 +51,21 @@ the low operating pressure and large thermal margin provided by using a molten
 salt coolant and the accident-tolerant qualities of \gls{TRISO} particle fuel. 
 
 There are several types of \gls{FHR} conceptual designs that exist
-worldwide: \gls{PBFHR} at UCB \cite{scarlat_current_2014,krumwiede_three-dimensional_2013}, 
-the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varma_ahtr_2012}, 
-the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010}, and the \gls{SF-TMSR}
-at the \gls{SINAP} in China \cite{liu_preliminary_2016}. 
+worldwide: \gls{PBFHR} at UCB with circulating pebble-fuel 
+\cite{scarlat_current_2014,krumwiede_three-dimensional_2013}, the \gls{SF-TMSR} 
+at the \gls{SINAP} in China with static pebble-fuel \cite{liu_preliminary_2016}, 
+the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varma_ahtr_2012} and 
+the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010} with static plate-fuel. 
 
+\subsection{Modeling challenges}
 % needs more oomph 
 Verification and validation of a simulation tool is a crucial step to successfully 
 model a reactor with the goal of deployment \cite{rahnema_phenomena_2019}. 
 The \gls{FHR} has a complex core design due to the multiple heterogeneity present 
-in the fuel introduced by presence of \gls{TRISO} particles and other moderating 
-materials (i.e.in the \gls{AHTR}, \gls{TRISO} particles pressed into plates, which 
-are bundled into assembles) \cite{ramey_monte_2018,rahnema_phenomena_2019}.
+in the fuel introduced by presence of \gls{TRISO} particles embedded in plates or 
+pebbles \cite{ramey_monte_2018,rahnema_phenomena_2019}.
+% add more description of why there are modelling challenges. ramey paper 
+
 Traditional homogenization methods are insufficient to capture the correct physics 
 in \glspl{FHR}, due to the multiple heterogeneity \cite{ramey_monte_2018}. 
 For example, in the \gls{PBFHR}, pebble packing variation effects are significant, 
@@ -72,7 +75,7 @@ In the \gls{AHTR}, single and multiple slab homogenization decreased computation
 by 10, however they introduce a nontrivial error of $\sim$3\%
 \cite{ramey_monte_2018,cisneros_neutronics_2012}.
 
-\subsection{FHR with fuel plates} % need a better section title 
+\subsection{FHR with plate fuel} % need a better section title 
 
 This proposed work is focused on the FHR design with hexagonal fuel elements 
 consisting of \gls{TRISO} fuel particles embedded in plates ("planks"), i.e., the 
@@ -133,7 +136,7 @@ carbon as seen in Figure \ref{fig:ahtr-triso}
     \label{fig:ahtr-triso}
 \end{figure}
 
-
 \subsection{FHR Benchmark}
+
 
 \section{Artificial Intelligence Applications to Nuclear Reactor Design}
