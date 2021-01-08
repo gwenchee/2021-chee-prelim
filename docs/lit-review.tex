@@ -33,7 +33,7 @@ $\rho C_p$ than water \cite{ho_molten_2013,forsberg_fluoride-salt-cooled_2012}.
 product release 
 \cite{ho_molten_2013}.
 
-\gls{VHTR} technology has been studied since the 1970s because it delivers 
+\gls{VHTR} technology has been studied since the 1970s because they delivers 
 heat at substantially high temperatures than \glspl{LWR} resulting in 
 the following advantages: increased power conversion efficiency, reduced 
 waste heat generation, and co-generation and process heat capabilities 
@@ -57,86 +57,119 @@ at the \gls{SINAP} in China with static pebble-fuel \cite{liu_preliminary_2016},
 the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varma_ahtr_2012} and 
 the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010} with static plate-fuel. 
 
-\subsection{Modeling challenges}
-% needs more oomph 
-Verification and validation of a simulation tool is a crucial step to successfully 
-model a reactor with the goal of deployment \cite{rahnema_phenomena_2019}. 
-The \gls{FHR} has a complex core design due to the multiple heterogeneity present 
-in the fuel introduced by presence of \gls{TRISO} particles embedded in plates or 
-pebbles \cite{ramey_monte_2018,rahnema_phenomena_2019}.
-% add more description of why there are modelling challenges. ramey paper 
-
-Traditional homogenization methods are insufficient to capture the correct physics 
-in \glspl{FHR}, due to the multiple heterogeneity \cite{ramey_monte_2018}. 
-For example, in the \gls{PBFHR}, pebble packing variation effects are significant, 
-resulting in large errors at the outer edge of the core when homogenized 
-\cite{rahnema_phenomena_2019}. 
-In the \gls{AHTR}, single and multiple slab homogenization decreased computation time 
-by 10, however they introduce a nontrivial error of $\sim$3\%
-\cite{ramey_monte_2018,cisneros_neutronics_2012}.
-
-\subsection{FHR with plate fuel} % need a better section title 
-
+\subsection{AHTR design}
 This proposed work is focused on the FHR design with hexagonal fuel elements 
 consisting of \gls{TRISO} fuel particles embedded in plates ("planks"), i.e., the 
 \gls{AHTR} design developed by ORNL. 
-The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power 
-\cite{varma_ahtr_2012}. 
-The prismatic \gls{AHTR}'s fuel element is shown in Figure \ref{fig:ahtr-fuel-element}.  
-It features plate-type fuel with hexagonal fuel assembly consisting of eighteen plates 
+The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power with
+inlet/outlet temperatures of 650/700$^{\circ}C$ \cite{varma_ahtr_2012}. 
+The prismatic \gls{AHTR}'s fuel element and core configuration are shown in 
+Figure \ref{fig:ahtr}.  
+Each hexagonal fuel element features plate-type fuel consisting of eighteen plates 
 arranged in three diamond-shaped sectors, with a central Y-shaped structure 
 and external channel (wrapper).
-The diamond-shaped sections have 120-deg rotational symmetry with each other 
-\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}. 
-
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.5\linewidth]{ahtr-fuel-element.png} 
-    \caption{FHR fuel element.}
-    \label{fig:ahtr-fuel-element}
-\end{figure}
-
-The external channel wrapper and structural Y-shape as seen in Figure 
-\ref{fig:y-shape} are made of C-C composite and have extra notches for the 
-fuel plates to slide in. 
-The gap between the fuel elements and fuel plates are filled with \gls{FLiBe}
-coolant. 
-At the center of the Y-shape structure is the Y-shaped control blade slot, 
-which contains \gls{FLiBe} coolant when the control blade is not in the slot
-\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
-
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.8\linewidth]{y-shape.png} 
-    \caption{FHR fuel element's structural components \cite{noauthor_fluoride_nodate}.}
-    \label{fig:y-shape}
-\end{figure}
-
 Each fuel plank is made of an isostatically pressed carbon with fuel stripes 
-on each outer side of the plank as seen in Figure \ref{fig:ahtr-fuel-plank}. 
+on each outer side of the plank. 
 The fuel stripes are prismatic regions composed of a graphite matrix filled with 
 a cubic lattice of \gls{TRISO} particles. 
-The lattice is 210 \gls{TRISO} particles wide in x-direction, 4 particles deep in 
-the y-direction, and 5936 particles tall in the z-direction. 
-Each \gls{TRISO} particle has 5 layers: Oxycarbide fuel kernel, porous carbon 
-buffer, inner pyrolytic carbon, silicon carbide layer, and the outer pyrolitic 
-carbon as seen in Figure \ref{fig:ahtr-triso}
+The core consists of 252 assemblies radially surrounded by reflectors
+\cite{ramey_monte_2018}. 
+Chapter \ref{chap:fhr-benchmark} details the specifications of the AHTR geometry
+modeled in this proposed work.
 
-\begin{figure}[]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{ahtr-fuel-plank.png} 
-    \caption{2D view of FHR fuel plank.}
-    \label{fig:ahtr-fuel-plank}
+    \includegraphics[width=0.9\linewidth]{ahtr.png} 
+    \caption{FHR core configuration and fuel element \cite{ramey_monte_2018}.}
+    \label{fig:ahtr}
 \end{figure}
 
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.4\linewidth]{ahtr-triso.png} 
-    \caption{TRISO particle schematic \cite{noauthor_fluoride_nodate}.}
-    \label{fig:ahtr-triso}
-\end{figure}
+\subsection{Previous AHTR modeling efforts and challenges}
+Modeling and simulation of the \gls{AHTR} design has been an ongoing effort 
+since its conception in 2003 \cite{forsberg_molten-salt-cooled_2003}. 
+The \gls{AHTR} core design differs significantly from the present \gls{LWR}-based 
+nuclear power plants. 
+These differences lead to modeling challenges and the need for verification and 
+validation of modeling and simulation methods \cite{ramey_monte_2018}. 
+Verification and validation of neutronics and thermal hydraulics tools' 
+capability to successfully model the \gls{AHTR} design is a crucial step 
+in support of licensure of the \gls{AHTR} design towards the eventual goal 
+of deployment \cite{rahnema_phenomena_2019,rahnema_current_2015}. 
+Several neutronic studies have been completed along the way to the current 
+\gls{AHTR} design \cite{ramey_monte_2018,holcomb_fluoride_2013,greene_pre-conceptual_2010}. 
+These efforts have shed light on the technical challenges facing the \gls{AHTR} design. 
 
-\subsection{FHR Benchmark}
+In an effort to understand the challenges of \gls{FHR} materials, 
+modeling the neutronics and thermal hydraulics in 
+both plate and pebble fuelled \glspl{FHR}, a university-led Integrated 
+Research Project \cite{zhang_integrated_2019} was conducted. 
+During the research project, a panel of subject matter experts came together to 
+generate a \gls{PIRT} by identifying phenomena and ranking their importance.
+The \gls{PIRT} identifies areas in which additional research is needed to better 
+understand important phenomena for adequate future modelling 
+\cite{rahnema_phenomena_2019}. 
+The phenomena identified as requiring further research are included in 
+Table \ref{tab:phenomena}. 
+
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{\gls{FHR} physical phenomena requiring further research 
+    \cite{rahnema_phenomena_2019}.}
+	\label{tab:phenomena}
+    \small
+    \begin{tabular}{l|l}
+    \hline
+    \textbf{Category} & \textbf{Phenomena} \\ \hline
+    Fundamental cross section data & - Moderation in FliBe \\
+    & - Thermalization in FliBe \\
+    & - Absorption in FliBe \\
+    & - Thermalization in carbon \\
+    & - Absorption in carbon \\ \hline
+    Material Composition & - Fuel particle distribution \\ \hline
+    Computational Methodology & - Solution Convergence \\ 
+    & - Granularity of depletion regions \\
+    & - Multiple heterogeneity treatment for generating multi-group \\ 
+    & cross sections \\
+    & - Selection of multi-group structure \\
+    & - Boundary conditions for multi-group cross section generation \\ \hline 
+    General Depletion & Spectral history \\ \hline 
+    \end{tabular}
+    \end{table}
+
+The \gls{AHTR} has a complex core design due to the multiple heterogeneity present 
+in the fuel introduced by presence of \gls{TRISO} particles embedded in plates 
+\cite{ramey_monte_2018,rahnema_phenomena_2019}.
+Accurately modeling the \gls{FHR}'s complex geometry with individual \gls{TRISO}
+particle fidelity is necessary to obtain detailed reference power distributions 
+to assess the accuracy of lower-fidelity models.
+However, it is challenging, particularly for deterministic codes which 
+use multigroup cross sections and traditional homogenization methods
+\cite{ramey_monte_2018}. 
+These traditional homogenization methods are insufficient to capture the correct physics 
+in \glspl{FHR}, due to the multiple heterogeneity \cite{ramey_monte_2018}. 
+In the \gls{AHTR}, single and multiple slab homogenization decreased computation time 
+by 10, however they introduce a nontrivial error of $\sim$3\%
+\cite{ramey_monte_2018,cisneros_neutronics_2012}.
+Core physics parameters with acceptable uncertainty must be calculated to determine 
+the feasibility and safety of the \gls{AHTR} design.
+For Monte Carlo codes, statistical uncertainties must be reduced by increasing 
+the number of neutron histories, however this comes at an increased 
+computational cost.
+
+Another technical challenge faced by the \gls{AHTR} design is the uncertainty of 
+the graphite and carbonaceous moderator material properties: densities, temperatures
+and thermal scattering data.
+Also, the thermal scattering data ($S(\alpha,\beta)$ matrices) for the bound 
+nuclei in the \gls{FLiBe} salt are lacking \cite{ramey_monte_2018}. 
+Upon examination of the thermal scattering behavior of solid \gls{FLiBe}
+\cite{mei_investigation_2013} and liquid \gls{FLiBe} \cite{zhu_thermal_2017}, 
+it was observed that the bound and free atom cross section of \gls{FLiBe} are 
+identical above 0.1eV and diverges below 0.01eV. 
+This means that the use or absence of thermal scattering data will impact the 
+accuracy of the results \cite{ramey_monte_2018}. 
+
+\subsection{AHTR Benchmark}
 
 
 \section{Artificial Intelligence Applications to Nuclear Reactor Design}
