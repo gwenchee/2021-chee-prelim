@@ -187,4 +187,57 @@ physics experiments that may be used for validation of codes are scarce
 A detailed description of the phases of the benchmark and the results to date 
 are described in Chapter \ref{chap:fhr-benchmark}. 
 
-\section{Artificial Intelligence Applications to Nuclear Reactor Design}
+\section{Nuclear Reactor Design Optimization}
+The practice of nuclear reactor optimization is as old as the conception of 
+nuclear reactors. 
+Optimization has been applied to nuclear reactor design, reactor reloading 
+patterns, and the nuclear fuel cycle.  
+In the proposed work, we will focus on the optimization of nuclear reactor 
+core design. 
+The complexity of a nuclear reactor results in reactor design optimization 
+being a multi-objective design problem requiring a tradeoff between desirable 
+attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
+
+Previous efforts towards nuclear reactor core design optimization include the use 
+of deterministic and stochastic optimization techniques, evolutionary algorithms 
+optimization, and optimization methods coupled with surrogate models. 
+Sacco et al \cite{sacco_two_2006,sacco_metropolis_2008} used stochastic 
+optimization techniques such as the \gls{PCA} and Dueck's Great Deluge 
+Algorithm (GDA), and a deterministic-stochastic hybrid optimization technique
+that combined the \gls{PCA} with the deterministic Nelder–Mead Simplex algorithm
+to optimize reactor dimensions, enrichment, materials etc., 
+in order to minimize the average peak factor in a three-enrichment-zone reactor. 
+Odeh et al \cite{odeh_core_2016} used the simulated annealing stochastic algorithm 
+coupled with neutronics and thermal hyraulics codes, \gls{PARCS} and RELAP5, 
+to develop an optimum core design for the \gls{NMR-50} to achieve a 10-year cycle length 
+with minimal fissile loading. 
+Kropaczek et al \cite{kropaczek_large-scale_2019} demonstrated the constraint 
+annealing method, a highly scalable method based on the method of parallel 
+simulated annealing with mixing of states \cite{kropaczek_constraint_2019}, for 
+the solution of large-scale, multiconstrained problems in \gls{LWR} fuel cycle 
+optimization. 
+Peireira et al \cite{pereira_coarse-grained_2003,pereira_parallel_2008} 
+used a coarse-grained parallel \gls{GA} and a niching \gls{GA}
+to optimize the same problem as \cite{sacco_two_2006}. 
+Kamalpour et al \cite{kamalpour_smart_2020} utilized the imperialist competitive 
+algorithm, a type of evolutionary algorithm, to optimize a \gls{FCM} fuelled 
+\gls{PWR} to extend the reactor core cycle length. 
+
+There are multiple papers that utilize optimization methods with surrogate models 
+to replace high fidelity neutronics or thermal hydraulics simulations that 
+typically require a high computational cost. 
+Kumar et al \cite{kumar_new_2015} combined genetic algorithm optimization 
+with regression splines surrogate model to optimize a reactor model for 
+high breeding of U-233 and Pu-239 in desired power peaking limits, desired 
+keff using the following parameters: radius of a fuel pin cell, isotopic enrichment 
+of the fissile material in the fuel, mass flow rate of the coolant, and temperature 
+of the coolant at the core inlet.
+Betzler et al \cite{betzler_design_2019} developed a systematic approach to 
+build a surrogate model to serve in place of high-fidelity computational 
+analyses, they then leveraged the surrogate model to generate optimized designs 
+at a lower computational cost to understand the impact of design decisions on 
+desired metrics for \gls{HFIR} \gls{LEU} core designs. 
+
+\subsection{Evolutionary Algorithms}
+Evolutionary algorithms have proved amenable to \gls{HPC} solution and 
+scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}
