@@ -187,11 +187,72 @@ physics experiments that may be used for validation of codes are scarce
 A detailed description of the phases of the benchmark and the results to date 
 are described in Chapter \ref{chap:fhr-benchmark}. 
 
+\section{Additive Manufacturing}
+\gls{AM} is the formalized termed for what used to be called rapid prototyping 
+and what is popularly called 3D printing \cite{gibson_additive_2014}. 
+The basic principle of \gls{AM} is that a model is initially generated using a
+\gls{3D CAD} system and is fabricated directly without the need for process 
+planning. 
+In \gls{AM}, the parts are made by adding materials in layers, each layer is a 
+thin cross-section of the \gls{3D CAD} designed part, as opposed 
+to subtractive manufacturing methods such as traditional machining
+\cite{standard_standard_2012}. 
+All commercialized \gls{AM} machines to date use a layer-based approach, and 
+the major ways that they differ are in the materials that can be used, 
+how the layers are created, and how the layers are bonded to each other
+\cite{gibson_additive_2014}.
+These major differences will determine the following factors: accuracy of the 
+final part, its material and mechanical properties, time required to manufacture 
+the part, the need for post-processing, size of \gls{AM} machine, overall 
+cost of the machine and the process \cite{gibson_additive_2014}. 
+Initially, \gls{AM} was used to manufacture prototypes. 
+However, with improvements in material properties, accuracy and overall quality 
+of \gls{AM} output, the applications for \gls{AM} expanded, to the 
+current point in which some industries build parts for direct assembly purposes
+\cite{uriondo_present_2015}.  
+Furthermore, using \gls{AM} in conjunction with other technologies, such as 
+high-power laser technology, has enabled the use of \gls{AM} technology 
+to manufacture parts made from a variety of metals \cite{gibson_additive_2014}. 
+
+\subsection{Application of Additive Manufacturing to Nuclear Reactor Core Components}
+Many generation IV advanced reactor concepts have complex geometries, such as 
+hex-ducts for sodium-cooled fast reactors, which are costly and difficult to 
+fabricate using common processing techniques. 
+These traditional processing routes also restrict the viable geometries for 
+reactor designers \cite{sridharan_performance_2019}. 
+Studies show the potential of using \gls{AM} for fabrication of nuclear fuel 
+and core structural materials with complex geometries and at a lower cost. 
+Without the geometric constraints of conventional fuel manufacturing, we can 
+further optimize and improve fuel geometries to enhance fuel performance and 
+safety \cite{bergeron_early_2018}. 
+
+There has been experimental work done in the nuclear materials field towards 
+demonstration of \gls{AM} of nuclear fuel and structural core materials. 
+Bergeron et al \cite{bergeron_early_2018} successfully demonstrated additively 
+manufacturing thorium dioxide using a stereolithography-based 3D printer 
+and photopolymer resin. 
+The high-density thorium dioxide objects were printed and sintered to densities 
+of $\sim90\%$ \cite{bergeron_early_2018}. 
+Rosales et al \cite{rosales_characterizing_2019} conducted a feasibility study 
+of direct routes to fabricate dense uranium silicide ($U_3Si_2$) fuel pellets 
+using the \gls{INL} invented \gls{AMAFT}. 
+$U_3Si_2$ is an accident-tolerant nuclear fuel candidate due to its promising 
+high uranium density and improved thermal properties. 
+Its current metallurgical fabrication process is expensive and long, the goal of
+\gls{AMAFT} is to fabricate $U_3Si_2$ at a lower cost, in a timely and
+commercially-reliable manner \cite{rosales_characterizing_2019}.  
+Sridharan et al \cite{sridharan_performance_2019} demonstrated the application of
+the laser-blown-powder \gls{AM} process to fabricate \gls{FM} steel, a type of 
+steel commonly used for cladding and structural components in nuclear reactors. 
+
+% Takaaki_additive_2021
+
 \section{Nuclear Reactor Design Optimization}
-The practice of nuclear reactor optimization is as old as the conception of 
+The practice of nuclear reactor optimization has been around since the conception of 
 nuclear reactors. 
 Optimization has been applied to nuclear reactor design, reactor reloading 
 patterns, and the nuclear fuel cycle.  
+% add some refs 
 In the proposed work, we will focus on the optimization of nuclear reactor 
 core design. 
 The complexity of a nuclear reactor results in reactor design optimization 
@@ -200,7 +261,7 @@ attributes \cite{byrne_evolving_2014,simon_sciences_2019}.
 
 Previous efforts towards nuclear reactor core design optimization include the use 
 of deterministic and stochastic optimization techniques, evolutionary algorithms 
-optimization, and optimization methods coupled with surrogate models. 
+optimization, and these optimization methods coupled with surrogate models. 
 Sacco et al \cite{sacco_two_2006,sacco_metropolis_2008} used stochastic 
 optimization techniques such as the \gls{PCA} and Dueck's Great Deluge 
 Algorithm (GDA), and a deterministic-stochastic hybrid optimization technique
@@ -238,6 +299,6 @@ analyses, they then leveraged the surrogate model to generate optimized designs
 at a lower computational cost to understand the impact of design decisions on 
 desired metrics for \gls{HFIR} \gls{LEU} core designs. 
 
-\subsection{Evolutionary Algorithms}
+\section{Evolutionary Algorithms}
 Evolutionary algorithms have proved amenable to \gls{HPC} solution and 
 scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}
