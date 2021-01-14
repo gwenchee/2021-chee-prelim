@@ -12,6 +12,18 @@
 %   - Past work 
 %   - Classical vs Evolutionary methods 
 
+In this chapter, we provide a literature review of relevant past research 
+efforts that give context to this proposed work. 
+We begin with an overview of the \gls{FHR} concept, then go into detail about 
+the specific \gls{AHTR} design, previous effort towards modeling the design and 
+technical challenges faced, and a description of how these efforts led to the 
+initiation of the \gls{OECD} \gls{NEA} \gls{AHTR} benchmark.  
+Next, we outline the history of additive manufacturing and describe the current 
+research towards application of additive manufacturing to nuclear reactor core 
+components. 
+Next, we review previous efforts towards nuclear reactor design optimization. 
+Finally, we ...
+
 \section{Fluoride-Salt-Cooled High-Temperature Reactor}
 The \gls{FHR} is a reactor concept introduced in 2012 that uses high-temperature 
 coated-particle fuel and a low pressure liquid fluoride-salt coolant 
@@ -203,7 +215,7 @@ how the layers are created, and how the layers are bonded to each other
 \cite{gibson_additive_2014}.
 These major differences will determine the following factors: accuracy of the 
 final part, its material and mechanical properties, time required to manufacture 
-the part, the need for post-processing, size of \gls{AM} machine, overall 
+the part, the need for post-processing, size of \gls{AM} machine, and overall 
 cost of the machine and the process \cite{gibson_additive_2014}. 
 Initially, \gls{AM} was used to manufacture prototypes. 
 However, with improvements in material properties, accuracy and overall quality 
@@ -215,16 +227,28 @@ high-power laser technology, has enabled the use of \gls{AM} technology
 to manufacture parts made from a variety of metals \cite{gibson_additive_2014}. 
 
 \subsection{Application of Additive Manufacturing to Nuclear Reactor Core Components}
-Many generation IV advanced reactor concepts have complex geometries, such as 
-hex-ducts for sodium-cooled fast reactors, which are costly and difficult to 
-fabricate using common processing techniques. 
-These traditional processing routes also restrict the viable geometries for 
+\label{sec:am}
+\gls{AM} has progressed rapidly in the last 30 years from rapid design protoyping 
+with polymers in the automotive industry to scale production of metal components.  
+Examples include Boeing using \gls{AM} to reduce the 979 Dreamliner's weight 
+\cite{noauthor_printed_2017} and General Electric using \gls{AM} to produce fuel 
+injection nozzles \cite{noauthor_transformation_2018}. 
+The most common metal \gls{AM} technologies, \gls{SLM}, \gls{EBM}, \gls{L-DED}, 
+and binder jetting, are not currently used to manufacture nuclear power plant parts. 
+Wide-spread adoption of these methods in the nuclear industry could drastically 
+reduce fabrication costs and timelines, combine multiple systems and assembled 
+components into single parts, increase safety and performance by tailoring 
+local material properties, and allow for redesigning of geometries for optimal 
+load paths \cite{simpson_considerations_2019}. 
+Many generation IV advanced reactor concepts have complex geometries, 
+such as hex-ducts for sodium-cooled fast reactors, which are costly and difficult 
+to fabricate using common processing techniques. 
+Traditional manufacturing routes also restrict the viable geometries for 
 reactor designers \cite{sridharan_performance_2019}. 
-Studies show the potential of using \gls{AM} for fabrication of nuclear fuel 
-and core structural materials with complex geometries and at a lower cost. 
-Without the geometric constraints of conventional fuel manufacturing, we can 
-further optimize and improve fuel geometries to enhance fuel performance and 
-safety \cite{bergeron_early_2018}. 
+In summary, the main benefits of using \gls{AM} for reactor core components is that 
+we are no longer geometrically constrained by conventional fuel manufacturing, 
+and can further optimize and improve fuel geometries to enhance fuel performance and 
+safety with the added benefit of lower cost \cite{bergeron_early_2018}. 
 
 There has been experimental work done in the nuclear materials field towards 
 demonstration of \gls{AM} of nuclear fuel and structural core materials. 
@@ -244,15 +268,23 @@ commercially-reliable manner \cite{rosales_characterizing_2019}.
 Sridharan et al \cite{sridharan_performance_2019} demonstrated the application of
 the laser-blown-powder \gls{AM} process to fabricate \gls{FM} steel, a type of 
 steel commonly used for cladding and structural components in nuclear reactors. 
-
-% Takaaki_additive_2021
+Koyanagi et al \cite{koyanagi_additive_2020} presented the current status of 
+\gls{AM} technology for manufacturing nuclear-grade \gls{SiC} materials, they 
+demonstrated that combinations of \gls{AM} techniques and traditional \gls{SiC} 
+densification methods enabled new designs of \gls{SiC} components with complex shapes. 
+\gls{SiC} has excellent strength at elevated temperatures, chemical inertness, 
+relatively low neutron absorption, and stability under neutron irradiation up 
+to high doses \cite{sauder_ceramic_2014, snead_handbook_2007,koyanagi_additive_2020} 
+which make it suitable for many applications in nuclear systems such as fuel cladding, 
+constituents of fuel particles \cite{snead_handbook_2007} and pellets
+\cite{terrani_progress_2015}, core structural components in fission reactors 
+\cite{sauder_ceramic_2014}. 
 
 \section{Nuclear Reactor Design Optimization}
 The practice of nuclear reactor optimization has been around since the conception of 
 nuclear reactors. 
 Optimization has been applied to nuclear reactor design, reactor reloading 
 patterns, and the nuclear fuel cycle.  
-% add some refs 
 In the proposed work, we will focus on the optimization of nuclear reactor 
 core design. 
 The complexity of a nuclear reactor results in reactor design optimization 
@@ -298,6 +330,36 @@ build a surrogate model to serve in place of high-fidelity computational
 analyses, they then leveraged the surrogate model to generate optimized designs 
 at a lower computational cost to understand the impact of design decisions on 
 desired metrics for \gls{HFIR} \gls{LEU} core designs. 
+
+\subsection{Impact of additive manufacturing on nuclear reactor design 
+optimization}
+In section \ref{sec:am}, we discussed how with the advancements of \gls{AM} 
+for reactor core components, reactor designers are no longer geometrically 
+constrained by conventional fuel manufacturing, and can further optimize and 
+improve fuel geometries to enhance fuel performance and safety. 
+The design objectives remain consistent with past objectives, such as minimizing 
+fuel amount, minimizing maximum fuel temperature for a given power level, 
+however, we can approach the nuclear design problems with truly arbitrary 
+geometries, no longer limited by traditional geometric shapes that are 
+easy to manufacture with traditional processes: slabs as fuel plates, cylinders 
+as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc  
+\cite{sobes_artificial_2020}.
+Therefore, this has opened the door for re-examination of optimization in 
+completely new way, determining the optimal arbitrary geometry for a given objective 
+function \cite{sobes_artificial_2020} with a much smaller set of constraints. 
+
+With a substantial increase and change in the design space of an arbitrary 
+geometry, it becomes time consuming for human reactor designer to completely 
+explore the design space to find optimal geometries. 
+We can leverage \gls{AI} to effectively explore the large design space in a 
+timely manner to find global optimal designs. 
+\gls{AI} would not replace the human reactor designer, but will shift the 
+human designer's focus away from conjecturing good geometries to defining 
+design criteria to find optimal designs \cite{sobes_artificial_2020}. 
+Therefore, when the design criteria is changed, the \gls{AI} model will easily 
+adapt and produce new global optimal designs to fit the new criteria.  
+
+% classical vs evolutionary algorithms for this. 
 
 \section{Evolutionary Algorithms}
 Evolutionary algorithms have proved amenable to \gls{HPC} solution and 
