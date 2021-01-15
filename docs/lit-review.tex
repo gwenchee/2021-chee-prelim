@@ -287,19 +287,44 @@ Optimization has been applied to nuclear reactor design, reactor reloading
 patterns, and the nuclear fuel cycle.  
 In the proposed work, we will focus on the optimization of nuclear reactor 
 core design. 
+Previous efforts towards nuclear reactor core design optimization include the use 
+of deterministic and stochastic optimization techniques, and these optimization 
+methods coupled with surrogate models. 
+
+Deterministic optimization methods usually start from a random guess solution, 
+thereafter the algorithm suggests a search direction based on applying local 
+information to a pre-specified transition rule. 
+The best solution becomes the new solution and the above procedure is continued 
+for a number of times \cite{deb_multi-objective_2001}. 
+Drawbacks of deterministic methods include: algorithms tend to get stuck to a 
+suboptimal solution and an algorithm efficient in solving one type of problem, 
+may not be efficient in solving a different problem \cite{deb_multi-objective_2001}. 
+Stochastic optimization methods find globally optimal solutions more reliably. 
+Evolutionary algorithms and simulated annealing are examples of stochastic 
+optimization algorithms. 
+
 The complexity of a nuclear reactor results in reactor design optimization 
 being a multi-objective design problem requiring a tradeoff between desirable 
 attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
+When multiple conflicting objectives are important, there is no single optimum 
+solution which simultaneously optimizes all objectives. 
+Instead, the multi-objective optimization problem's outcome is a set of optimal 
+solutions with a varying degree objective values \cite{deb_multi-objective_2001}. 
+For a multi-objective problem like reactor design optimization, 
+an ideal multi-objective optimization method should find widely spread solutions 
+in the obtained non-dominated front \cite{deb_multi-objective_2001}, concluding 
+that stochastic methods are ideal. 
 
-Previous efforts towards nuclear reactor core design optimization include the use 
-of deterministic and stochastic optimization techniques, evolutionary algorithms 
-optimization, and these optimization methods coupled with surrogate models. 
+Recent efforts towards nuclear reactor optimization have relied heavily on 
+stochastic methods such as simulated annealing and evolutionary algorithms, 
+with occasional stochastic-deterministic hybrid methods. 
 Sacco et al \cite{sacco_two_2006,sacco_metropolis_2008} used stochastic 
-optimization techniques such as the \gls{PCA} and Dueck's Great Deluge 
-Algorithm (GDA), and a deterministic-stochastic hybrid optimization technique
-that combined the \gls{PCA} with the deterministic Nelder–Mead Simplex algorithm
-to optimize reactor dimensions, enrichment, materials etc., 
-in order to minimize the average peak factor in a three-enrichment-zone reactor. 
+optimization techniques similar to simulated annealing, and a 
+deterministic-stochastic hybrid optimization technique
+that combined one of the stochastic simulated annealing methods with the 
+deterministic Nelder–Mead Simplex algorithm to optimize reactor dimensions, 
+enrichment, materials etc., in order to minimize the average peak factor in a 
+three-enrichment-zone reactor. 
 Odeh et al \cite{odeh_core_2016} used the simulated annealing stochastic algorithm 
 coupled with neutronics and thermal hyraulics codes, \gls{PARCS} and RELAP5, 
 to develop an optimum core design for the \gls{NMR-50} to achieve a 10-year cycle length 
@@ -316,9 +341,13 @@ Kamalpour et al \cite{kamalpour_smart_2020} utilized the imperialist competitive
 algorithm, a type of evolutionary algorithm, to optimize a \gls{FCM} fuelled 
 \gls{PWR} to extend the reactor core cycle length. 
 
-There are multiple papers that utilize optimization methods with surrogate models 
-to replace high fidelity neutronics or thermal hydraulics simulations that 
-typically require a high computational cost. 
+Nuclear reactor optimization problems require the use of computationally 
+extensive neutronics and thermal-hydraulics software to compute the objective 
+function and constraints. 
+In an effort to reduce computational cost of utilizing stochastic methods, 
+multiple papers utilized optimization methods with surrogate models to replace 
+high fidelity neutronics or thermal hydraulics simulations that typically 
+require a high computational cost. 
 Kumar et al \cite{kumar_new_2015} combined genetic algorithm optimization 
 with regression splines surrogate model to optimize a reactor model for 
 high breeding of U-233 and Pu-239 in desired power peaking limits, desired 
@@ -327,9 +356,29 @@ of the fissile material in the fuel, mass flow rate of the coolant, and temperat
 of the coolant at the core inlet.
 Betzler et al \cite{betzler_design_2019} developed a systematic approach to 
 build a surrogate model to serve in place of high-fidelity computational 
-analyses, they then leveraged the surrogate model to generate optimized designs 
-at a lower computational cost to understand the impact of design decisions on 
-desired metrics for \gls{HFIR} \gls{LEU} core designs. 
+analyses, they then leveraged the surrogate model with a simulated annealing 
+optimization algorithm to generate optimized designs at a lower computational 
+cost to understand the impact of design decisions on desired metrics for 
+\gls{HFIR} \gls{LEU} core designs. 
+
+The simulation annealing method uses a point-by-point approach, in which one
+solution gets updated to a new solution in one iteration, which does not 
+allow for advantages of parallel systems to be fully exploited. 
+Finding an optimal solution with simulation annealing methods will take very 
+long if high-fidelity codes are used to compute the objective function and 
+constraints.
+Therefore, using the simulation annealing method is only practical if a 
+surrogate evaluation model is used as described in \cite{betzler_design_2019}.
+Evolutionary algorithm method mimics nature's evolutionary principles to drive 
+its search towards an optimal solution. 
+Contrary to a single solution per iteration in deterministic and the stochastic 
+simulation annealing methods, \glspl{EA} use a population of solutions in each 
+iteration \cite{deb_multi-objective_2001}. 
+With the affordability and availability of parallel computing systems, the 
+evolutionary algorithm optimization method stands out as an optimization method 
+that easily and conveniently exploits parallel systems. 
+Therefore, in this proposed work, we will utilize the evolutionary algorithm 
+optimization method. 
 
 \subsection{Impact of additive manufacturing on nuclear reactor design 
 optimization}
@@ -337,9 +386,9 @@ In section \ref{sec:am}, we discussed how with the advancements of \gls{AM}
 for reactor core components, reactor designers are no longer geometrically 
 constrained by conventional fuel manufacturing, and can further optimize and 
 improve fuel geometries to enhance fuel performance and safety. 
-The design objectives remain consistent with past objectives, such as minimizing 
-fuel amount, minimizing maximum fuel temperature for a given power level, 
-however, we can approach the nuclear design problems with truly arbitrary 
+Reactor design objectives remain consistent with past objectives, such as minimizing 
+fuel amount, minimizing maximum fuel temperature for a given power level. 
+However, we can now approach the nuclear design problems with truly arbitrary 
 geometries, no longer limited by traditional geometric shapes that are 
 easy to manufacture with traditional processes: slabs as fuel plates, cylinders 
 as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc  
@@ -351,15 +400,14 @@ function \cite{sobes_artificial_2020} with a much smaller set of constraints.
 With a substantial increase and change in the design space of an arbitrary 
 geometry, it becomes time consuming for human reactor designer to completely 
 explore the design space to find optimal geometries. 
-We can leverage \gls{AI} to effectively explore the large design space in a 
-timely manner to find global optimal designs. 
+Instead, we can leverage \gls{AI} to effectively explore the large design space 
+in a timely manner to find global optimal designs. 
 \gls{AI} would not replace the human reactor designer, but will shift the 
 human designer's focus away from conjecturing good geometries to defining 
 design criteria to find optimal designs \cite{sobes_artificial_2020}. 
-Therefore, when the design criteria is changed, the \gls{AI} model will easily 
-adapt and produce new global optimal designs to fit the new criteria.  
-
-% classical vs evolutionary algorithms for this. 
+Therefore, when the human designer changes the reactor criteria, the \gls{AI} 
+model will easily adapt and produce new global optimal designs to fit the new 
+criteria.  
 
 \section{Evolutionary Algorithms}
 Evolutionary algorithms have proved amenable to \gls{HPC} solution and 
