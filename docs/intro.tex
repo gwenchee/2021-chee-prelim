@@ -41,7 +41,7 @@ eco-system, the Generation IV International Forum was created to lead and plan
 the research and development roadmap to support a new generation IV of innovative 
 nuclear energy systems \cite{gif_technology_2002}.
 Generation IV nuclear systems' goals are defined in four areas: sustainability, 
-economics, safety and reliability, and proliferation resistance and physical 
+economics, safety and reliability, proliferation resistance and physical 
 protection \cite{gif_technology_2002}. 
 Table \ref{tab:goals-gen4} summarizes the goals in each area. 
 
@@ -64,8 +64,8 @@ Table \ref{tab:goals-gen4} summarizes the goals in each area.
     & sources \\ 
     & - Reduce economic risk to nuclear projects by developing plants using \\
     & innovative fabrication and construction techniques \\ \hline
-    Safety and Reliability   & - Increase the use of inherent safety features, robust designs, and \\
-    & transparent safety features that can be understood by non-experts \\ 
+    Safety and Reliability   & - Increase the use of robust designs, inherent and transparent safety features\\
+    & that can be understood by non-experts \\ 
     & - Enhance public confidence in the safety of nuclear energy \\\hline
     Proliferation Resistance & - Provide continued effective proliferation resistance of nuclear energy \\
     and Physical Protection & systems through improved design features and other measures \\ 
@@ -73,10 +73,10 @@ Table \ref{tab:goals-gen4} summarizes the goals in each area.
     \end{tabular}
     \end{table}
 
-Based on the goals, an evaluation and selection methodology was developed, 
+An evaluation and selection methodology was developed based on the goals, 
 culminating in selecting six Generation IV systems: \gls{GFR}, 
 \gls{LFR}, \gls{MSR}, \gls{SFR}, \gls{SCWR}, and \gls{VHTR} \cite{gif_technology_2002}. 
-The reactor systems of interest in this dissertation are the \gls{MSR} and 
+The reactor systems of interest in this proposed work are the \gls{MSR} and 
 \gls{VHTR} systems. 
 The MSR system produces fission power in a circulating molten salt fuel mixture. 
 It has a closed fuel cycle tailored to the efficient utilization of plutonium 
@@ -94,8 +94,8 @@ The \gls{VHTR} system has a once-through uranium cycle and is primarily aimed at
 high-temperature heat applications, such as hydrogen production. 
 It is a graphite-moderated, helium-cooled reactor that uses \gls{TRISO} fuel, 
 which does not degrade at high burnup and temperature.  
-The \gls{VHTR} system is highly ranked in economics because of its high hydrogen 
-production efficiency, safety, and reliability because of the fuel and reactor's 
+The \gls{VHTR} system is highly ranked in economics, because of its high hydrogen 
+production efficiency, safety and reliability, because of the fuel and reactor's 
 inherent safety features. 
 It is rated good in proliferation resistance and physical protection and 
 neutral in sustainability because of its open fuel cycle \cite{gif_technology_2002}. 
@@ -116,10 +116,10 @@ Successful examples of additive manufacturing applied in the aircraft industry
 are Boeing’s use of additive manufacturing to reduce weight in the 787 Dreamliner
 \cite{noauthor_printed_2017} and SES-15 spacecraft \cite{noauthor_boeing_nodate}. 
 Like the nuclear industry, the aerospace industry is highly regulated; thus, 
-successful additive manufacturing applications to the aerospace industry are 
+successful additive manufacturing applications in the aerospace industry are 
 promising for the nuclear industry. 
 Using additive manufacturing to fabricate nuclear reactor components will 
-drastically reduce cost, timelines, increase safety and performance by 
+drastically reduce cost, timelines, increase safety, and performance by 
 tailoring local material properties and redesigning geometries for optimal load paths 
 \cite{simpson_considerations_2019}. 
 
@@ -128,88 +128,87 @@ core could be 3D printed in the near future.
 \gls{ORNL} is leading this initiative through the 2019 \gls{TCR} Demonstration 
 Program. 
 The \gls{TCR} program will leverage recent scientific achievements in advanced 
-manufacturing, nuclear materials, machine learning, and computational modeling 
+manufacturing, nuclear materials, machine learning, computational modeling 
 and simulation to build a microreactor. 
 The program targets to design, manufacture, and operate a demonstration reactor 
 by 2023 \cite{terrani_transformational_2019}. 
 % explore funky designs :D 
 Applying additive manufacturing to nuclear reactor design will enable complex 
-reactor geometries that are not limited by previous manufacturing constraints. 
-This opens the door for re-examination of nuclear reactor optimization 
+reactor geometries that are not limited by previous manufacturing constraints,
+opening the door for a re-examination of nuclear reactor optimization 
 \cite{sobes_artificial_2020}. 
 Optimization efforts towards classically-manufactured nuclear reactors and now
 3D printed nuclear reactors have focused on uniform shapes such as radius of the 
 core, height of cylinder, enrichment of fuel, etc 
 \cite{sobes_artificial_2020,sacco_two_2006,kumar_new_2015,pereira_parallel_2008}. 
 Leveraging additive manufacturing technology enables us to surpass classical 
-manufacturing constraints such as straight fuel channels or homogenous fuel enrichment, 
-and look forwards to optimize for non-uniform channel shapes, inhomogeneous 
-fuel enrichment throughout the core, etc. 
+manufacturing constraints such as straight fuel channels or homogenous fuel 
+enrichment, and look forward to optimizing with non-uniform channel shapes, 
+inhomogeneous fuel enrichment throughout the core, etc.
 
-Multi-objective design problems inevitably require a trade off between 
+Multi-objective design problems inevitably require a trade-off between 
 desirable attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
-In nuclear reactor design there are many trade offs, one example is the 
-trade-off between neutron economy and fuel enrichment. 
-A reactor design must have sufficient neutron economy to ensure criticality, 
-but must also have a low fuel enrichment to reduce proliferation risk.
-Conflicting objectives means that there is no one perfect solution, but a set
+There are many trade-offs in nuclear reactor design; one example is the 
+trade-off between neutron economy and fuel enrichment.
+A reactor design must have sufficient neutron economy to ensure criticality but 
+also have a low fuel enrichment to reduce proliferation risk. 
+Conflicting objectives means that there is no one perfect solution but a set
 of equally optimal solutions \cite{byrne_evolving_2014}.
-Multi-objective problems are difficult to optimize, such problems 
-cannot be handled by classical optimization methods such as gradient 
-methods, because only the local optimum will be found \cite{renner_genetic_2003}. 
-Evolutionary algorithms have proven to be successful 
-methods to optimize multi-objective problems \cite{krish_practical_2011} as 
-they can find a solution near the global optimum \cite{renner_genetic_2003}
-and they also take advantage of parallel systems for reduced computational 
-cost. 
+Multi-objective problems are challenging to optimize; therefore, they cannot be 
+handled by classical optimization methods such as gradient methods because only 
+the local optimum will be found \cite{renner_genetic_2003}. 
+Evolutionary algorithms have proven successful methods to optimize 
+multi-objective problems \cite{krish_practical_2011} as 
+they can find a solution near the global optimum \cite{renner_genetic_2003}.
+They also take advantage of parallel systems for reduced computational cost.
 The most popular evolutionary algorithms used to solve multi-objective 
 problems are genetic algorithms 
 \cite{byrne_evolving_2014, krish_practical_2011}. 
 Genetic algorithms imitate natural selection to evolve solutions 
 by (1) maintaining a population of solutions, (2) allowing 
-fitter solutions reproduce, and (3) letting lesser fit solutions die off, 
+fitter solutions to reproduce, and (3) letting lesser fit solutions die off, 
 resulting in final solutions that are better than the previous generations 
 \cite{renner_genetic_2003}. 
-Thus, we will pursue the evolutionary algorithm optimization technique 
+We will pursue the evolutionary algorithm optimization technique 
 in this work. 
 
-Therefore in this work, we propose the design of an optimization tool that uses 
+Therefore, in this work, we propose designing an optimization tool that uses 
 the evolutionary algorithm optimization technique with nuclear transport and 
-thermal hydraulics software to explore non-uniform \gls{FHR} reactor core parameters 
-in an effort to further optimize reactor systems and fully take advantage of 
-additive manufacturing technology.  
-
+thermal-hydraulics software. 
+This tool will be used to explore non-uniform FHR reactor core parameters, now 
+possible with additive manufacturing technology, to optimize reactor systems 
+fully. 
 
 \section{Objectives}
-The main objectives of the proposed work were developed based on leveraging open-source 
-artificial intelligence tools with validated open-source nuclear transport and 
-thermal hydraulics software to create an open-source tool to easily generate 
-optimal reactor designs. 
+The proposed work's main objectives were developed based on leveraging 
+open-source artificial intelligence tools with validated open-source nuclear 
+transport and thermal-hydraulics software to create an open-source tool to 
+generate optimal reactor designs quickly. 
 Accordingly, the objectives are listed below. 
 
 \vspace{0.2cm} 
 \noindent
 \textbf{Model Fluoride-Salt-Cooled High-Temperature Reactor with established 
-nuclear transport and thermal hydraulics software}.
-The optimization tool will be applied to the \gls{FHR} concept. 
-To demonstrate success in modeling the \gls{FHR} with the nuclear transport and 
-thermal hydraulics software prior to use with the optimization tool, I will participate 
-in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
+nuclear transport and thermal-hydraulics software}.
+To demonstrate success in modeling the \gls{FHR} with nuclear transport and 
+thermal-hydraulics software before using the optimization tool, we will 
+participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmark 
+\cite{noauthor_fluoride_nodate}. 
 
 \vspace{0.2cm} 
 \noindent
 \textbf{Develop a tool that applies evolutionary algorithms to nuclear 
 reactor design optimization}. 
-This tool will not re-invent the wheel, it will utilize a well-documented 
+This tool will not re-invent the wheel; it will utilize a well-documented 
 and validated open-source evolutionary algorithm python package with established 
-nuclear transport and thermal hydraulics software. This tool will run parallel on 
-\gls{HPC} machines. This tool will be open-source and follow rules for ensuring 
+nuclear transport and thermal-hydraulics software. This tool will run parallel on 
+\gls{HPC} machines. This tool will be open-source and follow the rules for ensuring 
 reproducibility, effectiveness, and usability 
 \cite{list_ten_2017,osborne_ten_2014,sandve_ten_2013}. 
 
 \vspace{0.2cm} 
 \noindent
-\textbf{Demonstrate nuclear reactor design optimization with developed tool 
+\textbf{Demonstrate nuclear reactor design optimization with the optimization tool 
 for a neutronics problem}. 
 We will demonstrate successful implementation of the optimization tool with the 
 nuclear transport software by optimizing a simple \gls{FHR} model for a single 
@@ -217,9 +216,8 @@ objective function.
 
 \vspace{0.2cm} 
 \noindent
-\textbf{Demonstrate hyperparameter tuning with developed tool for neutronics problem}.
-There are many hyperparameters required for an evolutionary algorithm. 
-The hyperparameter selection will impact the effective-ness of the algorithm 
+\textbf{Demonstrate hyperparameter tuning with the optimization tool for neutronics problem}.
+Hyperparameter selection will impact the effectiveness of the algorithm 
 for our problem. 
 Therefore, we must conduct hyperparameter tuning to find hyperparameters that work 
 best for our problem. 
@@ -227,27 +225,20 @@ best for our problem.
 \vspace{0.2cm} 
 \noindent
 \textbf{Demonstrate nuclear reactor design optimization and hyperparameter 
-search with tool for neutronics and thermal hydraulics problem}.
+search with the optimization tool for a neutronics and thermal-hydraulics problem}.
 We will demonstrate successful implementation of the optimization tool and 
-hyperparameter tuning with the nuclear transport and thermal hydraulics tools 
+hyperparameter tuning with the nuclear transport and thermal-hydraulics tools 
 for a \gls{FHR} model.  
 
 
 \section{Outline}
 This document outlines the motivation, preliminary work, and future work proposed 
 towards developing an open-source optimization tool that applies evolutionary 
-algorithms to nuclear transport and thermal hydraulics software to optimize 
+algorithms to nuclear transport and thermal-hydraulics software to optimize 
 nuclear reactor design. 
-Chapter 1 provides a description of the motivation and objectives of the 
-proposed work. 
+Chapter 1 describes the motivation and objectives of the proposed work. 
 Chapter 2 will present a literature review that organizes and reports on previous 
 relevant work. 
-First it summarizes the history of the \gls{FHR} reactor system and the ongoing 
-\gls{OECD}-\gls{NEA} \gls{FHR} benchmark. 
-Next, the literature review describes the status of additive manufacturing 
-applications in the nuclear industry. 
-Then, it focus on types of optimization and previous work towards reactor design
-optimization. 
 Chapter 3 will describe the \gls{FHR} benchmark specifications and the results 
 obtained thus far. 
 Chapter 4 will detail the computational design of the REALM python package. 
