@@ -285,6 +285,7 @@ constituents of fuel particles \cite{snead_handbook_2007} and pellets
 \cite{sauder_ceramic_2014}. 
 
 \section{Nuclear Reactor Design Optimization}
+\label{sec:opt}
 The practice of nuclear reactor optimization has been around since the conception of 
 nuclear reactors. 
 Optimization has been applied to nuclear reactor design, reactor reloading 
@@ -295,7 +296,7 @@ Previous efforts towards nuclear reactor core design optimization include the us
 of deterministic and stochastic optimization techniques, and these optimization 
 methods coupled with surrogate models. 
 
-Deterministic optimization methods usually start from a random guess solution, 
+Deterministic optimization methods usually start from a guess solution, 
 thereafter the algorithm suggests a search direction based on applying local 
 information to a pre-specified transition rule. 
 The best solution becomes the new solution and the above procedure is continued 
@@ -303,7 +304,9 @@ for a number of times \cite{deb_multi-objective_2001}.
 Drawbacks of deterministic methods include: algorithms tend to get stuck to a 
 suboptimal solution and an algorithm efficient in solving one type of problem, 
 may not be efficient in solving a different problem \cite{deb_multi-objective_2001}. 
-Stochastic optimization methods find globally optimal solutions more reliably. 
+Stochastic optimization methods minimize or maximize an objective function 
+when randomness is present, they tend to find globally optimal solutions 
+more reliably than deterministic methods. 
 Evolutionary algorithms and simulated annealing are examples of stochastic 
 optimization algorithms. 
 
@@ -316,8 +319,7 @@ Instead, the multi-objective optimization problem's outcome is a set of optimal
 solutions with a varying degree objective values \cite{deb_multi-objective_2001}. 
 For a multi-objective problem like reactor design optimization, 
 an ideal multi-objective optimization method should find widely spread solutions 
-in the obtained non-dominated front \cite{deb_multi-objective_2001}, concluding 
-that stochastic methods are ideal. 
+in the obtained non-dominated front \cite{deb_multi-objective_2001}. 
 
 Recent efforts towards nuclear reactor optimization have relied heavily on 
 stochastic methods such as simulated annealing and evolutionary algorithms, 
@@ -369,17 +371,18 @@ The simulation annealing method uses a point-by-point approach, in which one
 solution gets updated to a new solution in one iteration, which does not 
 allow for advantages of parallel systems to be fully exploited. 
 Finding an optimal solution with simulation annealing methods will take very 
-long if high-fidelity codes are used to compute the objective function and 
-constraints.
+long if high-fidelity computationally expensive codes are used to compute 
+the objective function and constraints.
 Therefore, using the simulation annealing method is only practical if a 
-surrogate evaluation model is used as described in \cite{betzler_design_2019}.
+surrogate evaluation model is used as described in \cite{betzler_design_2019}
+and \cite{kumar_new_2015}.
 Evolutionary algorithm method mimics nature's evolutionary principles to drive 
 its search towards an optimal solution. 
 Contrary to a single solution per iteration in deterministic and the stochastic 
 simulation annealing methods, \glspl{EA} use a population of solutions in each 
 iteration \cite{deb_multi-objective_2001}. 
 With the affordability and availability of parallel computing systems, the 
-evolutionary algorithm optimization method stands out as an optimization method 
+evolutionary algorithm optimization method stands out as a method 
 that easily and conveniently exploits parallel systems. 
 Further, \glspl{EA} have proved amenable to \gls{HPC} solution and 
 scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}. 
@@ -406,8 +409,9 @@ function \cite{sobes_artificial_2020} with a much smaller set of constraints.
 With a substantial increase and change in the design space of an arbitrary 
 geometry, it becomes time consuming for a human reactor designer to completely 
 explore the design space to find optimal geometries. 
-Instead, we can leverage \gls{AI} to effectively explore the large design space 
-in a timely manner to find global optimal designs. 
+Instead, we can leverage \gls{AI} optimization methods such as \gls{EA} to 
+effectively explore the large design space in a timely manner to find global 
+optimal designs. 
 \gls{AI} would not replace the human reactor designer, but will shift the 
 human designer's focus away from conjecturing good geometries to defining 
 design criteria to find optimal designs \cite{sobes_artificial_2020}. 
@@ -416,3 +420,121 @@ model will easily adapt and produce new global optimal designs to fit the new
 criteria.  
 
 \section{Evolutionary Algorithms} 
+\glspl{EA} mimic natural evolutionary principles to constitute search and 
+optimization procedures \cite{deb_multi-objective_2001}.  
+The most popular \glspl{EA} used to solve multi-objective 
+problems are genetic algorithms (GA) 
+\cite{byrne_evolving_2014, krish_practical_2011}. 
+
+\subsection{Genetic Algorithms}
+\glspl{GA} imitate natural genetics and selection to evolve solutions 
+by (1) maintaining a population of solutions, (2) allowing 
+fitter solutions reproduce, and (3) letting lesser fit solutions die off, 
+resulting in final solutions that are better than the previous generations 
+\cite{renner_genetic_2003}. 
+From here, we will refer to a solution as an individual within the population. 
+They efficiently exploit historical information to speculate new search 
+points with expected improved performance \cite{goldberg_genetic_1989}. 
+\glspl{GA} are theoretically and empirically proven to provide robust 
+search in complex spaces and are computationally simple yet powerful 
+in their search for improvement \cite{goldberg_genetic_1989}. 
+As discussed in section \ref{sec:opt}, \glspl{GA} are advantageous compared to 
+deterministic and other stochastic optimization methods, such as simulated 
+annealing because it searches from a population of points, uses objective 
+function information, not derivatives or other auxillary knowledge of the 
+problem, and uses probabilistic transition rules, not deterministic rules. 
+Figure \ref{fig:genetic_alg} depicts the iterative process of using a \gls{GA}
+to solve a problem. 
+When a population does not meet termination criteria, a new generation is 
+created. 
+This occurs iteratively till the termination criteria is met.
+
+\begin{figure}[!htbp]
+        \centering
+        \begin{tikzpicture}[node distance=1.7cm]
+                \tikzstyle{every node}=[font=\small]
+                \node (1) [lbblock] {\textbf{Create initial population}};
+                \node (2) [lbblock, below of=1] {\textbf{Evaluate initial population}};
+                \node (3) [loblock, below of=2, yshift = -1.3cm] {\textbf{Create new population:} \\ 
+                \begin{enumerate} \item \textbf{select} individuals for mating 
+                                  \item create offspring by \textbf{crossover} 
+                                  \item \textbf{mutate} selected individuals 
+                                  \item keep selected individuals from previous generation
+                                 \end{enumerate}};
+                \node (4) [loblock, below of=3, yshift=-1.3cm] {\textbf{Evaluate new population}};
+                \node (5) [loblock, below of=4] {\textbf{Is termination criteria satisfied?}};
+                \node (6) [lbblock, below of=5] {\textbf{Best solution is returned!}};
+                \draw [arrow] (1) -- (2);
+                \draw [arrow] (2) -- (3);
+                \draw [arrow] (3) -- (4);
+                \draw [arrow] (4) -- (5);
+                \draw [arrow] (5) -- node[anchor=east] {Yes} (6);
+                \draw [arrow] (5) -- ([shift={(0.5cm,0cm)}]5.east)-- node[anchor=west] {no} ([shift={(0.5cm,0cm)}]3.east)--(3);
+        \end{tikzpicture}
+        \caption{Process of solving a problem with genetic algorithm 
+        \cite{renner_genetic_2003}. }
+        \label{fig:genetic_alg}
+\end{figure}
+
+% explain how individuals look like 
+
+\glspl{GA} are usually composed of three operators: selection, crossover, 
+and mutation. 
+
+\subsubsection{Selection Operator}
+The selection operator's primary objective is to make duplicates of good 
+individuals and eliminate bad individuals in a population, while keeping the 
+population constant \cite{deb_multi-objective_2001}. 
+It achieves this by identifying above-average individuals in a population and 
+eliminating bad individuals from the population and replace them with copies 
+of good individuals. 
+Selection operator methods utilized in the proposed work include: tournament 
+selection, best selection, and NSGA-II selection. 
+In tournament selection, tournaments are played between a user-defined number 
+of individuals and the best individual is kept in the population. 
+This occurs repeatedly until all the population's spots are filled. 
+In best selection, a user-defined number of best individuals are selected 
+and copies of them are made to keep population size constant. 
+In NSGA-II selection, parent and offspring populations are combined and the
+best individuals (with respect to fitness and spread) are selected
+\cite{deb_fast_2002}, and copies of the best individuals are made to keep 
+population size constant. 
+
+The selection operator cannot create any new individuals in the population, 
+and only makes more copies of good individuals at the expense of not-so-good
+individuals. 
+The creation of new solutions is performed by the crossover and mutation 
+operators. 
+
+\subsubsection{Crossover Operator}
+The crossover operator is also known as the mating operator. 
+In most crossover operators, two individuals are picked from the population at 
+random and some portion of the individuals' attributes are exchanged with one 
+another to create two new individuals \cite{deb_multi-objective_2001}. 
+Crossover operator methods utilized in the proposed work include: single-point
+crossover, uniform crossover, and blend crossover. 
+In single-point crossover, two individuals are selected from the population and 
+a site along the individual's definition is randomly chosen. 
+Attributes on the right side of this cross site are exchanged between the two 
+individuals, creating two new offspring individuals.  
+In uniform crossover, the user defines an independent probability for each 
+individual attribute to be exchanged, usually $p=0.5$ is used. 
+In blend crossover, two offspring (O) individuals are created based on a linear 
+combination of two parent (P) individuals using the following equations: 
+
+\begin{align}
+    O_1 &= P_1 - \alpha(P_1-P_2) \\
+    O_2 &= P_2 + \alpha(P_1-P_2)
+\intertext{where}
+\alpha &= \mbox{Extent of the interval in which the new values can be drawn} \nonumber \\
+ & \mbox{for each attribute on both side of the parents’ attributes (user-defined)} \nonumber 
+\end{align}
+
+In order to preserve some good individuals selected during the selection 
+operator stage, not all individuals are used in a crossover, this is implemented 
+by having the user define a crossover probability ($p_c$).  
+Therefore, the crossover operator is only applied to $100p_c\%$ of the 
+population, the rest are simply copied to the new population
+\cite{deb_multi-objective_2001}. 
+
+\subsection{Mutation Operator}
