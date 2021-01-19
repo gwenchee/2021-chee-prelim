@@ -421,10 +421,12 @@ criteria.
 
 \section{Evolutionary Algorithms} 
 \glspl{EA} mimic natural evolutionary principles to constitute search and 
-optimization procedures \cite{deb_multi-objective_2001}.  
-The most popular \glspl{EA} used to solve multi-objective 
-problems are genetic algorithms (GA) 
-\cite{byrne_evolving_2014, krish_practical_2011}. 
+optimization procedures \cite{deb_multi-objective_2001}. 
+Evolutionary algorithms often perform well at approximating solutions to many 
+types of problems because they do not make any assumptions about the 
+underlying fitness landscape.
+The most popular \glspl{EA} used to solve multi-objective problems are genetic 
+algorithms (GA) \cite{byrne_evolving_2014, krish_practical_2011}. 
 
 \subsection{Genetic Algorithms}
 \glspl{GA} imitate natural genetics and selection to evolve solutions 
@@ -478,8 +480,15 @@ This occurs iteratively till the termination criteria is met.
 
 % explain how individuals look like 
 
-\glspl{GA} are usually composed of three operators: selection, crossover, 
-and mutation. 
+\glspl{GA} uses mechanisms inspired by biological evolution such as selection, 
+crossover, and mutation. 
+The three operators are simple and straightforward. 
+The selection operator selects good individuals, while the crossover operator 
+recombines together good individuals to hopefully form a better individual, 
+and the mutation operator alters individuals to hopefully create a better 
+individual \cite{deb_multi-objective_2001}. 
+In the subsequent section, we will provide more description and common methods 
+for each operator.
 
 \subsubsection{Selection Operator}
 The selection operator's primary objective is to make duplicates of good 
@@ -537,4 +546,80 @@ Therefore, the crossover operator is only applied to $100p_c\%$ of the
 population, the rest are simply copied to the new population
 \cite{deb_multi-objective_2001}. 
 
+The crossover operator is mainly responsible for the search aspect of the 
+\glspl{GA}, whereas the mutation operator is needed to keep diversity 
+in the population \cite{deb_multi-objective_2001}. 
+
 \subsubsection{Mutation Operator}
+The mutation operator alters one or more attributes of an individual within 
+a population. 
+Mutation occurs in the \gls{GA} based on a user-defined mutation probability 
+($p_m$), that must be set low to prevent a primitive random search. 
+Mutation operator methods utilized in the proposed work include: polynomial 
+bounded mutation. 
+In polynomial bounded mutation, each attribute in each individual is mutated 
+based on a polynomial distribution. 
+The user also defines the upper and lower bounds of each attribute and the 
+crowding-degree of the mutation, $\eta$ (large $\eta$ will produce a mutant 
+resembling its parent, while a small $\eta$ will produce the opposite).  
+
+\subsection{Balancing Genetic Algorithm Hyperparameters}
+In the proposed work, hyperparameters refer to parameters whose value controls 
+the \gls{GA}'s process such as each genetic operator's associated parameters, and
+population size.  
+A good optimization method needs to balance the extent of exploration of 
+information obtained up until the current generation through the crossover 
+and mutation operators with the extent of exploitation through the selection
+operator. 
+If individuals obtained are exploited too much, the population loses its diversity 
+and premature convergence to a sub-optimal solution is expected. 
+Whereas if too much stress is given on exploration, the information obtained 
+thus far has not been utilized properly and the \gls{GA}'s search procedure 
+behaves like a random search process \cite{deb_multi-objective_2001}. 
+A quantitative balance between these two issues, exploitation and exploration, 
+is difficult to achieve. 
+Deb et al \cite{deb_multi-objective_2001} and Goldberg et al 
+\cite{goldberg_toward_1993} quantified the relationship between exploitation 
+and exploration and found that for the one-max test problem, in which the 
+objective is to maximize the number of 1s in a string, a \gls{GA} with any 
+arbitrary hyperparameter setting was not expected to work well even on a simple 
+problem. 
+Only a \gls{GA} with a selection pressure, s, and crossover probability, $p_c$, 
+falling inside the control map (figure \ref{fig:controlmap}) finds the desired 
+optimum.  
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{controlmap.png} 
+    \caption{Simulation results of the region in which the \gls{GA} will find the 
+    desired optimum for the one-max problem 
+    \cite{goldberg_toward_1993,deb_multi-objective_2001}.}
+    \label{fig:controlmap}
+\end{figure}
+
+Another consideration is population size, a function with a large variability in 
+objective function values demands a large population size to find global 
+optinum \cite{deb_multi-objective_2001}. 
+Therefore, it is clear that to effectively use a \glspl{GA} to find an optimized 
+solution, a hyperparameter search must be conducted to find the optimal 
+hyperparameters for the problem at hand. 
+Ng et al \cite{ng_improving_2021} suggests that a coarse to fine sampling scheme 
+is the best way to perform a systematic hyperparameter search.  
+For a two-dimensional example of a coarse to fine sampling scheme, the user 
+first does a coarse sample of the entire square, and based on the results does a
+fine search within a region that indicated the best hyperparameters in the 
+coarse search. 
+
+\section{Summary}
+Additive manufacturing of nuclear reactor components is a quickly developing
+field thanks to the aerospace and auto industries which led breakthroughs 
+in additive manufacturing fabrication of metal components. 
+The promise of cheaper and faster manufacturing of reactor components with 
+additive manufacturing has reduced constraints on nuclear reactor 
+design and thus, allowed reactor designers to reexamine optimization of 
+nuclear reactor design. 
+Stochastic optimization methods such as evolutionary algorithms have proven to 
+work well for finding global optimums in multi-objective design problems such as 
+nuclear reactor optimization and can be leveraged to explore the vast exploration 
+design space recently enabled by additive manufacturing.
