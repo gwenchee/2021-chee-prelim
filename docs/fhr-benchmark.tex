@@ -8,13 +8,13 @@
 % Appendix? 
 % - More details about the geometry 
 
-In 2019, \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the ongoing 
+In 2019, \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the
 \gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
 \glspl{FHR} are cooled with liquid molten salt and fuelled with 
 \gls{TRISO}-based fuel. 
 The \gls{FHR} studied in this benchmark has plate-based fuel in hexagonal fuel 
 elements, i.e. \gls{AHTR} design. 
-The benchmark has several phases planned, starting with single fuel element 
+The benchmark has several phases, starting with single fuel element 
 simulation without burnup, and gradually extending to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
 
@@ -136,6 +136,8 @@ The following subsections will report the equations we used to calculate the
 results listed above. 
 
 \subsubsection{Reactivity Coefficients (b)}
+Effective delayed neutron fraction ($\beta_{eff}$) is the fraction of delayed 
+neutrons in the core at creation at thermal energies. 
 We assumed 1 energy group and 6 delayed groups for $\beta_{eff}$: 
 \begin{align}
     \beta_{eff} = \sum_k \beta_k
@@ -222,11 +224,11 @@ Table \ref{tab:phase1a-cases} outlines each of the cases.
     particle layers other than fuel kernel). Nominal (cold) dimensions, 
     9 wt\% enrichment, no \gls{BP}, \glspl{CR} out.\\
     \hline
-    2AH & Hot zero power (HZP) with uniform temperature of 948 K, 
+    2AH & \gls{HZP} with uniform temperature of 948 K, 
     otherwise same as CASE 1A. Comparison with CASE 1A provides HZP-to-HFP power 
     defect.\\
     \hline 
-    2AC & “Cold” Zero Power (CZP). Same as CASE 2AH, but with uniform temperature 
+    2AC & \gls{CZP}. Same as CASE 2AH, but with uniform temperature 
     of 773 K. Comparison with CASE 2AH provides isothermal temperature coefficient.\\
     \hline
     3A & \gls{CR} inserted, otherwise same as CASE 1A. \\
@@ -252,6 +254,15 @@ In phase I-B, the benchmark specifies analysis for 3 cases: 1B, 4B, and 7B.
 These are the same as cases 1A, 4A, and 7A, but with depletion steps added and
 the critical spectrum assumption. 
 The benchmark assumes that depletion occurs only in the fuel and \glspl{BP}. 
+Table \ref{tab:phase1b} outlines the results required by the benchmark at specific 
+depletion burnup steps. 
+
+\begin{table}
+    \centering
+    \caption{Phase I-B required results at specific burnup steps \cite{noauthor_fluoride_nodate}.}
+    \label{tab:phase1b}
+    \includegraphics[width=0.8\linewidth]{phase1b.png}
+  \end{table}
 
 \section{Results}
 Several organizations participated in the benchmark with various Monte Carlo
@@ -261,5 +272,67 @@ We participated in the benchmark with the OpenMC Monte Carlo code
 \cite{chadwick_endf/b-vii.1_2011}.
 The \texttt{fhr-benchmark} github repository contains all the results submitted 
 by \gls{UIUC} for the \gls{FHR} benchmark. 
-% needs citation
+% needs citation both up and down
+The benchmark used a phased blind approach, thus, participants were asked to 
+submit phase I-A and I-B results without knowledge of other submissions. 
+Petrovic et al describes the preliminary results of the benchmark results 
+across the several institutions, and concludes that the overall observed agreement 
+is satisfactory, although notable differences are identified in specific cases 
+suggesting the need for further in-depth analysis of those cases. 
+In the subsequent sections, we will share the results obtained by the \gls{UIUC}.  
+
 \subsection{Phase I-A}
+Table \ref{tab:phase1a-cases} reports phase I-A results for effective multiplication 
+factor and reactivity coefficients. 
+We ran the simulations on \gls{UIUC}'s BlueWaters supercomputer with 64 XE nodes, 
+which have 32 cores each. 
+To reduce statistical uncertainty of keff to $\sim$10pcm, each simulation took 
+wall-clock-time of 2 to 5 hours. 
+\begin{table}[H]
+    \centering
+    \onehalfspacing
+    \caption{Phase I-A results cite github fhr bm.}
+	\label{tab:phase1a-results}
+    \footnotesize
+    \begin{tabular}{cp{2.6cm}ccccc}
+    \hline
+    \textbf{Case} & \textbf{Summary} &\textbf{$k_{eff}$} & 
+    \textbf{$\beta_{eff}$} & 
+    \textbf{Fuel} $\frac{\Delta \rho}{\Delta T}$ & 
+    \textbf{FliBe} $\frac{\Delta \rho}{\Delta T}$ & 
+    \textbf{Graphite} $\frac{\Delta \rho}{\Delta T}$\\
+    \hline 
+    1A & Reference &1.39389$\pm$0.00010 & 0.006534$\pm$0.000001 & -2.24$\pm$0.15 & -0.15$\pm$0.15 & -0.68$\pm$0.15\\
+    2AH & \gls{HZP} &1.40395$\pm$0.00010 & 0.006534$\pm$0.000001 & -3.14$\pm$0.15 & -0.20$\pm$0.14 & -0.85$\pm$0.14\\
+    2AC & \gls{CZP} &1.41891$\pm$0.00010 & 0.006534$\pm$0.000001 & -3.36$\pm$0.14 & -0.11$\pm$0.14 & 0.07$\pm$0.14\\
+    3A & \gls{CR} &1.03147$\pm$0.00011 & 0.006534$\pm$0.000001 & -4.03$\pm$0.28 & -0.83$\pm$0.27 & -3.18$\pm$0.29\\
+    4A & Discrete \gls{BP} &1.09766$\pm$0.00010 & 0.006542$\pm$0.000001 & -4.06$\pm$0.24 & -1.55$\pm$0.23 & -6.51$\pm$0.24\\
+    4AR & Discrete \gls{BP} +\gls{CR} &0.84158$\pm$0.00010 & 0.006553$\pm$0.000001 & -5.60$\pm$0.49 & -1.78$\pm$0.46 & -10.44$\pm$0.47\\
+    5A & Dispersed \gls{BP} &0.79837$\pm$0.00009 & 0.006556$\pm$0.000001 & -5.09$\pm$0.40 & -4.87$\pm$0.40 & -22.99$\pm$0.38\\
+    6A & Increased \gls{HM} &1.26294$\pm$0.00011 & 0.006556$\pm$0.000001 & -4.46$\pm$0.19 & 0.16$\pm$0.20 & -0.39$\pm$0.20\\
+    7A & 19.75\% Enriched &1.50526$\pm$0.00010 & 0.006530$\pm$0.000001 & -2.49$\pm$0.13 & -0.12$\pm$0.12 & -0.62$\pm$0.12\\
+    \hline
+    \end{tabular}
+\end{table}
+Petrovic et al compared effective multiplication factor for all participants 
+and cases, and reported that standard deviation between participants for each case 
+was in the 231 to 514 pcm range, which is acceptable and notably close given a 
+blind benchmark. 
+
+Cases 2AH and 2AC are at zero power meaning that the fuel element is exactly 
+critical but not producing any energy. 
+For both cases, keff is higher than the reference case 1A which we attribute to 
+lower fuel temperatures; at higher fuel temperatures, doppler broadening occurs 
+which results in more neutron capture, thus, lowering keff. 
+As expected, keff is lower for cases 3A, 4AR, and 5A compared to reference case 
+1A since those cases introduced burnable poisons and control rods to the fuel 
+element. 
+Also as expected, keff is higher for case 7A compared to reference case 1A since 
+the fuel has a higher enrichment. 
+However, case 6A deviated from expectations with a lower keff despite an increase 
+in \gls{HM} loading. 
+This could be due reduced moderation and worsened fuel utilization brought 
+about by self-shielding, demonstrating that an increase in fuel packing 
+fraction does not always correspond with an increased keff. 
+
+$\beta_{eff}$ increased for cases 4A, 4AR, 5A, and 6A.  
