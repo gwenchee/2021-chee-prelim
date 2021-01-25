@@ -9,11 +9,13 @@
 % - More details about the geometry 
 
 In 2019, \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the
-\gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
+\gls{FHR} benchmark for the \gls{AHTR} design \cite{noauthor_fluoride_nodate}. 
 \glspl{FHR} are cooled with liquid molten salt and fuelled with 
 \gls{TRISO}-based fuel. 
 The \gls{FHR} studied in this benchmark has plate-based fuel in hexagonal fuel 
 elements, i.e. \gls{AHTR} design. 
+More details about the \gls{AHTR} design and the history of \gls{FHR} modeling 
+efforts leading up to the benchmark can be found in Section \ref{sec:fhr}. 
 The benchmark has several phases, starting with single fuel element 
 simulation without burnup, and gradually extending to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
@@ -125,8 +127,7 @@ The benchmark required the following results for phases I-A and I-B:
     \item Reactivity coefficients ($\beta_{eff}$, fuel Doppler coefficient, FLiBe 
     temperature coefficient, graphite temperature coefficient)
     \item Tabulated fission source distribution, at several levels of granularity 
-    (by fuel plate, by fuel stripe, by 1/5-th fuel stripe). Optional: visualized fission 
-    density distribution.
+    (by fuel plate, by fuel stripe, by 1/5-th fuel stripe). 
     \item Neutron flux averaged over the whole model tabulated in 3 coarse energy groups. 
     \item Visualized distribution of the neutron flux distribution, in 3 coarse energy groups
     \item Neutron spectrum, fuel assembly average. Optional: by region.
@@ -143,6 +144,8 @@ We assumed 1 energy group and 6 delayed groups for $\beta_{eff}$:
     \beta_{eff} = \sum_k \beta_k
 \end{align}
 
+Reactivity coefficient is the change in reactivity of the material per degree 
+change in the material's temperature. 
 We calculated each reactivity coefficient and its corresponding uncertainty 
 with these equations: 
 \begin{align}
@@ -282,42 +285,49 @@ suggesting the need for further in-depth analysis of those cases.
 In the subsequent sections, we will share the results obtained by the \gls{UIUC}.  
 
 \subsection{Phase I-A}
+Petrovic et al compared effective multiplication factor for all participants 
+and cases in the \gls{FHR} benchmark, and reported that standard deviation 
+between participants for each case was in the 231 to 514 pcm range, which is 
+acceptable and notably close given a blind benchmark. % CITE!! 
+This assures us that our results for phase I-A are acceptable and in agreement 
+with other participants in the benchmark. 
+Next, we will present our results for phase I-A and describe and explain the 
+observed trends.
+
 Table \ref{tab:phase1a-cases} reports phase I-A results for effective multiplication 
 factor and reactivity coefficients. 
 We ran the simulations on \gls{UIUC}'s BlueWaters supercomputer with 64 XE nodes, 
 which have 32 cores each. 
-To reduce statistical uncertainty of keff to $\sim$10pcm, each simulation took 
-wall-clock-time of 2 to 5 hours. 
+To reduce statistical uncertainty of keff to $\sim$10pcm, we ran each simulation 
+with 500 active cycles, 100 inactive cycles, and 200000 neutrons. 
+Each simulation took \gls{WCT} ranging from 2 to 5 hours. 
 \begin{table}[H]
     \centering
     \onehalfspacing
-    \caption{Phase I-A results cite github fhr bm.}
+    \caption{\gls{FHR} Benchmark Phase I-A results cite github fhr bm.}
 	\label{tab:phase1a-results}
     \footnotesize
-    \begin{tabular}{cp{2.6cm}ccccc}
+    \begin{tabular}{cp{2.7cm}cccccc}
     \hline
-    \textbf{Case} & \textbf{Summary} &\textbf{$k_{eff}$} & 
-    \textbf{$\beta_{eff}$} & 
+    \textbf{Case} & \textbf{Summary} & \textbf{WCT [hr]} & \textbf{$k_{eff}$} & 
+    \textbf{$\beta_{eff}$}* & 
     \textbf{Fuel} $\frac{\Delta \rho}{\Delta T}$ & 
     \textbf{FliBe} $\frac{\Delta \rho}{\Delta T}$ & 
     \textbf{Graphite} $\frac{\Delta \rho}{\Delta T}$\\
     \hline 
-    1A & Reference &1.39389$\pm$0.00010 & 0.006534$\pm$0.000001 & -2.24$\pm$0.15 & -0.15$\pm$0.15 & -0.68$\pm$0.15\\
-    2AH & \gls{HZP} &1.40395$\pm$0.00010 & 0.006534$\pm$0.000001 & -3.14$\pm$0.15 & -0.20$\pm$0.14 & -0.85$\pm$0.14\\
-    2AC & \gls{CZP} &1.41891$\pm$0.00010 & 0.006534$\pm$0.000001 & -3.36$\pm$0.14 & -0.11$\pm$0.14 & 0.07$\pm$0.14\\
-    3A & \gls{CR} &1.03147$\pm$0.00011 & 0.006534$\pm$0.000001 & -4.03$\pm$0.28 & -0.83$\pm$0.27 & -3.18$\pm$0.29\\
-    4A & Discrete \gls{BP} &1.09766$\pm$0.00010 & 0.006542$\pm$0.000001 & -4.06$\pm$0.24 & -1.55$\pm$0.23 & -6.51$\pm$0.24\\
-    4AR & Discrete \gls{BP} +\gls{CR} &0.84158$\pm$0.00010 & 0.006553$\pm$0.000001 & -5.60$\pm$0.49 & -1.78$\pm$0.46 & -10.44$\pm$0.47\\
-    5A & Dispersed \gls{BP} &0.79837$\pm$0.00009 & 0.006556$\pm$0.000001 & -5.09$\pm$0.40 & -4.87$\pm$0.40 & -22.99$\pm$0.38\\
-    6A & Increased \gls{HM} &1.26294$\pm$0.00011 & 0.006556$\pm$0.000001 & -4.46$\pm$0.19 & 0.16$\pm$0.20 & -0.39$\pm$0.20\\
-    7A & 19.75\% Enriched &1.50526$\pm$0.00010 & 0.006530$\pm$0.000001 & -2.49$\pm$0.13 & -0.12$\pm$0.12 & -0.62$\pm$0.12\\
+    1A & Reference &2.82&1.39389$\pm$0.00010 & 0.006534 & -2.24$\pm$0.15 & -0.15$\pm$0.15 & -0.68$\pm$0.15\\
+    2AH & \gls{HZP} &2.82&1.40395$\pm$0.00010 & 0.006534 & -3.14$\pm$0.15 & -0.20$\pm$0.14 & -0.85$\pm$0.14\\
+    2AC & \gls{CZP} &2.75&1.41891$\pm$0.00010 & 0.006534 & -3.36$\pm$0.14 & -0.11$\pm$0.14 & 0.07$\pm$0.14\\
+    3A & \gls{CR} &2.49&1.03147$\pm$0.00011 & 0.006534 & -4.03$\pm$0.28 & -0.83$\pm$0.27 & -3.18$\pm$0.29\\
+    4A & Discrete \gls{BP} &5.08&1.09766$\pm$0.00010 & 0.006542 & -4.06$\pm$0.24 & -1.55$\pm$0.23 & -6.51$\pm$0.24\\
+    4AR & Discrete \gls{BP} + \gls{CR} &4.59&0.84158$\pm$0.00010 & 0.006553 & -5.60$\pm$0.49 & -1.78$\pm$0.46 & -10.44$\pm$0.47\\
+    5A & Dispersed \gls{BP} &2.33&0.79837$\pm$0.00009 & 0.006556 & -5.09$\pm$0.40 & -4.87$\pm$0.40 & -22.99$\pm$0.38\\
+    6A & Increased \gls{HM} &3.52&1.26294$\pm$0.00011 & 0.006556 & -4.46$\pm$0.19 & 0.16$\pm$0.20 & -0.39$\pm$0.20\\
+    7A & 19.75\% Enriched &2.21&1.50526$\pm$0.00010 & 0.006530 & -2.49$\pm$0.13 & -0.12$\pm$0.12 & -0.62$\pm$0.12\\
     \hline
+    \multicolumn{5}{l}{* All $\beta_{eff}$ values have an uncertainty of 0.000001.} 
     \end{tabular}
 \end{table}
-Petrovic et al compared effective multiplication factor for all participants 
-and cases, and reported that standard deviation between participants for each case 
-was in the 231 to 514 pcm range, which is acceptable and notably close given a 
-blind benchmark. 
 
 Cases 2AH and 2AC are at zero power meaning that the fuel element is exactly 
 critical but not producing any energy. 
@@ -335,4 +345,52 @@ This could be due reduced moderation and worsened fuel utilization brought
 about by self-shielding, demonstrating that an increase in fuel packing 
 fraction does not always correspond with an increased keff. 
 
-$\beta_{eff}$ increased for cases 4A, 4AR, 5A, and 6A.  
+$\beta_{eff}$ increased by 10-20pcm for cases 4A, 4AR, 5A, and 6A, compared to
+reference case 1A.
+This is attributed to the introduction of control rods and poisons, which 
+shifts the average neutron velocity to higher values resulting in decreased
+thermal fission and increased fast fission\cite{torabi_neutronic_2018}.
+Table \ref{tab:phase1a-results} reports that most of the temperature coefficients 
+are negative, which exemplifies the \gls{AHTR}'s passive safety behavior. 
+Negative reactivity feedback results in a self-regulating reactor; if the reactor's 
+power rises, resulting in temperature increase, the negative reactivity will in turn 
+reduce power. 
+
+Figure \ref{fig:phase1a-c} shows the fission source distribution by 
+$1/5^{th}$ fuel stripe for cases 1A and 3A. 
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.49\linewidth]{p1a_c1a_c.png} 
+    \includegraphics[width=0.49\linewidth]{p1a_c3a_c.png} 
+    \caption{Fission Source Distribution per $1/5^{th}$ fuel stripe for \gls{FHR} 
+    Benchmark's Phase I-A Case 1A (left) and Case 3A (right).}
+    \label{fig:phase1a-c}
+\end{figure}
+Case 4AR has a similar fission source distribution as case 3A, since both 
+cases have control rod insertion. 
+All other cases have similar fission source distributions to case 1A. 
+For case 1A, intuitively, we would assume that highest fission source in stripes 
+corresponding to the centre of the diamond fuel segment, however, the opposite is 
+true. 
+Power peaking occurs on exterior stripes and is minimum on the interior stripes.  
+Gentry et al \cite{gentry_development_2016} reported a similar phenomena of 
+power peaking towards the exterior of the lattice cell closest to the Y-shaped 
+carbon support structure where the thermal flux is most elevated, and the 
+complement to the peaking is found in the interiors of the lattice tri-sections. 
+This fission source distribution is caused by  diminished resonance escape 
+probability in the interior due to higher relative fuel-to-carbon volume ratio. 
+This phenomenon is more exaggerated in cases 6A and 7A since there is a higher 
+fuel-to-carbon ratio. 
+For case 3A, the fission source is lower in the $1/5^{th}$ stripes closer to 
+the control rod.  
+
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=\linewidth]{phase1a-d-flux.png} 
+    \caption{Neutron Flux, averaged over the whole model, tabulated in 3 coarse 
+    energy groups for each Phase I-A case. }
+    \label{fig:phase1a-d}
+\end{figure}
+
+\subsection{Phase I-B}
