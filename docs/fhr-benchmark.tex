@@ -1,4 +1,4 @@
-\chapter{Fluoride Salt Cooled High Temperature Reactor Benchmark}
+\chapter{Fluoride Salt Cooled High-Temperature Reactor Benchmark}
 \label{chap:fhr-benchmark}
 % Main Gist 
 % - The work I did for the FHR Benchmark
@@ -11,8 +11,8 @@
 The \gls{FHR} is a reactor concept that uses \gls{TRISO}-based fuel and a 
 low-pressure liquid fluoride-salt coolant.
 \gls{FHR} technology combines FLiBE coolant from \gls{MSR} technology and 
-\gls{TRISO} particles from \gls{VHTR} technology to enable a reactor that 
-has a low operating pressure, large thermal margin, and accident-tolerant 
+\gls{TRISO} particles from \gls{VHTR} technology to enable a reactor with 
+low operating pressure, large thermal margin, and accident-tolerant 
 qualities.
 To address the technical challenges of \gls{AHTR} modeling, such as multiple 
 heterogeneity and material cross-section data, the \gls{OECD}-\gls{NEA} and 
@@ -25,8 +25,8 @@ a high-level description of the \gls{AHTR} design, a review of previous efforts
 towards modeling these designs, and how these efforts led to the 
 initiation of the benchmark. 
 
-The \gls{FHR} benchmark has several phases, starting with single fuel assembly 
-simulation without burnup, and gradually extending to full core depletion. 
+The \gls{FHR} benchmark has several phases, starting with a single fuel assembly 
+simulation without burnup and gradually extending to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
 
 \begin{table}[H]
@@ -39,7 +39,7 @@ Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
     \hline 
     \textbf{Phases}& \textbf{Sub-phases} & \textbf{Description} & \textbf{Completed?} \\
     \hline
-    \multirow{ 3}{5cm}{\textbf{Phase I: Fuel assembly (2D/3D with depletion)}} & I-A & 2D model, steady state (no depletion) & \checkmark\\
+    \multirow{ 3}{5cm}{\textbf{Phase I: Fuel assembly (2D/3D with depletion)}} & I-A & 2D model, steady-state (no depletion) & \checkmark\\
     &I-B & 2D model depletion & \checkmark\\
     &I-C & 3D model depletion &\\
     \hline
@@ -61,7 +61,6 @@ The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power
 \cite{varma_ahtr_2012}. 
 Figure \ref{fig:reactor-schematic} shows the reactor schematic and a vertical 
 cut of the reactor vessel. 
-Figure \ref{fig:ahtr} shows the core configuration and fuel assembly. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.9\linewidth]{reactor-schematic.png} 
@@ -69,6 +68,8 @@ Figure \ref{fig:ahtr} shows the core configuration and fuel assembly.
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:reactor-schematic}
 \end{figure}
+Figure \ref{fig:ahtr} shows the geometry of a single fuel assembly and all 
+assemblies' configuration in the core.
 The prismatic \gls{AHTR}'s fuel assembly is shown in Figure 
 \ref{fig:ahtr-fuel-assembly}.  
 \begin{figure}[]
@@ -89,9 +90,9 @@ The diamond-shaped sections have 120-deg rotational symmetry with each other
 The fuel planks have semi-cylindrical spacers attached, their radius being 
 equal to the coolant channel thickness. 
 
-The external channel wrapper and structural Y-shape as seen in Figure 
-\ref{fig:y-shape} are made of C-C composite and have extra notches for the 
-fuel plates to slide in. 
+The external channel wrapper and structural Y-shape, as seen in Figure 
+\ref{fig:y-shape}, are made of C-C composite and have extra notches to hold 
+the fuel plates in place.
 \begin{figure}[]
     \centering
     \includegraphics[width=0.8\linewidth]{y-shape.png} 
@@ -101,11 +102,11 @@ fuel plates to slide in.
 \end{figure}
 The gap between the fuel assemblies and fuel plates are filled with \gls{FLiBe}
 coolant. 
-At the center of the Y-shape structure is the Y-shaped control rod slot, 
-which contains \gls{FLiBe} coolant when the control blade is not in the slot
+The Y-shaped control rod slot at the center of the Y-shape structure contains 
+\gls{FLiBe} coolant when the control blade is not in the slot
 \cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
 Each fuel plank is made of an isostatically pressed carbon with fuel stripes 
-on each outer side of the plank as seen in Figure \ref{fig:ahtr-fuel-plank}. 
+on each outer side of the plank, as seen in Figure \ref{fig:ahtr-fuel-plank}. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.75\linewidth]{ahtr-fuel-plank.png} 
@@ -115,11 +116,11 @@ on each outer side of the plank as seen in Figure \ref{fig:ahtr-fuel-plank}.
 \end{figure}
 The fuel stripes are prismatic regions composed of a graphite matrix filled with 
 a cubic lattice of \gls{TRISO} particles with a 40\% packing fraction. 
-The lattice is 210 \gls{TRISO} particles wide in x-direction, 4 particles deep in 
-the y-direction, and 5936 particles tall in the z-direction. 
-Each \gls{TRISO} particle has 5 layers: Oxycarbide fuel kernel, porous carbon 
+The lattice is 210 \gls{TRISO} particles wide in the x-direction, four particles 
+deep in the y-direction, and 5936 particles tall in the z-direction. 
+Each \gls{TRISO} particle has five layers: Oxycarbide fuel kernel, porous carbon 
 buffer, inner pyrolytic carbon, silicon carbide layer, and the outer pyrolitic 
-carbon as seen in Figure \ref{fig:ahtr-triso}
+carbon, as seen in Figure \ref{fig:ahtr-triso}
 \begin{figure}[]
     \centering
     \includegraphics[width=0.35\linewidth]{ahtr-triso.png} 
@@ -129,10 +130,10 @@ carbon as seen in Figure \ref{fig:ahtr-triso}
 
 Burnable poisons and control rods for reactivity control are also included in 
 some configurations of the \gls{AHTR}. 
-The burnable poisons consist of europium oxide, $Eu_2O_3$, and have a discrete
+The burnable poisons consist of europium oxide, $Eu_2O_3$ and have a discrete
 or integral (dispersed) option. 
 In the discrete option, small spherical $Eu_2O_3$ particles are stacked axially 
-at 5 locations in each fuel plank as shown in Figure \ref{fig:discrete-poison}. 
+at 5 locations in each fuel plank, as shown in Figure \ref{fig:discrete-poison}. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.6\linewidth]{discrete-poison.png} 
@@ -141,7 +142,7 @@ at 5 locations in each fuel plank as shown in Figure \ref{fig:discrete-poison}.
     \label{fig:discrete-poison}
 \end{figure}
 In the integral option, $Eu_2O_3$ is homogenously mixed with the fuel plank 
-graphite matrix (including the graphite in fuel stripes matrix, and the 
+graphite matrix (including the graphite in fuel stripes matrix and the 
 graphite in the plank ends indented to structural sides, but excluding the 
 graphite in spacers and graphite in TRISO particles). 
 Each control rod is uniformly composed of \gls{MHC} and is inserted into the 
@@ -350,7 +351,7 @@ Each simulation took \gls{WCT} ranging from 2 to 5 hours.
 \begin{table}[H]
     \centering
     \onehalfspacing
-    \caption{\gls{FHR} Benchmark UIUC's Phase I-A results \cite{chee_arfcfhr-benchmark_2021}.}
+    \caption{\gls{FHR} Benchmark UIUC's phase I-A results \cite{chee_arfcfhr-benchmark_2021}.}
 	\label{tab:phase1a-results}
     \footnotesize
     \begin{tabular}{cp{2.7cm}cccccc}
@@ -409,7 +410,7 @@ $1/5^{th}$ fuel stripe for cases 1A and 3A.
     \includegraphics[width=0.49\linewidth]{p1a_c1a_c.png} 
     \includegraphics[width=0.49\linewidth]{p1a_c3a_c.png} 
     \caption{Fission Source Distribution per $1/5^{th}$ fuel stripe for \gls{FHR} 
-    Benchmark's Phase I-A Case 1A (left) and Case 3A (right).}
+    Benchmark's phase I-A Case 1A (left) and Case 3A (right).}
     \label{fig:phase1a-c}
 \end{figure}
 Case 4AR has a similar fission source distribution as case 3A, since both 
@@ -436,7 +437,7 @@ three coarse energy groups.
     \centering
     \includegraphics[width=\linewidth]{phase1a-d-flux.png} 
     \caption{Neutron Flux, averaged over the whole model, tabulated in 3 coarse 
-    energy groups for each Phase I-A case. }
+    energy groups for each phase I-A case. }
     \label{fig:phase1a-d}
 \end{figure}
 Most of the cases have the most flux in the intermediate group, followed by 
@@ -465,7 +466,7 @@ Figure \ref{fig:phase1a-f} shows the neutron spectrum for cases 1A and 6A.
     \centering
     \includegraphics[width=0.49\linewidth]{p1a_c1a_f.png} 
     \includegraphics[width=0.49\linewidth]{p1a_c6a_f.png} 
-    \caption{Neutron Spectrum for \gls{FHR} Benchmark's Phase I-A Case 1A 
+    \caption{Neutron Spectrum for \gls{FHR} Benchmark's phase I-A Case 1A 
     (left) and Case 6A (right).}
     \label{fig:phase1a-f}
 \end{figure}
