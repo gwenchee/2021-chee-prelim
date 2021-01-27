@@ -153,7 +153,7 @@ Y-shaped control rod slot and displaces the \gls{FLiBe} that occupies the slot.
 Phase I of the \gls{FHR} benchmark consists of a steady-state 2D model 
 (phase I-A) and depletion (phase I-B) of one \gls{FHR} fuel assembly. 
 For a single fuel assembly, the internal 120-degree rotational symmetry is 
-represented by periodic boundary conditions as seen in Figure \ref{fig:bc}. 
+represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.5\linewidth]{bc.png} 
@@ -166,11 +166,10 @@ The benchmark required the following results for phases I-A and I-B:
     \item Effective multiplication factor 
     \item Reactivity coefficients ($\beta_{eff}$, fuel Doppler coefficient, FLiBe 
     temperature coefficient, graphite temperature coefficient)
-    \item Tabulated fission source distribution, at several levels of granularity 
-    (by fuel plate, by fuel stripe, by 1/5-th fuel stripe). 
-    \item Neutron flux averaged over the whole model tabulated in 3 coarse energy groups. 
-    \item Visualized distribution of the neutron flux distribution, in 3 coarse energy groups
-    \item Neutron spectrum, fuel assembly average. Optional: by region.
+    \item Tabulated fission source distribution by 1/5-th fuel stripe. 
+    \item Neutron flux averaged over the whole model tabulated in three coarse energy groups. 
+    \item Visualized distribution of the neutron flux distribution in three coarse energy groups
+    \item Neutron spectrum, fuel assembly average.
 \end{enumerate}
 
 Next, we will report the equations we used to calculate the required results 
@@ -252,7 +251,7 @@ We calculated reactor power based on the given reference specific power
 
 \subsection{Benchmark Specifications: Phase I-A}
 For phase I-A, the benchmark specifies that each participant must produce a 
-steady-state 2D model of one fresh fuel assembly for 9 cases, 
+steady-state 2D model of one fresh fuel assembly for 9 cases
 and report the required results listed in Section \ref{sec:phase1}.  
 Table \ref{tab:phase1a-cases} describes each case. 
 \begin{table}[H]
@@ -270,23 +269,23 @@ Table \ref{tab:phase1a-cases} describes each case.
     particle layers other than fuel kernel). Nominal (cold) dimensions, 
     9 wt\% enrichment, no \gls{BP}, \glspl{CR} out.\\
     \hline
-    2AH & \gls{HZP} with uniform temperature of 948 K, 
+    2AH & \Gls{HZP} with uniform temperature of 948 K, 
     otherwise same as CASE 1A. Comparison with CASE 1A provides HZP-to-HFP power 
     defect.\\
     \hline 
-    2AC & \gls{CZP}. Same as CASE 2AH, but with uniform temperature 
+    2AC & \Gls{CZP}. Same as CASE 2AH, but with uniform temperature 
     of 773 K. Comparison with CASE 2AH provides isothermal temperature coefficient.\\
     \hline
     3A & \gls{CR} inserted, otherwise same as CASE 1A. \\
     \hline
-    4A & Disrete europia \gls{BP}, otherwise same as CASE 1A.\\
+    4A & Discrete europia \gls{BP}, otherwise same as CASE 1A.\\
     \hline
-    4AR & Discrete europia \gls{BP}, and \gls{CR} inserted, otherwise same as 
+    4AR & Discrete europia \gls{BP} and \gls{CR} inserted, otherwise same as 
     CASE 1A. \\
     \hline
     5A & Integral (dispersed) europia \gls{BP}, otherwise same as CASE 1A. \\
     \hline
-    6A & Increased \gls{HM} loading (4 to 8 layers of \gls{TRISO}), hence decreased C/HM 
+    6A & Increased \gls{HM} loading (4 to 8 layers of \gls{TRISO}) decreased C/HM 
     (from about 400 to about 200) and decreased specific power to 100 W/gU, 
     otherwise same as CASE 1A.\\
     \hline 
@@ -297,7 +296,7 @@ Table \ref{tab:phase1a-cases} describes each case.
 
 \subsection{Benchmark Specifications: Phase I-B}
 For phase I-B, the benchmark specifies that each participant must produce 
-depletion results for 3 cases: 1B, 4B, and 7B. 
+depletion results for three cases: 1B, 4B, and 7B. 
 These are the same as cases 1A, 4A, and 7A, but with depletion steps added and
 the critical spectrum assumption. 
 The benchmark assumes that depletion occurs only in the fuel and \glspl{BP}. 
@@ -319,33 +318,34 @@ OpenMC \cite{romano_openmc_2013}, and WIMS \cite{lindley_current_2017}.
 We participated in the benchmark with the OpenMC Monte Carlo code 
 \cite{romano_openmc_2013} and the ENDF/B-VII.1 material library 
 \cite{chadwick_endf/b-vii.1_2011}.
-The \texttt{fhr-benchmark} github repository contains all the results submitted 
-by \gls{UIUC} for the \gls{FHR} benchmark. 
-% needs citation both up and down
-The benchmark used a phased blind approach, thus, participants were asked to 
+The \texttt{fhr-benchmark} Github repository contains all the results submitted 
+by \gls{UIUC} for the \gls{FHR} benchmark \cite{chee_arfcfhr-benchmark_2021}. 
+The benchmark used a phased blind approach; thus, participants were asked to 
 submit phase I-A and I-B results without knowledge of other submissions. 
-Petrovic et al describes the preliminary results of the benchmark results 
-across the several institutions, and concludes that the overall observed agreement 
-is satisfactory, although notable differences are identified in specific cases 
-suggesting the need for further in-depth analysis of those cases. 
+Petrovic et al. \cite{petrovic_preliminary_2021} describes the preliminary 
+results of the benchmark results across several institutions and concludes 
+that the overall observed agreement is satisfactory. 
+However, notable differences are identified in specific cases suggesting the 
+need for further in-depth analysis of those cases. 
 In the subsequent sections, we will share the results obtained by \gls{UIUC}.  
 
 \subsection{Results: Phase I-A}
-Petrovic et al \cite{petrovic_preliminary_2021} compared effective multiplication 
-factor for all participants and phase I-A cases in the \gls{FHR} benchmark, 
-and reported that standard deviation between participants for each case was in 
-the 231 to 514 pcm range, which is acceptable and notably close given a blind 
+Petrovic et al. \cite{petrovic_preliminary_2021} compared the effective 
+multiplication factor for all participants and phase I-A cases in the \gls{FHR} 
+benchmark. 
+They reported that the standard deviation between participants for each case 
+was in the 231 to 514 pcm range, acceptable and notably close given a blind 
 benchmark.
-This assures us that our results for phase I-A are acceptable and in agreement 
-with other participants in the benchmark. 
+This assures us that our phase I-A results are acceptable and in agreement 
+with other benchmark participants. 
 Next, we will present our results for phase I-A and describe and explain the 
 observed trends.
 
 Table \ref{tab:phase1a-cases} reports phase I-A results for effective multiplication 
 factor and reactivity coefficients. 
 We ran the simulations on \gls{UIUC}'s BlueWaters supercomputer \cite{ncsa_about_2017}
-with 64 XE nodes, which have 32 cores each. 
-To reduce statistical uncertainty of keff to $\sim$10pcm, we ran each simulation 
+with 64 XE nodes, which each have 32 cores. 
+To reduce the statistical uncertainty of keff to $\sim$10pcm, we ran each simulation 
 with 500 active cycles, 100 inactive cycles, and 200000 neutrons. 
 Each simulation took \gls{WCT} ranging from 2 to 5 hours. 
 \begin{table}[H]
@@ -376,32 +376,31 @@ Each simulation took \gls{WCT} ranging from 2 to 5 hours.
     \end{tabular}
 \end{table}
 
-Cases 2AH and 2AC are at zero power meaning that the fuel assembly is exactly 
+Cases 2AH and 2AC are at zero power, meaning that the fuel assembly is exactly 
 critical but not producing any energy. 
-For both cases, keff is higher than the reference case 1A which we attribute to 
+For both cases, keff is higher than the reference case 1A, which we attribute to 
 lower fuel temperatures; at higher fuel temperatures, doppler broadening occurs 
-which results in more neutron capture, thus, lowering keff. 
-As expected, keff is lower for cases 3A, 4AR, and 5A compared to reference case 
+resulting in more neutron capture, thus, lowering keff. 
+As expected, keff is lower for cases 3A, 4AR, and 5A than reference case 
 1A since those cases introduced burnable poisons and control rods to the fuel 
 assembly. 
-Also as expected, keff is higher for case 7A compared to reference case 1A since 
+Also, as expected, keff is higher for case 7A than reference case 1A since 
 the fuel has a higher enrichment. 
 However, case 6A deviated from expectations with a lower keff despite an increase 
 in \gls{HM} loading. 
-This could be due reduced moderation and worsened fuel utilization brought 
-about by self-shielding, demonstrating that an increase in fuel packing 
-fraction does not always correspond with an increased keff. 
+This unexpected behavior is due to reduced moderation and worsened fuel 
+utilization brought about by self-shielding, demonstrating increase in 
+fuel packing fraction does not always correspond with an increased keff. 
 
 $\beta_{eff}$ increased by 10-20pcm for cases 4A, 4AR, 5A, and 6A, compared to
-reference case 1A.
-This is attributed to the introduction of control rods and poisons, which 
+reference case 1A, due to the introduction of control rods and poisons, which 
 shifts the average neutron velocity to higher values resulting in decreased
 thermal fission and increased fast fission\cite{torabi_neutronic_2018}.
 Table \ref{tab:phase1a-results} reports that most of the temperature coefficients 
-are negative, which exemplifies the \gls{AHTR}'s passive safety behavior. 
+are negative, exemplifying the \gls{AHTR}'s passive safety behavior. 
 Negative reactivity feedback results in a self-regulating reactor; if the reactor's 
-power rises, resulting in temperature increase, the negative reactivity will in turn 
-reduce power. 
+power rises, resulting in temperature increase, the negative reactivity will, 
+in turn, reduce power. 
 
 Figure \ref{fig:phase1a-c} shows the fission source distribution by 
 $1/5^{th}$ fuel stripe for cases 1A and 3A. 
@@ -413,54 +412,54 @@ $1/5^{th}$ fuel stripe for cases 1A and 3A.
     Benchmark's phase I-A Case 1A (left) and Case 3A (right).}
     \label{fig:phase1a-c}
 \end{figure}
-Case 4AR has a similar fission source distribution as case 3A, since both 
+Case 4AR has a similar fission source distribution as case 3A since both 
 cases have control rod insertion. 
 All other cases have similar fission source distributions to case 1A. 
-For case 1A, intuitively, we would assume that highest fission source in stripes 
-corresponding to the centre of the diamond fuel segment, however, the opposite is 
-true. 
-Power peaking occurs on exterior stripes and is minimum on the interior stripes.  
-Gentry et al \cite{gentry_development_2016} reported a similar phenomena of 
-power peaking towards the exterior of the lattice cell closest to the Y-shaped 
-carbon support structure where the thermal flux is most elevated, and the 
-complement to the peaking is found in the interiors of the lattice tri-sections. 
-This fission source distribution is caused by  diminished resonance escape 
-probability in the interior due to higher relative fuel-to-carbon volume ratio. 
-This phenomenon is more exaggerated in cases 6A and 7A since there is a higher 
-fuel-to-carbon ratio. 
+For case 1A, intuitively, we would assume that the highest fission source would 
+occur in the center of the diamond fuel segment; however, the opposite is true. 
+Power peaking occurs on exterior stripes and is minimum on the interior stripes.
+Gentry et al. \cite{gentry_development_2016} reported similar power peaking 
+phenomena towards the lattice cell's exterior closest to the Y-shaped carbon 
+support structure where the thermal flux is most elevated, and the complement 
+to the peaking is found in the interiors of the lattice tri-sections. 
+This fission source distribution is caused by diminished resonance escape 
+probability in the interior due to the higher relative fuel-to-carbon volume 
+ratio. 
+This diminished fission source in the interior stripes phenomena is exaggerated 
+in cases 6A and 7A since there is a higher fuel-to-carbon ratio.
 For case 3A, the fission source is lower in the $1/5^{th}$ stripes closer to 
 the control rod.  
 
-Figure \ref{fig:phase1a-d} shows average neutron flux in the fuel assembly in 
+Figure \ref{fig:phase1a-d} shows the average neutron flux in the fuel assembly in 
 three coarse energy groups. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{phase1a-d-flux.png} 
-    \caption{Neutron Flux, averaged over the whole model, tabulated in 3 coarse 
+    \caption{Neutron Flux, averaged over the whole model, tabulated in three coarse 
     energy groups for each phase I-A case. }
     \label{fig:phase1a-d}
 \end{figure}
 Most of the cases have the most flux in the intermediate group, followed by 
-the thermal group, and least flux in the fast group.    
+the thermal group, and the least flux in the fast group.    
 Figure \ref{fig:phase1a-e} shows the neutron flux distribution for case 1A, 
-3A, and 6A for 3 coarse energy groups. 
+3A, and 6A for three coarse energy groups. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.9\linewidth]{phase1a-e-c1a.png} 
     \includegraphics[width=0.9\linewidth]{phase1a-e-c3a.png} 
     \includegraphics[width=0.9\linewidth]{phase1a-e-c6a.png} 
-    \caption{Neutron Flux distribution in 100 by 100 mesh for 3 coarse 
+    \caption{Neutron Flux distribution in 100 by 100 mesh for three coarse 
     energy groups: case 1A (above), case 3A (middle), case 6A (below) }
     \label{fig:phase1a-e}
 \end{figure}
-For all three cases, fast flux peaks in the diamond-shaped sectors that contain the 
-fuel stripes whereas thermal flux peaks outside of the diamond-shaped sectors. 
-This is attributed to fission occurring at thermal energies in the fuel stripe 
-area. 
-For case 3A, thermal and intermediate neutron flux is depressed in the control 
-rod region of the fuel assembly.  
-Case 6A has increased \gls{HM}, thus, we see that fast flux peaking and the thermal 
-flux dip in the fuel stripe area is more pronounced than case 1A. 
+For all three cases, fast-flux peaks in the diamond-shaped sectors containing 
+the fuel stripes, whereas thermal flux peaks outside of the diamond-shaped 
+sectors; this is attributed to fission occurring at thermal energies in the 
+fuel stripe area. 
+For case 3A, the thermal and intermediate neutron flux is depressed in the fuel 
+assembly's control rod region.  
+Case 6A has increased \gls{HM}; thus, we see that fast-flux peaking and the 
+thermal flux dip in the fuel stripe area is more pronounced than case 1A.
 Figure \ref{fig:phase1a-f} shows the neutron spectrum for cases 1A and 6A. 
 \begin{figure}[]
     \centering
@@ -470,9 +469,9 @@ Figure \ref{fig:phase1a-f} shows the neutron spectrum for cases 1A and 6A.
     (left) and Case 6A (right).}
     \label{fig:phase1a-f}
 \end{figure}
-Case 7A has a similar neutron spectrum as case 6A, since both cases have 
+Case 7A has a similar neutron spectrum as case 6A since both cases have 
 control rod insertion. 
-All other cases have similar neutron spectrum to case 1A.
+All other cases have a similar neutron spectrum to case 1A.
 The neutron spectrum is faster for case 6a and case 7a due to more heavy metal 
 loading and higher enrichment.  
 
@@ -486,9 +485,9 @@ loading and higher enrichment.
 This chapter described the \gls{FHR} benchmark specifications and the results 
 obtained so far by the UIUC team. 
 Unanticipated results such as a lower keff for the \gls{AHTR} configuration with 
-higher \gls{HM} loading gave insight to how increased fuel packing does not always 
+higher \gls{HM} loading gave insight into how increased fuel packing does not always 
 correspond with increased keff due to self-shielding.
-This hints to the possibility of minimizing fuel required by optimizing for 
-inhomogeneous fuel distributions within the core. 
+These results hint at the possibility of minimizing fuel required by optimizing 
+for inhomogeneous fuel distributions within the core. 
 This will be further explored in the next chapters. 
 
