@@ -8,15 +8,24 @@
 % Appendix? 
 % - More details about the geometry 
 
-In 2019, \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the
-\gls{FHR} benchmark for the \gls{AHTR} design \cite{noauthor_fluoride_nodate}. 
-\glspl{FHR} are cooled with liquid molten salt and fuelled with 
-\gls{TRISO}-based fuel. 
-The \gls{FHR} studied in this benchmark has plate-based fuel in hexagonal fuel 
-elements, i.e. \gls{AHTR} design. 
-More details about the \gls{AHTR} design and the history of \gls{FHR} modeling 
-efforts leading up to the benchmark can be found in Section \ref{sec:fhr}. 
-The benchmark has several phases, starting with single fuel element 
+The \gls{FHR} is a reactor concept that uses \gls{TRISO}-based fuel and a 
+low-pressure liquid fluoride-salt coolant.
+\gls{FHR} technology combines FLiBE coolant from \gls{MSR} technology and 
+\gls{TRISO} particles from \gls{VHTR} technology to enable a reactor that 
+has a low operating pressure, large thermal margin, and accident-tolerant 
+qualities.
+To address the technical challenges of \gls{AHTR} modeling, such as multiple 
+heterogeneity and material cross-section data, the \gls{OECD}-\gls{NEA} and 
+\gls{Georgia Tech} initiated the \gls{FHR} benchmark for the \gls{AHTR} design 
+in 2019 \cite{noauthor_fluoride_nodate}. 
+The \gls{AHTR} is a type of \gls{FHR} that has plate-based fuel in a hexagonal 
+fuel assembly. 
+In section \ref{sec:fhr}, we gave an overview of the \gls{FHR} concept, 
+a high-level description of the \gls{AHTR} design, a review of previous efforts 
+towards modeling these designs, and how these efforts led to the 
+initiation of the benchmark. 
+
+The \gls{FHR} benchmark has several phases, starting with single fuel assembly 
 simulation without burnup, and gradually extending to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
 
@@ -43,56 +52,65 @@ Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
     \end{tabular}
 \end{table}
 
-In the subsequent sections, we will describe the benchmark specifications, 
-phases I-A and I-B, and their results. 
+In the subsequent sections, we will describe the benchmark's specifications for 
+the \gls{AHTR} design and phase I. Then, we will share our phase I-A and I-B 
+results. 
 
-\section{Benchmark Specifications}
+\section{Benchmark Specifications: AHTR Design}
 The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power 
 \cite{varma_ahtr_2012}. 
 Figure \ref{fig:reactor-schematic} shows the reactor schematic and a vertical 
 cut of the reactor vessel. 
-Figure \ref{fig:ahtr} shows the core configuration and fuel element. 
+Figure \ref{fig:ahtr} shows the core configuration and fuel assembly. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.9\linewidth]{reactor-schematic.png} 
-    \caption{Reactor schematic (left) and vessel (right) 
+    \caption{\acrlong{AHTR} schematic (left) and vessel (right) 
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:reactor-schematic}
 \end{figure}
-The prismatic \gls{AHTR}'s fuel element is shown in Figure 
-\ref{fig:ahtr-fuel-element}.  
-It features plate-type fuel with hexagonal fuel assembly consisting of eighteen 
-plates arranged in three diamond-shaped sectors, with a central Y-shaped 
-structure and external channel (wrapper).
-The diamond-shaped sections have 120-deg rotational symmetry with each other 
-\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}. 
+The prismatic \gls{AHTR}'s fuel assembly is shown in Figure 
+\ref{fig:ahtr-fuel-assembly}.  
 \begin{figure}[]
     \centering
     \includegraphics[width=0.5\linewidth]{ahtr-fuel-element.png} 
-    \caption{FHR fuel element.}
-    \label{fig:ahtr-fuel-element}
+    \caption{\acrlong{AHTR} fuel assembly with 18 fuel plates arranged in 
+    three diamond-shaped sectors, with a central Y-shaped and external channel 
+    graphite structure. Blue: FliBE coolant, Gray: graphite structural components, 
+    Red: graphite fuel plank, Pink: graphite spacers, Green: graphite matrix 
+    with embedded TRISO particles.}
+    \label{fig:ahtr-fuel-assembly}
 \end{figure}
+It features plate-type fuel with hexagonal fuel assembly consisting of eighteen 
+planks arranged in three diamond-shaped sectors, with a central Y-shaped 
+structure and external channel (wrapper).
+The diamond-shaped sections have 120-deg rotational symmetry with each other 
+\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}. 
+The fuel planks have semi-cylindrical spacers attached, their radius being 
+equal to the coolant channel thickness. 
 
 The external channel wrapper and structural Y-shape as seen in Figure 
 \ref{fig:y-shape} are made of C-C composite and have extra notches for the 
 fuel plates to slide in. 
-The gap between the fuel elements and fuel plates are filled with \gls{FLiBe}
-coolant. 
-At the center of the Y-shape structure is the Y-shaped control blade slot, 
-which contains \gls{FLiBe} coolant when the control blade is not in the slot
-\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
 \begin{figure}[]
     \centering
     \includegraphics[width=0.8\linewidth]{y-shape.png} 
-    \caption{FHR fuel element's structural components \cite{noauthor_fluoride_nodate}.}
+    \caption{\acrlong{AHTR} fuel assembly's structural components 
+    \cite{noauthor_fluoride_nodate}.}
     \label{fig:y-shape}
 \end{figure}
+The gap between the fuel assemblies and fuel plates are filled with \gls{FLiBe}
+coolant. 
+At the center of the Y-shape structure is the Y-shaped control rod slot, 
+which contains \gls{FLiBe} coolant when the control blade is not in the slot
+\cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
 Each fuel plank is made of an isostatically pressed carbon with fuel stripes 
 on each outer side of the plank as seen in Figure \ref{fig:ahtr-fuel-plank}. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.8\linewidth]{ahtr-fuel-plank.png} 
-    \caption{2D view of FHR fuel plank.}
+    \includegraphics[width=0.75\linewidth]{ahtr-fuel-plank.png} 
+    \caption{\acrlong{AHTR}'s fuel plank, with magnification of 
+    a spacer and segment of the fuel stripe with embedded TRISO particles.}
     \label{fig:ahtr-fuel-plank}
 \end{figure}
 The fuel stripes are prismatic regions composed of a graphite matrix filled with 
@@ -104,21 +122,42 @@ buffer, inner pyrolytic carbon, silicon carbide layer, and the outer pyrolitic
 carbon as seen in Figure \ref{fig:ahtr-triso}
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.4\linewidth]{ahtr-triso.png} 
-    \caption{TRISO particle schematic \cite{noauthor_fluoride_nodate}.}
+    \includegraphics[width=0.35\linewidth]{ahtr-triso.png} 
+    \caption{\acrlong{AHTR}'s TRISO particle schematic \cite{noauthor_fluoride_nodate}.}
     \label{fig:ahtr-triso}
 \end{figure}
 
-\section{Phase I}
+Burnable poisons and control rods for reactivity control are also included in 
+some configurations of the \gls{AHTR}. 
+The burnable poisons consist of europium oxide, $Eu_2O_3$, and have a discrete
+or integral (dispersed) option. 
+In the discrete option, small spherical $Eu_2O_3$ particles are stacked axially 
+at 5 locations in each fuel plank as shown in Figure \ref{fig:discrete-poison}. 
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.6\linewidth]{discrete-poison.png} 
+    \caption{Placement of axial stacks of burnable poisons in the \acrlong{AHTR} 
+    \cite{noauthor_fluoride_nodate}.}
+    \label{fig:discrete-poison}
+\end{figure}
+In the integral option, $Eu_2O_3$ is homogenously mixed with the fuel plank 
+graphite matrix (including the graphite in fuel stripes matrix, and the 
+graphite in the plank ends indented to structural sides, but excluding the 
+graphite in spacers and graphite in TRISO particles). 
+Each control rod is uniformly composed of \gls{MHC} and is inserted into the 
+Y-shaped control rod slot and displaces the \gls{FLiBe} that occupies the slot. 
+
+\section{Benchmark Specifications: Phase I}
 \label{sec:phase1}
-Phases I consists of a steady-state 2D model of one \gls{FHR} fuel element. 
-For a single fuel element, the internal 120-degree rotational symmetry is 
+Phase I of the \gls{FHR} benchmark consists of a steady-state 2D model 
+(phase I-A) and depletion (phase I-B) of one \gls{FHR} fuel assembly. 
+For a single fuel assembly, the internal 120-degree rotational symmetry is 
 represented by periodic boundary conditions as seen in Figure \ref{fig:bc}. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.8\linewidth]{bc.png} 
+    \includegraphics[width=0.5\linewidth]{bc.png} 
     \caption{Visualization of periodic boundary conditions for a single fuel 
-    element \cite{noauthor_fluoride_nodate}.}
+    assembly \cite{noauthor_fluoride_nodate}.}
     \label{fig:bc}
 \end{figure}
 The benchmark required the following results for phases I-A and I-B:
@@ -133,8 +172,8 @@ The benchmark required the following results for phases I-A and I-B:
     \item Neutron spectrum, fuel assembly average. Optional: by region.
 \end{enumerate}
 
-The following subsections will report the equations we used to calculate the
-results listed above. 
+Next, we will report the equations we used to calculate the required results 
+listed above. 
 
 \subsubsection{Reactivity Coefficients (b)}
 Effective delayed neutron fraction ($\beta_{eff}$) is the fraction of delayed 
@@ -157,21 +196,20 @@ with these equations:
 
 \subsubsection{Fission Source Distribution / Fission Density (c)}
 We calculated \gls{FD} with OpenMC's \texttt{fission} score (f) for a region 
-divided by the average \texttt{fission} score of all the regions. 
-
-\begin{align*}
-    FD_i &=  \frac{f_i}{f_{ave}}
-    \intertext{where:}
-    f_i &= \mbox{Total fission reaction rate [reactions/src]} \\
-    f_{ave} &= \mbox{average of all $f_i$ [reactions/src]}
-\end{align*}
+divided by the average \texttt{fission} score of all the regions:
+\begin{align}
+    FD_i &=  \frac{f_i}{f_{ave}} \\
+    \intertext{where}
+    f_i &= \mbox{Total fission reaction rate [reactions/src]} \nonumber \\
+    f_{ave} &= \mbox{average of all $f_i$ [reactions/src]} \nonumber
+\end{align}
 The uncertainty calculations for $f_{ave}$ and $FD_i$: 
-\begin{align*}
+\begin{align}
     \delta f_{ave} &= \frac{1}{N}\sqrt{\sum_i^Nf_i^2} \\
-    \delta FD_i &= |FD_i| \sqrt{(\frac{\delta f_i}{f_i})^2+(\frac{\delta f_{ave}}{f_{ave}})^2}
-    \intertext{where:}
-    N &= \mbox{No. of fission score values} 
-\end{align*}
+    \delta FD_i &= |FD_i| \sqrt{(\frac{\delta f_i}{f_i})^2+(\frac{\delta f_{ave}}{f_{ave}})^2} \\
+    \intertext{where}
+    N &= \mbox{No. of fission score values} \nonumber
+\end{align}
 
 \subsubsection{Neutron Flux (d, e, f)}
 OpenMC's \texttt{flux} score are in [$\frac{n * cm}{src}$] units. 
@@ -179,9 +217,9 @@ For the benchmark, we converted flux to [$\frac{n}{cm^2s}$] units
 using the following equations:  
 
 \begin{align}
-    \Phi_c &= \frac{N* \Phi_o}{V} 
-    \intertext{where:} 
-    N &= \frac{P*\nu}{Q*k} \nonumber \\
+    \Phi_c &= \frac{N* \Phi_o}{V} \\
+    N &= \frac{P*\nu}{Q*k} \\
+    \intertext{where}
     \Phi_c &= \mbox{Converted Flux [$\frac{neutrons}{cm^2s}$]} \nonumber \\ 
     \Phi_o &= \mbox{Original Flux [$\frac{neutrons* cm}{src}$]} \nonumber \\
     N &= \mbox{Normalization factor [$\frac{src}{s}$]} \nonumber \\
@@ -200,18 +238,22 @@ Flux standard deviation:
 We calculated reactor power based on the given reference specific power 
 ($P_{sp}$) of 200 $\frac{W}{gU}$. 
 \begin{align}
-    P &= P_{sp} * V_F * \rho_F * \frac{wt\%_{U}}{100} 
-    \intertext{where:}
-    V_F &= \mbox{Volume of fuel [$cm^3$]} = \frac{4}{3} \pi r_1^3 * 101 * 210 * 4 * 2 * 6 * 3 \nonumber \\
+    P &= P_{sp} * V_F * \rho_F * \frac{wt\%_{U}}{100} \\
+    \intertext{where}
+    V_F &= \mbox{volume of fuel [$cm^3$]} = \frac{4}{3} \pi r_f^3 * N_{total} \nonumber \\
+    r_f &= \mbox{radius of fuel kernel} \nonumber\\
+    N_{total} &= \mbox{total no. of TRISO particles in fuel assembly} \nonumber\\ 
+    &= 101 * 210 * 4 * 2 * 6 * 3 \nonumber\\
     \rho_F &= \mbox{density of fuel [$g/cc$]} \nonumber \\
     wt\%_{U} &= \frac{at\%_{U235} * AM_{U235} + at\%_{U238} * AM_{U238}}{\sum (at\%_i * AM_i)} * 100 \nonumber\\
     AM &= \mbox{atomic mass} \nonumber
 \end{align}
 
 \subsection{Phase I-A}
-For phase I-A, the benchmark specifies analysis for 9 cases for a 2D model of 
-one fresh fuel element. 
-Table \ref{tab:phase1a-cases} outlines each of the cases. 
+For phase I-A, the benchmark specifies that each participant must produce a 
+steady-state 2D model of one fresh fuel assembly for 9 cases, 
+and report the required results listed in Section \ref{sec:phase1}.  
+Table \ref{tab:phase1a-cases} describes each case. 
 \begin{table}[H]
     \centering
     \onehalfspacing
@@ -253,23 +295,26 @@ Table \ref{tab:phase1a-cases} outlines each of the cases.
 \end{table}
 
 \subsection{Phase I-B}
-In phase I-B, the benchmark specifies analysis for 3 cases: 1B, 4B, and 7B. 
+For phase I-B, the benchmark specifies that each participant must produce 
+depletion results for 3 cases: 1B, 4B, and 7B. 
 These are the same as cases 1A, 4A, and 7A, but with depletion steps added and
 the critical spectrum assumption. 
 The benchmark assumes that depletion occurs only in the fuel and \glspl{BP}. 
 Table \ref{tab:phase1b} outlines the results required by the benchmark at specific 
-depletion burnup steps. 
+depletion burnup steps for all three cases. 
 
 \begin{table}
     \centering
-    \caption{Phase I-B required results at specific burnup steps \cite{noauthor_fluoride_nodate}.}
+    \caption{\gls{FHR} benchmark Phase I-B required results at specific burnup 
+    steps \cite{noauthor_fluoride_nodate}.}
     \label{tab:phase1b}
     \includegraphics[width=0.8\linewidth]{phase1b.png}
   \end{table}
 
 \section{Results}
 Several organizations participated in the benchmark with various Monte Carlo
-and Deterministic neutronics codes. 
+and Deterministic neutronics codes, such as Serpent \cite{leppanen_serpent_2014}, 
+OpenMC \cite{romano_openmc_2013}, and WIMS \cite{lindley_current_2017}. 
 We participated in the benchmark with the OpenMC Monte Carlo code 
 \cite{romano_openmc_2013} and the ENDF/B-VII.1 material library 
 \cite{chadwick_endf/b-vii.1_2011}.
@@ -282,11 +327,11 @@ Petrovic et al describes the preliminary results of the benchmark results
 across the several institutions, and concludes that the overall observed agreement 
 is satisfactory, although notable differences are identified in specific cases 
 suggesting the need for further in-depth analysis of those cases. 
-In the subsequent sections, we will share the results obtained by the \gls{UIUC}.  
+In the subsequent sections, we will share the results obtained by \gls{UIUC}.  
 
 \subsection{Phase I-A}
 Petrovic et al compared effective multiplication factor for all participants 
-and cases in the \gls{FHR} benchmark, and reported that standard deviation 
+and phase I-A cases in the \gls{FHR} benchmark, and reported that standard deviation 
 between participants for each case was in the 231 to 514 pcm range, which is 
 acceptable and notably close given a blind benchmark. % CITE!! 
 This assures us that our results for phase I-A are acceptable and in agreement 
@@ -296,8 +341,8 @@ observed trends.
 
 Table \ref{tab:phase1a-cases} reports phase I-A results for effective multiplication 
 factor and reactivity coefficients. 
-We ran the simulations on \gls{UIUC}'s BlueWaters supercomputer with 64 XE nodes, 
-which have 32 cores each. 
+We ran the simulations on \gls{UIUC}'s BlueWaters supercomputer \cite{ncsa_about_2017}
+with 64 XE nodes, which have 32 cores each. 
 To reduce statistical uncertainty of keff to $\sim$10pcm, we ran each simulation 
 with 500 active cycles, 100 inactive cycles, and 200000 neutrons. 
 Each simulation took \gls{WCT} ranging from 2 to 5 hours. 
@@ -329,14 +374,14 @@ Each simulation took \gls{WCT} ranging from 2 to 5 hours.
     \end{tabular}
 \end{table}
 
-Cases 2AH and 2AC are at zero power meaning that the fuel element is exactly 
+Cases 2AH and 2AC are at zero power meaning that the fuel assembly is exactly 
 critical but not producing any energy. 
 For both cases, keff is higher than the reference case 1A which we attribute to 
 lower fuel temperatures; at higher fuel temperatures, doppler broadening occurs 
 which results in more neutron capture, thus, lowering keff. 
 As expected, keff is lower for cases 3A, 4AR, and 5A compared to reference case 
 1A since those cases introduced burnable poisons and control rods to the fuel 
-element. 
+assembly. 
 Also as expected, keff is higher for case 7A compared to reference case 1A since 
 the fuel has a higher enrichment. 
 However, case 6A deviated from expectations with a lower keff despite an increase 
@@ -384,7 +429,7 @@ fuel-to-carbon ratio.
 For case 3A, the fission source is lower in the $1/5^{th}$ stripes closer to 
 the control rod.  
 
-Figure \ref{fig:phase1a-d} shows average neutron flux in the fuel element in 
+Figure \ref{fig:phase1a-d} shows average neutron flux in the fuel assembly in 
 three coarse energy groups. 
 \begin{figure}[]
     \centering
@@ -411,7 +456,7 @@ fuel stripes whereas thermal flux peaks outside of the diamond-shaped sectors.
 This is attributed to fission occurring at thermal energies in the fuel stripe 
 area. 
 For case 3A, thermal and intermediate neutron flux is depressed in the control 
-rod region of the fuel element.  
+rod region of the fuel assembly.  
 Case 6A has increased \gls{HM}, thus, we see that fast flux peaking and the thermal 
 flux dip in the fuel stripe area is more pronounced than case 1A. 
 Figure \ref{fig:phase1a-f} shows the neutron spectrum for cases 1A and 6A. 
@@ -426,10 +471,22 @@ Figure \ref{fig:phase1a-f} shows the neutron spectrum for cases 1A and 6A.
 Case 7A has a similar neutron spectrum as case 6A, since both cases have 
 control rod insertion. 
 All other cases have similar neutron spectrum to case 1A.
-Spectrum becomes faster for case 6a and case 7a due to more heavy metal loading 
-and higher enrichment.  
+The neutron spectrum is faster for case 6a and case 7a due to more heavy metal 
+loading and higher enrichment.  
 
 \subsection{Phase I-B}
 
 
-\subsection{Summary}
+\section{Summary}
+% more enrichment / more HM does not mean higher keff, there is shielding 
+% effects, thus, this leads us to believe that the phenomena is not as expected. 
+
+This chapter described the \gls{FHR} benchmark specifications and the results 
+obtained so far by the UIUC team. 
+Unanticipated results such as a lower keff for the \gls{AHTR} configuration with 
+higher \gls{HM} loading gave insight to how increased fuel packing does not always 
+correspond with increased keff due to self-shielding.
+This hints to the possibility of minimizing fuel required by optimizing for 
+inhomogeneous fuel distributions within the core. 
+This will be further explored in the next chapters. 
+
