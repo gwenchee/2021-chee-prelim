@@ -70,14 +70,15 @@ cut of the reactor vessel.
 \end{figure}
 Figure \ref{fig:ahtr} shows the geometry of a single fuel assembly and all 
 assemblies' configuration in the core.
-The prismatic \gls{AHTR}'s fuel assembly is shown in Figure 
-\ref{fig:ahtr-fuel-assembly}.  
+A detailed 2D view of the \gls{AHTR}'s hexagonal fuel assembly is shown in 
+Figure \ref{fig:ahtr-fuel-assembly}.  
 \begin{figure}[]
     \centering
     \includegraphics[width=0.5\linewidth]{ahtr-fuel-element.png} 
     \caption{\acrlong{AHTR} fuel assembly with 18 fuel plates arranged in 
     three diamond-shaped sectors, with a central Y-shaped and external channel 
-    graphite structure. Blue: FliBE coolant, Gray: graphite structural components, 
+    graphite structure. Blue: FliBE coolant in between fuel assemblies and plates, 
+    and in the control rod slot, Gray: graphite structural components, 
     Red: graphite fuel plank, Pink: graphite spacers, Green: graphite matrix 
     with embedded TRISO particles.}
     \label{fig:ahtr-fuel-assembly}
@@ -146,7 +147,8 @@ graphite matrix (including the graphite in fuel stripes matrix and the
 graphite in the plank ends indented to structural sides, but excluding the 
 graphite in spacers and graphite in TRISO particles). 
 Each control rod is uniformly composed of \gls{MHC} and is inserted into the 
-Y-shaped control rod slot and displaces the \gls{FLiBe} that occupies the slot. 
+Y-shaped control rod slot and displaces the \gls{FLiBe} that occupies the slot
+(Figure \ref{fig:ahtr-fuel-assembly}). 
 
 \section{Benchmark Specifications: Phase I}
 \label{sec:phase1}
@@ -168,8 +170,8 @@ The benchmark required the following results for phases I-A and I-B:
     temperature coefficient, graphite temperature coefficient)
     \item Tabulated fission source distribution by 1/5-th fuel stripe. 
     \item Neutron flux averaged over the whole model tabulated in three coarse energy groups. 
-    \item Visualized distribution of the neutron flux distribution in three coarse energy groups
-    \item Neutron spectrum, fuel assembly average.
+    \item Neutron flux distribution in three coarse energy groups
+    \item Fuel assembly averaged neutron spectrum
 \end{enumerate}
 
 Next, we will report the equations we used to calculate the required results 
@@ -427,8 +429,8 @@ probability in the interior due to the higher relative fuel-to-carbon volume
 ratio. 
 This diminished fission source in the interior stripes phenomena is exaggerated 
 in cases 6A and 7A since there is a higher fuel-to-carbon ratio.
-For case 3A, the fission source is lower in the $1/5^{th}$ stripes closer to 
-the control rod.  
+For case 3A that has an inserted control rod, the fission source is lower in 
+the $1/5^{th}$ stripes closer to the control rod.  
 
 Figure \ref{fig:phase1a-d} shows the average neutron flux in the fuel assembly in 
 three coarse energy groups. 
@@ -470,7 +472,7 @@ Figure \ref{fig:phase1a-f} shows the neutron spectrum for cases 1A and 6A.
     \label{fig:phase1a-f}
 \end{figure}
 Case 7A has a similar neutron spectrum as case 6A since both cases have 
-control rod insertion. 
+higher fuel content. 
 All other cases have a similar neutron spectrum to case 1A.
 The neutron spectrum is faster for case 6a and case 7a due to more heavy metal 
 loading and higher enrichment.  
@@ -482,8 +484,10 @@ loading and higher enrichment.
 % more enrichment / more HM does not mean higher keff, there is shielding 
 % effects, thus, this leads us to believe that the phenomena is not as expected. 
 
-This chapter described the \gls{FHR} benchmark specifications and the results 
-obtained so far by the UIUC team. 
+This chapter described the \gls{FHR} benchmark specifications, \gls{AHTR} design,
+and the phase I results obtained so far by the UIUC team. 
+The benchmark results highlight the \gls{AHTR}'s passive safety behavior with 
+negative temperature coefficients. 
 Unanticipated results such as a lower keff for the \gls{AHTR} configuration with 
 higher \gls{HM} loading gave insight into how increased fuel packing does not always 
 correspond with increased keff due to self-shielding.
