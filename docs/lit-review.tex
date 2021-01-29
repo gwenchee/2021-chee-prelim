@@ -14,17 +14,29 @@
 
 This chapter provides a literature review of relevant past research efforts 
 that give context to this proposed work.
-We begin with an overview of the \gls{FHR} concept, then go into detail about the 
-specific \gls{AHTR} design, previous efforts towards modeling the design and 
-technical challenges, and a description of how these efforts led to the \gls{OECD} 
-\gls{NEA} initiation of the \gls{AHTR} benchmark.
+Recent advancements in \gls{AM} applications for nuclear reactor core 
+components has removed traditional manufacturing constraints on reactor design, 
+enabling reactor designers to reexamine optimization.
+In the proposed work, we aim to apply evolutionary algorithm methods to explore 
+non-conventional reactor geometries and fuel distributions, to apply a fresh 
+perspective to nuclear reactor optimization. 
+With growing interest in the nuclear science community and benefits of the 
+\gls{FHR}, we chose to apply the optimization methods to this reactor type, 
+and also participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmarking exercise. 
+Thus, we begin this literature review with an overview of the \gls{FHR} concept, 
+then go into detail about one specific \gls{FHR} design: the \gls{AHTR}, 
+previous efforts and technical challenges of modeling the design, and a 
+description of how these efforts led to the \gls{OECD} \gls{NEA}'s initiation of 
+the \gls{AHTR} benchmark.
 Next, we outline \gls{AM} history and describe the current research towards applying 
 \gls{AM} to the fabrication of nuclear reactor core components. 
-Next, we review previous efforts towards nuclear reactor design optimization 
-and describe the impact of \gls{AM} advancements on reactor 
-design optimization. 
-Finally, we give a background of evolutionary algorithms and their applications for
-optimizing reactor designs constructed with additive manufacturing technology.
+We also review previous efforts towards nuclear reactor design optimization, 
+describe how \gls{AM} of nuclear reactor components enables optimization for 
+less constrained reactor geometries, and types of optimization methods that can be 
+leveraged in a large less-constrained design space, such as \glspl{EA}.  
+Finally, we give a background of \glspl{EA}, go into detail on a 
+specific \gls{EA}: the \gls{GA}, and how it works to robustly conduct global 
+optimization. 
 
 \section{Fluoride-Salt-Cooled High-Temperature Reactor}
 \label{sec:fhr}
@@ -38,18 +50,18 @@ since the 1960s and are desirable because of their high-temperature
 performance and overall chemical stability \cite{scarlat_design_2014}.  
 Using molten salts for reactor coolant introduces inherent safety compared 
 to water due to the salts' high boiling temperature and high volumetric 
-heat capacity, eliminating the risk of coolant boiling off, resulting in 
-fuel elements overheating \cite{ho_molten_2013}. 
+heat capacity.
+This eliminates the risk of coolant boiling off, resulting in fuel elements 
+overheating \cite{ho_molten_2013}. 
 The leading candidate coolant salt is the fluoride salt Li$_2$BeF$_4$ (FLiBe), 
 which remains liquid without pressurization up to 1400 $^{\circ}$C and a larger 
-$\rho C_p$ than water \cite{ho_molten_2013,forsberg_fluoride-salt-cooled_2012}. 
-\glspl{FHR} are favorable compared to a liquid fuel reactor, such as
-\gls{MSR} systems, because the solid fuel cladding adds an extra barrier to fission 
-product release 
-\cite{ho_molten_2013}.
+heat capacity than water \cite{ho_molten_2013,forsberg_fluoride-salt-cooled_2012}. 
+\glspl{FHR} are favorable compared to liquid fuelled reactors, such as
+\gls{MSR} systems, because the solid fuel cladding adds an extra barrier to 
+fission product release \cite{ho_molten_2013}.
 
 \gls{VHTR} technology has been studied since the 1970s because it delivers 
-heat at substantially high temperatures than \glspl{LWR}, resulting in 
+heat at substantially higher temperatures than \glspl{LWR}, resulting in 
 the following advantages: increased power conversion efficiency, reduced 
 waste heat generation, and co-generation and process heat capabilities 
 \cite{scarlat_design_2014}. 
@@ -66,21 +78,21 @@ the low operating pressure and large thermal margin provided by using a molten
 salt coolant and the accident-tolerant qualities of \gls{TRISO} particle fuel. 
 
 Several types of \gls{FHR} conceptual designs exist worldwide: \gls{PBFHR} at 
-UCB with circulating pebble-fuel 
+\gls{UCB} with circulating pebble-fuel 
 \cite{scarlat_current_2014,krumwiede_three-dimensional_2013}, the \gls{SF-TMSR} 
 at the \gls{SINAP} in China with static pebble-fuel \cite{liu_preliminary_2016}, 
 the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varma_ahtr_2012} and 
 the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010} with static plate-fuel. 
 
-\subsection{AHTR design}
+\subsection{\acrlong{AHTR} Design}
 This proposed work focuses on the \gls{FHR} design with hexagonal fuel elements 
-consisting of \gls{TRISO} fuel particles embedded in plates ("planks"), i.e., the 
+consisting of \gls{TRISO} fuel particles embedded in planks, i.e., the 
 \gls{AHTR} design developed by ORNL. 
 The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power with
-inlet/outlet temperatures of 650/700$^{\circ}C$ \cite{varma_ahtr_2012}.  
+inlet/outlet temperatures of 650/700$^{\circ}$C \cite{varma_ahtr_2012}.  
 Figure \ref{fig:ahtr} shows the prismatic AHTR's fuel element and core 
 configuration.  
-Each hexagonal fuel element features plate-type fuel consisting of eighteen plates 
+Each hexagonal fuel element features plate-type fuel consisting of eighteen planks 
 arranged in three diamond-shaped sectors, with a central Y-shaped structure 
 and external channel (wrapper).
 Each fuel plank contains an isostatically pressed carbon with fuel stripes 
@@ -95,7 +107,8 @@ modeled in this proposed work.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{ahtr.png} 
-    \caption{FHR core configuration and fuel element \cite{ramey_monte_2018}.}
+    \caption{\acrlong{AHTR} fuel assembly (left) and core configuration (right) 
+    \cite{ramey_monte_2018}.}
     \label{fig:ahtr}
 \end{figure}
 
@@ -107,7 +120,7 @@ nuclear power plants.
 These differences lead to modeling challenges and the need to verify and 
 validate modeling and simulation methods \cite{ramey_monte_2018}. 
 Verification and validation of neutronics and thermal-hydraulics tools' 
-capability to successfully model the \gls{AHTR} design is a crucial step 
+capability to successfully model the \gls{AHTR} design are crucial steps 
 in support of licensure of the \gls{AHTR} design towards the eventual goal 
 of deployment \cite{rahnema_phenomena_2019,rahnema_current_2015}. 
 Several neutronic studies conducted along the way to the current \gls{AHTR} 
@@ -116,11 +129,10 @@ design have shed light on the technical challenges facing the design
 
 
 \gls{Georgia Tech} led an Integrated Research Project to 
-understand challenges in \gls{FHR} materials', and modeling the neutronics and 
-thermal-hydraulics in both plate and pebble fuelled \glspl{FHR} 
-\cite{zhang_integrated_2019}. 
-During the research project, a panel of subject matter experts came together to 
-generate a \gls{PIRT} by identifying phenomena and ranking their importance.
+understand challenges in \gls{AHTR} materials and modeling the neutronics and 
+thermal-hydraulics \cite{zhang_integrated_2019}. 
+During the research project, a panel of subject matter experts 
+generated a \gls{PIRT}.
 The \gls{PIRT} identifies areas that need additional research to better 
 understand important phenomena for adequate future modeling
 \cite{rahnema_phenomena_2019}. 
@@ -130,8 +142,8 @@ research.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{\gls{PIRT} identified \gls{FHR} physical phenomena requiring further research 
-    \cite{rahnema_phenomena_2019}.}
+    \caption{\acrlong{PIRT} identified \acrlong{AHTR} physical phenomena requiring 
+    further research \cite{rahnema_phenomena_2019}.}
 	\label{tab:phenomena}
     \small
     \begin{tabular}{l|l}
@@ -155,28 +167,28 @@ research.
 
 The \gls{AHTR} has a complex core design due to the multiple heterogeneity 
 present in the fuel introduced by \gls{TRISO} particles' presence embedded in 
-plates \cite{ramey_monte_2018,rahnema_phenomena_2019}.
-Accurately modeling the \gls{FHR}'s complex geometry with individual \gls{TRISO}
-particle fidelity is necessary to obtain detailed reference power distributions 
-to assess lower-fidelity models' accuracy.
+planks \cite{ramey_monte_2018,rahnema_phenomena_2019}.
+We must obtain detailed reference power distributions to assess lower-fidelity 
+models' accuracy, thus, requiring accurate models of the \gls{AHTR}'s complex 
+geometry with individual \gls{TRISO} particle fidelity.
 However, it is challenging, particularly for deterministic codes that
 use multigroup cross sections and traditional homogenization methods
-\cite{ramey_monte_2018}. 
-These traditional homogenization methods are insufficient to capture the correct physics 
-in \glspl{FHR}, due to the multiple heterogeneity \cite{ramey_monte_2018}. 
+\cite{ramey_monte_2018}, which are insufficient to capture the correct physics 
+in \glspl{AHTR} due to the multiple heterogeneity \cite{ramey_monte_2018}. 
 In the \gls{AHTR}, single and multiple slab homogenization decreased computation time 
-by 10; however they introduce a nontrivial error of $\sim$3\%
+by an order of 10; however, they introduce a nontrivial error of $\sim$3\%
 \cite{ramey_monte_2018,cisneros_neutronics_2012}.
 To determine the feasibility and safety of the \gls{AHTR} design, we must 
 calculate core physics parameters to an acceptable uncertainty. 
 For Monte Carlo codes, increasing neutron histories reduces statistical 
-uncertainty but comes at an increased computational cost.
+uncertainty but comes at an increased computational cost, requiring the use of 
+supercomputers to run the simulations.
 
 Another technical challenge the \gls{AHTR} design faces is the uncertainty of 
 the graphite and carbonaceous moderator material properties: densities, 
 temperatures, and thermal scattering data.
-Also, the thermal scattering data ($S(\alpha,\beta)$ matrices) for the bound 
-nuclei in the \gls{FLiBe} salt are lacking \cite{ramey_monte_2018}. 
+Problematically, the thermal scattering data ($S(\alpha,\beta)$ matrices) for 
+the bound nuclei in the \gls{FLiBe} salt are lacking \cite{ramey_monte_2018}. 
 Mei et al. \cite{mei_investigation_2013} and Zhu et al. \cite{zhu_thermal_2017} 
 examined the thermal scattering behavior of solid and liquid \gls{FLiBe}.
 They concluded that the bound and free atom cross section of \gls{FLiBe} are 
@@ -187,13 +199,13 @@ absence of thermal scattering data will impact the accuracy of the results
 \subsection{AHTR Benchmark}
 To address and further understand the technical challenges described 
 in the previous section, in 2019, the OECD-NEA initiated a benchmark to assess the 
-state of the art modeling and simulation capabilities for \glspl{FHR} with 
-\gls{TRISO} fuel embedded in fuel plates ("planks") of hexagonal fuel elements
+modeling and simulation capabilities for the \glspl{AHTR} with 
+\gls{TRISO} fuel embedded in fuel planks of hexagonal fuel elements
 \cite{noauthor_fluoride_nodate}. 
 The benchmark plans to have three phases, starting from a single fuel element 
 simulation without burnup, gradually extending to full core depletion and feedback. 
 The benchmark's overarching objective is to identify the applicability, accuracy, 
-and practicality of the current methods and codes to assess the current state 
+and practicality of the latest methods and codes to assess the current state 
 of the art of FHR simulation and modeling \cite{petrovic_preliminary_2021}. 
 The benchmark also enables the cross-verification of codes and methodologies 
 for the challenging \gls{AHTR} geometry, which is especially useful since 
@@ -203,8 +215,8 @@ Chapter \ref{chap:fhr-benchmark} will provide a detailed description of the
 benchmark phases and results obtained so far.
 
 \section{Additive Manufacturing}
-\gls{AM} is the formalized termed for what used to be called rapid prototyping 
-and what is popularly called 3D printing \cite{gibson_additive_2014}. 
+\gls{AM} is the formalized term for what used to be called `rapid prototyping' 
+and what is popularly called `3D printing' \cite{gibson_additive_2014}. 
 The basic principle of \gls{AM} is that a model is initially generated using a
 \gls{3D CAD} system and is fabricated directly without the need for process 
 planning. 
@@ -217,16 +229,16 @@ the major ways that they differ are in materials, layer creation method, and
 how the layers are bonded to each other \cite{gibson_additive_2014}.
 These major differences will determine the following factors: accuracy of the 
 final part, material and mechanical properties, the time required to manufacture 
-the part, the need for post-processing, size of \gls{AM} machine, and overall 
+the part, the need for post-processing, the size of \gls{AM} machine, and the overall 
 cost of the machine and the process \cite{gibson_additive_2014}. 
 Initially, \gls{AM} was used to manufacture prototypes. 
 However, with improvements in material properties, accuracy, and overall quality 
 of \gls{AM} output, the applications for \gls{AM} expanded to the 
-current point in which some industries build parts for direct assembly purposes
+point at which some industries build parts for direct assembly purposes
 \cite{uriondo_present_2015}.  
 Furthermore, using \gls{AM} in conjunction with other technologies, such as 
-high-power laser technology, has enabled \gls{AM} technology 
-to manufacture parts made from various metals \cite{gibson_additive_2014}. 
+high-power lasers, has enabled \gls{AM} to manufacture parts made from various 
+metals \cite{gibson_additive_2014}. 
 
 \subsection{Application of Additive Manufacturing to Nuclear Reactor Core Components}
 \label{sec:am}
@@ -242,7 +254,7 @@ reduce fabrication costs and timelines, combine multiple systems and assembled
 components into single parts, increase safety and performance by tailoring 
 local material properties, and enable geometry redesign for optimal load paths 
 \cite{simpson_considerations_2019}. 
-Many generation IV advanced reactor concepts have complex geometries, 
+Many Generation IV advanced reactor concepts have complex geometries, 
 such as hex-ducts for sodium-cooled fast reactors, that are costly and difficult 
 to fabricate using standard processing techniques. 
 Traditional manufacturing routes also restrict the viable geometries for 
@@ -250,7 +262,7 @@ reactor designers \cite{sridharan_performance_2019}.
 In summary, the main benefits of using \gls{AM} for reactor core components is that 
 we are no longer geometrically constrained by conventional fuel manufacturing 
 and can further optimize and improve fuel geometries to enhance fuel performance and 
-safety with the added benefit of lower cost \cite{bergeron_early_2018}. 
+at lower costs \cite{bergeron_early_2018}. 
 
 Experimental work in the nuclear materials field demonstrates the application 
 of \gls{AM} to nuclear fuel and structural core material fabrication. 
@@ -260,18 +272,18 @@ and photopolymer resin.
 The high-density thorium dioxide objects were printed and sintered to densities 
 of $\sim90\%$ \cite{bergeron_early_2018}. 
 Rosales et al. \cite{rosales_characterizing_2019} conducted a feasibility study 
-of direct routes to fabricate dense uranium silicide ($U_3Si_2$) fuel pellets 
+of direct routes to fabricate dense uranium silicide (U$_3$Si$_2$) fuel pellets 
 using the \gls{INL} invented \gls{AMAFT}. 
-$U_3Si_2$ is an accident-tolerant nuclear fuel candidate due to its
+U$_3$Si$_2$ is an accident-tolerant nuclear fuel candidate due to its
 high uranium density and improved thermal properties. 
 Its current metallurgical fabrication process is expensive and long; the goal of
-\gls{AMAFT} is to fabricate $U_3Si_2$ at a lower cost in a timely and
+\gls{AMAFT} is to fabricate U$_3$Si$_2$ at a lower cost in a timely and
 commercially-reliable manner \cite{rosales_characterizing_2019}.  
 Sridharan et al. \cite{sridharan_performance_2019} demonstrated the application of
 the laser-blown-powder \gls{AM} process to fabricate \gls{FM} steel, a type of 
 steel commonly used for cladding and structural components in nuclear reactors. 
-Koyanagi et al. \cite{koyanagi_additive_2020} presented \gls{AM} technology's 
-current status for manufacturing nuclear-grade \gls{SiC} materials; they 
+Koyanagi et al. \cite{koyanagi_additive_2020} presented the latest 
+\gls{AM} technology for manufacturing nuclear-grade \gls{SiC} materials; they 
 demonstrated that combinations of \gls{AM} techniques and traditional \gls{SiC} 
 densification methods enabled new designs of \gls{SiC} components with complex shapes. 
 \gls{SiC} has excellent strength at elevated temperatures, chemical inertness, 
@@ -279,8 +291,11 @@ relatively low neutron absorption, and stability under neutron irradiation up
 to high doses \cite{sauder_ceramic_2014, snead_handbook_2007,koyanagi_additive_2020}. 
 These qualities make \gls{SiC} suitable for many applications in nuclear systems 
 such as fuel cladding, constituents of fuel particles \cite{snead_handbook_2007} 
-and pellets \cite{terrani_progress_2015}, core structural components in fission 
+and pellets \cite{terrani_progress_2015}, and core structural components in fission 
 reactors \cite{sauder_ceramic_2014}. 
+
+% Add more information about AM of FHR materials -> TRISO, graphite etc. 
+% Then talk about how that's exciting :D 
 
 \section{Nuclear Reactor Design Optimization}
 \label{sec:opt}
@@ -396,7 +411,7 @@ minimizing fuel amount and minimizing the maximum fuel temperature for a given
 power level.
 However, we can now approach the nuclear design problems with truly arbitrary 
 geometries, no longer limited by traditional geometric shapes that are 
-easy to manufacture with traditional processes: slabs as fuel plates, cylinders 
+easy to manufacture with traditional processes: slabs as fuel planks, cylinders 
 as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc  
 \cite{sobes_artificial_2020}.
 Therefore, this has opened the door for a re-examination of optimization in a 
