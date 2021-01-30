@@ -266,11 +266,6 @@ at lower costs \cite{bergeron_early_2018}.
 
 Experimental work in the nuclear materials field demonstrates the application 
 of \gls{AM} to nuclear fuel and structural core material fabrication. 
-Bergeron et al. \cite{bergeron_early_2018} successfully demonstrated additively 
-manufacturing thorium dioxide using a stereolithography-based 3D printer 
-and photopolymer resin. 
-The high-density thorium dioxide objects were printed and sintered to densities 
-of $\sim90\%$ \cite{bergeron_early_2018}. 
 Rosales et al. \cite{rosales_characterizing_2019} conducted a feasibility study 
 of direct routes to fabricate dense uranium silicide (U$_3$Si$_2$) fuel pellets 
 using the \gls{INL} invented \gls{AMAFT}. 
@@ -293,35 +288,56 @@ These qualities make \gls{SiC} suitable for many applications in nuclear systems
 such as fuel cladding, constituents of fuel particles \cite{snead_handbook_2007} 
 and pellets \cite{terrani_progress_2015}, and core structural components in fission 
 reactors \cite{sauder_ceramic_2014}. 
+Trammel et al \cite{trammell_advanced_2019} conducted a preliminary investigation 
+to assess the possibilities of fabricating fuel element with embedded 
+\gls{TRISO} fuel using \gls{AM} techniques, such as binderjet printing and \gls{CVI}. 
+They successfully demonstrated a fabrication method with the following steps 
+(depicted in Figure \ref{fig:ornl-triso-print}): 
+\begin{enumerate}
+    \item A SiC fuel element structure is first printed with binderjet technology. 
+    \item The designated fueled region of the element is loaded with surrogate 
+    \gls{TRISO} particles and additional SiC powder to fill interstitial spaces
+    between particles. 
+    \item The loaded fuel element is densified in a \gls{CVI} process to achieve 
+    microencapsulation of \gls{TRISO} particles in a SiC matrix. 
+\end{enumerate}
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\linewidth]{ornl-triso-print.png} 
+    \caption{Stages of \gls{AM} fabrication conducted at \acrlong{ORNL} to 
+    produce a fuel element with non-homogenously shaped coolant channels and
+    \gls{TRISO} particles embedded in a SiC matrix \cite{trammell_advanced_2019}.}
+    \label{fig:ornl-triso-print}
+\end{figure}
 
-% Add more information about AM of FHR materials -> TRISO, graphite etc. 
-% Then talk about how that's exciting :D 
+Many of the materials and fabrication methods discussed above are also applicable 
+for manufacturing \gls{FHR} parts. 
+Therefore, this reiterates the possibility of leveraging \gls{AM} to 3D print a
+\gls{FHR}-type reactor with non-conventional geometry. 
 
 \section{Nuclear Reactor Design Optimization}
 \label{sec:opt}
-The practice of nuclear reactor optimization has been around since the conception of 
+The practice of nuclear reactor optimization began with the conception of 
 nuclear reactors. 
-Optimization has been applied to nuclear reactor design, reactor reloading 
-patterns, and the nuclear fuel cycle.  
-In the proposed work, we will focus on the optimization of nuclear reactor 
-core design. 
-Previous efforts towards nuclear reactor core design optimization include
-deterministic and stochastic optimization techniques and these optimization 
-methods coupled with surrogate models. 
+Optimization has been applied to many nuclear engineering sub-fields such 
+as reactor design, reactor reloading patterns, and the nuclear fuel cycle.  
+In the proposed work, we will focus on the reexamination of nuclear reactor core 
+design optimization for arbitrary reactor geometries and fuel distributions. 
+Previous efforts towards nuclear reactor core design optimization were limited by 
+traditional manufacturing constraints and utilized deterministic and stochastic 
+optimization techniques, coupled with surrogate models. 
 
-Deterministic optimization methods usually start from a guess solution;
-then, the algorithm suggests a search direction based on applying local 
+Deterministic optimization methods usually start from a guess solution.
+Then, the algorithm suggests a search direction by applying local 
 information to a pre-specified transition rule. 
 The best solution becomes the new solution, and the above procedure continues 
-several timess \cite{deb_multi-objective_2001}. 
-Drawbacks of deterministic methods include: algorithms tend to get stuck to a 
+several times \cite{deb_multi-objective_2001}. 
+Drawbacks of deterministic methods include: algorithms tend to get stuck at a 
 suboptimal solution, and an algorithm efficient in solving one type of problem 
 may not solve a different problem efficiently \cite{deb_multi-objective_2001}. 
-Stochastic optimization methods minimize or maximize an objective function 
-when randomness is present; they tend to find globally optimal solutions 
-more reliably than deterministic methods. 
-Evolutionary algorithms and simulated annealing are examples of stochastic 
-optimization algorithms. 
+Stochastic optimization methods, such as \glspl{EA} amd simulated annealing,  
+minimize or maximize an objective function when randomness is present; they 
+tend to find globally optimal solutions more reliably than deterministic methods. 
 
 A nuclear reactor's complexity results in reactor design optimization being a 
 multi-objective design problem requiring a tradeoff between desirable 
@@ -335,8 +351,8 @@ an ideal multi-objective optimization method should find widely spread solutions
 in the obtained non-dominated front \cite{deb_multi-objective_2001}. 
 
 Recent efforts towards nuclear reactor optimization have relied heavily on 
-stochastic methods such as simulated annealing and evolutionary algorithms, 
-with the occasional addition of stochastic-deterministic hybrid methods. 
+the aforementioned stochastic methods, with the occasional addition of 
+stochastic-deterministic hybrid methods. 
 Sacco et al. \cite{sacco_two_2006,sacco_metropolis_2008} used stochastic 
 simulated annealing and deterministic-stochastic hybrid optimization techniques 
 to optimize reactor dimensions, enrichment, materials, etc., in order to 
@@ -346,13 +362,13 @@ coupled with neutronics and thermal-hydraulics codes, \gls{PARCS} and RELAP5,
 to develop an optimum \gls{NMR-50} core design to achieve a 10-year cycle length 
 with minimal fissile loading. 
 Kropaczek et al. \cite{kropaczek_large-scale_2019} demonstrated the constraint 
-annealing method, a highly scalable method based on the method of parallel 
-simulated annealing with mixing of states \cite{kropaczek_constraint_2019}, for 
+annealing method: a highly scalable method based on the method of parallel 
+simulated annealing with mixing of states \cite{kropaczek_constraint_2019} for 
 the solution of large-scale, multiconstrained problems in \gls{LWR} fuel cycle 
 optimization. 
 Peireira et al. \cite{pereira_coarse-grained_2003,pereira_parallel_2008} 
 used a coarse-grained parallel \gls{GA} and a niching \gls{GA}
-to optimize the same problem as \cite{sacco_two_2006}. 
+to optimize the same problem as Sacco et al. \cite{sacco_two_2006}. 
 Kamalpour et al. \cite{kamalpour_smart_2020} utilized the imperialist competitive 
 algorithm, a type of evolutionary algorithm, to optimize an \gls{FCM} fuelled 
 \gls{PWR} to extend the reactor core cycle length. 
@@ -360,12 +376,12 @@ algorithm, a type of evolutionary algorithm, to optimize an \gls{FCM} fuelled
 Nuclear reactor optimization problems require computationally 
 extensive neutronics and thermal-hydraulics software to compute the objective 
 function and constraints. 
-Multiple papers utilized optimization methods with surrogate models to replace 
-computationally-expensive high fidelity neutronics or thermal hydraulics 
-simulations to reduce the computational cost of utilizing stochastic methods.
+Multiple papers utilized stochastic optimization methods with surrogate models 
+to replace computationally expensive, high fidelity neutronics or thermal hydraulics 
+simulations to reduce computational cost.
 Kumar et al. \cite{kumar_new_2015} combined genetic algorithm optimization 
 with regression splines surrogate model to optimize a reactor model for 
-high breeding of U-233 and Pu-239 in desired power peaking limits, desired 
+high breeding of $^{233}$U and $^{239}$Pu in desired power peaking limits and
 keff using the following parameters: radius of a fuel pin cell, isotopic enrichment 
 of the fissile material in the fuel, the mass flow rate of the coolant, and 
 temperature of the coolant at the core inlet.
