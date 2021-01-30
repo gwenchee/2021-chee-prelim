@@ -317,8 +317,8 @@ Therefore, this reiterates the possibility of leveraging \gls{AM} to 3D print a
 
 \section{Nuclear Reactor Design Optimization}
 \label{sec:opt}
-The practice of nuclear reactor optimization began with the conception of 
-nuclear reactors. 
+The practice of nuclear reactor optimization has been around since the 
+conception of nuclear reactors. 
 Optimization has been applied to many nuclear engineering sub-fields such 
 as reactor design, reactor reloading patterns, and the nuclear fuel cycle.  
 In the proposed work, we will focus on the reexamination of nuclear reactor core 
@@ -377,14 +377,13 @@ Nuclear reactor optimization problems require computationally
 extensive neutronics and thermal-hydraulics software to compute the objective 
 function and constraints. 
 Multiple papers utilized stochastic optimization methods with surrogate models 
-to replace computationally expensive, high fidelity neutronics or thermal hydraulics 
+to replace computationally expensive, high-fidelity neutronics or thermal hydraulics 
 simulations to reduce computational cost.
 Kumar et al. \cite{kumar_new_2015} combined genetic algorithm optimization 
-with regression splines surrogate model to optimize a reactor model for 
-high breeding of $^{233}$U and $^{239}$Pu in desired power peaking limits and
-keff using the following parameters: radius of a fuel pin cell, isotopic enrichment 
-of the fissile material in the fuel, the mass flow rate of the coolant, and 
-temperature of the coolant at the core inlet.
+with a surrogate model to optimize for high breeding of $^{233}$U and $^{239}$Pu 
+in desired power peaking limits and keff by varying these parameters: fuel pin 
+radius,  fissile material isotopic enrichment, coolant mass flow rate, and 
+core inlet coolant temperature.
 Betzler et al. \cite{betzler_design_2019} developed a systematic approach to 
 build a surrogate model to serve in place of high-fidelity computational 
 analyses. 
@@ -393,23 +392,23 @@ algorithm to generate optimized designs at a lower computational cost to
 understand design decisions' impact on desired metrics for \gls{HFIR} \gls{LEU} 
 core designs.
 
-The simulation annealing method uses a point-by-point approach. 
-One solution gets updated to a new solution in one iteration, which does not 
+The simulation annealing method uses a point-by-point approach:
+one solution gets updated to a new solution in one iteration, but does not 
 exploit parallel systems' advantages.
-Finding an optimal solution with simulation annealing methods will take very 
+Finding an optimal solution with simulation annealing methods takes very 
 long if high-fidelity computationally expensive codes are used to compute 
 the objective function and constraints.
 Therefore, using the simulation annealing method is only practical if a 
-surrogate evaluation model is used as described in \cite{betzler_design_2019}
-and \cite{kumar_new_2015}.
-Evolutionary algorithm methods mimic nature's evolutionary principles to drive 
-its search towards an optimal solution. 
+surrogate evaluation model is used as described in Betzler et al. 
+\cite{betzler_design_2019} and Kumar et al. \cite{kumar_new_2015}.
 
 Contrary to a single solution per iteration in deterministic and stochastic 
 simulation annealing methods, \glspl{EA} use a population of solutions in each 
 iteration \cite{deb_multi-objective_2001}. 
+\gls{EA} methods mimic nature's evolutionary principles to drive 
+its search towards an optimal solution. 
 With the affordability and availability of parallel computing systems, the 
-evolutionary algorithm optimization method stands out as a method 
+\gls{EA} optimization method stands out as a method 
 that easily and conveniently exploits parallel systems. 
 Further, \glspl{EA} have proved amenable to \gls{HPC} solutions and 
 scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}. 
@@ -418,10 +417,13 @@ optimization method.
 
 \subsection{Impact of Additive Manufacturing on Nuclear Reactor Design 
 Optimization}
-In section \ref{sec:am}, we discussed how, with the advancements of \gls{AM} 
-for reactor core components, reactor designers are no longer geometrically 
-constrained by conventional fuel manufacturing and can further optimize and 
-improve fuel geometries to enhance fuel performance and safety. 
+Previous efforts towards nuclear reactor optimization, as discussed in the above 
+section, focused on optimizing classical reactor parameters such as 
+radius of fuel pellet and clad, enrichment of fuel, pin pitch, etc. 
+With the advancements of \gls{AM} for reactor core components, reactor designers 
+are no longer geometrically constrained by conventional fuel manufacturing and 
+can optimize beyond classical parameters to enhance fuel performance and safety 
+further. 
 Reactor design objectives remain consistent with past objectives, such as 
 minimizing fuel amount and minimizing the maximum fuel temperature for a given 
 power level.
@@ -430,37 +432,42 @@ geometries, no longer limited by traditional geometric shapes that are
 easy to manufacture with traditional processes: slabs as fuel planks, cylinders 
 as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc  
 \cite{sobes_artificial_2020}.
-Therefore, this has opened the door for a re-examination of optimization in a 
-completely new way, determining the optimal arbitrary geometry for a given objective 
-function \cite{sobes_artificial_2020} with a much smaller set of constraints. 
+This has opened the door for a re-examination of reactor core 
+optimization in a complete new way, determining the optimal arbitrary geometry 
+for a given objective function \cite{sobes_artificial_2020} with a much smaller s
+et of constraints. 
 
 With a substantial increase and change in an arbitrary geometry's design space, 
-it becomes time-consuming for a human reactor designer to thoroughly explore 
+it becomes time consuming for a human reactor designer to thoroughly explore 
 and find optimal geometries in the expanded design space. 
-Instead, we can leverage \gls{AI} optimization methods such as \gls{EA} to 
+Instead, we can leverage \gls{AI} optimization methods (such as \gls{EA}) to 
 promptly explore the large design space to find global optimal designs. 
 \gls{AI} would not replace the human reactor designer but shifts the human 
 designer's focus away from conjecturing suitable geometries to defining design 
 criteria to find optimal designs \cite{sobes_artificial_2020}. 
-Therefore, when the human designer changes the reactor criteria, the \gls{AI} 
+Thus, when the human designer changes the reactor criteria, the \gls{AI} 
 model will quickly adapt and produce new global optimal designs to fit the new 
 criteria.  
 
 \section{Evolutionary Algorithms} 
-\glspl{EA} mimic natural evolutionary principles to constitute search and 
-optimization procedures \cite{deb_multi-objective_2001}. 
-Evolutionary algorithms often perform well at approximating solutions to many 
+\gls{AI} research is the study of `intelligent agents': any device that perceives 
+its environment and takes actions that maximize its chance of successfully 
+achieving its goals \cite{david_l_poole_computational_1998}.
+Therefore, \glspl{EA} are considered a subset of \gls{AI} as they create a population 
+of individual solutions, inspired by biological evolution, and induce goals by 
+using a `fitness function' to mutate and preferentially replicate high-scoring 
+individuals to reach an optimal solution.
+\glspl{EA} often perform well at approximating solutions to many 
 problem types because they do not make any assumptions about the 
 underlying fitness landscape.
-The most popular \glspl{EA} used to solve multi-objective problems are genetic 
-algorithms (GA) \cite{byrne_evolving_2014, krish_practical_2011}. 
+The most popular \glspl{EA} used to solve multi-objective problems are \glspl{GA} 
+\cite{byrne_evolving_2014, krish_practical_2011}. 
 
 \subsection{Genetic Algorithms}
 \glspl{GA} imitate natural genetics and selection to evolve solutions 
-by maintaining a population of solutions, allowing 
-fitter solutions to reproduce, and letting lesser fit solutions die off, 
-resulting in final solutions that are better than the previous generations 
-\cite{renner_genetic_2003}. 
+by maintaining a population of solutions, allowing fitter solutions to reproduce
+and letting lesser fit solutions die off, resulting in final solutions that are 
+better than the previous generations \cite{renner_genetic_2003}. 
 From here, we will refer to a solution as an individual within the population. 
 \glspl{GA} efficiently exploit historical information to speculate new search 
 points, improving each subsequent population's performance 
@@ -469,9 +476,9 @@ points, improving each subsequent population's performance
 search in complex spaces and are computationally simple yet powerful 
 in their search for improvement \cite{goldberg_genetic_1989}. 
 GAs are advantageous compared to deterministic and stochastic simulated 
-annealing optimization methods because (1) it searches from a population of 
-points, (2) uses objective function information, not derivatives or other 
-auxiliary knowledge of the problem, and (3) uses probabilistic transition 
+annealing optimization methods, because (1) it searches from a population of 
+points; (2) uses objective function information, not derivatives or other 
+auxiliary knowledge of the problem; and (3) uses probabilistic transition 
 rules, not deterministic rules. 
 Figure \ref{fig:genetic_alg} depicts the iterative process of using a \gls{GA}
 to solve a problem. 
@@ -485,10 +492,10 @@ criteria.
                 \node (1) [lbblock] {\textbf{Create initial population}};
                 \node (2) [lbblock, below of=1] {\textbf{Evaluate initial population}};
                 \node (3) [loblock, below of=2, yshift = -1.3cm] {\textbf{Create new population:} \\ 
-                \begin{enumerate} \item \textbf{select} individuals for mating 
-                                  \item create offspring by \textbf{crossover} 
-                                  \item \textbf{mutate} selected individuals 
-                                  \item keep selected individuals from previous generation
+                \begin{enumerate} \item \textbf{Select} individuals for mating 
+                                  \item Create offspring by \textbf{crossover} 
+                                  \item \textbf{Mutate} selected individuals 
+                                  \item Keep selected individuals from previous generation
                                  \end{enumerate}};
                 \node (4) [loblock, below of=3, yshift=-1.3cm] {\textbf{Evaluate new population}};
                 \node (5) [loblock, below of=4] {\textbf{Is termination criteria satisfied?}};
@@ -511,12 +518,11 @@ criteria.
 crossover, and mutation. 
 The three operators are simple and straightforward. 
 The selection operator selects good individuals. 
-The crossover operator recombines together good individuals to form a better 
+The crossover operator recombines good individuals to form a better 
 individual. 
-The mutation operator alters individuals to create a better individual 
+The mutation operator alters individuals to create better individuals
 \cite{deb_multi-objective_2001}. 
-In the subsequent section, we will provide more description and common methods 
-for each operator.
+Next, we will provide more description and common methods for each operator.
 
 \subsubsection{Selection Operator}
 The selection operator's primary objective is to duplicate good 
@@ -531,17 +537,16 @@ In tournament selection, tournaments are played between a user-defined number
 of individuals, and the best individual is kept in the population. 
 This repeatedly occurs until all the population's spots are filled. 
 In best selection, a user-defined number of best individuals are selected, 
-and copies are made to keep population size constant. 
+and copies are made to keep the population size constant. 
 In NSGA-II selection, parent and offspring populations are combined, and the
 best individuals (with respect to fitness and spread) are selected
 \cite{deb_fast_2002}.
-Copies of the best individuals are made to keep 
-population size constant. 
+Again, copies of the best individuals are made to keep the population size constant. 
 
 The selection operator cannot create any new individuals in the population 
 and only makes more copies of good individuals at the expense of not-so-good
 individuals. 
-The crossover and mutation operators perform the creation of new solutions.
+Instead, crossover and mutation operators perform the creation of new solutions.
 
 \subsubsection{Crossover Operator}
 The crossover operator is also known as the mating operator. 
@@ -584,11 +589,10 @@ a population.
 Mutation occurs in the \gls{GA} based on a user-defined mutation probability 
 ($p_m$) that is set low to prevent a primitive random search. 
 Mutation operator methods utilized in the proposed work include polynomial 
-bounded mutation. 
-In polynomial bounded mutation, each attribute in each individual is mutated 
+bounded mutation, in which each attribute in each individual is mutated 
 based on a polynomial distribution. 
 The user also defines each attribute's upper and lower bounds and the 
-crowding-degree of the mutation, $\eta$ (large $\eta$ will produce a mutant 
+crowding-degree of the mutation, $\eta$ (a large $\eta$ will produce a mutant 
 resembling its parent, while a small $\eta$ will produce the opposite).  
 
 \subsection{Balancing Genetic Algorithm Hyperparameters}
@@ -600,8 +604,8 @@ information obtained until the current generation through the crossover
 and mutation operators with the extent of exploitation through the selection
 operator. 
 If previously obtained individuals are exploited too much, the population loses 
-its diversity, and premature convergence to a sub-optimal solution is expected. 
-Whereas if too much stress is given on exploration, the information obtained 
+its diversity, and premature convergence to a suboptimal solution is expected. 
+Alternatively, if too much stress is given on exploration, the information obtained 
 thus far has not been appropriately utilized, and the \gls{GA}'s search procedure 
 behaves like a random search process \cite{deb_multi-objective_2001}. 
 A quantitative balance between these two issues, exploitation and exploration, 
@@ -613,7 +617,7 @@ They found that for the one-max test problem, in which the objective is to
 maximize the number of 1s in a string, a \gls{GA} with any arbitrary 
 hyperparameter setting does not work well even on a simple problem. 
 Only \glspl{GA} with a selection pressure, s, and crossover probability, $p_c$, 
-falling inside the control map (figure \ref{fig:controlmap}), find the desired 
+falling inside the control map (Figure \ref{fig:controlmap}), find the desired 
 optimum.  
 
 
@@ -626,9 +630,9 @@ optimum.
     \label{fig:controlmap}
 \end{figure}
 
-Another consideration is the population size, a function with considerable 
-variability in objective function values demands a large population size to 
-find a global optimum \cite{deb_multi-objective_2001}. 
+Another consideration is the population size. 
+A function with considerable variability in objective function values demands 
+a large population size to find a global optimum \cite{deb_multi-objective_2001}. 
 Therefore, finding an optimized solution with \glspl{GA} requires the user 
 to conduct a hyperparameter search. 
 Ng et al. \cite{ng_improving_2021} suggest that a coarse to fine sampling scheme 
