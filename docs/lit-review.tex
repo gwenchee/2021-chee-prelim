@@ -54,11 +54,11 @@ heat capacity.
 This eliminates the risk of coolant boiling off, resulting in fuel elements 
 overheating \cite{ho_molten_2013}. 
 The leading candidate coolant salt is the fluoride salt Li$_2$BeF$_4$ (FLiBe), 
-which remains liquid without pressurization up to 1400 $^{\circ}$C and a larger 
+which remains liquid without pressurization up to 1400 $^{\circ}$C and has a larger 
 heat capacity than water \cite{ho_molten_2013,forsberg_fluoride-salt-cooled_2012}. 
 \glspl{FHR} are favorable compared to liquid fuelled reactors, such as
-\gls{MSR} systems, because the solid fuel cladding adds an extra barrier to 
-fission product release \cite{ho_molten_2013}.
+\gls{MSR} systems, because the \gls{TRISO} particles' solid fuel cladding adds 
+an extra barrier to fission product release \cite{ho_molten_2013}.
 
 \gls{VHTR} technology has been studied since the 1970s because it delivers 
 heat at substantially higher temperatures than \glspl{LWR}, resulting in 
@@ -85,12 +85,12 @@ the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varm
 the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010} with static plate-fuel. 
 
 \subsection{\acrlong{AHTR} Design}
-This proposed work focuses on the \gls{FHR} design with hexagonal fuel elements 
+This proposed work focuses on the \gls{FHR} design with hexagonal fuel assemblies
 consisting of \gls{TRISO} fuel particles embedded in planks, i.e., the 
 \gls{AHTR} design developed by ORNL. 
 The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power with
 inlet/outlet temperatures of 650/700$^{\circ}$C \cite{varma_ahtr_2012}.  
-Figure \ref{fig:ahtr} shows the prismatic AHTR's fuel element and core 
+Figure \ref{fig:ahtr} shows the prismatic AHTR's fuel assembly and core 
 configuration.  
 Each hexagonal fuel element features plate-type fuel consisting of eighteen planks 
 arranged in three diamond-shaped sectors, with a central Y-shaped structure 
@@ -104,7 +104,7 @@ The core consists of 252 assemblies radially surrounded by reflectors
 Chapter \ref{chap:fhr-benchmark} details the specifications of the AHTR geometry
 modeled in this proposed work.
 
-\begin{figure}[H]
+\begin{figure}[]
     \centering
     \includegraphics[width=0.9\linewidth]{ahtr.png} 
     \caption{\acrlong{AHTR} fuel assembly (left) and core configuration (right) 
@@ -129,7 +129,7 @@ design have shed light on the technical challenges facing the design
 
 
 \gls{Georgia Tech} led an Integrated Research Project to 
-understand challenges in \gls{AHTR} materials and modeling the neutronics and 
+understand challenges in \gls{AHTR} materials and modeling its neutronics and 
 thermal-hydraulics \cite{zhang_integrated_2019}. 
 During the research project, a panel of subject matter experts 
 generated a \gls{PIRT}.
@@ -215,10 +215,10 @@ Chapter \ref{chap:fhr-benchmark} will provide a detailed description of the
 benchmark phases and results obtained so far.
 
 \section{Additive Manufacturing}
-\gls{AM} is the formalized term for what used to be called `rapid prototyping' 
+\acrlong{AM} (AM) is the formalized term for what used to be called `rapid prototyping' 
 and what is popularly called `3D printing' \cite{gibson_additive_2014}. 
 The basic principle of \gls{AM} is that a model is initially generated using a
-\gls{3D CAD} system and is fabricated directly without the need for process 
+\gls{3D CAD} system and then fabricated directly without the need for process 
 planning. 
 In \gls{AM}, the parts are made by adding materials in layers; each layer is a 
 thin cross section of the \gls{3D CAD} designed part, as opposed 
@@ -257,14 +257,14 @@ local material properties, and enable geometry redesign for optimal load paths
 Many Generation IV advanced reactor concepts have complex geometries, 
 such as hex-ducts for sodium-cooled fast reactors, that are costly and difficult 
 to fabricate using standard processing techniques. 
-Traditional manufacturing routes also restrict the viable geometries for 
-reactor designers \cite{sridharan_performance_2019}. 
+Traditional manufacturing routes also restrict many viable geometries for 
+reactor designers to explore \cite{sridharan_performance_2019}. 
 In summary, the main benefits of using \gls{AM} for reactor core components is that 
 we are no longer geometrically constrained by conventional fuel manufacturing 
-and can further optimize and improve fuel geometries to enhance fuel performance and 
+and can further optimize and improve fuel geometries to enhance fuel performance 
 at lower costs \cite{bergeron_early_2018}. 
 
-Experimental work in the nuclear materials field demonstrates the application 
+Experimental work in the nuclear materials' field demonstrates the application 
 of \gls{AM} to nuclear fuel and structural core material fabrication. 
 Rosales et al. \cite{rosales_characterizing_2019} conducted a feasibility study 
 of direct routes to fabricate dense uranium silicide (U$_3$Si$_2$) fuel pellets 
@@ -289,9 +289,9 @@ such as fuel cladding, constituents of fuel particles \cite{snead_handbook_2007}
 and pellets \cite{terrani_progress_2015}, and core structural components in fission 
 reactors \cite{sauder_ceramic_2014}. 
 Trammel et al \cite{trammell_advanced_2019} conducted a preliminary investigation 
-to assess the possibilities of fabricating fuel element with embedded 
+to assess the possibilities of fabricating a fuel element with embedded 
 \gls{TRISO} fuel using \gls{AM} techniques, such as binderjet printing and \gls{CVI}. 
-They successfully demonstrated a fabrication method with the following steps 
+They successfully demonstrated a fabrication method using the following steps 
 (depicted in Figure \ref{fig:ornl-triso-print}): 
 \begin{enumerate}
     \item A SiC fuel element structure is first printed with binderjet technology. 
@@ -310,8 +310,8 @@ They successfully demonstrated a fabrication method with the following steps
     \label{fig:ornl-triso-print}
 \end{figure}
 
-Many of the materials and fabrication methods discussed above are also applicable 
-for manufacturing \gls{FHR} parts. 
+Many of the materials and fabrication methods discussed are applicable 
+for \gls{FHR}-part manufacturing. 
 Therefore, this reiterates the possibility of leveraging \gls{AM} to 3D print a
 \gls{FHR}-type reactor with non-conventional geometry. 
 
@@ -358,9 +358,9 @@ simulated annealing and deterministic-stochastic hybrid optimization techniques
 to optimize reactor dimensions, enrichment, materials, etc., in order to 
 minimize the average peak factor in a three-enrichment-zone reactor. 
 Odeh et al. \cite{odeh_core_2016} used the simulated annealing stochastic algorithm 
-coupled with neutronics and thermal-hydraulics codes, \gls{PARCS} and RELAP5, 
-to develop an optimum \gls{NMR-50} core design to achieve a 10-year cycle length 
-with minimal fissile loading. 
+coupled with neutronics and thermal-hydraulics codes, \gls{PARCS} and RELAP5
+\cite{fletcher_relap5mod3_1992}, to develop an optimum \gls{NMR-50} core design 
+to achieve a 10-year cycle length with minimal fissile loading. 
 Kropaczek et al. \cite{kropaczek_large-scale_2019} demonstrated the constraint 
 annealing method: a highly scalable method based on the method of parallel 
 simulated annealing with mixing of states \cite{kropaczek_constraint_2019} for 
@@ -370,7 +370,7 @@ Peireira et al. \cite{pereira_coarse-grained_2003,pereira_parallel_2008}
 used a coarse-grained parallel \gls{GA} and a niching \gls{GA}
 to optimize the same problem as Sacco et al. \cite{sacco_two_2006}. 
 Kamalpour et al. \cite{kamalpour_smart_2020} utilized the imperialist competitive 
-algorithm, a type of evolutionary algorithm, to optimize an \gls{FCM} fuelled 
+algorithm, a type of \gls{EA}, to optimize an \gls{FCM} fuelled 
 \gls{PWR} to extend the reactor core cycle length. 
 
 Nuclear reactor optimization problems require computationally 
@@ -392,18 +392,18 @@ algorithm to generate optimized designs at a lower computational cost to
 understand design decisions' impact on desired metrics for \gls{HFIR} \gls{LEU} 
 core designs.
 
-The simulation annealing method uses a point-by-point approach:
-one solution gets updated to a new solution in one iteration, but does not 
+The \gls{SA} method uses a point-by-point approach:
+one solution gets updated to a new solution in one iteration, which does not 
 exploit parallel systems' advantages.
-Finding an optimal solution with simulation annealing methods takes very 
+Finding an optimal solution with \gls{SA} methods takes very 
 long if high-fidelity computationally expensive codes are used to compute 
 the objective function and constraints.
-Therefore, using the simulation annealing method is only practical if a 
+Therefore, using the \gls{SA} method is only practical if a 
 surrogate evaluation model is used as described in Betzler et al. 
 \cite{betzler_design_2019} and Kumar et al. \cite{kumar_new_2015}.
 
 Contrary to a single solution per iteration in deterministic and stochastic 
-simulation annealing methods, \glspl{EA} use a population of solutions in each 
+\gls{SA} methods, \glspl{EA} use a population of solutions in each 
 iteration \cite{deb_multi-objective_2001}. 
 \gls{EA} methods mimic nature's evolutionary principles to drive 
 its search towards an optimal solution. 
@@ -434,8 +434,8 @@ as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc
 \cite{sobes_artificial_2020}.
 This has opened the door for a re-examination of reactor core 
 optimization in a complete new way, determining the optimal arbitrary geometry 
-for a given objective function \cite{sobes_artificial_2020} with a much smaller s
-et of constraints. 
+for a given objective function \cite{sobes_artificial_2020} with a much smaller 
+set of constraints. 
 
 With a substantial increase and change in an arbitrary geometry's design space, 
 it becomes time consuming for a human reactor designer to thoroughly explore 
@@ -504,17 +504,15 @@ criteria.
                 \draw [arrow] (2) -- (3);
                 \draw [arrow] (3) -- (4);
                 \draw [arrow] (4) -- (5);
-                \draw [arrow] (5) -- node[anchor=east] {Yes} (6);
+                \draw [arrow] (5) -- node[anchor=east] {yes} (6);
                 \draw [arrow] (5) -- ([shift={(0.5cm,0cm)}]5.east)-- node[anchor=west] {no} ([shift={(0.5cm,0cm)}]3.east)--(3);
         \end{tikzpicture}
-        \caption{Process of solving a problem with genetic algorithm 
-        \cite{renner_genetic_2003}. }
+        \caption{Process of finding optimal solutions for a problem with a 
+        genetic algorithm \cite{renner_genetic_2003}. }
         \label{fig:genetic_alg}
 \end{figure}
 
-% explain how individuals look like 
-
-\glspl{GA} uses mechanisms inspired by biological evolution such as selection, 
+\glspl{GA} use mechanisms inspired by biological evolution such as selection, 
 crossover, and mutation. 
 The three operators are simple and straightforward. 
 The selection operator selects good individuals. 
@@ -522,7 +520,7 @@ The crossover operator recombines good individuals to form a better
 individual. 
 The mutation operator alters individuals to create better individuals
 \cite{deb_multi-objective_2001}. 
-Next, we will provide more description and common methods for each operator.
+Next, we provide more description and common methods for each operator.
 
 \subsubsection{Selection Operator}
 The selection operator's primary objective is to duplicate good 
@@ -599,10 +597,10 @@ resembling its parent, while a small $\eta$ will produce the opposite).
 In the proposed work, hyperparameters refer to parameters whose value controls 
 the \gls{GA}'s process, such as each genetic operator's associated parameters 
 and population size.  
-A good optimization method needs to balance the extent of exploration of 
-information obtained until the current generation through the crossover 
-and mutation operators with the extent of exploitation through the selection
-operator. 
+A well-performing \gls{GA} needs to balance the extent of exploration and 
+exploitation; this is done by finding a balance between the conservation of 
+valuable individuals obtained until the current generation while exploring new 
+individuals. 
 If previously obtained individuals are exploited too much, the population loses 
 its diversity, and premature convergence to a suboptimal solution is expected. 
 Alternatively, if too much stress is given on exploration, the information obtained 
@@ -616,23 +614,21 @@ and exploration.
 They found that for the one-max test problem, in which the objective is to 
 maximize the number of 1s in a string, a \gls{GA} with any arbitrary 
 hyperparameter setting does not work well even on a simple problem. 
-Only \glspl{GA} with a selection pressure, s, and crossover probability, $p_c$, 
-falling inside the control map (Figure \ref{fig:controlmap}), find the desired 
+Only \glspl{GA} with a selection pressure (s) and crossover probability ($p_c$) 
+falling inside the control map (Figure \ref{fig:controlmap}) will find the desired 
 optimum.  
-
-
-\begin{figure}[H]
+\begin{figure}[]
     \centering
     \includegraphics[width=0.7\linewidth]{controlmap.png} 
-    \caption{Simulation results of the region in which the \gls{GA} will find the 
-    desired optimum for the one-max problem 
-    \cite{goldberg_toward_1993,deb_multi-objective_2001}.}
+    \caption{Control map region of selection pressure (s) and crossover probability ($p_c$)
+    values in which the genetic algorithm will find the desired optimum for the 
+    one-max problem \cite{goldberg_toward_1993,deb_multi-objective_2001}.}
     \label{fig:controlmap}
 \end{figure}
-
 Another consideration is the population size. 
 A function with considerable variability in objective function values demands 
 a large population size to find a global optimum \cite{deb_multi-objective_2001}. 
+
 Therefore, finding an optimized solution with \glspl{GA} requires the user 
 to conduct a hyperparameter search. 
 Ng et al. \cite{ng_improving_2021} suggest that a coarse to fine sampling scheme 

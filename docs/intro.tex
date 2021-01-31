@@ -105,7 +105,7 @@ The \gls{FHR} uses high-temperature coated-particle fuel (similar to the \gls{VH
 and a low-pressure liquid fluoride-salt coolant (similar to the \gls{MSR})
 \cite{forsberg_fluoride-salt-cooled_2012,facilitators_fluoride-salt-cooled_2013}.
 
-In recent years, \gls{AM} technology, popularly known as 3D printing, 
+In recent years, \gls{AM} technology, popularly known as `3D printing', 
 has advanced and altered the manufacturing and design of components 
 \cite{simpson_considerations_2019}. 
 The automotive and aircraft industries have successfully fabricated parts with 
@@ -156,11 +156,11 @@ a \textit{set} of equally optimal solutions \cite{byrne_evolving_2014}.
 Multi-objective problems are challenging to optimize; therefore, they cannot be 
 handled by classical optimization methods, such as gradient methods, because only 
 the local optimum will be found \cite{renner_genetic_2003}. 
-Evolutionary algorithms have proven successful methods to optimize 
+\glspl{EA} have proven successful methods to optimize 
 multi-objective problems \cite{krish_practical_2011}, as 
 they can find a solution near the global optimum \cite{renner_genetic_2003}.
 They also take advantage of parallel systems for reduced computational cost.
-The most popular evolutionary algorithms used to solve multi-objective 
+The most popular \glspl{EA} used to solve multi-objective 
 problems are genetic algorithms \cite{byrne_evolving_2014, krish_practical_2011},
 which imitate natural selection to evolve solutions by (1) maintaining a 
 population of solutions, (2) allowing fitter solutions to reproduce, and (3) 
@@ -168,7 +168,7 @@ letting lesser fit solutions die off, resulting in final solutions that are
 better than the previous generations \cite{renner_genetic_2003}. 
 
 Therefore, in this work, we propose designing an optimization tool that uses 
-the evolutionary algorithm optimization technique with nuclear transport and 
+the \gls{EA} optimization technique with nuclear transport and 
 thermal-hydraulics software. 
 This tool will be used to explore nonuniform FHR reactor core parameters, now 
 possible with \gls{AM} technology, to optimize reactor systems 
@@ -195,7 +195,7 @@ participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmark
 \textbf{Develop a tool that applies evolutionary algorithms to optimize nuclear 
 reactor design}. 
 This tool will not reinvent the wheel---it will utilize a well-documented 
-and validated open-source evolutionary algorithm Python package with established 
+and validated open-source \gls{EA} Python package with established 
 nuclear transport and thermal-hydraulics software. This tool will run parallel on 
 \gls{HPC} machines, be open-source, and follow the rules for ensuring 
 reproducibility, effectiveness, and usability 
@@ -230,7 +230,8 @@ for a \gls{FHR} model.
 This document outlines the motivation, preliminary work, and future work proposed 
 towards developing an open-source optimization tool that applies evolutionary 
 algorithms to nuclear transport and thermal-hydraulics software to optimize 
-nuclear reactor design. 
+nuclear reactor design beyond classical parameters to enhance fuel performance 
+and safety further. 
 Chapter 1 describes the motivation and objectives of the proposed work. 
 Chapter 2 will present a literature review that organizes and reports on previous 
 relevant work. 
