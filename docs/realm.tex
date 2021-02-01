@@ -6,3 +6,32 @@
 % Structure 
 % - Realm framework
 % - Coupling to OpenMC and Moltres
+
+In this chapter, we introduce the \gls{REALM} Python framework developed for this
+proposed work.
+\gls{REALM} is an optimization tool that applies \gls{EA} optimization to 
+nuclear reactor design. 
+The tool is:  
+\begin{itemize}
+    \item Open-source: We utilized a well-documented open-source \gls{EA} Python 
+    package to drive the genetic algorithm optimization. We utilized established 
+    open-source nuclear transport, OpenMC \cite{romano_openmc_2013}, and 
+    thermal-hydraulics, Moltres \cite{lindsay_introduction_2018}, software to 
+    compute the objective function and constraints. We also provide a simple 
+    tutorial for future developers to follow for coupling other nuclear software 
+    to the \gls{REALM} package.  
+    \item Flexible: Our goal is to utilize \gls{REALM} to explore arbitrary 
+    reactor geometries and inhomogeneous fuel distributions. However, we 
+    acknowledge that future users might want to utilize \gls{REALM} other
+    arbitrary parameters that we overlooked. Thus, we designed the \gls{REALM}
+    framework with this in mind. The user is able to vary any imaginable parameter 
+    as \gls{REALM} edits the neutronics/thermal-hydraulics software's input file 
+    with a templating method.
+    \item Usable: 
+    \item Parallel: \gls{REALM} runs parallel on \gls{HPC} machines using the 
+    \texttt{multiprocessing\_on\_dill} Python package 
+    \cite{smallshire_multiprocessing_on_dill_nodate}.
+    \item Reproducible: 
+    \item Effective: 
+    \item Usable: 
+\end{itemize}
