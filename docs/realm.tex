@@ -52,6 +52,8 @@ evolutionary algorithm's iterative problem solving process.
 I modified Figure \ref{fig:genetic_alg} to produce Figure 
 \ref{fig:genetic_alg_nuclear} which depicts how the nuclear transport and 
 thermal-hydraulics software fit within the process. 
+% link the chart with the code? 
+
 \begin{figure}[]
     \centering
     \begin{tikzpicture}[node distance=1.7cm]
@@ -83,6 +85,31 @@ thermal-hydraulics software fit within the process.
     \label{fig:genetic_alg_nuclear}
 \end{figure}
 
+\subsection{Evolutionary Algorithm Driver}
+Evolutionary algorithm computation is a sophisticated field with diverse techniques 
+and mechanisms, resulting in even well designed coded-up frameworks being complicated 
+under the hood \cite{fortin_deap_2012}. 
+Therefore, utilizing a previously used evolutionary algorithm framework brings 
+up issues in extending implementation intricacies as the user has to edit the 
+source code. 
+This is concerning since using evolutionary algorithms to solve unique real-world 
+problems requires customization of algorithms \cite{fortin_deap_2012}. 
+Therefore, an evolutionary algorithm computation framework that gives the user the 
+capability to build custom evolutionary algorithms is ideal for this project.
+
+There are many evolutionary algorithm computation packages available: 
+\gls{DEAP} \cite{fortin_deap_2012}, inspyred \cite{garrett_inspyred_2014}, 
+Pyevolve \cite{perone_pyevolve_2009}, and OpenBEAGLE \cite{gagne_open_2002}.
+\gls{DEAP} is the most newly created package and places a high value on code 
+compactness and code clarity \cite{fortin_deap_2012}. 
+\gls{DEAP} is the only framework that allows the user to rapidly prototype 
+evolutionary algorithms and define custom algorithms without having to dig 
+deep into the source code to modify lines,  making it the code of choice for 
+the evolutionary algorithm driver component of the \gls{REALM} framework.  
+\gls{DEAP} provides building blocks for each optimizer function and allows the 
+user to customize and design a specialized algorithm to fit their project.
+
+\subsection{Software Architecture}
 \vspace{0.2cm} 
 \noindent
 \textbf{InputValidation}. The \textit{InputValidation} class contains methods 
