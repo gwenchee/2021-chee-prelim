@@ -7,31 +7,94 @@
 % - Realm framework
 % - Coupling to OpenMC and Moltres
 
-In this chapter, we introduce the \gls{REALM} Python framework developed for this
+In this chapter, I introduce the \gls{REALM} Python framework developed for the
 proposed work.
 \gls{REALM} is an optimization tool that applies \gls{EA} optimization to 
 nuclear reactor design. 
-The tool is:  
+The tool strives to be effective, flexible, open-source, parallel, reproducible, 
+and usable. 
+I briefly summarize how \gls{REALM} achieves these goals:  
 \begin{itemize}
-    \item Open-source: We utilized a well-documented open-source \gls{EA} Python 
-    package to drive the genetic algorithm optimization. We utilized established 
+    \item Effective: \gls{REALM} is well documented, well tested, and 
+    version-controlled on Github \cite{chee_arfcrealm_2021}.
+    \item Flexible: The goal is to utilize \gls{REALM} to explore arbitrary 
+    reactor geometries and inhomogeneous fuel distributions. However, I 
+    acknowledge that future users might want to utilize \gls{REALM} with other
+    arbitrary parameters that I overlooked. Thus, I designed the \gls{REALM}
+    framework with this in mind. The user is able to vary any imaginable parameter 
+    as \gls{REALM} uses a templating method to edit the coupled software's input 
+    file.
+    \item Open-source: I utilized a well-documented open-source \gls{EA} Python 
+    package to drive the genetic algorithm optimization. I utilized established 
     open-source nuclear transport, OpenMC \cite{romano_openmc_2013}, and 
     thermal-hydraulics, Moltres \cite{lindsay_introduction_2018}, software to 
-    compute the objective function and constraints. We also provide a simple 
+    compute the objective function and constraints. I also provide a simple 
     tutorial for future developers to follow for coupling other nuclear software 
     to the \gls{REALM} package.  
-    \item Flexible: Our goal is to utilize \gls{REALM} to explore arbitrary 
-    reactor geometries and inhomogeneous fuel distributions. However, we 
-    acknowledge that future users might want to utilize \gls{REALM} other
-    arbitrary parameters that we overlooked. Thus, we designed the \gls{REALM}
-    framework with this in mind. The user is able to vary any imaginable parameter 
-    as \gls{REALM} edits the neutronics/thermal-hydraulics software's input file 
-    with a templating method.
-    \item Usable: 
     \item Parallel: \gls{REALM} runs parallel on \gls{HPC} machines using the 
     \texttt{multiprocessing\_on\_dill} Python package 
     \cite{smallshire_multiprocessing_on_dill_nodate}.
-    \item Reproducible: 
-    \item Effective: 
-    \item Usable: 
+    \item Reproducible: Data from every REALM run saves into a unique pickled file
+    and all results from this work is available on Github. 
+    \item Usable: I did not reinvent the wheel--instead combined available 
+    evolutionary algorithm, nuclear transport, and thermal-hydraulics software, 
+    to create a new optimization tool for easy leveraging of evolutionary algorithms 
+    to construct arbitrary reactor designs. 
 \end{itemize}
+Next, I will describe \gls{REALM}'s framework and the specifics about how 
+I designed \gls{REALM} to achieve these goals. 
+
+\section{\acrlong{REALM}'s Framework}
+\gls{REALM} essentially couples an evolutionary algorithm driver with nuclear 
+software such as, nuclear transport and thermal-hydraulics codes. 
+Figure \ref{fig:genetic_alg} from Chapter \ref{chap:lit-review} outlined an 
+evolutionary algorithm's iterative problem solving process. 
+I modified Figure \ref{fig:genetic_alg} to produce Figure 
+\ref{fig:genetic_alg_nuclear} which depicts how the nuclear transport and 
+thermal-hydraulics software fit within the process. 
+\begin{figure}[]
+    \centering
+    \begin{tikzpicture}[node distance=1.7cm]
+            \tikzstyle{every node}=[font=\small]
+            \node (1) [lbblock] {\textbf{Create initial population}};
+            \node (2) [loblock, below of=1] {\textbf{Evaluate initial population}};
+            \node (3) [lbblock, below of=2, yshift = -1.3cm] {\textbf{Create new population:} \\ 
+            \begin{enumerate} \item \textbf{Select} individuals for mating 
+                              \item Create offspring by \textbf{crossover} 
+                              \item \textbf{Mutate} selected individuals 
+                              \item Keep selected individuals from previous generation
+                             \end{enumerate}};
+            \node (4) [loblock, below of=3, yshift=-1.3cm] {\textbf{Evaluate new population}};
+            \node (5) [lbblock, below of=4] {\textbf{Is termination criteria satisfied?}};
+            \node (6) [lbblock, below of=5] {\textbf{Best solution is returned!}};
+            \draw [arrow] (1) -- (2);
+            \draw [arrow] (2) -- (3);
+            \draw [arrow] (3) -- (4);
+            \draw [arrow] (4) -- (5);
+            \draw [arrow] (5) -- node[anchor=east] {yes} (6);
+            \draw [arrow] (5) -- ([shift={(0.5cm,0cm)}]5.east)-- node[anchor=west] {no} ([shift={(0.5cm,0cm)}]3.east)--(3);
+            \matrix [draw,above right,yshift=10.7cm, xshift=0cm] at (current bounding box.south east) {
+            \node [bbblock,label=right:\textbf{GA: Genetic algorithm}] {}; \\
+            \node [boblock,label=right:\textbf{NS: Nuclear software}] {}; \\
+            };
+    \end{tikzpicture}
+    \caption{Process of finding optimal solutions for a problem with a 
+    genetic algorithm with evaluation conducted with nuclear software.}
+    \label{fig:genetic_alg_nuclear}
+\end{figure}
+
+\vspace{0.2cm} 
+\noindent
+\textbf{InputValidation}. The \textit{InputValidation} class contains methods 
+to read the \texttt{json} \gls{REALM} input file and conduct a validation to 
+ensure the user defined all key parameters, and if they did not, \gls{REALM} 
+raises an exception to tell the user which parameter is missing. 
+
+\vspace{0.2cm} 
+\noindent
+\textbf{Evaluation}. The \textit{Evaluation} class contains 
+
+\vspace{0.2cm} 
+\noindent
+\textbf{Executor}. The \textit{Executor} class drives the \gls{REALM} code
+execution. 
