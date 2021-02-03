@@ -17,10 +17,10 @@ I briefly summarize how \gls{REALM} achieves these goals:
 \begin{itemize}
     \item Effective: \gls{REALM} is well documented, well tested, and 
     version-controlled on Github \cite{chee_arfcrealm_2021}.
-    \item Flexible: The goal is to utilize \gls{REALM} to explore arbitrary 
-    reactor geometries and inhomogeneous fuel distributions. However, I 
-    acknowledge that future users might want to utilize \gls{REALM} with other
-    arbitrary parameters that I overlooked. Thus, I designed the \gls{REALM}
+    \item Flexible: The proposed work's goal is to utilize \gls{REALM} to 
+    explore arbitrary reactor geometries and inhomogeneous fuel distributions. 
+    However, I acknowledge that future users might want to utilize \gls{REALM} 
+    with other arbitrary parameters that I overlooked. Thus, I designed the \gls{REALM}
     framework with this in mind. The user is able to vary any imaginable parameter 
     as \gls{REALM} uses a templating method to edit the coupled software's input 
     file.
@@ -76,7 +76,7 @@ thermal-hydraulics software fit within the process.
             \draw [arrow] (5) -- node[anchor=east] {yes} (6);
             \draw [arrow] (5) -- ([shift={(0.5cm,0cm)}]5.east)-- node[anchor=west] {no} ([shift={(0.5cm,0cm)}]3.east)--(3);
             \matrix [draw,above right,yshift=10.7cm, xshift=0cm] at (current bounding box.south east) {
-            \node [bbblock,label=right:\textbf{GA: Genetic algorithm}] {}; \\
+            \node [bbblock,label=right:\textbf{EA: Evolutionary algorithm}] {}; \\
             \node [boblock,label=right:\textbf{NS: Nuclear software}] {}; \\
             };
     \end{tikzpicture}
