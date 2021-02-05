@@ -1,4 +1,4 @@
-\chapter{REALM}
+\chapter{REALM: Reactor Evolutionary Algorithm Optimizer}
 % Main Gist 
 % - Genetic Algorithms / DEAP have been applied to a multitude of problems, 
 %   but barely to nuclear. DEAP was created to be easily coupled with other
@@ -9,9 +9,8 @@
 
 In this chapter, I introduce the \gls{REALM} Python framework developed for the
 proposed work.
-\gls{REALM} is an optimization tool that applies \gls{EA} optimization to 
-nuclear reactor design. 
-The tool strives to be effective, flexible, open-source, parallel, reproducible, 
+\gls{REALM} applies \gls{EA} optimization to nuclear reactor design, and 
+strives to be effective, flexible, open-source, parallel, reproducible, 
 and usable. 
 I briefly summarize how \gls{REALM} achieves these goals:  
 \begin{itemize}
@@ -41,6 +40,7 @@ I briefly summarize how \gls{REALM} achieves these goals:
     to create a new optimization tool for easy leveraging of evolutionary algorithms 
     to construct arbitrary reactor designs. 
 \end{itemize}
+
 Next, I will describe \gls{REALM}'s framework and the specifics about how 
 I designed \gls{REALM} to achieve these goals. 
 
@@ -52,8 +52,6 @@ evolutionary algorithm's iterative problem solving process.
 I modified Figure \ref{fig:genetic_alg} to produce Figure 
 \ref{fig:genetic_alg_nuclear} which depicts how the nuclear transport and 
 thermal-hydraulics software fit within the process. 
-% link the chart with the code? 
-
 \begin{figure}[]
     \centering
     \begin{tikzpicture}[node distance=1.7cm]
@@ -85,6 +83,15 @@ thermal-hydraulics software fit within the process.
     \label{fig:genetic_alg_nuclear}
 \end{figure}
 
+\subsubsection{Overview of Program Flow}
+\begin{itemize}
+    \item Read and validate \texttt{json} input file.
+    \item Initialize DEAP genetic algorithm hyperparameters and operators. 
+\end{itemize}
+
+Next, I will describe evolutionary algorithm software that drives \gls{REALM} 
+and details about the \gls{REALM} framework. 
+
 \subsection{Evolutionary Algorithm Driver}
 Evolutionary algorithm computation is a sophisticated field with diverse techniques 
 and mechanisms, resulting in even well designed coded-up frameworks being complicated 
@@ -107,15 +114,20 @@ evolutionary algorithms and define custom algorithms without having to dig
 deep into the source code to modify lines,  making it the code of choice for 
 the evolutionary algorithm driver component of the \gls{REALM} framework.  
 \gls{DEAP} provides building blocks for each optimizer function and allows the 
-user to customize and design a specialized algorithm to fit their project.
+user to customize and design a specialized algorithm to fit their project
+\cite{fortin_deap_2012}.
 
 \subsection{Software Architecture}
+In this section, I will describe \gls{REALM} v1.0's software architecture and 
+how all the parts come together to meet the goal of optimizing reactor 
+design. 
+
 \vspace{0.2cm} 
 \noindent
 \textbf{InputValidation}. The \textit{InputValidation} class contains methods 
 to read the \texttt{json} \gls{REALM} input file and conduct a validation to 
 ensure the user defined all key parameters, and if they did not, \gls{REALM} 
-raises an exception to tell the user which parameter is missing. 
+raises an exception to tell the user which parameters are missing. 
 
 \vspace{0.2cm} 
 \noindent
@@ -123,5 +135,20 @@ raises an exception to tell the user which parameter is missing.
 
 \vspace{0.2cm} 
 \noindent
+\textbf{DeapOperators}. 
+
+\vspace{0.2cm} 
+\noindent
 \textbf{Executor}. The \textit{Executor} class drives the \gls{REALM} code
 execution. 
+The \texttt{execute} method has the following steps: 
+\begin{enumerate}
+    \item Calls \textit{InputValidation} to read the \texttt{json} input file 
+    and conduct a validation.
+    \item Calls \textit{Evaluation} to create the evaluator function. 
+    \item Calls \textit{}
+\end{enumerate}
+
+\section{Hyperparameter Search}
+Hyperparameters are a model configuration argument specified by the developer to 
+guide the learning process for a specific dataset. 
