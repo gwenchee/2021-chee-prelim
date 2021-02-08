@@ -82,13 +82,10 @@ thermal-hydraulics software fit within the process.
     genetic algorithm with evaluation conducted with nuclear software.}
     \label{fig:genetic_alg_nuclear}
 \end{figure}
-
-\subsubsection{Overview of Program Flow}
-\begin{itemize}
-    \item Read and validate \texttt{json} input file.
-    \item Initialize DEAP genetic algorithm hyperparameters and operators. 
-\end{itemize}
-
+Therefore, \gls{REALM} will initially read and validate the \texttt{json} input 
+file, initialize the \gls{DEAP} genetic algorithm hyperparameters and operators, 
+and finally run the genetic algorithm which follows the flow chart in Figure 
+\ref{fig:genetic_alg_nuclear}. 
 Next, I will describe evolutionary algorithm software that drives \gls{REALM} 
 and details about the \gls{REALM} framework. 
 
@@ -117,6 +114,81 @@ the evolutionary algorithm driver component of the \gls{REALM} framework.
 user to customize and design a specialized algorithm to fit their project
 \cite{fortin_deap_2012}.
 
+\subsubsection{How \gls{DEAP} works}
+\gls{DEAP} is composed of two simples structures: a \textit{creator} and a 
+\textit{toolbox}.  
+The \textit{creator} module is a meta-factory that allows the run-time creation 
+of classes via inheritance and composition. 
+This enables the creation of individuals and populations from any data structure: 
+lists, sets, dictionaries, trees, etc. 
+The \textit{toolbox} is a container for the tools/operators that the user 
+manually populates with selected tools for the evolutionary algorithm.
+The \textit{toolbox} is where the user would define the selection, crossover, 
+and mutation operator types and hyperparameters. 
+For example, the user would register a crossover operator under the `mate'
+alias. 
+Then, the evolutionary algorithms would be built with these aliased operators, 
+and if the user wanted to change the crossover operator, they would update the 
+`mate' alias in the toolbox and the algorithm would remain unchanged
+\cite{fortin_deap_2012}. 
+Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
+\textit{toolbox} modules. 
+\begin{figure}[]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        fontsize=\footnotesize,
+        linenos
+        ]{python}
+        
+        from deap import creator, base, tools, algorithms
+        creator.create("Objective", base.Fitness, weights=(-1.0,)) # minimum
+        creator.create("Individual", list, fitness=creator.Objective)
+
+        toolbox = base.Toolbox()
+        toolbox.register("variable_1", random.uniform, 0, 10)
+        toolbox.register("variable_2", random.uniform, -1, 0)
+        def individual_creator():
+            return creator.Individual([toolbox.variable_1(), toolbox.variable_2()])
+        toolbox.register("individual", individual_creator())
+        toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+        def evaluator_fn(individual):
+            return tuple([sum(individual)])
+        toolbox.register("evaluate", evaluator_fn)
+        toolbox.register("select", tools.selBest, k=5)
+        toolbox.register("mutate", tools.mutPolynomialBounded, eta=0.5, low=[0, -1], up=[-1, 0])
+        toolbox.register("mate", tools.cxOnePoint)
+    \end{minted}
+    \caption{DEAP sample code}
+    \label{fig:deap-code}
+\end{figure}
+On line 2, a single-objective fitness class \texttt{Objective} is created. 
+
+\subsection{Nuclear Software}
+Many nuclear software have restricted public access. 
+In the proposed work, I enabled \gls{REALM} to work with open-source nuclear 
+transport and thermal-hydraulics software, OpenMC \cite{romano_openmc_2013} 
+and Moltres \cite{lindsay_introduction_2018}.  
+OpenMC is an open-source Monte Carlo neutron transport code, that is capable of 
+performing k-eigenvalue calculations on models built using either constructive 
+solid geometry or CAD representation. 
+OpenMC can run in parallel using a hybrid MPI and OpenMP programming model. 
+Moltres is an open-source tool designed for simulation of \glspl{MSR} using 
+deterministic neutronics and thermal-hydraulics, implemented as an application 
+atop the \gls{MOOSE} finite-element framework.  
+Moltres solves arbitrary-group neutron diffusion, temperature, and precursor 
+governing equations on a single mesh and can be deployed on an arbitrary number 
+of processing units \cite{lindsay_introduction_2018}.
+
+OpenMC and Moltres are both open-source, well-documented, well-supported, and 
+Github version controlled codes that run in parallel on \gls{HPC} machines, 
+thus, achieving the \gls{REALM} goals listed at the start of this chapter, 
+making them suitable to be used as \gls{REALM}'s nuclear software.
+However, \gls{REALM} users can easily use restricted nuclear software with 
+\gls{REALM} by using \gls{REALM} with the restricted software on their local 
+machine. 
+
 \subsection{Software Architecture}
 In this section, I will describe \gls{REALM} v1.0's software architecture and 
 how all the parts come together to meet the goal of optimizing reactor 
@@ -131,7 +203,8 @@ raises an exception to tell the user which parameters are missing.
 
 \vspace{0.2cm} 
 \noindent
-\textbf{Evaluation}. The \textit{Evaluation} class contains 
+\textbf{Evaluation}. The \gls{DEAP} fitness evaluator requires an evaluation 
+The \textit{Evaluation} class contains 
 
 \vspace{0.2cm} 
 \noindent
