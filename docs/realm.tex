@@ -164,6 +164,15 @@ Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
     \label{fig:deap-code}
 \end{figure}
 On line 2, a single-objective fitness class \texttt{Objective} is created. 
+The first argument defines the name of the derived class, the second argument 
+specifies the inherited base class (\texttt{base.fitness}), and the third 
+argument is the weights attribute initialized with a tuple that indicates
+one-objective fitness ($-1.0$ indicates a minimum objective, and $+1.0$ 
+indicates a maximum objective). 
+On line 3, an \texttt{Individual} class is derived from the Python list and 
+composed with our newly created \texttt{Objective} object. 
+On lines 5-9, we initialize the \gls{DEAP} toolbox and register 
+\texttt{variable\_1} and \texttt{variable\_2}
 
 \subsection{Nuclear Software}
 Many nuclear software have restricted public access. 
