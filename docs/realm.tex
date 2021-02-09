@@ -84,8 +84,9 @@ thermal-hydraulics software fit within the process.
 \end{figure}
 Therefore, \gls{REALM} will initially read and validate the \texttt{json} input 
 file, initialize the \gls{DEAP} genetic algorithm hyperparameters and operators, 
-and finally run the genetic algorithm which follows the flow chart in Figure 
-\ref{fig:genetic_alg_nuclear}. 
+and finally run the genetic algorithm following the flow chart in Figure 
+\ref{fig:genetic_alg_nuclear} in which the nuclear software evaluates each 
+individual's fitness. 
 Next, I will describe evolutionary algorithm software that drives \gls{REALM} 
 and details about the \gls{REALM} framework. 
 
@@ -115,12 +116,13 @@ user to customize and design a specialized algorithm to fit their project
 \cite{fortin_deap_2012}.
 
 \subsubsection{How \gls{DEAP} works}
+\label{sec:deap-works}
 \gls{DEAP} is composed of two simples structures: a \textit{creator} and a 
 \textit{toolbox}.  
 The \textit{creator} module is a meta-factory that allows the run-time creation 
 of classes via inheritance and composition. 
 This enables the creation of individuals and populations from any data structure: 
-lists, sets, dictionaries, trees, etc. 
+lists, sets, dictionaries, trees, etc \cite{fortin_deap_2012}. 
 The \textit{toolbox} is a container for the tools/operators that the user 
 manually populates with selected tools for the evolutionary algorithm.
 The \textit{toolbox} is where the user would define the selection, crossover, 
@@ -131,6 +133,7 @@ Then, the evolutionary algorithms would be built with these aliased operators,
 and if the user wanted to change the crossover operator, they would update the 
 `mate' alias in the toolbox and the algorithm would remain unchanged
 \cite{fortin_deap_2012}. 
+
 Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
 \textit{toolbox} modules. 
 \begin{figure}[]
@@ -160,7 +163,8 @@ Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
         toolbox.register("mutate", tools.mutPolynomialBounded, eta=0.5, low=[0, -1], up=[-1, 0])
         toolbox.register("mate", tools.cxOnePoint)
     \end{minted}
-    \caption{DEAP sample code}
+    \caption{DEAP sample code demonstrating the usage of the \textit{creator} and
+    \textit{toolbox} modules to initialize the genetic algorithm.}
     \label{fig:deap-code}
 \end{figure}
 On line 2, a single-objective fitness class \texttt{Objective} is created. 
@@ -171,8 +175,16 @@ one-objective fitness ($-1.0$ indicates a minimum objective, and $+1.0$
 indicates a maximum objective). 
 On line 3, an \texttt{Individual} class is derived from the Python list and 
 composed with our newly created \texttt{Objective} object. 
-On lines 5-9, we initialize the \gls{DEAP} toolbox and register 
-\texttt{variable\_1} and \texttt{variable\_2}
+On lines 5-9, we initialize the \gls{DEAP} toolbox, register 
+\texttt{variable\_1} and \texttt{variable\_2} with their upper and lower bounds, 
+and defined the \texttt{individual\_creator} function to return an 
+\texttt{Individual} initialized with \texttt{variable\_1} and \texttt{variable\_2}. 
+Lines 10-11 and 14-17 have aliases for initializing individuals and population, 
+specifying variation operators (\texttt{select}, \texttt{mutate}, \texttt{mate}), 
+and evaluating individual fitness (\texttt{evaluate}) \cite{fortin_deap_2012}. 
+Lines 12-13 defines the evaluation function that returns the fitness values. 
+In \gls{REALM}, the evaluation function returns fitness values from the nuclear 
+software.  
 
 \subsection{Nuclear Software}
 Many nuclear software have restricted public access. 
@@ -203,21 +215,39 @@ In this section, I will describe \gls{REALM} v1.0's software architecture and
 how all the parts come together to meet the goal of optimizing reactor 
 design. 
 
-\vspace{0.2cm} 
-\noindent
-\textbf{InputValidation}. The \textit{InputValidation} class contains methods 
-to read the \texttt{json} \gls{REALM} input file and conduct a validation to 
-ensure the user defined all key parameters, and if they did not, \gls{REALM} 
-raises an exception to tell the user which parameters are missing. 
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{REALM Architecture}
+	\label{tab:realm-architecture}
+    \small
+    \begin{tabular}{l|p{0.77\textwidth}}
+    \hline
+    \textbf{Class} & \textbf{Description} \\ \hline
+    \textbf{InputValidation} & The \textit{InputValidation} class contains methods 
+    to read the \texttt{json} \gls{REALM} input file and conduct a validation to 
+    ensure the user defined all key parameters, and if they did not, \gls{REALM} 
+    raises an exception to tell the user which parameters are missing. \\
+    \hline
+    \textbf{Evaluation} & \gls{DEAP}'s fitness evaluator (as mentioned in Section 
+    \ref{sec:deap-works}) requires an evaluation function to evaluate each 
+    individual's fitness values. 
+    The \textit{Evaluation} class contains a method that returns an evaluation 
+    function that runs the nuclear software and returns the fitness values defined 
+    in the user input file. \\
+    \hline 
+    \textbf{ToolboxGenerator} & The \textit{ToolboxGenerator} class initializes
+    DEAP's \textit{toolbox} and \textit{creator} modules with genetic algorithm 
+    hyperparameters defined in the user input file.\\
+    \hline
+    \textbf{Constraints} & \\
+    \hline 
+    \textbf{Executor} & The \textit{Executor} class drives the \gls{REALM} code
+    execution. \\
+    \hline
+    \end{tabular}
+    \end{table}
 
-\vspace{0.2cm} 
-\noindent
-\textbf{Evaluation}. The \gls{DEAP} fitness evaluator requires an evaluation 
-The \textit{Evaluation} class contains 
-
-\vspace{0.2cm} 
-\noindent
-\textbf{DeapOperators}. 
 
 \vspace{0.2cm} 
 \noindent
