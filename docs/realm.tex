@@ -183,8 +183,8 @@ Lines 10-11 and 14-17 have aliases for initializing individuals and population,
 specifying variation operators (\texttt{select}, \texttt{mutate}, \texttt{mate}), 
 and evaluating individual fitness (\texttt{evaluate}) \cite{fortin_deap_2012}. 
 Lines 12-13 defines the evaluation function that returns the fitness values. 
-In \gls{REALM}, the evaluation function returns fitness values from the nuclear 
-software.  
+In \gls{REALM}, the evaluation function will run the nuclear software and 
+return user-defined fitness values.  
 
 \subsection{Nuclear Software}
 Many nuclear software have restricted public access. 
@@ -210,7 +210,12 @@ However, \gls{REALM} users can easily use restricted nuclear software with
 \gls{REALM} by using \gls{REALM} with the restricted software on their local 
 machine. 
 
-\subsection{Software Architecture}
+\subsection{REALM Input File}
+REALM's input file is in \texttt{json} format. 
+There are four sections that the user must define: \\ \texttt{control\_variables}, 
+\texttt{evaluators}, \texttt{constraints}, and \texttt{algorithm}. 
+
+\subsection{REALM Software Architecture}
 In this section, I will describe \gls{REALM} v1.0's software architecture and 
 how all the parts come together to meet the goal of optimizing reactor 
 design. 
@@ -218,48 +223,92 @@ design.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{REALM Architecture}
+    \caption{Classes that make up REALM's architecture and their description. }
 	\label{tab:realm-architecture}
     \small
     \begin{tabular}{l|p{0.77\textwidth}}
     \hline
     \textbf{Class} & \textbf{Description} \\ \hline
-    \textbf{InputValidation} & The \textit{InputValidation} class contains methods 
+    \textit{InputValidation} & The \textit{InputValidation} class contains methods 
     to read the \texttt{json} \gls{REALM} input file and conduct a validation to 
     ensure the user defined all key parameters, and if they did not, \gls{REALM} 
     raises an exception to tell the user which parameters are missing. \\
     \hline
-    \textbf{Evaluation} & \gls{DEAP}'s fitness evaluator (as mentioned in Section 
+    \textit{Evaluation} & \gls{DEAP}'s fitness evaluator (as mentioned in Section 
     \ref{sec:deap-works}) requires an evaluation function to evaluate each 
     individual's fitness values. 
     The \textit{Evaluation} class contains a method that returns an evaluation 
     function that runs the nuclear software and returns the fitness values defined 
     in the user input file. \\
     \hline 
-    \textbf{ToolboxGenerator} & The \textit{ToolboxGenerator} class initializes
+    \textit{OpenMCEvaluation} & The \textit{OpenMCEvaluation} class contains
+    built-in methods for evaluating OpenMC output files. Developers can update 
+    this file with methods to evaluate frequently used OpenMC outputs. \\
+    \hline 
+    \textit{ToolboxGenerator} & The \textit{ToolboxGenerator} class initializes
     DEAP's \textit{toolbox} and \textit{creator} modules with genetic algorithm 
     hyperparameters defined in the user input file.\\
     \hline
-    \textbf{Constraints} & \\
+    \textit{Constraints} & The \textit{Constraints} class contains methods to 
+    initialize constraints defined in the user input file and to apply the
+    constraints in the genetic algorithm by removing individuals that do 
+    not meet the constraint.\\
     \hline 
-    \textbf{Executor} & The \textit{Executor} class drives the \gls{REALM} code
-    execution. \\
+    \textit{BackEnd} & The \textit{BackEnd} class contains methods to save 
+    genetic algorithm population results into a pickled checkpoint file and to 
+    restart a partially completed genetic algorithm from the checkpoint file. \\
+    \hline
+    \textit{Algorithm} & The \textit{Algorithm} class contains methods to 
+    initialize and execute the genetic algorithm. It executes a general genetic 
+    algorithm framework that uses the hyperparameters defined in the 
+    \textit{ToolboxGenerator}, applies constraints defined in
+    \textit{Constraints}, evaluates fitness values using the evaluation 
+    function produced by \textit{Evaluation}, and saves all the results 
+    with \textit{BackEnd}. \\
+    \hline
+    \textit{Executor} & The \textit{Executor} class drives the \gls{REALM} code
+    execution with the following steps: \\
+    & 1) User input file validation with \textit{InputValidation}. \\
+    & 2) Evaluation function generation with \textit{Evaluation}. \\
+    & 3) DEAP toolbox initialization with \textit{ToolboxGenerator}. \\ 
+    & 4) Constraint initialization with \textit{Constraints}. \\ 
+    & 5) Genetic algorithm execution with \textit{Algorithm}. \\
     \hline
     \end{tabular}
     \end{table}
 
+\begin{figure}[]
+    \centering
+    \begin{tikzpicture}[node distance=0.4cm]
+        \tikzstyle{every node}=[font=\footnotesize]
+        \node (1) [b72block] {\textbf{\textit{InputValidation}}};
+        \node (2) [b72block, below=of 1] {\textbf{\textit{Evaluation}}};
+        \node (3) [b72block, below=of 2] {\textbf{\textit{ToolboxGenerator}}};
+        \node (4) [b72block, below=of 3] {\textbf{\textit{Constraints}}};
+        \node (5) [b72block, below=of 4] {\textbf{\textit{BackEnd}}};
+        \node (6) [b223block, right=of 2, yshift=0cm, xshift=1cm] 
+        {\baselineskip=14.5pt \textbf{\textit{Executor}} \\ \raggedright 
+        1) User input file validation with \textbf{\textit{InputValidation}} \\ 
+        2) Evaluation function generation with \textbf{\textit{Evaluation}} \\ 
+        3) DEAP toolbox initialization with \textbf{\textit{ToolboxGenerator}} \\ 
+        4) Constraints initialization with \textbf{\textit{Constraints}} \\ 
+        5) Genetic algorithm execution with \textbf{\textit{Algorithm}} \\};
+        \draw [arrow] (1) -- ([shift={(0cm,0cm)}]1.east) -- ([shift={(-0.5cm,0.8cm)}]6.west)--([shift={(0cm,0.8cm)}]6.west);
+        \draw [arrow] (2) -- ([shift={(0cm,0cm)}]2.east) -- ([shift={(-0.5cm,0.3cm)}]6.west)--([shift={(0cm,0.3cm)}]6.west);
+        \draw [arrow] (3) -- ([shift={(0cm,0cm)}]3.east) -- ([shift={(-0.5cm,-0.25cm)}]6.west)--([shift={(0cm,-0.25cm)}]6.west);
+        \draw [arrow] (4) -- ([shift={(0cm,0cm)}]4.east) -- ([shift={(-0.5cm,-0.8cm)}]6.west)--([shift={(0cm,-0.8cm)}]6.west);
+        \node (7) [b223block, right=of 4, yshift=-1cm, xshift=1cm] 
+        {\baselineskip=14.5pt \textbf{\textit{Algorithm}} \\ \raggedright 
+        1) Accepts initialized toolbox, constraints, and evaluator \\ \hspace{0.3cm} function \\
+        2) Runs the genetic algorithm \\
+        3) Saves results with \textbf{\textit{BackEnd}} \\};
+        \draw [arrow] (7) -- ([shift={(0.cm,0.25cm)}]7.north) -| ([shift={(-0.5cm,-1.25cm)}]6.west) -- ([shift={(0cm,-1.25cm)}]6.west);
+        \draw [arrow] (5) -- ([shift={(0cm,0cm)}]5.east) -- ([shift={(-0.5cm,-1cm)}]7.west)--([shift={(0cm,-1cm)}]7.west);
+    \end{tikzpicture}
+    \caption{Visualization of REALM architecture.}
+    \label{fig:realm_archi}
+\end{figure}
 
-\vspace{0.2cm} 
-\noindent
-\textbf{Executor}. The \textit{Executor} class drives the \gls{REALM} code
-execution. 
-The \texttt{execute} method has the following steps: 
-\begin{enumerate}
-    \item Calls \textit{InputValidation} to read the \texttt{json} input file 
-    and conduct a validation.
-    \item Calls \textit{Evaluation} to create the evaluator function. 
-    \item Calls \textit{}
-\end{enumerate}
 
 \section{Hyperparameter Search}
 Hyperparameters are a model configuration argument specified by the developer to 
