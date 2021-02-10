@@ -150,8 +150,8 @@ Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
         creator.create("Individual", list, fitness=creator.Objective)
 
         toolbox = base.Toolbox()
-        toolbox.register("variable_1", random.uniform, 0, 10)
-        toolbox.register("variable_2", random.uniform, -1, 0)
+        toolbox.register("variable_1", random.uniform, 0.0, 10.0)
+        toolbox.register("variable_2", random.uniform, -1.0, 0.0)
         def individual_creator():
             return creator.Individual([toolbox.variable_1(), toolbox.variable_2()])
         toolbox.register("individual", individual_creator())
@@ -214,12 +214,62 @@ machine.
 REALM's input file is in \texttt{json} format. 
 There are four sections that the user must define: \\ \texttt{control\_variables}, 
 \texttt{evaluators}, \texttt{constraints}, and \texttt{algorithm}. 
+Figure \ref{fig:realm-input} shows an example REALM input file. 
+\begin{figure}[]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        fontsize=\footnotesize,
+        linenos
+        ]{json}
+        {
+            "control_variables": {
+                "variable_1": {"min": 0.0, "max": 10.0}, 
+                "variable_2": {"min": -1.0, "max": 0.0}
+            }, 
+            "evaluators": {
+                "openmc": {
+                    "input_script": "openmc_inp.py",
+                    "output_script": "openmc_output.py", 
+                    "inputs": ["variable_1", "variable_2"],
+                    "outputs": ["output_1", "output_2"]
+                }
+            }, 
+            "constraints": {
+                "output_1": {"operator": [">="], "constrained_val": [1.0]}
+            }, 
+            "algorithm": {
+                "objective": "min", 
+                "optimized_variable": "output_1", 
+                "pop_size": 100, 
+                "generations": 10, 
+                "mutation_probability": 0.5,
+                "mating_probability": 0.5,
+                "selection_operator": {"operator": "selBest", "k": 1},
+                "mutation_operator": {
+                    "operator": "mutPolynomialBounded",
+                    "indpb": 0.5,
+                    "eta": 0.5
+                },
+                "mating_operator": {"operator": "cxOnePoint"}
+            }
+        }
+    \end{minted}
+    \caption{REALM sample input file.}
+    \label{fig:realm-input}
+\end{figure}
+The control variables are parameters that the user wants the genetic algorithm 
+to vary. 
+For each control variable, the user must specify the minimum and maximum value 
+(lower and upper bounds). 
 
 \subsection{REALM Software Architecture}
 In this section, I will describe \gls{REALM} v1.0's software architecture and 
 how all the parts come together to meet the goal of optimizing reactor 
 design. 
-
+Table \ref{tab:realm-architecture} outlines the classes in the REALM software 
+and describes each class' purpose.
 \begin{table}[]
     \centering
     \onehalfspacing
@@ -276,7 +326,7 @@ design.
     \hline
     \end{tabular}
     \end{table}
-
+Figure \ref{fig:realm_archi} depicts REALM's software architecture. 
 \begin{figure}[]
     \centering
     \begin{tikzpicture}[node distance=0.5cm]
