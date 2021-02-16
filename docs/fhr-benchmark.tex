@@ -68,7 +68,7 @@ cut of the reactor vessel.
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:reactor-schematic}
 \end{figure}
-Figure \ref{fig:ahtr} shows the geometry of a single fuel assembly and all 
+Figure \ref{fig:ahtr} shows a single fuel assembly's geometry and all 
 assemblies' configuration in the core.
 A detailed 2D view of the \gls{AHTR}'s hexagonal fuel assembly is shown in 
 Figure \ref{fig:ahtr-fuel-assembly}.  
@@ -101,7 +101,7 @@ the fuel plates in place.
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:y-shape}
 \end{figure}
-The gap between the fuel assemblies and fuel plates are filled with \gls{FLiBe}
+The gap between the fuel assemblies and fuel plates is filled with \gls{FLiBe}
 coolant. 
 The Y-shaped control rod slot at the center of the Y-shape structure contains 
 \gls{FLiBe} coolant when the control blade is not in the slot
@@ -111,7 +111,7 @@ on each outer side of the plank, as seen in Figure \ref{fig:ahtr-fuel-plank}.
 \begin{figure}[]
     \centering
     \includegraphics[width=0.75\linewidth]{ahtr-fuel-plank.png} 
-    \caption{\acrlong{AHTR}'s fuel plank, with magnification of 
+    \caption{\acrlong{AHTR}'s fuel plank, with the magnification of 
     a spacer and segment of the fuel stripe with embedded TRISO particles.}
     \label{fig:ahtr-fuel-plank}
 \end{figure}
@@ -160,7 +160,7 @@ represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}.
     \centering
     \includegraphics[width=0.5\linewidth]{bc.png} 
     \caption{Visualization of periodic boundary conditions for a single fuel 
-    assembly \cite{noauthor_fluoride_nodate}.}
+    assembly in the \gls{AHTR}\cite{noauthor_fluoride_nodate}.}
     \label{fig:bc}
 \end{figure}
 The benchmark required the following results for phases I-A and I-B:
@@ -168,8 +168,8 @@ The benchmark required the following results for phases I-A and I-B:
     \item Effective multiplication factor 
     \item Reactivity coefficients ($\beta_{eff}$, fuel Doppler coefficient, FLiBe 
     temperature coefficient, graphite temperature coefficient)
-    \item Tabulated fission source distribution by 1/5-th fuel stripe. 
-    \item Neutron flux averaged over the whole model tabulated in three coarse energy groups. 
+    \item Tabulated fission source distribution by 1/5-th fuel stripe
+    \item Neutron flux averaged over the whole model tabulated in three coarse energy groups
     \item Neutron flux distribution in three coarse energy groups
     \item Fuel assembly averaged neutron spectrum
 \end{enumerate}
@@ -327,8 +327,7 @@ multiplication factor for all participants and phase I-A cases in the \gls{FHR}
 benchmark. 
 They reported that the standard deviation between participants for each case 
 was in the 231 to 514 pcm range, acceptable and notably close given a blind 
-benchmark.
-This assures us that our phase I-A results are acceptable and in agreement 
+benchmark, assuring us that our phase I-A results are acceptable and in agreement 
 with other benchmark participants. 
 Next, we will present our results for phase I-A and describe and explain the 
 observed trends.
@@ -371,17 +370,17 @@ Each simulation took \gls{WCT} ranging from 2 to 5 hours.
 Cases 2AH and 2AC are at zero power, meaning that the fuel assembly is exactly 
 critical but not producing any energy. 
 For both cases, keff is higher than the reference case 1A, which we attribute to 
-lower fuel temperatures; at higher fuel temperatures, doppler broadening occurs 
+lower fuel temperatures; at higher fuel temperatures, doppler broadening occurs, 
 resulting in more neutron capture, thus, lowering keff. 
 As expected, keff is lower for cases 3A, 4AR, and 5A than reference case 
 1A since those cases introduced burnable poisons and control rods to the fuel 
 assembly. 
 Also, as expected, keff is higher for case 7A than reference case 1A since 
-the fuel has a higher enrichment. 
+it has a higher enrichment. 
 However, case 6A deviated from expectations with a lower keff despite an increase 
 in \gls{HM} loading. 
 This behavior is due to reduced moderation and worsened fuel 
-utilization brought about by self-shielding, demonstrating increase in 
+utilization brought about by self-shielding, demonstrating an increase in 
 fuel packing fraction does not always correspond with an increased keff. 
 
 $\beta_{eff}$ increased by 10-20pcm for cases 4A, 4AR, 5A, and 6A, compared to
@@ -412,14 +411,14 @@ occur in the center of the diamond fuel segment; however, the opposite is true.
 Power peaking occurs on exterior stripes and is minimum on the interior stripes.
 Gentry et al. \cite{gentry_development_2016} reported similar power peaking 
 phenomena towards the lattice cell's exterior closest to the Y-shaped carbon 
-support structure where the thermal flux is most elevated, and the complement 
-to the peaking is found in the interiors of the lattice tri-sections. 
+support structure where the thermal flux is most elevated. 
+The lowest power is found in the interiors of the lattice tri-sections. 
 This fission source distribution is caused by diminished resonance escape 
 probability in the interior due to the higher relative fuel-to-carbon volume 
 ratio. 
 This diminished fission source in the interior stripes phenomena is exaggerated 
 in cases 6A and 7A since there is a higher fuel-to-carbon ratio.
-For case 3A that has an inserted control rod, the fission source is lower in 
+For case 3A with an inserted control rod, the fission source is lower in 
 the $1/5^{th}$ stripes closer to the control rod.  
 
 Figure \ref{fig:phase1a-d} shows the average neutron flux in the fuel assembly in 
@@ -469,25 +468,25 @@ loading and higher enrichment.
 
 \subsection{Results: Phase I-B}
 Figure \ref{fig:phase1b_keff} shows the evolution of effective multiplication 
-factor for depletion of cases 1B, 4B, and 7B. 
+factor during depletion for cases 1B, 4B, and 7B.
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{phase1b_keff.png} 
     \caption{FHR Benchmark UIUC's phase I-B depletion k-eff evolution 
     for cases 1B, 4B, and 7B. Case 1B is the reference case, case 4B is the 
     discrete \gls{BP} case, and case 7B is the 19.75$\%$ enrichment case. 
-    Error bars are included, but are barely visible due to the low uncertainty 
+    Error bars are included but are barely visible due to the low uncertainty 
     of $\sim$40pcm.}
     \label{fig:phase1b_keff}
 \end{figure}
 The effective multiplication factor at 0 burnup corresponds to each case's 
 corresponding phase I-A k-eff value reported in Table \ref{tab:phase1a-results}. 
 Case 1B is the reference case with $9\%$ fuel enrichment and no \glspl{BP}. 
-Case 1B's k-eff steadily decreases until it reaches 0.967845 at final 70 GWd/tU 
-burnup. 
+Case 1B's k-eff steadily decreases until it reaches 0.967845 at the final 70 
+GWd/tU burnup. 
 Case 4B includes burnable poisons resulting in a lower initial k-eff. 
-It's k-eff decreases at a slower rate at the beginning due to the presence 
-of the burnable poisons which decreases flux in the core. 
+Its k-eff decreases at a slower rate in the beginning due to the burnable poisons, 
+which decreases flux in the core. 
 Case 7B has a $19.75\%$ fuel enrichment, resulting in a higher initial k-eff. 
 With a higher enrichment, the fuel can achieve a burnup of 160 GWd/tU. 
 
@@ -496,12 +495,12 @@ With a higher enrichment, the fuel can achieve a burnup of 160 GWd/tU.
 % effects, thus, this leads us to believe that the phenomena is not as expected. 
 
 This chapter described the \gls{FHR} benchmark specifications, \gls{AHTR} design,
-and the phase I results obtained so far by the UIUC team. 
+and the phase I-A and I-B results obtained by the UIUC team. 
 The benchmark results highlight the \gls{AHTR}'s passive safety behavior with 
 negative temperature coefficients. 
 Results such as a lower keff for the \gls{AHTR} configuration with 
 higher \gls{HM} loading gave insight into how increased fuel packing does not always 
-correspond with increased keff due to self-shielding.
+correspond with increased keff due to self-shielding effects.
 These results hint at the possibility of minimizing fuel required by optimizing 
 for inhomogeneous fuel distributions within the core. 
 This will be further explored in the next chapters. 
