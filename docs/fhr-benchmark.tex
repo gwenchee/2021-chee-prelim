@@ -302,16 +302,6 @@ depletion results for three cases: 1B, 4B, and 7B.
 These are the same as cases 1A, 4A, and 7A, but with depletion steps added and
 the critical spectrum assumption. 
 The benchmark assumes that depletion occurs only in the fuel and \glspl{BP}. 
-Table \ref{tab:phase1b} outlines the results required by the benchmark at specific 
-depletion burnup steps for all three cases. 
-
-\begin{table}
-    \centering
-    \caption{\gls{FHR} benchmark Phase I-B required results at specific burnup 
-    steps \cite{noauthor_fluoride_nodate}.}
-    \label{tab:phase1b}
-    \includegraphics[width=0.8\linewidth]{phase1b.png}
-  \end{table}
 
 \section{Results}
 Several organizations participated in the benchmark with various Monte Carlo
@@ -390,7 +380,7 @@ Also, as expected, keff is higher for case 7A than reference case 1A since
 the fuel has a higher enrichment. 
 However, case 6A deviated from expectations with a lower keff despite an increase 
 in \gls{HM} loading. 
-This unexpected behavior is due to reduced moderation and worsened fuel 
+This behavior is due to reduced moderation and worsened fuel 
 utilization brought about by self-shielding, demonstrating increase in 
 fuel packing fraction does not always correspond with an increased keff. 
 
@@ -478,7 +468,28 @@ The neutron spectrum is faster for case 6a and case 7a due to more heavy metal
 loading and higher enrichment.  
 
 \subsection{Results: Phase I-B}
-
+Figure \ref{fig:phase1b_keff} shows the evolution of effective multiplication 
+factor for depletion of cases 1B, 4B, and 7B. 
+\begin{figure}[]
+    \centering
+    \includegraphics[width=\linewidth]{phase1b_keff.png} 
+    \caption{FHR Benchmark UIUC's phase I-B depletion k-eff evolution 
+    for cases 1B, 4B, and 7B. Case 1B is the reference case, case 4B is the 
+    discrete \gls{BP} case, and case 7B is the 19.75$\%$ enrichment case. 
+    Error bars are included, but are barely visible due to the low uncertainty 
+    of $\sim$40pcm.}
+    \label{fig:phase1b_keff}
+\end{figure}
+The effective multiplication factor at 0 burnup corresponds to each case's 
+corresponding phase I-A k-eff value reported in Table \ref{tab:phase1a-results}. 
+Case 1B is the reference case with $9\%$ fuel enrichment and no \glspl{BP}. 
+Case 1B's k-eff steadily decreases until it reaches 0.967845 at final 70 GWd/tU 
+burnup. 
+Case 4B includes burnable poisons resulting in a lower initial k-eff. 
+It's k-eff decreases at a slower rate at the beginning due to the presence 
+of the burnable poisons which decreases flux in the core. 
+Case 7B has a $19.75\%$ fuel enrichment, resulting in a higher initial k-eff. 
+With a higher enrichment, the fuel can achieve a burnup of 160 GWd/tU. 
 
 \section{Summary}
 % more enrichment / more HM does not mean higher keff, there is shielding 
@@ -488,7 +499,7 @@ This chapter described the \gls{FHR} benchmark specifications, \gls{AHTR} design
 and the phase I results obtained so far by the UIUC team. 
 The benchmark results highlight the \gls{AHTR}'s passive safety behavior with 
 negative temperature coefficients. 
-Unanticipated results such as a lower keff for the \gls{AHTR} configuration with 
+Results such as a lower keff for the \gls{AHTR} configuration with 
 higher \gls{HM} loading gave insight into how increased fuel packing does not always 
 correspond with increased keff due to self-shielding.
 These results hint at the possibility of minimizing fuel required by optimizing 
