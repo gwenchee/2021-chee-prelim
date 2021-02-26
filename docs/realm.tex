@@ -627,9 +627,24 @@ to produce desired plots.
 Examples of REALM results analysis can be found in the REALM documentation 
 \cite{chee_arfcrealm_2021}. 
 
-%\subsection{Using REALM on a HPC}
+\subsection{Using REALM on a HPC}
 
 
 %\section{Hyperparameter Search}
 %Hyperparameters are a model configuration argument specified by the developer to 
 %guide the learning process for a specific dataset. 
+
+\section{Summary}
+This chapter described the \acrlong{REALM} (REALM) framework developed for the
+proposed work; REALM is a Python package that applies evolutionary algorithm 
+optimization techniques to nuclear reactor design using the \acrlong{DEAP} (DEAP) 
+module and OpenMC and Moltres nuclear software. 
+The motivation for REALM's inception is to enable reactor designers to utilize 
+robust evolutionary algorithm optimization methods without going 
+through the cumbersome process of setting up a genetic algorithm framework,
+selecting appropriate hyperparameters, and setting up its parallelization. 
+REALM is designed to be effective, flexible, open-source, parallel, 
+reproducible, and usable and is hosted on Github \cite{chee_arfcrealm_2021}. 
+REALM's input file is in JSON format, and I described its formatting and REALM's 
+software architecture in the chapter. 
+REALM also enables parallelization on local machines and supercomputers. 
