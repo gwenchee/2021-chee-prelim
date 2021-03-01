@@ -78,18 +78,18 @@ and correspondingly selected six Generation IV systems: \glspl{GFR},
 \cite{gif_technology_2002}. 
 This proposed work will consider the \gls{MSR} and \gls{VHTR} systems. 
 
-The \gls{MSR} system produces fission power in a circulating molten salt fuel mixture. 
+\gls{MSR} systems produce fission power in a circulating molten salt fuel mixture. 
 It has a closed fuel cycle tailored to the efficient utilization of plutonium 
 and minor actinides. 
 Molten fluoride salts have very low vapor pressure, which reduces stress on the 
 system. 
 MSR systems also incorporate inherent system safety with fail-safe drainage, 
 passive cooling, and a low inventory of volatile fission products in the fuel. 
-The MSR system is top-ranked in sustainability because of its closed fuel cycle 
+MSR systems are top-ranked in sustainability because of their closed fuel cycle 
 and excellent waste burndown performance. 
-It rates well in safety and proliferation resistance and physical protection, 
-due to its inherent safety features, and rates neutrally in economics because of
-its large number of subsystems \cite{gif_technology_2002}.  
+They rate well in safety and proliferation resistance and physical protection, 
+due to their inherent safety features, and rate neutrally in economics because of
+their large number of subsystems \cite{gif_technology_2002}.  
 
 \gls{VHTR} systems have a once-through uranium cycle and are primarily aimed at 
 high-temperature heat applications, such as hydrogen production. 
@@ -101,31 +101,32 @@ of the fuel and reactor.
 They rate well in proliferation resistance and physical protection and 
 neutrally in sustainability because of their open fuel cycle \cite{gif_technology_2002}. 
 
-In the proposed work, we explore the \gls{FHR} concept, which 
-is a combination of the best aspects of \gls{MSR} and \gls{VHTR} technologies. 
-The \gls{FHR} uses high-temperature coated-particle fuel (similar to the \gls{VHTR}) 
-and a low-pressure liquid fluoride-salt coolant (similar to the \gls{MSR})
+In the proposed work, we explore the \glspl{FHR} concept, which 
+combines the best aspects of \gls{MSR} and \gls{VHTR} technologies. 
+\glspl{FHR} use high-temperature coated-particle fuel (similar to the \glspl{VHTR}) 
+and a low-pressure liquid fluoride-salt coolant (similar to the \glspl{MSR})
 \cite{forsberg_fluoride-salt-cooled_2012,facilitators_fluoride-salt-cooled_2013}.
+% add more connecction
 
-In recent years, \gls{AM} technology, popularly known as `3D printing', 
-has advanced and altered the manufacturing and design of components 
+In recent years, additive manufacturing technology, popularly known as `3D printing', 
+has advanced and altered the manufacturing and design of engineered hardware
 \cite{simpson_considerations_2019}. 
-The automotive and aircraft industries have successfully fabricated parts with 
-key \gls{AM} technologies relevant to nuclear reactor core 
-structures \cite{murr_frontiers_2016}.  
-For example, Boeing successfully used \gls{AM} to reduce weight 
+The automotive and aircraft industries have successfully fabricated car and 
+airplane components with key additive manufacturing technologies that are 
+relevant to nuclear reactor core structures \cite{murr_frontiers_2016}.  
+For example, Boeing successfully used additive manufacturing to reduce weight 
 in the 787 Dreamliner \cite{noauthor_printed_2017} and SES-15 spacecraft 
 \cite{noauthor_boeing_nodate}. 
-Successful \gls{AM} applications in the aerospace industry are 
-promising for the nuclear industry since both are highly regulated. 
-Using \gls{AM} to fabricate nuclear reactor components will 
+Successful additive manufacturing applications in the aerospace industry are 
+promising for the nuclear industry since both industries are highly regulated. 
+Using additive manufacturing to fabricate nuclear reactor components could 
 drastically reduce cost and timelines, and increase safety and performance by 
-tailoring local material properties and redesigning geometries for optimal load paths 
+tailoring local material properties and redesigning for optimal geometries
 \cite{simpson_considerations_2019}. 
 
-With further advancement of \gls{AM} technologies, a reactor 
+With further advancement of additive manufacturing technologies, a reactor 
 core could be 3D printed in the near future. 
-\gls{ORNL} is leading this initiative through the 2019 \gls{TCR} Demonstration 
+\gls{ORNL} leads this initiative through the 2019 \gls{TCR} Demonstration 
 Program. 
 The \gls{TCR} program will leverage recent scientific achievements in advanced 
 manufacturing, nuclear materials, machine learning, and computational modeling 
@@ -133,15 +134,15 @@ and simulation to build a microreactor.
 The program aims to design, manufacture, and operate a demonstration reactor 
 by 2023 \cite{terrani_transformational_2019}. 
 % explore funky designs :D 
-Applying \gls{AM} to nuclear reactor design will free complex 
+Applying additive manufacturing to nuclear reactor design will free complex 
 reactor geometries from previous manufacturing constraints,
 opening the door for a re-examination of nuclear reactor optimization 
 \cite{sobes_artificial_2020}. 
 Optimization efforts towards classically manufactured nuclear reactors, and now
-3D printed nuclear reactors, have focused on parameters such as radius of the 
-core, height of cylinder, enrichment of fuel, etc 
+3D printed nuclear reactors have focused on parameters such as core radius, 
+cylinder height, fuel enrichment, etc 
 \cite{sobes_artificial_2020,sacco_two_2006,kumar_new_2015,pereira_parallel_2008}. 
-Leveraging \gls{AM} technology enables us to surpass classical 
+Leveraging additive manufacturing technology enables us to surpass classical 
 manufacturing constraints, such as straight fuel channels or homogenous fuel 
 enrichment, and optimize for arbitrary geometries and parameters 
 such as non-uniform channel shapes, and inhomogeneous fuel distribution throughout 
@@ -151,18 +152,18 @@ Multi-objective design problems inevitably require a trade-off between
 desirable attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
 In nuclear reactor design, one example is the trade-off between neutron economy 
 and fuel enrichment.
-A reactor design must have sufficient neutron economy to ensure criticality but 
-also have a low fuel enrichment to reduce proliferation risk. 
+A reactor design should maximize neutron economy and minimize fuel enrichment 
+to reduce proliferation risk and cost. 
 Conflicting objectives means that there is no \textit{one} perfect solution but 
 a \textit{set} of equally optimal solutions \cite{byrne_evolving_2014}.
 Multi-objective problems are challenging to optimize; therefore, they cannot be 
-handled by classical optimization methods, such as gradient methods, because only 
-the local optimum will be found \cite{renner_genetic_2003}. 
-\Glspl{EA} have proven successful methods to optimize 
-multi-objective problems \cite{krish_practical_2011}, as 
-they can find a solution near the global optimum \cite{renner_genetic_2003}.
+handled by classical optimization methods, such as gradient methods, which may 
+find local optima while missing the global optimum \cite{renner_genetic_2003}. 
+Evolutionary algorithms have proven successful in optimizing multi-objective problems 
+\cite{krish_practical_2011}, as they can find solutions at the global 
+optimum \cite{renner_genetic_2003}.
 They also take advantage of parallel systems for reduced computational cost.
-The most popular \glspl{EA} used to solve multi-objective 
+The most popular evolutionary algorithms used to solve multi-objective 
 problems are genetic algorithms \cite{byrne_evolving_2014, krish_practical_2011},
 which imitate natural selection to evolve solutions by (1) maintaining a 
 population of solutions, (2) allowing fitter solutions to reproduce, and (3) 
@@ -170,10 +171,10 @@ letting lesser fit solutions die off, resulting in final solutions that are
 better than the previous generations \cite{renner_genetic_2003}. 
 
 Therefore, in this work, we propose designing an optimization tool that uses 
-the \gls{EA} optimization technique with nuclear transport and 
+the evolutionary algorithm optimization technique with nuclear transport and 
 thermal-hydraulics software. 
 This tool will be used to explore nonuniform FHR reactor core parameters, now 
-possible with \gls{AM} technology, to optimize reactor systems 
+possible with additive manufacturing technology, to optimize reactor systems 
 fully. 
 
 \section{Objectives}
@@ -197,7 +198,7 @@ participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmark
 \textbf{Develop a tool that applies evolutionary algorithms to optimize nuclear 
 reactor design}. 
 This tool will not reinvent the wheel---it will utilize a well-documented 
-and validated open-source \gls{EA} Python package with established 
+and validated open-source evolutionary algorithm Python package with established 
 nuclear transport and thermal-hydraulics software. This tool will run parallel on 
 \gls{HPC} machines, be open-source, and follow the rules for ensuring 
 reproducibility, effectiveness, and usability 

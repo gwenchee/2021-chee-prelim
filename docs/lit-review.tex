@@ -34,9 +34,9 @@ Next, we outline \gls{AM} history and describe the current research towards appl
 We also review previous efforts towards nuclear reactor design optimization, 
 describe how \gls{AM} of nuclear reactor components enables optimization for 
 less constrained reactor geometries, and types of optimization methods that can be 
-leveraged in a large less-constrained design space, such as \glspl{EA}.  
-Finally, we give a background of \glspl{EA}, go into detail on a 
-specific \gls{EA}: the \gls{GA}, and how it works to robustly conduct global 
+leveraged in a large less-constrained design space, such as evolutionary algorithms.  
+Finally, we give a background of evolutionary algorithms, go into detail on a 
+specific evolutionary algorithm: the genetic algorithm, and how it works to robustly conduct global 
 optimization. 
 
 \section{Fluoride-Salt-Cooled High-Temperature Reactor}
@@ -336,7 +336,7 @@ several times \cite{deb_multi-objective_2001}.
 Drawbacks of deterministic methods include: algorithms tend to get stuck at a 
 suboptimal solution, and an algorithm efficient in solving one type of problem 
 may not solve a different problem efficiently \cite{deb_multi-objective_2001}. 
-Stochastic optimization methods, such as \glspl{EA} amd simulated annealing,  
+Stochastic optimization methods, such as evolutionary algorithms amd simulated annealing,  
 minimize or maximize an objective function when randomness is present; they 
 tend to find globally optimal solutions more reliably than deterministic methods. 
 
@@ -368,10 +368,10 @@ simulated annealing with mixing of states \cite{kropaczek_constraint_2019} for
 the solution of large-scale, multiconstrained problems in \gls{LWR} fuel cycle 
 optimization. 
 Peireira et al. \cite{pereira_coarse-grained_2003,pereira_parallel_2008} 
-used a coarse-grained parallel \gls{GA} and a niching \gls{GA}
+used a coarse-grained parallel genetic algorithm and a niching genetic algorithm
 to optimize the same problem as Sacco et al. \cite{sacco_two_2006}. 
 Kamalpour et al. \cite{kamalpour_smart_2020} utilized the imperialist competitive 
-algorithm, a type of \gls{EA}, to optimize an \gls{FCM} fuelled 
+algorithm, a type of evolutionary algorithm, to optimize an \gls{FCM} fuelled 
 \gls{PWR} to extend the reactor core cycle length. 
 
 Nuclear reactor optimization problems require computationally 
@@ -404,14 +404,14 @@ surrogate evaluation model is used as described in Betzler et al.
 \cite{betzler_design_2019} and Kumar et al. \cite{kumar_new_2015}.
 
 Contrary to a single solution per iteration in deterministic and stochastic 
-\gls{SA} methods, \glspl{EA} use a population of solutions in each 
+\gls{SA} methods, evolutionary algorithms use a population of solutions in each 
 iteration \cite{deb_multi-objective_2001}. 
-\gls{EA} methods mimic nature's evolutionary principles to drive 
+evolutionary algorithm methods mimic nature's evolutionary principles to drive 
 its search towards an optimal solution. 
 With the affordability and availability of parallel computing systems, the 
-\gls{EA} optimization method stands out as a method 
+evolutionary algorithm optimization method stands out as a method 
 that easily and conveniently exploits parallel systems. 
-Further, \glspl{EA} have proved amenable to \gls{HPC} solutions and 
+Further, evolutionary algorithms have proved amenable to \gls{HPC} solutions and 
 scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}. 
 Therefore, in this proposed work, we will utilize the evolutionary algorithm 
 optimization method. 
@@ -441,7 +441,7 @@ set of constraints.
 With a substantial increase and change in an arbitrary geometry's design space, 
 it becomes time consuming for a human reactor designer to thoroughly explore 
 and find optimal geometries in the expanded design space. 
-Instead, we can leverage \gls{AI} optimization methods (such as \gls{EA}) to 
+Instead, we can leverage \gls{AI} optimization methods (such as evolutionary algorithms) to 
 promptly explore the large design space to find global optimal designs. 
 \gls{AI} would not replace the human reactor designer but shifts the human 
 designer's focus away from conjecturing suitable geometries to defining design 
@@ -454,27 +454,27 @@ criteria.
 \gls{AI} research is the study of `intelligent agents': any device that perceives 
 its environment and takes actions that maximize its chance of successfully 
 achieving its goals \cite{david_l_poole_computational_1998}.
-Therefore, \glspl{EA} are considered a subset of \gls{AI} as they create a population 
+Therefore, evolutionary algorithms are considered a subset of \gls{AI} as they create a population 
 of individual solutions, inspired by biological evolution, and induce goals by 
 using a `fitness function' to mutate and preferentially replicate high-scoring 
 individuals to reach an optimal solution.
-\glspl{EA} often perform well at approximating solutions to many 
+Evolutionary algorithms often perform well at approximating solutions to many 
 problem types because they do not make any assumptions about the 
 underlying fitness landscape.
-The most popular \glspl{EA} used to solve multi-objective problems are \glspl{GA} 
+The most popular evolutionary algorithms used to solve multi-objective problems are genetic algorithms 
 \cite{byrne_evolving_2014, krish_practical_2011}. 
 
 \subsection{Genetic Algorithms}
 \label{sec:genetic_alg}
-\glspl{GA} imitate natural genetics and selection to evolve solutions 
+Genetic algorithms imitate natural genetics and selection to evolve solutions 
 by maintaining a population of solutions, allowing fitter solutions to reproduce
 and letting lesser fit solutions die off, resulting in final solutions that are 
 better than the previous generations \cite{renner_genetic_2003}. 
 From here, we will refer to a solution as an individual within the population. 
-\glspl{GA} efficiently exploit historical information to speculate new search 
+genetic algorithms efficiently exploit historical information to speculate new search 
 points, improving each subsequent population's performance 
 \cite{goldberg_genetic_1989}. 
-\glspl{GA} are theoretically and empirically proven to provide robust 
+Genetic algorithms are theoretically and empirically proven to provide robust 
 search in complex spaces and are computationally simple yet powerful 
 in their search for improvement \cite{goldberg_genetic_1989}. 
 GAs are advantageous compared to deterministic and stochastic simulated 
@@ -482,9 +482,9 @@ annealing optimization methods, because (1) it searches from a population of
 points; (2) uses objective function information, not derivatives or other 
 auxiliary knowledge of the problem; and (3) uses probabilistic transition 
 rules, not deterministic rules. 
-Figure \ref{fig:genetic_alg} depicts the iterative process of using a \gls{GA}
+Figure \ref{fig:genetic_alg} depicts the iterative process of using a genetic algorithm
 to solve a problem. 
-The \gls{GA} generates new populations iteratively until it meets the termination 
+The genetic algorithm generates new populations iteratively until it meets the termination 
 criteria. 
 
 \begin{figure}[]
@@ -514,7 +514,7 @@ criteria.
         \label{fig:genetic_alg}
 \end{figure}
 
-\glspl{GA} use mechanisms inspired by biological evolution such as selection, 
+Genetic algorithms use mechanisms inspired by biological evolution such as selection, 
 crossover, and mutation. 
 The three operators are simple and straightforward. 
 The selection operator selects good individuals. 
@@ -580,13 +580,13 @@ population; the rest are copied to the new population
 \cite{deb_multi-objective_2001}. 
 
 The crossover operator is mainly responsible for the search aspect of the 
-\glspl{GA}, whereas the mutation operator is needed to keep diversity 
+genetic algorithms, whereas the mutation operator is needed to keep diversity 
 in the population \cite{deb_multi-objective_2001}. 
 
 \subsubsection{Mutation Operator}
 The mutation operator alters one or more attributes of an individual within 
 a population. 
-Mutation occurs in the \gls{GA} based on a user-defined mutation probability 
+Mutation occurs in the genetic algorithm based on a user-defined mutation probability 
 ($p_m$) that is set low to prevent a primitive random search. 
 Mutation operator methods utilized in the proposed work include polynomial 
 bounded mutation, in which each attribute in each individual is mutated 
@@ -597,16 +597,16 @@ resembling its parent, while a small $\eta$ will produce the opposite).
 
 \subsection{Balancing Genetic Algorithm Hyperparameters}
 In the proposed work, hyperparameters refer to parameters whose value controls 
-the \gls{GA}'s process, such as each genetic operator's associated parameters 
+the genetic algorithm's process, such as each genetic operator's associated parameters 
 and population size.  
-A well-performing \gls{GA} needs to balance the extent of exploration and 
+A well-performing genetic algorithm needs to balance the extent of exploration and 
 exploitation; this is done by finding a balance between the conservation of 
 valuable individuals obtained until the current generation while exploring new 
 individuals. 
 If previously obtained individuals are exploited too much, the population loses 
 its diversity, and premature convergence to a suboptimal solution is expected. 
 Alternatively, if too much stress is given on exploration, the information obtained 
-thus far has not been appropriately utilized, and the \gls{GA}'s search procedure 
+thus far has not been appropriately utilized, and the genetic algorithm's search procedure 
 behaves like a random search process \cite{deb_multi-objective_2001}. 
 A quantitative balance between these two issues, exploitation and exploration, 
 is challenging to achieve. 
@@ -614,9 +614,9 @@ Deb et al. \cite{deb_multi-objective_2001} and Goldberg et al.
 \cite{goldberg_toward_1993} quantified the relationship between exploitation 
 and exploration. 
 They found that for the one-max test problem, in which the objective is to 
-maximize the number of 1s in a string, a \gls{GA} with any arbitrary 
+maximize the number of 1s in a string, a genetic algorithm with any arbitrary 
 hyperparameter setting does not work well even on a simple problem. 
-Only \glspl{GA} with a selection pressure (s) and crossover probability ($p_c$) 
+Only genetic algorithms with a selection pressure (s) and crossover probability ($p_c$) 
 falling inside the control map (Figure \ref{fig:controlmap}) will find the desired 
 optimum.  
 \begin{figure}[]
@@ -631,7 +631,7 @@ Another consideration is the population size.
 A function with considerable variability in objective function values demands 
 a large population size to find a global optimum \cite{deb_multi-objective_2001}. 
 
-Therefore, finding an optimized solution with \glspl{GA} requires the user 
+Therefore, finding an optimized solution with genetic algorithms require the user 
 to conduct a hyperparameter search. 
 Ng et al. \cite{ng_improving_2021} suggest that a coarse to fine sampling scheme 
 is the best way to perform a systematic hyperparameter search.  
