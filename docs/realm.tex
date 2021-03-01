@@ -627,7 +627,16 @@ to produce desired plots.
 Examples of REALM results analysis can be found in the REALM documentation 
 \cite{chee_arfcrealm_2021}. 
 
-\subsection{Using REALM on a HPC}
+For closer inspection of the evaluator software's output files, the evaluation 
+function creates a new directory for each software, generation, and individual 
+and stores the templated input file and output files associated with that 
+particular run. 
+The generation and individual values are indexed by zero. 
+For example, the directory containing files associated with an OpenMC run for 
+the tenth individual in the genetic algorithm's third generation will be named: 
+\texttt{openmc\_2\_9}.
+
+%\subsection{Using REALM on a HPC}
 
 
 %\section{Hyperparameter Search}
@@ -645,6 +654,3 @@ through the cumbersome process of setting up a genetic algorithm framework,
 selecting appropriate hyperparameters, and setting up its parallelization. 
 REALM is designed to be effective, flexible, open-source, parallel, 
 reproducible, and usable and is hosted on Github \cite{chee_arfcrealm_2021}. 
-REALM's input file is in JSON format, and I described its formatting and REALM's 
-software architecture in the chapter. 
-REALM also enables parallelization on local machines and supercomputers. 
