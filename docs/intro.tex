@@ -163,39 +163,41 @@ Evolutionary algorithms have proven successful in optimizing multi-objective pro
 \cite{krish_practical_2011}, as they can find solutions at the global 
 optimum \cite{renner_genetic_2003}.
 They also take advantage of parallel systems for reduced computational cost.
-The most popular evolutionary algorithms used to solve multi-objective 
-problems are genetic algorithms \cite{byrne_evolving_2014, krish_practical_2011},
-which imitate natural selection to evolve solutions by (1) maintaining a 
-population of solutions, (2) allowing fitter solutions to reproduce, and (3) 
-letting lesser fit solutions die off, resulting in final solutions that are 
-better than the previous generations \cite{renner_genetic_2003}. 
+Genetic algorithms are the most frequently used evolutionary algorithms for 
+solving multi-objective problems \cite{byrne_evolving_2014, krish_practical_2011}.
+Genetic algorithms imitate natural selection to evolve solutions by 
+\cite{renner_genetic_2003}: 
+\begin{enumerate}
+    \item maintaining a population of solutions
+    \item allowing fitter solutions to reproduce
+    \item letting lesser fit solutions die off, resulting in final solutions that are 
+    better than the previous generations
+\end{enumerate} 
 
-Therefore, in this work, we propose designing an optimization tool that uses 
+Therefore, in this work, I propose designing an optimization tool that uses 
 the evolutionary algorithm optimization technique with nuclear transport and 
 thermal-hydraulics software. 
-This tool will be used to explore nonuniform FHR reactor core parameters, now 
-possible with additive manufacturing technology, to optimize reactor systems 
-fully. 
+With this tool, I will explore nonuniform FHR reactor core parameters, now 
+possible with additive manufacturing technology, to fully optimize reactor systems. 
 
 \section{Objectives}
-We developed the proposed work's main objectives based on leveraging 
-open-source artificial intelligence tools with validated open-source nuclear 
-transport and thermal-hydraulics software to create an open-source tool which 
+I developed the proposed work's main objectives based on leveraging 
+artificial intelligence tools with validated nuclear transport and 
+thermal-hydraulics software to create an open-source tool which 
 generates optimal reactor designs quickly. 
-Accordingly, the objectives are listed below:
+The proposed work's objectives are: 
 
 \vspace{0.2cm} 
 \noindent
-\textbf{Model the \gls{FHR} with established 
+\begin{enumerate}[label=\textbf{\Roman*}]
+\item \textbf{Model the \gls{FHR} with established 
 nuclear transport and thermal-hydraulics software}.
 To demonstrate success in modeling the \gls{FHR} with nuclear transport and 
 thermal-hydraulics software before using the optimization tool, we will 
 participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmark 
 \cite{noauthor_fluoride_nodate}. 
 
-\vspace{0.2cm} 
-\noindent
-\textbf{Develop a tool that applies evolutionary algorithms to optimize nuclear 
+\item \textbf{Develop a tool that applies evolutionary algorithms to optimize nuclear 
 reactor design}. 
 This tool will not reinvent the wheel---it will utilize a well-documented 
 and validated open-source evolutionary algorithm Python package with established 
@@ -204,44 +206,36 @@ nuclear transport and thermal-hydraulics software. This tool will run parallel o
 reproducibility, effectiveness, and usability 
 \cite{list_ten_2017,osborne_ten_2014,sandve_ten_2013}. 
 
-\vspace{0.2cm} 
-\noindent
-\textbf{Optimize a nuclear reactor design with the optimization tool and a 
+\item \textbf{Optimize a nuclear reactor design with the optimization tool and a 
 neutronics software}. 
 We will demonstrate successful implementation of the optimization tool with a
 nuclear transport software by optimizing a simple \gls{FHR} model for a single 
 objective function. 
 
-\vspace{0.2cm} 
-\noindent
-\textbf{Tune hyperparameters with the optimization tool for a neutronics problem}.
+\item \textbf{Tune hyperparameters with the optimization tool for a neutronics problem}.
 Hyperparameter selection will impact the effectiveness of the algorithm 
 for our problem. 
 Therefore, we must conduct a hyperparameter search to find ones that work best 
 for our problem. 
 
-\vspace{0.2cm} 
-\noindent
-\textbf{Demonstrate nuclear reactor design optimization and hyperparameter 
+\item \textbf{Demonstrate nuclear reactor design optimization and hyperparameter 
 search with the optimization tool for a neutronics and thermal-hydraulics problem}.
 We will demonstrate successful implementation of the optimization tool and 
 hyperparameter tuning with the nuclear transport and thermal-hydraulics tools 
-for a \gls{FHR} model.  
-
+for an \gls{FHR} model.  
+\end{enumerate}
 
 \section{Outline}
 This document outlines the motivation, preliminary work, and future work proposed 
-towards developing an open-source optimization tool that applies evolutionary 
-algorithms to nuclear transport and thermal-hydraulics software to optimize 
-nuclear reactor design beyond classical parameters to enhance fuel performance 
-and safety further. 
+toward developing an open-source reactor evolutionary algorithm optimization tool 
+to optimize nuclear reactor design beyond classical parameters. 
 Chapter 1 describes the motivation and objectives of the proposed work. 
-Chapter 2 will present a literature review that organizes and reports on previous 
+Chapter 2 presents a literature review that organizes and reports on previous 
 relevant work. 
-Chapter 3 will describe the \gls{FHR} benchmark specifications and the results 
+Chapter 3 describes the \gls{FHR} benchmark specifications and the results 
 obtained thus far. 
-Chapter 4 will detail the computational design of the developed optimization 
+Chapter 4 details the computational design of the developed optimization 
 tool. 
-Chapter 5 will demonstrate nuclear reactor optimization with the optimization 
+Chapter 5 demonstrates nuclear reactor optimization with the optimization 
 tool.  
-Chapter 6 will summarize the remaining future work. 
+Chapter 6 summarizes the remaining future work. 
