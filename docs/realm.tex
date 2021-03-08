@@ -12,13 +12,13 @@ proposed work.
 \gls{REALM} is a Python package that applies evolutionary algorithm 
 optimization techniques to nuclear reactor design. 
 Applying evolutionary algorithms to nuclear design problems is not new, as I
-previously discussed in Section \ref{sec:opt}, and many evolutionary algorithm 
-packages can be used with reactor design optimization problems. 
-However, the evolutionary algorithm setup is highly customizable with
+previously discussed in Section \ref{sec:opt}, and available evolutionary algorithm 
+packages can be customized for reactor design optimization problems. 
+However, evolutionary algorithm setup is highly customizable with
 an assortment of genetic algorithm designs and operators.
 A reactor designer unfamiliar with evolutionary algorithms will have
 to go through the cumbersome process of customizing a genetic algorithm 
-for their needs and decide which operators and hyperparameters work best for 
+for their needs and determine which operators and hyperparameters work best for 
 their problem. 
 Furthermore, computing fitness values with nuclear software is computationally 
 expensive, necessitating using supercomputers and setting up parallelization 
@@ -27,7 +27,7 @@ for the genetic algorithm.
 Therefore, the motivation behind creating REALM is to limit these inconveniences and 
 facilitate using evolutionary algorithms for reactor design optimization.
 \gls{REALM} provides a general genetic algorithm framework, sets up 
-parallelization for the user, and promotes usability by designing an input file 
+parallelization for the user, and promotes usability with an input file 
 that only exposes mandatory parameters.
 REALM also strives to be effective, flexible, open-source, parallel, reproducible, 
 and usable. 
@@ -37,17 +37,17 @@ I briefly summarize how \gls{REALM} achieves these goals:
     version-controlled on Github \cite{chee_arfcrealm_2021}.
     \item Flexible: The proposed work aims to utilize \gls{REALM} to 
     explore arbitrary reactor geometries and inhomogeneous fuel distributions. 
-    However, I acknowledge that future users might want to utilize \gls{REALM} 
+    However, future users might want to utilize \gls{REALM} 
     with other arbitrary parameters. Thus, I designed the \gls{REALM}
     framework accordingly. The user can vary any imaginable parameter 
     because \gls{REALM} uses a templating method to edit the coupled software's input 
     file.
-    \item Open-source: I utilized a well-documented, open-source evolutionary algorithm 
-    Python package to drive the optimization process. I utilized established 
+    \item Open-source: I utilize a well-documented, open-source evolutionary algorithm 
+    Python package to drive the optimization process, and established 
     open-source nuclear software, OpenMC \cite{romano_openmc_2013} and 
     Moltres \cite{lindsay_introduction_2018}, to compute the objective function 
     and constraints. I also provide a simple tutorial for future developers to 
-    follow for coupling other nuclear software to the \gls{REALM} package.  
+    follow for coupling other nuclear software to \gls{REALM}.  
     \item Parallel: \gls{REALM} runs parallel on \gls{HPC} machines using the 
     \texttt{mpi4py} Python package \cite{dalcin_mpi_2008}.
     \item Reproducible: Data from every REALM run saves into a unique, pickled 
@@ -55,7 +55,7 @@ I briefly summarize how \gls{REALM} achieves these goals:
     results from this work are available on Github. 
     \item Usable: I did not reinvent the wheel--instead, I combined available 
     evolutionary algorithm, nuclear transport, and thermal-hydraulics software 
-    to create a new optimization tool for easy leveraging of evolutionary algorithms 
+    to create an optimization tool for easy leveraging of evolutionary algorithms 
     to construct arbitrary reactor designs. 
 \end{itemize}
 
@@ -79,7 +79,7 @@ thermal-hydraulics software fit within the process.
                               \item Keep selected individuals from previous generation
                              \end{enumerate}};
             \node (4) [loblock, below of=3, yshift=-1.3cm] {\textbf{Evaluate new population}};
-            \node (5) [lbblock, below of=4] {\textbf{Is termination criteria satisfied?}};
+            \node (5) [lbblock, below of=4] {\textbf{Is termination \\ criteria satisfied?}};
             \node (6) [lbblock, below of=5] {\textbf{Best solution is returned!}};
             \draw [arrow] (1) -- (2);
             \draw [arrow] (2) -- (3);
@@ -93,16 +93,16 @@ thermal-hydraulics software fit within the process.
             };
     \end{tikzpicture}
     \caption{Process of finding optimal solutions for a problem with a 
-    genetic algorithm with evaluation conducted with nuclear software.}
+    genetic algorithm. Nuclear software evaluates each new population.}
     \label{fig:genetic_alg_nuclear}
 \end{figure}
-Therefore, \gls{REALM} will initially read and validate the JSON input 
-file, initialize the \gls{DEAP} genetic algorithm hyperparameters and operators, 
-and finally run the genetic algorithm following the flow chart in Figure 
+Therefore, \gls{REALM} initially reads and validates the JSON input 
+file, initializes the \gls{DEAP} genetic algorithm hyperparameters and operators, 
+and finally runs the genetic algorithm following the flow chart in Figure 
 \ref{fig:genetic_alg_nuclear}, in which the nuclear software evaluates each 
 individual's fitness. 
 
-In the subsequent sections, I will describe the evolutionary algorithm software 
+In the subsequent sections, I describe the evolutionary algorithm software 
 that drives \gls{REALM}, the nuclear software coupled to REALM, and details about 
 the \gls{REALM} framework, such as the input file format and software architecture. 
 
@@ -123,7 +123,7 @@ Pyevolve \cite{perone_pyevolve_2009}, and OpenBEAGLE \cite{gagne_open_2002}.
 compactness and clarity \cite{fortin_deap_2012}. 
 \gls{DEAP} is the only framework that allows the user to prototype evolutionary 
 algorithms rapidly and define custom algorithms without digging deep into 
-the source code to modify lines/
+the source code to modify lines.
 This makes \gls{DEAP} the code of choice for the REALM framework's evolutionary 
 algorithm driver component. 
 \gls{DEAP} provides building blocks for each optimizer function and allows the 
@@ -137,16 +137,16 @@ The \textit{creator} module is a meta-factory that allows the run-time creation
 of classes via inheritance and composition, enabling individual and population 
 creation from  from any data structure: lists, sets, dictionaries, trees, 
 etc \cite{fortin_deap_2012}. 
-The \textit{toolbox} is a container that the user manually populates with 
-selected tools for the evolutionary algorithm.
+The \textit{toolbox} is a container that the user manually populates.
 In the \textit{toolbox}, the user defines the selection, crossover, and 
 mutation operator types and hyperparameters. 
 For example, the user registers a crossover operator under the `mate'
 alias, and a selection operator under the `select' alias. 
-Then, the evolutionary algorithm uses these aliased operators. 
+Then, the evolutionary algorithm uses these aliased operators from the 
+\textit{toolbox}. 
 If the user wants to change the crossover operator, they would update the 
-`mate' alias in the \textit{toolbox}, keeping the algorithm unchanged
-\cite{fortin_deap_2012}. 
+`mate' alias in the \textit{toolbox}, while keeping the evolutionary algorithm 
+unchanged \cite{fortin_deap_2012}. 
 
 Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
 \textit{toolbox} modules. 
@@ -186,12 +186,12 @@ Figure \ref{fig:deap-code} illustrates DEAP's usage of the \textit{creator} and
 \end{figure}
 Line 2 creates a single-objective fitness class, \texttt{Objective}. 
 The first argument defines the name of the derived class, the second argument 
-specifies the inherited base class, \texttt{base.fitness}), and the third 
+specifies the inherited base class, \texttt{base.fitness}, and the third 
 argument indicates the objective fitness ($-1.0$ indicates a minimum objective, 
 $+1.0$ indicates a maximum objective). 
-Line 3 derives an \texttt{Individual} class from the Python list,
-composed with our newly created \texttt{Objective} object. 
-On Lines 5-9, I initialize the \gls{DEAP} toolbox, register 
+Line 3 derives an \texttt{Individual} class from the standard Python list type,
+and defines its fitness attribute to be the newly created \texttt{Objective} object. 
+Lines 5-9 initialize the \gls{DEAP} toolbox, register 
 \texttt{variable\_1} and \texttt{variable\_2} with their upper and lower bounds, 
 and define the \texttt{individual\_creator} function to return an 
 \texttt{Individual} initialized with \texttt{variable\_1}, and \texttt{variable\_2}. 
@@ -207,7 +207,7 @@ The evaluation function runs the nuclear software and returns user-defined
 fitness values. 
 
 \subsection{General Genetic Algorithm Framework}
-The creators' of DEAP provided an example of a classical genetic algorithm 
+The creators' of DEAP provided variations of a classical genetic algorithm 
 exposing different explicitness levels \cite{fortin_deap_2012}. 
 The high-level examples use the in-built DEAP genetic algorithms, 
 whereas the low-level example completely unpacks the genetic algorithm to expose 
@@ -240,11 +240,11 @@ governing equations on a single mesh and can be deployed on an arbitrary number
 of processing units \cite{lindsay_introduction_2018}.
 
 OpenMC and Moltres are both open-source, well-documented, well-supported, and 
-Github version-controlled codes that run in parallel on \gls{HPC} machines.
+Github version-controlled codes that can run in parallel on \gls{HPC} machines.
 Thus they achieve the \gls{REALM} goals listed at the start of this chapter, 
 making them suitable to be used as \gls{REALM}'s nuclear software.
 However, users can easily use restricted nuclear software with \gls{REALM} 
-through coupling \gls{REALM} with the restricted software on their local machine. 
+by coupling \gls{REALM} with the restricted software on their local machine. 
 In the REALM documentation \cite{chee_arfcrealm_2021}, I outline how to couple 
 other nuclear software to REALM. 
 
@@ -253,6 +253,10 @@ REALM's input file is in JSON format.
 There are four sections that the user must define: \\ \texttt{control\_variables}, 
 \texttt{evaluators}, \texttt{constraints}, and \texttt{algorithm}. 
 Figure \ref{fig:realm-input} shows an example REALM input file. 
+In this simulation, REALM uses a genetic algorithm with the defined 
+hyperparameters to minimize the \texttt{output1} parameter which is 
+calculated using the OpenMC evaluator that accepts input parameters: 
+\texttt{variable1} and \texttt{variable2}. 
 \begin{figure}[]
     \begin{minted}[
         frame=lines,
@@ -275,7 +279,7 @@ Figure \ref{fig:realm-input} shows an example REALM input file.
                 }
             }, 
             "constraints": {
-                "output_1": {"operator": [">=", "<"], "constrained_val": [1.0, 1.5]}
+                "output1": {"operator": [">=", "<"], "constrained_val": [1.0, 1.5]}
             }, 
             "algorithm": {
                 "objective": "min", 
@@ -294,29 +298,32 @@ Figure \ref{fig:realm-input} shows an example REALM input file.
             }
         }
     \end{minted}
-    \caption{REALM sample input file.}
+    \caption{\acrfull{REALM} sample JSON input file.}
     \label{fig:realm-input}
 \end{figure}
+
 Next, I will describe how to define each section of a REALM input file. 
-Detailed descriptions of setting up REALM can be found in the REALM 
-documentation \cite{chee_arfcrealm_2021}. 
+The \gls{REALM} documentation \cite{chee_arfcrealm_2021} provides further 
+descriptions for setting up a \gls{REALM} input file.
 
 \subsection{Control Variables}
-The control variables are parameters the genetic algorithm will vary. 
+Control variables are parameters the genetic algorithm will vary. 
 For each control variable, the user must specify its minimum and maximum values.
 For example, Lines 2 to 5 in Figure \ref{fig:realm-input} demonstrate that the 
 control variables, \texttt{variable1} and \texttt{variable2}, 
-can be varied from 0 to 10 and -1 to 0, respectively. 
+will be varied from 0 to 10 and -1 to 0, respectively. 
 
 \subsection{Evaluators}
-Evaluators are the software REALM utilizes to calculate objective functions. 
+Evaluators are the nuclear software REALM utilizes to calculate objective functions. 
 Presently, only \texttt{openmc} and \texttt{moltres} evaluators are available 
 in REALM.
 In a single REALM input file, a user may define any number of evaluators. 
 For each evaluator, mandatory input parameters are \texttt{input\_script}, 
 \texttt{inputs}, and \texttt{outputs}, and the optional input parameter is
 \texttt{output\_script}. 
-The \texttt{input\_script} is an input file template for the evaluator software. 
+The \texttt{input\_script} is input file template's name for the evaluator software. 
+The user must include a input file template in the same directory as the REALM input 
+file. 
 The \texttt{inputs} parameter lists the control variables that are placed into the 
 input file template. 
 REALM utilizes jinja2 templating to insert the control variable values into the 
@@ -374,10 +381,10 @@ The \texttt{outputs} parameter lists the output variables that the evaluator
 will return to the genetic algorithm. 
 These output parameters are also known as the objective functions used to 
 evaluate the individual.  
-There are three methods to returning an output parameter. 
+\gls{REALM} uses three methods to return an output parameter. 
 First, if the output parameter is also an input parameter, REALM will automatically 
 return the input parameter's value. 
-Second, the user can use predefine evaluations. 
+Second, the user can use predefined evaluations. 
 For example, in \texttt{OpenMCEvaluation}, there is a predefined $k_{eff}$ 
 evaluation.
 The user may also add predefined evaluations to \texttt{OpenMCEvaluation} or 
@@ -388,8 +395,8 @@ The \texttt{output\_script} must include a line that prints a dictionary contain
 the output parameters' names and their corresponding value as key-value pairs. 
 
 \subsection{Constraints}
-In constraints, the user can constrain any output parameter. 
-Any individual that does not meet the constraints will be removed from the 
+In the constraints section, the user can define constraints on any output parameter. 
+Any individual that does not meet the defined constraints is removed from the 
 population, encouraging the proliferation of individuals that meet the 
 constraints. 
 For each constrained output parameter, the user lists the \texttt{operator}s 
@@ -411,7 +418,7 @@ In the algorithm section, the user defines all the hyperparameters for the
 genetic algorithm. 
 The mandatory input parameters include \texttt{optimized\_variable}, 
 \texttt{objective}, \texttt{pop\_size}, and \texttt{generations}.
-The user specifies an \texttt{optimized\_variable} which must be an output 
+The user specifies an \texttt{optimized\_variable}, which must be an output 
 parameter from the evaluators' \texttt{outputs}. 
 The user has the option to maximize or minimize this \texttt{optimized\_variable}
 by defining the \texttt{objective} variable as \texttt{max} or \texttt{min}. 
@@ -424,10 +431,10 @@ The optional input parameters include \texttt{mutation\_probability},
 As mentioned previously in Section \ref{sec:genetic_alg}, it is important to 
 select genetic algorithm hyperparameters that balance the extent of exploration 
 and exploitation.
-The user can define the mutation and mating probability or use default values 
-of 0.3 and 0.4, respectively. 
-For each operator, the user can choose from a list of operators and define the
-required hyperparameters. 
+The user can define the mutation and mating probability or not define them which 
+results in the default values of 0.3 and 0.4, respectively. 
+For each operator, the user can choose from a list of operators and define each
+of their required hyperparameters. 
 Table \ref{tab:deap_operators} shows the available operators and their respective 
 hyperparameters. 
 \begin{table}[]
@@ -452,11 +459,12 @@ hyperparameters.
     \end{tabular}
     \end{table}
 % fill this out properly later. 
-The default selection operator is \texttt{selNSGA2}, with
-\texttt{k} being two-thirds of the population size. 
-The default mutation operator is \texttt{mutPolynomialBounded} with an  
-\texttt{eta} of 0.3 and \texttt{indpb} of 0.3. 
-The default mating operator is \texttt{cxBlend} with an \texttt{alpha} of 0.4. 
+The default selection operator is \texttt{selNSGA2} with a default
+\texttt{k} value, two-thirds the population size. 
+The default mutation operator is \texttt{mutPolynomialBounded} with default
+\texttt{eta} and \texttt{indpb} values of 0.3. 
+The default mating operator is \texttt{cxBlend} with a default \texttt{alpha} 
+of 0.4. 
 Lines 17 to 31 in the example REALM input file (Figure \ref{fig:realm-input}) 
 demonstrate \texttt{algorithm} specifications. 
 
@@ -470,21 +478,21 @@ and describes each class's purpose.
     \onehalfspacing
     \caption{Classes that makeup REALM's architecture and their description. }
 	\label{tab:realm-architecture}
-    \small
-    \begin{tabular}{l|p{0.77\textwidth}}
+    \footnotesize
+    \begin{tabular}{l|p{0.73\textwidth}}
     \hline
     \textbf{Class} & \textbf{Description} \\ \hline
     \textbf{\textit{InputValidation}} & The \textbf{\textit{InputValidation}} class contains methods 
-    to read the JSON \gls{REALM} input file and conduct a validation to 
-    ensure the user defined all key parameters, and if they did not, \gls{REALM} 
+    to read and validate the JSON \gls{REALM} input file to 
+    ensure the user defined all key parameters. If they did not, \gls{REALM} 
     raises an exception to tell the user which parameters are missing. \\
     \hline
     \textbf{\textit{Evaluation}} & \gls{DEAP}'s fitness evaluator (as mentioned in Section 
     \ref{sec:deap-works}) requires an evaluation function to evaluate each 
     individual's fitness values. 
-    The \textbf{\textit{Evaluation}} class contains a method that returns an evaluation 
-    function that runs the nuclear software and returns the fitness values listed 
-    in the user input file. \\
+    The \textbf{\textit{Evaluation}} class contains a method that creates an evaluation 
+    function that runs the nuclear software and returns the required fitness values, 
+    defined in the input file. \\
     \hline 
     \textbf{\textit{OpenMCEvaluation}} & The \textbf{\textit{OpenMCEvaluation}} class contains
     built-in methods for evaluating OpenMC output files. Developers can update 
@@ -492,10 +500,10 @@ and describes each class's purpose.
     \hline 
     \textbf{\textit{ToolboxGenerator}} & The \textbf{\textit{ToolboxGenerator}} class initializes
     DEAP's \textit{toolbox} and \textit{creator} modules with genetic algorithm 
-    hyperparameters defined in the user input file.\\
+    hyperparameters defined in the input file.\\
     \hline
     \textbf{\textit{Constraints}} & The \textbf{\textit{Constraints}} class 
-    contains methods to initialize constraints defined in the user input file 
+    contains methods to initialize constraints defined in the input file 
     and applies the constraints by removing individuals that do not meet the 
     constraint.\\
     \hline 
@@ -575,8 +583,9 @@ The \textbf{\textit{ToolboxGenerator}} object accepts the
 tool.  
 Then, it initializes a \textbf{\textit{Constraints}} object to contain 
 \texttt{constraints} specified in the input file. 
-Next, it initializes an \textbf{\textit{Algorithm}} object that accepts the 
-initialized DEAP toolbox and \textbf{\textit{Constraints}} objects. 
+Next, the \textbf{\textit{Executor}} initializes an \textbf{\textit{Algorithm}} 
+object that accepts the initialized DEAP toolbox and \textbf{\textit{Constraints}} 
+object. 
 Finally, the \textbf{\textit{Executor}} class uses a method in the 
 \textbf{\textit{Algorithm}} object to run a general genetic algorithm with 
 hyperparameters from the DEAP toolbox, apply constraints defined in the 
@@ -614,7 +623,7 @@ Thus, if a REALM simulation ends prematurely, the checkpoint file can be used
 to restart the code from the most recent population and continue the simulation. 
 
 \subsection{REALM Results Analysis}
-The \textbf{\textit{BackEnd}} class manages REALM's results. 
+The \textbf{\textit{BackEnd}} class manages each REALM simulation's results. 
 \textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, and it 
 is saved as \texttt{checkpoint.pkl} in the same directory as the input file. 
 The checkpoint file can then be reloaded into a Jupyter notebook and organized 
@@ -622,10 +631,9 @@ to produce desired plots.
 Examples of REALM results analysis can be found in the REALM documentation 
 \cite{chee_arfcrealm_2021}. 
 
-For closer inspection of the evaluator software's output files, the evaluation 
-function creates a new directory for each software, generation, and individual 
-and stores the templated input file and output files associated with that 
-particular run. 
+The evaluation function creates a new directory for each software, generation, 
+and individual and stores the templated input file and output files associated 
+with that particular run. 
 The generation and individual values are indexed by zero. 
 For example, the directory containing files associated with an OpenMC run for 
 the tenth individual in the genetic algorithm's third generation will be named: 
