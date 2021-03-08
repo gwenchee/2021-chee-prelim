@@ -14,79 +14,78 @@
 %   - Classical vs Evolutionary methods 
 
 This chapter provides a literature review of relevant past research efforts 
-that give context to this proposed work.
-Recent advancements in \gls{AM} applications for nuclear reactor core 
-components has removed traditional manufacturing constraints on reactor design, 
+giving context to this proposed work.
+Recent advancements in additive manufacturing applications for nuclear reactor core 
+components have removed traditional manufacturing constraints on reactor design, 
 enabling reactor designers to reexamine optimization.
-In the proposed work, we aim to apply evolutionary algorithm methods to explore 
-non-conventional reactor geometries and fuel distributions, to apply a fresh 
-perspective to nuclear reactor optimization. 
-With growing interest in the nuclear science community and benefits of the 
-\gls{FHR}, we chose to apply the optimization methods to this reactor type, 
-and also participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmarking exercise. 
+The proposed work aims to provide a fresh perspective to nuclear reactor optimization
+by applying evolutionary algorithm methods to explore non-conventional reactor 
+geometries and fuel distributions. 
+With the many benefits of \glspl{FHR} and growing interest in the nuclear science 
+community with \gls{FHR} designs, I chose to apply the optimization methods to 
+this reactor type, and also participate in the \acrlong{OECD} (OECD) 
+\acrlong{NEA}'s (NEA) \gls{FHR} benchmarking exercise. 
 Thus, we begin this literature review with an overview of the \gls{FHR} concept, 
 then go into detail about one specific \gls{FHR} design: the \gls{AHTR}, 
 previous efforts and technical challenges of modeling the design, and a 
 description of how these efforts led to the \gls{OECD} \gls{NEA}'s initiation of 
 the \gls{AHTR} benchmark.
-Next, we outline \gls{AM} history and describe the current research towards applying 
-\gls{AM} to the fabrication of nuclear reactor core components. 
+Next, we outline additive manufacturing's history and describe the current research towards applying 
+additive manufacturing to the fabrication of nuclear reactor core components. 
 We also review previous efforts towards nuclear reactor design optimization, 
-describe how \gls{AM} of nuclear reactor components enables optimization for 
+describe how additive manufacturing of nuclear reactor components enables optimization for 
 less constrained reactor geometries, and types of optimization methods that can be 
-leveraged in a large less-constrained design space, such as evolutionary algorithms.  
-Finally, we give a background of evolutionary algorithms, go into detail on a 
-specific evolutionary algorithm: the genetic algorithm, and how it works to robustly conduct global 
-optimization. 
+leveraged in this expanded design space.   
+Finally, we give a background of evolutionary algorithms and detail a specific 
+evolutionary algorithm: the genetic algorithm and how it works to conduct global 
+optimization robustly.
 
 \section{Fluoride-Salt-Cooled High-Temperature Reactor}
 \label{sec:fhr}
-The \gls{FHR} is a reactor concept introduced in 2012 that uses high-temperature 
+The \gls{FHR} is a reactor concept introduced in 2003 that uses high-temperature 
 coated-particle fuel and a low-pressure liquid fluoride-salt coolant 
-\cite{forsberg_fluoride-salt-cooled_2012,facilitators_fluoride-salt-cooled_2013}.
+\cite{forsberg_molten-salt-cooled_2003,facilitators_fluoride-salt-cooled_2013}.
+However, the term \acrlong{FHR} was only introduced in 2010 to distinguish fluoride 
+salt-cooled \glspl{MSR} from other \glspl{MSR}. 
 \gls{FHR} technology combines the best aspects of \gls{MSR} and \gls{VHTR} 
 (or \gls{HTGR}) technologies. 
-Molten fluoride salts as working fluids for nuclear reactors have been explored 
-since the 1960s and are desirable because of their high-temperature 
-performance and overall chemical stability \cite{scarlat_design_2014}.  
-Using molten salts for reactor coolant introduces inherent safety compared 
-to water due to the salts' high boiling temperature and high volumetric 
-heat capacity.
-This eliminates the risk of coolant boiling off, resulting in fuel elements 
-overheating \cite{ho_molten_2013}. 
-The leading candidate coolant salt is the fluoride salt Li$_2$BeF$_4$ (FLiBe), 
-which remains liquid without pressurization up to 1400 $^{\circ}$C and has a larger 
+High-temperature performance and overall chemical stability make molten 
+fluoride salts desirable as working fluids for nuclear reactors
+\cite{scarlat_design_2014}.  
+Using molten salts as reactor coolants introduces inherent safety due to the 
+salts' high boiling temperature and high volumetric heat capacity
+\cite{ho_molten_2013}.
+One coolant salt is the fluoride salt Li$_2$BeF$_4$ (FLiBe), 
+which remains liquid without pressurization up to 1400 $^{\circ}$C and has a bigger 
 heat capacity than water \cite{ho_molten_2013,forsberg_fluoride-salt-cooled_2012}. 
-\glspl{FHR} are favorable compared to liquid fuelled reactors, such as
-\gls{MSR} systems, because the \gls{TRISO} particles' solid fuel cladding adds 
-an extra barrier to fission product release \cite{ho_molten_2013}.
+FHRs' TRISO particles' solid fuel cladding adds an extra barrier to fission 
+product release compared to \glspl{MSR} with liquid fuel.  \cite{ho_molten_2013}.
 
-\gls{VHTR} technology has been studied since the 1970s because it delivers 
-heat at substantially higher temperatures than \glspl{LWR}, resulting in 
-the following advantages: increased power conversion efficiency, reduced 
-waste heat generation, and co-generation and process heat capabilities 
-\cite{scarlat_design_2014}. 
+\gls{VHTR} technology delivers heat at substantially higher temperatures than 
+\glspl{LWR}, resulting in the following advantages: increased power conversion 
+efficiency, reduced waste heat generation, and co-generation and process heat 
+capabilities \cite{scarlat_design_2014}. 
 In \glspl{VHTR}, the helium coolant is held at a high pressure of approximately 
 100 atm, whereas the \gls{FHR}'s FLiBe coolant is at room pressure, resulting in lower 
 construction costs since a thick concrete reactor vessel is not required.
 The molten salt coolant has superior cooling and moderating properties compared 
-to helium coolant in \glspl{VHTR}, resulting in \glspl{FHR} operating at 
-power densities two to six times higher than  \glspl{VHTR} 
-\cite{scarlat_design_2014,forsberg_fluoride-salt-cooled_2012}.
-Therefore, by combining the FLiBE coolant from \gls{MSR} technology and 
+to helium coolant in \glspl{VHTR}. 
+Accordingly, \glspl{FHR} operate at power densities two to six times higher than 
+\glspl{VHTR} \cite{scarlat_design_2014,forsberg_fluoride-salt-cooled_2012}.
+By combining the FLiBE coolant from \gls{MSR} technology and 
 \gls{TRISO} particles from \gls{VHTR} technology, the \gls{FHR} benefits from 
-the low operating pressure and large thermal margin provided by using a molten 
-salt coolant and the accident-tolerant qualities of \gls{TRISO} particle fuel. 
+a low operating pressure and large thermal margin enabled by the molten 
+salt coolant and the thermal resilience of \gls{TRISO} particle fuel. 
 
-Several types of \gls{FHR} conceptual designs exist worldwide: \gls{PBFHR} at 
+Several types of \gls{FHR} conceptual designs exist worldwide: the \gls{PBFHR} at 
 \gls{UCB} with circulating pebble-fuel 
 \cite{scarlat_current_2014,krumwiede_three-dimensional_2013}, the \gls{SF-TMSR} 
 at the \gls{SINAP} in China with static pebble-fuel \cite{liu_preliminary_2016}, 
 the large central-station \gls{AHTR} at \gls{ORNL} \cite{holcomb_core_2011, varma_ahtr_2012} and 
-the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010} with static plate-fuel. 
+the \gls{SmAHTR} at ORNL \cite{greene_pre-conceptual_2010} with static, plate fuel. 
 
 \subsection{\acrlong{AHTR} Design}
-This proposed work focuses on the \gls{FHR} design with hexagonal fuel assemblies
+This proposed work focuses on a prismatic \gls{FHR} design with hexagonal fuel assemblies
 consisting of \gls{TRISO} fuel particles embedded in planks, i.e., the 
 \gls{AHTR} design developed by ORNL. 
 The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power with
@@ -98,8 +97,8 @@ arranged in three diamond-shaped sectors, with a central Y-shaped structure
 and external channel (wrapper).
 Each fuel plank contains an isostatically pressed carbon with fuel stripes 
 on each plank's outer side.
-The fuel stripes are prismatic regions composed of a graphite matrix filled with 
-a cubic lattice of \gls{TRISO} particles. 
+Each fuel stripe is a graphite matrix filled with a cubic lattice of 
+\gls{TRISO} particles. 
 The core consists of 252 assemblies radially surrounded by reflectors
 \cite{ramey_monte_2018}. 
 Chapter \ref{chap:fhr-benchmark} details the specifications of the AHTR geometry
@@ -113,23 +112,20 @@ modeled in this proposed work.
     \label{fig:ahtr}
 \end{figure}
 
-\subsection{Previous AHTR modeling efforts and challenges}
-Modeling and simulation of the \gls{AHTR} design have been an ongoing effort 
-since its conception in 2003 \cite{forsberg_molten-salt-cooled_2003}. 
+\subsection{Previous AHTR modeling efforts and challenges} 
 The \gls{AHTR} core design differs significantly from the present \gls{LWR}-based 
 nuclear power plants. 
 These differences lead to modeling challenges and the need to verify and 
-validate modeling and simulation methods \cite{ramey_monte_2018}. 
-Verification and validation of neutronics and thermal-hydraulics tools' 
-capability to successfully model the \gls{AHTR} design are crucial steps 
-in support of licensure of the \gls{AHTR} design towards the eventual goal 
+validate simulation methods \cite{ramey_monte_2018}. 
+Verification and validation of neutronics and thermal-hydraulics simulation 
+capabilities in the context of the \gls{AHTR} design crucially 
+support licensure of the \gls{AHTR} design towards the eventual goal 
 of deployment \cite{rahnema_phenomena_2019,rahnema_current_2015}. 
 Several neutronic studies conducted along the way to the current \gls{AHTR} 
 design have shed light on the technical challenges facing the design 
 \cite{ramey_monte_2018,holcomb_fluoride_2013,greene_pre-conceptual_2010}. 
 
-
-\gls{Georgia Tech} led an Integrated Research Project to 
+The \gls{Georgia Tech} led an Integrated Research Project to 
 understand challenges in \gls{AHTR} materials and modeling its neutronics and 
 thermal-hydraulics \cite{zhang_integrated_2019}. 
 During the research project, a panel of subject matter experts 
@@ -166,30 +162,28 @@ research.
     \end{tabular}
     \end{table}
 
-The \gls{AHTR} has a complex core design due to the multiple heterogeneity 
-present in the fuel introduced by \gls{TRISO} particles' presence embedded in 
-planks \cite{ramey_monte_2018,rahnema_phenomena_2019}.
-We must obtain detailed reference power distributions to assess lower-fidelity 
-models' accuracy, thus, requiring accurate models of the \gls{AHTR}'s complex 
-geometry with individual \gls{TRISO} particle fidelity.
-However, it is challenging, particularly for deterministic codes that
-use multigroup cross sections and traditional homogenization methods
-\cite{ramey_monte_2018}, which are insufficient to capture the correct physics 
-in \glspl{AHTR} due to the multiple heterogeneity \cite{ramey_monte_2018}. 
-In the \gls{AHTR}, single and multiple slab homogenization decreased computation time 
-by an order of 10; however, they introduce a nontrivial error of $\sim$3\%
-\cite{ramey_monte_2018,cisneros_neutronics_2012}.
+The \emph{multiply heterogeneous} \gls{AHTR} fuel, comprised of \gls{TRISO} 
+particles embedded in strategically arranged plates, presents simulation challenges. 
+We must obtain detailed reference power distributions with individual 
+\gls{TRISO} particle fidelity to assess lower-fidelity models' accuracy.
+However, deterministic codes that use multigroup cross sections and traditional 
+homogenization methods \cite{ramey_monte_2018}, insufficiently capture the 
+correct physics in \glspl{AHTR} due to these multiple heterogeneities
+\cite{ramey_monte_2018}. 
+In the \gls{AHTR}, single and multiple slab homogenization decreased total 
+simulation time by an order of 10; however, the homogenization introduced a 
+nontrivial error of $\sim$3\% \cite{ramey_monte_2018,cisneros_neutronics_2012}.
 To determine the feasibility and safety of the \gls{AHTR} design, we must 
 calculate core physics parameters to an acceptable uncertainty. 
-For Monte Carlo codes, increasing neutron histories reduces statistical 
-uncertainty but comes at an increased computational cost, requiring the use of 
+With Monte Carlo neutron transport, increasing neutron histories reduces statistical 
+uncertainty but increases computational cost typically, requiring the use of 
 supercomputers to run the simulations.
 
-Another technical challenge the \gls{AHTR} design faces is the uncertainty of 
-the graphite and carbonaceous moderator material properties: densities, 
-temperatures, and thermal scattering data.
+This \gls{AHTR} presents another technical challenge: the uncertainty of 
+graphite moderator material properties: densities, temperatures, and thermal 
+scattering data.
 Problematically, the thermal scattering data ($S(\alpha,\beta)$ matrices) for 
-the bound nuclei in the \gls{FLiBe} salt are lacking \cite{ramey_monte_2018}. 
+the bound nuclei in \gls{FLiBe} salts are lacking \cite{ramey_monte_2018}. 
 Mei et al. \cite{mei_investigation_2013} and Zhu et al. \cite{zhu_thermal_2017} 
 examined the thermal scattering behavior of solid and liquid \gls{FLiBe}.
 They concluded that the bound and free atom cross section of \gls{FLiBe} are 
@@ -199,8 +193,8 @@ absence of thermal scattering data will impact the accuracy of the results
 
 \subsection{AHTR Benchmark}
 To address and further understand the technical challenges described 
-in the previous section, in 2019, the OECD-NEA initiated a benchmark to assess the 
-modeling and simulation capabilities for the \glspl{AHTR} with 
+in the previous section, in 2019, the OECD-NEA initiated a benchmark exercise 
+to assess the modeling and simulation capabilities for \glspl{AHTR} with 
 \gls{TRISO} fuel embedded in fuel planks of hexagonal fuel elements
 \cite{noauthor_fluoride_nodate}. 
 The benchmark plans to have three phases, starting from a single fuel element 
@@ -208,7 +202,7 @@ simulation without burnup, gradually extending to full core depletion and feedba
 The benchmark's overarching objective is to identify the applicability, accuracy, 
 and practicality of the latest methods and codes to assess the current state 
 of the art of FHR simulation and modeling \cite{petrovic_preliminary_2021}. 
-The benchmark also enables the cross-verification of codes and methodologies 
+The benchmark also enables the cross-verification of software and methods 
 for the challenging \gls{AHTR} geometry, which is especially useful since 
 applicable reactor physics experiments for code validation are scarce 
 \cite{petrovic_fhrahtr_2019,petrovic_preliminary_2021}. 
@@ -216,40 +210,44 @@ Chapter \ref{chap:fhr-benchmark} will provide a detailed description of the
 benchmark phases and results obtained so far.
 
 \section{Additive Manufacturing}
-\acrlong{AM} (AM) is the formalized term for what used to be called `rapid prototyping' 
-and what is popularly called `3D printing' \cite{gibson_additive_2014}. 
-The basic principle of \gls{AM} is that a model is initially generated using a
+\acrlong{AM} is the formal term for what is popularly called `3D printing' 
+\cite{gibson_additive_2014}. 
+The basic principle of additive manufacturing is that a model is initially generated using a
 \gls{3D CAD} system and then fabricated directly without the need for process 
 planning. 
-In \gls{AM}, the parts are made by adding materials in layers; each layer is a 
-thin cross section of the \gls{3D CAD} designed part, as opposed 
-to subtractive manufacturing methods such as traditional machining
+Additive manufacturing, as the name implies, adds material in layers, such that 
+each layer is a thin cross section of the 3D-CAD-designed part, as opposed 
+to traditional machining which subtracts material instead 
 \cite{standard_standard_2012}. 
-All commercialized \gls{AM} machines to date use a layer-based approach, and 
+All commercialized additive manufacturing machines to date use a layer-based approach, and 
 the major ways that they differ are in materials, layer creation method, and 
 how the layers are bonded to each other \cite{gibson_additive_2014}.
-These major differences will determine the following factors: accuracy of the 
+These major differences will determine the: accuracy of the 
 final part, material and mechanical properties, the time required to manufacture 
-the part, the need for post-processing, the size of \gls{AM} machine, and the overall 
+the part, the need for post-processing, the size of additive manufacturing machine, and the overall 
 cost of the machine and the process \cite{gibson_additive_2014}. 
-Initially, \gls{AM} was used to manufacture prototypes. 
+Initially, additive manufacturing was only used to manufacture prototypes. 
 However, with improvements in material properties, accuracy, and overall quality 
-of \gls{AM} output, the applications for \gls{AM} expanded to the 
+of additive manufacturing output, the applications for additive manufacturing expanded to the 
 point at which some industries build parts for direct assembly purposes
 \cite{uriondo_present_2015}.  
-Furthermore, using \gls{AM} in conjunction with other technologies, such as 
-high-power lasers, has enabled \gls{AM} to manufacture parts made from various 
+Furthermore, using additive manufacturing in conjunction with other technologies, such as 
+high-power lasers, has enabled additive manufacturing of parts made from various 
 metals \cite{gibson_additive_2014}. 
 
 \subsection{Application of Additive Manufacturing to Nuclear Reactor Core Components}
 \label{sec:am}
-\gls{AM} has progressed rapidly in the last 30 years, from rapid design prototyping 
-with polymers in the automotive industry to scale production of metal components.  
-Examples include Boeing using \gls{AM} to reduce the 979 Dreamliner's weight 
-\cite{noauthor_printed_2017} and General Electric using \gls{AM} to produce fuel 
-injection nozzles \cite{noauthor_transformation_2018}. 
-The most common metal \gls{AM} technologies, \gls{SLM}, \gls{EBM}, \gls{L-DED}, 
-and binder jetting, are not currently used to manufacture nuclear power plant parts. 
+Additive manufacturing has progressed rapidly in the last 30 years, from rapid 
+design prototyping with polymers in the automotive industry to scale production 
+of metal components.  
+Examples include Boeing using additive manufacturing to reduce the 979 
+Dreamliner's weight \cite{noauthor_printed_2017} and General Electric using 
+additive manufacturing to produce fuel injection nozzles 
+\cite{noauthor_transformation_2018}. 
+The most common metal additive manufacturing technologies, \gls{SLM}, \gls{EBM}, 
+\gls{L-DED}, and binder jetting, are not currently used to manufacture nuclear 
+power plant parts. 
+Nuclear grade material and manufacturing have high qualification standards. 
 Wide-spread adoption of these methods in the nuclear industry could drastically 
 reduce fabrication costs and timelines, combine multiple systems and assembled 
 components into single parts, increase safety and performance by tailoring 
@@ -260,29 +258,29 @@ such as hex-ducts for sodium-cooled fast reactors, that are costly and difficult
 to fabricate using standard processing techniques. 
 Traditional manufacturing routes also restrict many viable geometries for 
 reactor designers to explore \cite{sridharan_performance_2019}. 
-In summary, the main benefits of using \gls{AM} for reactor core components is that 
-we are no longer geometrically constrained by conventional fuel manufacturing 
-and can further optimize and improve fuel geometries to enhance fuel performance 
-at lower costs \cite{bergeron_early_2018}. 
+In summary, reactor core component fabrication with additive manufacturing 
+enables further optimization and improvement of fuel geometries to enhance fuel 
+performance at lower costs \cite{bergeron_early_2018}
 
-Experimental work in the nuclear materials' field demonstrates the application 
-of \gls{AM} to nuclear fuel and structural core material fabrication. 
+Recent nuclear materials experiments have demonstrated the application 
+of additive manufacturing to nuclear fuel and structural core material fabrication. 
 Rosales et al. \cite{rosales_characterizing_2019} conducted a feasibility study 
 of direct routes to fabricate dense uranium silicide (U$_3$Si$_2$) fuel pellets 
-using the \gls{INL} invented \gls{AMAFT}. 
-U$_3$Si$_2$ is an accident-tolerant nuclear fuel candidate due to its
-high uranium density and improved thermal properties. 
-Its current metallurgical fabrication process is expensive and long; the goal of
-\gls{AMAFT} is to fabricate U$_3$Si$_2$ at a lower cost in a timely and
-commercially-reliable manner \cite{rosales_characterizing_2019}.  
+using the \gls{INL} approach known as \gls{AMAFT}. 
+U$_3$Si$_2$ demonstrates desirable accident-tolerant nuclear fuel properties 
+such as high uranium density and improved thermal properties, however, it has 
+an expensive and long metallurgical fabrication process. 
+Thus, using \gls{AMAFT} to fabricate U$_3$Si$_2$ will lower cost and ensure a
+timely and commercially-reliable fabrication process \cite{rosales_characterizing_2019}.  
 Sridharan et al. \cite{sridharan_performance_2019} demonstrated the application of
-the laser-blown-powder \gls{AM} process to fabricate \gls{FM} steel, a type of 
+the laser-blown-powder additive manufacturing process to fabricate \gls{FM} steel, a type of 
 steel commonly used for cladding and structural components in nuclear reactors. 
 Koyanagi et al. \cite{koyanagi_additive_2020} presented the latest 
-\gls{AM} technology for manufacturing nuclear-grade \gls{SiC} materials; they 
-demonstrated that combinations of \gls{AM} techniques and traditional \gls{SiC} 
-densification methods enabled new designs of \gls{SiC} components with complex shapes. 
-\gls{SiC} has excellent strength at elevated temperatures, chemical inertness, 
+additive manufacturing technology for manufacturing nuclear-grade \gls{SiC} materials. 
+They demonstrated that combinations of additive manufacturing techniques and 
+traditional \gls{SiC} densification methods enabled new designs of \gls{SiC} 
+components with complex shapes. 
+\gls{SiC} demonstrates excellent strength at elevated temperatures, chemical inertness, 
 relatively low neutron absorption, and stability under neutron irradiation up 
 to high doses \cite{sauder_ceramic_2014, snead_handbook_2007,koyanagi_additive_2020}. 
 These qualities make \gls{SiC} suitable for many applications in nuclear systems 
@@ -291,7 +289,7 @@ and pellets \cite{terrani_progress_2015}, and core structural components in fiss
 reactors \cite{sauder_ceramic_2014}. 
 Trammel et al \cite{trammell_advanced_2019} conducted a preliminary investigation 
 to assess the possibilities of fabricating a fuel element with embedded 
-\gls{TRISO} fuel using \gls{AM} techniques, such as binderjet printing and \gls{CVI}. 
+\gls{TRISO} fuel using additive manufacturing techniques, such as binderjet printing and \gls{CVI}. 
 They successfully demonstrated a fabrication method using the following steps 
 (depicted in Figure \ref{fig:ornl-triso-print}): 
 \begin{enumerate}
@@ -305,7 +303,7 @@ They successfully demonstrated a fabrication method using the following steps
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{ornl-triso-print.png} 
-    \caption{Stages of \gls{AM} fabrication conducted at \acrlong{ORNL} to 
+    \caption{Stages of additive manufacturing fabrication conducted at \acrlong{ORNL} to 
     produce a fuel element with non-homogenously shaped coolant channels and
     \gls{TRISO} particles embedded in a SiC matrix \cite{trammell_advanced_2019}.}
     \label{fig:ornl-triso-print}
@@ -313,7 +311,7 @@ They successfully demonstrated a fabrication method using the following steps
 
 Many of the materials and fabrication methods discussed are applicable 
 for \gls{FHR}-part manufacturing. 
-Therefore, this reiterates the possibility of leveraging \gls{AM} to 3D print a
+Therefore, this reiterates the possibility of leveraging additive manufacturing to 3D print a
 \gls{FHR}-type reactor with non-conventional geometry. 
 
 \section{Nuclear Reactor Design Optimization}
@@ -322,7 +320,7 @@ The practice of nuclear reactor optimization has been around since the
 conception of nuclear reactors. 
 Optimization has been applied to many nuclear engineering sub-fields such 
 as reactor design, reactor reloading patterns, and the nuclear fuel cycle.  
-In the proposed work, we will focus on the reexamination of nuclear reactor core 
+In the proposed work, we will reexamine nuclear reactor core 
 design optimization for arbitrary reactor geometries and fuel distributions. 
 Previous efforts towards nuclear reactor core design optimization were limited by 
 traditional manufacturing constraints and utilized deterministic and stochastic 
@@ -331,37 +329,38 @@ optimization techniques, coupled with surrogate models.
 Deterministic optimization methods usually start from a guess solution.
 Then, the algorithm suggests a search direction by applying local 
 information to a pre-specified transition rule. 
-The best solution becomes the new solution, and the above procedure continues 
+Any better solution becomes the new solution, and the above procedure continues 
 several times \cite{deb_multi-objective_2001}. 
-Drawbacks of deterministic methods include: algorithms tend to get stuck at a 
-suboptimal solution, and an algorithm efficient in solving one type of problem 
+Drawbacks of deterministic methods include: algorithms tend to get stuck at
+suboptimal solutions, and an algorithm efficient in solving one type of problem 
 may not solve a different problem efficiently \cite{deb_multi-objective_2001}. 
 Stochastic optimization methods, such as evolutionary algorithms amd simulated annealing,  
-minimize or maximize an objective function when randomness is present; they 
-tend to find globally optimal solutions more reliably than deterministic methods. 
+minimize or maximize an objective function when randomness is present. 
+Stochasticity enables them to find globally optimal solutions more reliably than 
+deterministic methods. 
 
 A nuclear reactor's complexity results in reactor design optimization being a 
 multi-objective design problem requiring a tradeoff between desirable 
 attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
-When multiple conflicting objectives are important, there is no single optimum 
-solution that simultaneously optimizes all objectives. 
-Instead, the multi-objective optimization problem's outcome is a set of optimal 
+When multiple conflicting objectives compete no single optimum solution 
+simultaneously optimizes all objectives. 
+Instead, multi-objective optimization returns multiple optimal 
 solutions with varying degree objective values \cite{deb_multi-objective_2001}. 
-For a multi-objective problem like reactor design optimization, 
-an ideal multi-objective optimization method should find widely spread solutions 
-in the obtained non-dominated front \cite{deb_multi-objective_2001}. 
+For a multi-objective problem like reactor design, an ideal optimization method 
+should find widely spread solutions in the obtained non-dominated front 
+\cite{deb_multi-objective_2001}. 
 
 Recent efforts towards nuclear reactor optimization have relied heavily on 
 the aforementioned stochastic methods, with the occasional addition of 
 stochastic-deterministic hybrid methods. 
 Sacco et al. \cite{sacco_two_2006,sacco_metropolis_2008} used stochastic 
 simulated annealing and deterministic-stochastic hybrid optimization techniques 
-to optimize reactor dimensions, enrichment, materials, etc., in order to 
-minimize the average peak factor in a three-enrichment-zone reactor. 
+to optimize reactor dimensions, enrichment, materials, etc., to 
+minimize the average peaking factor in a three-enrichment-zone reactor. 
 Odeh et al. \cite{odeh_core_2016} used the simulated annealing stochastic algorithm 
-coupled with neutronics and thermal-hydraulics codes, \gls{PARCS} and RELAP5
-\cite{fletcher_relap5mod3_1992}, to develop an optimum \gls{NMR-50} core design 
-to achieve a 10-year cycle length with minimal fissile loading. 
+coupled with neutronics and thermal-hydraulics simulation tools, \gls{PARCS} and RELAP5
+\cite{fletcher_relap5mod3_1992}, to develop an optimal \gls{NMR-50} core design 
+with a 10-year cycle length and minimal fissile loading. 
 Kropaczek et al. \cite{kropaczek_large-scale_2019} demonstrated the constraint 
 annealing method: a highly scalable method based on the method of parallel 
 simulated annealing with mixing of states \cite{kropaczek_constraint_2019} for 
@@ -375,39 +374,39 @@ algorithm, a type of evolutionary algorithm, to optimize an \gls{FCM} fuelled
 \gls{PWR} to extend the reactor core cycle length. 
 
 Nuclear reactor optimization problems require computationally 
-extensive neutronics and thermal-hydraulics software to compute the objective 
+expensive neutronics and thermal-hydraulics software to compute the objective 
 function and constraints. 
 Multiple papers utilized stochastic optimization methods with surrogate models 
-to replace computationally expensive, high-fidelity neutronics or thermal hydraulics 
+and replace, high-fidelity neutronics or thermal hydraulics 
 simulations to reduce computational cost.
 Kumar et al. \cite{kumar_new_2015} combined genetic algorithm optimization 
 with a surrogate model to optimize for high breeding of $^{233}$U and $^{239}$Pu 
-in desired power peaking limits and keff by varying these parameters: fuel pin 
+in desired power peaking limits and keff by varying: fuel pin 
 radius,  fissile material isotopic enrichment, coolant mass flow rate, and 
 core inlet coolant temperature.
 Betzler et al. \cite{betzler_design_2019} developed a systematic approach to 
 build a surrogate model to serve in place of high-fidelity computational 
 analyses. 
 They leveraged the surrogate model with a simulated annealing optimization 
-algorithm to generate optimized designs at a lower computational cost to 
-understand design decisions' impact on desired metrics for \gls{HFIR} \gls{LEU} 
+algorithm to generate optimized designs at a lower computational cost and
+understand the impact of design decisions on desired metrics for \gls{HFIR} \gls{LEU} 
 core designs.
 
-The \gls{SA} method uses a point-by-point approach:
+The simulated annealing method uses a point-by-point approach:
 one solution gets updated to a new solution in one iteration, which does not 
 exploit parallel systems' advantages.
-Finding an optimal solution with \gls{SA} methods takes very 
+Finding an optimal solution with simulated annealing methods takes very 
 long if high-fidelity computationally expensive codes are used to compute 
 the objective function and constraints.
-Therefore, using the \gls{SA} method is only practical if a 
-surrogate evaluation model is used as described in Betzler et al. 
+Therefore, using a simulated annealing method is only practical if a 
+surrogate evaluation model is used, as described in Betzler et al. 
 \cite{betzler_design_2019} and Kumar et al. \cite{kumar_new_2015}.
 
 Contrary to a single solution per iteration in deterministic and stochastic 
-\gls{SA} methods, evolutionary algorithms use a population of solutions in each 
+simulated annealing methods, evolutionary algorithms use a population of solutions in each 
 iteration \cite{deb_multi-objective_2001}. 
 evolutionary algorithm methods mimic nature's evolutionary principles to drive 
-its search towards an optimal solution. 
+the search towards an optimal solution. 
 With the affordability and availability of parallel computing systems, the 
 evolutionary algorithm optimization method stands out as a method 
 that easily and conveniently exploits parallel systems. 
@@ -418,13 +417,13 @@ optimization method.
 
 \subsection{Impact of Additive Manufacturing on Nuclear Reactor Design 
 Optimization}
-Previous efforts towards nuclear reactor optimization, as discussed in the above 
+Previous efforts toward nuclear reactor optimization, as discussed in the above 
 section, focused on optimizing classical reactor parameters such as 
 radius of fuel pellet and clad, enrichment of fuel, pin pitch, etc. 
-With the advancements of \gls{AM} for reactor core components, reactor designers 
-are no longer geometrically constrained by conventional fuel manufacturing and 
-can optimize beyond classical parameters to enhance fuel performance and safety 
-further. 
+With the advancements of additive manufacturing for reactor core components, 
+reactor designers are no longer geometrically constrained by conventional fuel 
+manufacturing and can optimize beyond classical parameters to enhance fuel 
+performance and safety further. 
 Reactor design objectives remain consistent with past objectives, such as 
 minimizing fuel amount and minimizing the maximum fuel temperature for a given 
 power level.
@@ -434,7 +433,7 @@ easy to manufacture with traditional processes: slabs as fuel planks, cylinders
 as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc  
 \cite{sobes_artificial_2020}.
 This has opened the door for a re-examination of reactor core 
-optimization in a complete new way, determining the optimal arbitrary geometry 
+optimization in a completely new way, determining the optimal arbitrary geometry 
 for a given objective function \cite{sobes_artificial_2020} with a much smaller 
 set of constraints. 
 
@@ -454,15 +453,15 @@ criteria.
 \gls{AI} research is the study of `intelligent agents': any device that perceives 
 its environment and takes actions that maximize its chance of successfully 
 achieving its goals \cite{david_l_poole_computational_1998}.
-Therefore, evolutionary algorithms are considered a subset of \gls{AI} as they create a population 
-of individual solutions, inspired by biological evolution, and induce goals by 
-using a `fitness function' to mutate and preferentially replicate high-scoring 
-individuals to reach an optimal solution.
+Therefore, evolutionary algorithms are considered a subset of \gls{AI} as they 
+create a population of individual solutions, inspired by biological evolution, 
+and induce goals by using a `fitness function' to mutate and preferentially 
+replicate high-scoring individuals to reach an optimal solution.
 Evolutionary algorithms often perform well at approximating solutions to many 
 problem types because they do not make any assumptions about the 
 underlying fitness landscape.
-The most popular evolutionary algorithms used to solve multi-objective problems are genetic algorithms 
-\cite{byrne_evolving_2014, krish_practical_2011}. 
+The most popular evolutionary algorithms used to solve multi-objective problems 
+are genetic algorithms \cite{byrne_evolving_2014, krish_practical_2011}. 
 
 \subsection{Genetic Algorithms}
 \label{sec:genetic_alg}
@@ -478,10 +477,13 @@ Genetic algorithms are theoretically and empirically proven to provide robust
 search in complex spaces and are computationally simple yet powerful 
 in their search for improvement \cite{goldberg_genetic_1989}. 
 GAs are advantageous compared to deterministic and stochastic simulated 
-annealing optimization methods, because (1) it searches from a population of 
-points; (2) uses objective function information, not derivatives or other 
-auxiliary knowledge of the problem; and (3) uses probabilistic transition 
-rules, not deterministic rules. 
+annealing optimization methods, because:
+\begin{enumerate}
+    \item they search from a population of points
+    \item they use objective function information, not derivatives or other 
+    auxiliary knowledge of the problem
+    \item they use probabilistic transition rules, not deterministic rules
+\end{enumerate}
 Figure \ref{fig:genetic_alg} depicts the iterative process of using a genetic algorithm
 to solve a problem. 
 The genetic algorithm generates new populations iteratively until it meets the termination 
@@ -525,20 +527,19 @@ The mutation operator alters individuals to create better individuals
 Next, we provide more description and common methods for each operator.
 
 \subsubsection{Selection Operator}
-The selection operator's primary objective is to duplicate good 
-individuals and eliminate bad individuals while keeping the population 
-constant \cite{deb_multi-objective_2001}. 
+The selection operator duplicates good individuals and eliminates bad individuals 
+while keeping the population constant \cite{deb_multi-objective_2001}. 
 It achieves this by identifying above-average individuals in a population, 
 eliminating bad individuals from the population, and replacing them with 
 copies of good individuals.
 Selection operator methods utilized in the proposed work include tournament 
-selection, best selection, and NSGA-II selection. 
-In tournament selection, tournaments are played between a user-defined number 
+selection, best selection, and \gls{NSGA-II} selection. 
+In \textit{tournament selection}, tournaments are played between a user-defined number 
 of individuals, and the best individual is kept in the population. 
-This repeatedly occurs until all the population's spots are filled. 
-In best selection, a user-defined number of best individuals are selected, 
+This repeats until all the population's spots are filled. 
+In \textit{best selection}, a user-defined number of best individuals are selected, 
 and copies are made to keep the population size constant. 
-In NSGA-II selection, parent and offspring populations are combined, and the
+In \textit{NSGA-II selection}, parent and offspring populations are combined, and the
 best individuals (with respect to fitness and spread) are selected
 \cite{deb_fast_2002}.
 Again, copies of the best individuals are made to keep the population size constant. 
@@ -555,10 +556,11 @@ random, and some portion of the individuals' attributes are exchanged with one
 another to create two new individuals \cite{deb_multi-objective_2001}. 
 Crossover operator methods utilized in the proposed work include single-point
 crossover, uniform crossover, and blend crossover. 
-In the single-point crossover, two individuals are selected from the population,
+In the single-point crossover, two individuals are selected from the population
 and a site along the individual's definition is randomly chosen. 
-Attributes on this cross site's right side are exchanged between the two 
-individuals, creating two new offspring individuals.  
+For example, if the individual is a list, an element in the list is randomly 
+chosen, and attributes on this cross site's right side are exchanged between 
+the two individuals, creating two new offspring individuals.  
 In a uniform crossover, the user defines an independent probability for each 
 individual's attribute to be exchanged; usually, $p=0.5$ is used. 
 In blend crossover, two offspring (O) individuals are created based on a linear 
@@ -586,8 +588,9 @@ in the population \cite{deb_multi-objective_2001}.
 \subsubsection{Mutation Operator}
 The mutation operator alters one or more attributes of an individual within 
 a population. 
-Mutation occurs in the genetic algorithm based on a user-defined mutation probability 
-($p_m$) that is set low to prevent a primitive random search. 
+Mutation occurs in the genetic algorithm based on a user-defined mutation 
+probability ($p_m$). 
+A low $p_m$ prevents a primitive random search. 
 Mutation operator methods utilized in the proposed work include polynomial 
 bounded mutation, in which each attribute in each individual is mutated 
 based on a polynomial distribution. 
@@ -597,8 +600,7 @@ resembling its parent, while a small $\eta$ will produce the opposite).
 
 \subsection{Balancing Genetic Algorithm Hyperparameters}
 In the proposed work, hyperparameters refer to parameters whose value controls 
-the genetic algorithm's process, such as each genetic operator's associated parameters 
-and population size.  
+the genetic algorithm's process such as the population size. 
 A well-performing genetic algorithm needs to balance the extent of exploration and 
 exploitation; this is done by finding a balance between the conservation of 
 valuable individuals obtained until the current generation while exploring new 
@@ -613,7 +615,7 @@ is challenging to achieve.
 Deb et al. \cite{deb_multi-objective_2001} and Goldberg et al. 
 \cite{goldberg_toward_1993} quantified the relationship between exploitation 
 and exploration. 
-They found that for the one-max test problem, in which the objective is to 
+They found that for the one-max test problem, in which the objective seeks to 
 maximize the number of 1s in a string, a genetic algorithm with any arbitrary 
 hyperparameter setting does not work well even on a simple problem. 
 Only genetic algorithms with a selection pressure (s) and crossover probability ($p_c$) 
@@ -622,9 +624,10 @@ optimum.
 \begin{figure}[]
     \centering
     \includegraphics[width=0.6\linewidth]{controlmap.png} 
-    \caption{Control map region of selection pressure (s) and crossover probability ($p_c$)
+    \caption{Figure reproduced from \cite{goldberg_toward_1993,deb_multi-objective_2001}
+    shows a control map region of selection pressure (s) and crossover probability ($p_c$)
     values in which the genetic algorithm will find the desired optimum for the 
-    one-max problem \cite{goldberg_toward_1993,deb_multi-objective_2001}.}
+    one-max problem.}
     \label{fig:controlmap}
 \end{figure}
 Another consideration is the population size. 
@@ -633,7 +636,7 @@ a large population size to find a global optimum \cite{deb_multi-objective_2001}
 
 Therefore, finding an optimized solution with genetic algorithms require the user 
 to conduct a hyperparameter search. 
-Ng et al. \cite{ng_improving_2021} suggest that a coarse to fine sampling scheme 
+Ng et al. \cite{ng_improving_2021} suggest that a coarse-to-fine sampling scheme 
 is the best way to perform a systematic hyperparameter search.  
 For a two-dimensional example of a coarse to fine sampling scheme, the user 
 first does a coarse sample of the entire square. 
@@ -645,11 +648,11 @@ This chapter provided a literature review of relevant past research
 efforts that give context to this proposed work.
 In summary, additive manufacturing of nuclear reactor components is a quickly 
 developing field thanks to the aerospace and auto industries, which led to 
-breakthroughs in \gls{AM} fabrication of metal components. 
+breakthroughs in additive manufacturing fabrication of metal components. 
 The promise of cheaper and faster manufacturing of reactor components with 
-\gls{AM} frees complex reactor geometries from previous manufacturing constraints
+additive manufacturing frees complex reactor geometries from previous manufacturing constraints
 and allows reactor designers to reexamine reactor design optimization.  
 Stochastic optimization methods such as evolutionary algorithms have proven to 
 work well for finding global optimums in multi-objective design problems such as 
 nuclear reactor optimization and can be leveraged to explore the vast exploration 
-design space enabled by \gls{AM}.
+design space enabled by additive manufacturing.
