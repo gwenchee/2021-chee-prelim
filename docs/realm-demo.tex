@@ -36,6 +36,8 @@ of the homogenization of each \gls{TRISO} particle's four outer layers:
 porous carbon buffer, inner pyrolytic carbon, silicon carbide layer, and the 
 outer pyrolitic carbon. 
 The \gls{TRISO} particles' dimensions remain the same.
+The $k_{eff}$ for this original straighted \gls{AHTR} configuration is 
+$1.38625 +/- 0.00109$. 
 
 The \gls{REALM} optimization problem's objective is to maximize the slab's 
 $k_{eff}$, by varying the \gls{TRISO} particle packing fraction across the slab,
@@ -76,9 +78,11 @@ The genetic algorithm varies the $a$, $b$ and $c$ variables to find a combinatio
 that maximizes the average $k_{eff}$ of the genetic algorithm's final generation 
 of $a$, $b$ and $c$ combinations.
 The OpenMC evaluator calculates $k_{eff}$. 
+Each OpenMC simulation is run with 80 active cycles, 20 inactive cycles, and 
+8000 particles to reach an uncertainty of approximately 130pcm. 
 
-
-\section{Hyperparameter Search}
+\section{Results}
+\subsection{Hyperparameter Search}
 I conducted a hyperparameter search with random sampling. 
 I used random search over grid search because of the former's efficiency in 
 high-dimensional spaces. 
@@ -184,13 +188,10 @@ experiments' scatter point are opaque.
 
 Table \ref{tab:topfive} shows the hyperparameters for the five experiments 
 with the highest $k_{eff ave}$ for each experiment's final generation.
-The best performing set of hyperparameters are from the final 
-\textit{Fine Search 2} and is experiment 39 in Table \ref{tab:topfive}
-with $k_{eff max} = 1.40519$ and $k_{eff ave} = 1.40165$.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{}
+    \caption{Input and Output Parameters}
 	\label{tab:topfive}
     \footnotesize
     \makebox[\textwidth][c]{\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}}
@@ -215,6 +216,21 @@ with $k_{eff max} = 1.40519$ and $k_{eff ave} = 1.40165$.
     \hline
     \end{tabular}}
 \end{table}
+Figure \ref{fig:topfiveplot} shows the packing fraction distributions that 
+produced the $k_{eff max}$ from each of the top five experiments. 
+\begin{figure}[]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1\linewidth]{topfive_plot.png}} 
+    \caption{}
+    \label{fig:topfiveplot}
+\end{figure}
+Four experiments had similar distributions of packing fraction peaking at approximately 
+0.23 in the centre of the slab, while one experiment had an exponential-looking 
+distribution with peak packing fraction of 0.31 at side of the slab.
+This demonstrates the robustness of the genetic algorithms to find similar solutions with 
+different hyperparameters. 
+The best performing set of hyperparameters are from the final 
+\textit{Fine Search 2} and is experiment 39 in Table \ref{tab:topfive}
+with centre-peaking packing fraction distribution with $k_{eff max} = 1.40519$. 
 
-\section{Results}
-
+% explain why this distribution makes sense. 
