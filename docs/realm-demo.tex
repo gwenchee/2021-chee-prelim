@@ -6,7 +6,8 @@
 In this chapter, I demonstrate \gls{REALM}'s capabilities with a simple neutronics 
 problem. 
 
-\section{Problem Definition}
+\section{Straightened AHTR Fuel Slab}
+\subsection{Problem Definition}
 I explore how inhomogeneous fuel distributions impact $k_{eff}$ compared to 
 homogenous fuel distributions that are customary in most reactor designs. 
 The reactor core explored is a straightened slab from the \gls{FHR} benchmark's
@@ -81,7 +82,6 @@ The OpenMC evaluator calculates $k_{eff}$.
 Each OpenMC simulation is run with 80 active cycles, 20 inactive cycles, and 
 8000 particles to reach an uncertainty of approximately 130pcm. 
 
-\section{Results}
 \subsection{Hyperparameter Search}
 I conducted a hyperparameter search with random sampling. 
 I used random search over grid search because of the former's efficiency in 
@@ -108,6 +108,7 @@ I used random sampling with a coarse-to-fine sampling scheme, previously
 discussed in Chapter \ref{chap:lit-review} to perform the hyperparameter search. 
 I started with 25 coarse experiments and fine tuned the hyperparameters
 with 15 fine experiments. 
+% explain more about 1000 evaluations gen and pop size. 
 Table \ref{tab:hyperparameter_search} shows the lower and upper bounds used 
 for random sampling of each hyperparameter. 
 \begin{table}[]
@@ -206,6 +207,7 @@ with the highest $k_{eff ave}$ for each experiment's final generation.
     \hline
     \textbf{Hyperparameter}& &&&&\\
     Population size & 83 & 28&74&60&60\\ 
+    Generations &8&22&9&10&10 \\
     Mutation probability & 0.32 &0.26&0.21&0.23&0.23\\
     Mating probability & 0.17 &0.53&0.48&0.59&0.46\\
     Selection operator & \texttt{selTournament} &\texttt{selTournament}&\texttt{selBest}&\texttt{selTournament}&\texttt{selTournament}\\
@@ -229,8 +231,62 @@ Four experiments had similar distributions of packing fraction peaking at approx
 distribution with peak packing fraction of 0.31 at side of the slab.
 This demonstrates the robustness of the genetic algorithms to find similar solutions with 
 different hyperparameters. 
+
+\subsection{Results for best hyperparameter set}
 The best performing set of hyperparameters are from the final 
 \textit{Fine Search 2} and is experiment 39 in Table \ref{tab:topfive}
 with centre-peaking packing fraction distribution with $k_{eff max} = 1.40519$. 
+Experiment 39's $k_{eff max}$ is $\sim2000$pcm larger than the original 
+straighted \gls{AHTR} configuration's $k_{eff}$. 
 
+Figure \ref{fig:keff_conv_39} and \ref{fig:pf_39} show the evolution of $k_{eff}$ 
+and packing fraction distribution through each generation of the best performing 
+39$^{th}$ experiment, respectively. 
+\begin{figure}[]
+    \centering
+    \begin{subfigure}{\textwidth}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{keff_conv_39.png}} 
+    \caption{Minimum, average, and maximum $k_{eff}$ values evolution.}
+    \label{fig:keff_conv_39}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{pf_39.png}} 
+        \caption{Maximum $k_{eff}$'s packing fraction distribution evolution.}
+        \label{fig:pf_39}
+    \end{subfigure}
+    \caption{ Results for each generation for REALM's genetic algorithm optimization 
+    of the Straightened \acrfull{AHTR} Fuel Slab. The REALM simulation used 
+    the 39$^{th}$ experiment's hyperparameter set.}
+    \label{fig:39}
+\end{figure}
+The maximum $k_{eff}$ converged quickly by generation 1, however, this is not 
+usually the case. 
+The genetic algorithm optimization process is stochastic, and so there is always 
+the possibility that the algorithm randomly samples a set of input parameters
+that maximizes the objective function. 
+The average $k_{eff}$ shows how the average population of individuals converge 
+towards a higher $k_{eff}$ with improvements from each generation. 
+Figure \ref{fig:keff_conv_15} and \ref{fig:pf_15} show the evolution of $k_{eff}$ 
+and packing fraction distribution through each generation of the second best 
+performing 15$^{th}$ experiment, respectively. 
+Experiment 15 demonstrates how both maximum and average $k_{eff}$ converges 
+towards a higher $k_{eff}$ with improvements from each generation.
+\begin{figure}[]
+    \centering
+    \begin{subfigure}{\textwidth}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{keff_conv_15.png}} 
+    \caption{Minimum, average, and maximum $k_{eff}$ values evolution.}
+    \label{fig:keff_conv_15}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{pf_15.png}} 
+        \caption{Maximum $k_{eff}$'s packing fraction distribution evolution.}
+        \label{fig:pf_15}
+    \end{subfigure}
+    \caption{ Results for each generation for REALM's genetic algorithm optimization 
+    of the Straightened \acrfull{AHTR} Fuel Slab. The REALM simulation used 
+    the 15$^{th}$ experiment's hyperparameter set.}
+    \label{fig:15}
+\end{figure}
+% convergence of keff
 % explain why this distribution makes sense. 
