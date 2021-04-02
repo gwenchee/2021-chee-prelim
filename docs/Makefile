@@ -1,6 +1,6 @@
 manuscript = 2021-chee-prelim
 references = $(wildcard *.bib)
-latexopt   = -shell-escape -halt-on-error -file-line-error
+latexopt   = -shell-escape -halt-on-error -file-line-error 
 
 all: all-via-pdf
 

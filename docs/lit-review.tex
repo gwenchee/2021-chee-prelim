@@ -599,6 +599,7 @@ crowding-degree of the mutation, $\eta$ (a large $\eta$ will produce a mutant
 resembling its parent, while a small $\eta$ will produce the opposite).  
 
 \subsection{Balancing Genetic Algorithm Hyperparameters}
+\label{sec:balance}
 In the proposed work, hyperparameters refer to parameters whose value controls 
 the genetic algorithm's process such as the population size. 
 A well-performing genetic algorithm needs to balance the extent of exploration and 
@@ -642,6 +643,21 @@ For a two-dimensional example of a coarse to fine sampling scheme, the user
 first does a coarse sample of the entire square. 
 A fine search is then conducted on the best-performing region of the coarse 
 search. 
+Ng et al. also suggests to use random sampling over grid sampling because of the 
+former's efficiency in high-dimensional spaces. 
+Figure \ref{fig:random_vs_grid_sampling} illustrates how grid sampling gives 
+even coverage in the original 2-d space, but provides inefficient coverage in 
+projections onto either the x1 or x2 subspace.  
+In contrast, random sampling has slightly less evenly distributed in the original 
+space, but far more evenly distributed in the subspaces.
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\linewidth]{random_vs_grid_sampling.png} 
+    \caption{The impact of grid sampling vs random sampling on coverage of projections 
+    into subspaces (reproduced from \cite{}). Random sampling has better coverage 
+    in the subspaces.}
+    \label{fig:random_vs_grid_sampling}
+\end{figure}
 
 \section{Summary}
 This chapter provided a literature review of relevant past research 

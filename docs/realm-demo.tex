@@ -3,13 +3,14 @@
 % - Demonstrate OpenMC problem with REALM. 
 % Structure 
 % - realm demonstration of OpenMC Coupling for a toy problem. 
-In this chapter, I demonstrate \gls{REALM}'s capabilities with a simple neutronics 
-problem. 
+In this chapter, I demonstrate using \gls{REALM} to apply a genetic algorithm 
+to maximize $k_{eff}$ in a single \gls{AHTR} fuel slab.  
 
 \section{Straightened AHTR Fuel Slab}
 \subsection{Problem Definition}
-I explore how inhomogeneous fuel distributions impact $k_{eff}$ compared to 
-homogenous fuel distributions that are customary in most reactor designs. 
+The objective of this demonstration is to explore how inhomogeneous fuel 
+distributions impact $k_{eff}$ compared to homogenous fuel distributions that 
+are customary in most reactor designs. 
 The reactor core explored is a straightened slab from the \gls{FHR} benchmark's
 \gls{AHTR} design.
 Figure \ref{fig:straightened_slab} illustrates the straightened fuel slab. 
@@ -53,7 +54,7 @@ governed by a sine distribution:
     PF(x) &= (a\ sin(bx + c) + 2) \times NF\\
     \intertext{where}
     a &= \mbox{amplitude, peak deviation of the function from zero} \nonumber \\
-    b &= \mbox{angular frequency, rate of change of the function argument s} [\frac{radians}{s}] \nonumber \\
+    b &= \mbox{angular frequency, rate of change of the function argument } [\frac{radians}{s}] \nonumber \\
     c &= \mbox{phase, specifies (in radians) where in its cycle the oscillation is at t = 0.} \nonumber \\
     x &= \mbox{midpoint value for each slice} \nonumber \\
     NF &= \mbox{Normalization factor} \nonumber
@@ -92,34 +93,74 @@ algorithm to explore various sine distributions.
 The OpenMC evaluator calculates $k_{eff}$. 
 Each OpenMC simulation is run with 80 active cycles, 20 inactive cycles, and 
 8000 particles to reach an uncertainty of approximately 130pcm. 
+Figure \ref{fig:realm-input-simple} shows the REALM input file for this 
+genetic algorithm optimization problem. 
+\texttt{ahtr\_slab\_openmc.py} is the template OpenMC script that accepts 
+$a$, $b$ and $c$ from REALM as described in Chapter \ref{chap:realm}. 
+\begin{figure}[]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        fontsize=\footnotesize,
+        linenos
+        ]{json}
+        {
+            "control_variables": {
+                "a": {"min": 0.0, "max": 2.0},
+                "b": {"min": 0.0, "max": 1.57},
+                "c": {"min": 0.0, "max": 6.28},
+            },
+            "evaluators": {
+                "openmc": {
+                    "input_script": "ahtr_slab_openmc.py",
+                    "inputs": ["a", "b", "c"],
+                    "outputs": ["keff"],
+                    "keep_files": false,
+                }
+            },
+            "constraints": {"keff": {"operator": [">="], "constrained_val": [1.0]}},
+            "algorithm": {
+                "objective": "max",
+                "optimized_variable": "keff",
+                "pop_size": 60,
+                "generations": 10,
+                "mutation_probability": 0.23,
+                "mating_probability": 0.46,
+                "selection_operator": {"operator": "selTournament", "k": 15, "tournsize": 5},
+                "mutation_operator": {
+                    "operator": "mutPolynomialBounded",
+                    "eta": 0.23,
+                    "indpb": 0.23,
+                },
+                "mating_operator": {"operator": "cxBlend", "alpha": 0.46},
+            },
+        }
+        
+    \end{minted}
+    \caption{\acrfull{REALM} JSON input file to maximize $k_{eff}$ in the 
+    straightened \acrfull{AHTR} fuel slab by varying packing fraction distribution 
+    with control variables, $a$, $b$, $c$.}
+    \label{fig:realm-input-simple}
+\end{figure}
 
 \subsection{Hyperparameter Search}
-I conducted a hyperparameter search with random sampling. 
-I used random search over grid search because of the former's efficiency in 
-high-dimensional spaces. 
-Figure \ref{fig:random_vs_grid_sampling} illustrates how grid sampling gives 
-even coverage in the original 2-d space, but provides inefficient coverage in 
-projections onto either the x1 or x2 subspace.  
-In contrast, random sampling has slightly less evenly distributed in the original 
-space, but far more evenly distributed in the subspaces.
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.8\linewidth]{random_vs_grid_sampling.png} 
-    \caption{The impact of grid sampling vs random sampling on coverage of projections 
-    into subspaces (reproduced from \cite{}). Random sampling has better coverage 
-    in the subspaces.}
-    \label{fig:random_vs_grid_sampling}
-\end{figure}
+REALM's input file allows the user to define the genetic algorithm's 
+hyperparameters. 
+A good hyperparameter set is able to guide the optimization process by 
+balancing exploitation and exploration to find an optimal solution more quickly 
+or accurately. 
+Finding a good set of hyperparameters requires trial and error. 
+
+I used random sampling with a coarse-to-fine sampling scheme, whose advantages 
+I previously discussed in Section \ref{sec:balance} to perform the hyperparameter search. 
 The hyperparameters varied include: population size, number of generations, 
 mutation probability, mating probability, selection operator, selection operator's 
 k value, selection operator's tournament size, mutation operator, and mating 
 operator.  
-
-I used random sampling with a coarse-to-fine sampling scheme, previously 
-discussed in Chapter \ref{chap:lit-review} to perform the hyperparameter search. 
 I started with 25 coarse experiments and fine tuned the hyperparameters
-with 15 fine experiments. 
-For each experiment, I hold 
+with 15 more experiments. 
+For each experiment, I hold the number of OpenMC evaluations constant at 1000. 
 Table \ref{tab:hyperparameter_search} shows the lower and upper bounds used 
 for random sampling of each hyperparameter. 
 \begin{table}[]
