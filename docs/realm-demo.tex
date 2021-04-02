@@ -52,7 +52,9 @@ governed by a sine distribution:
 \begin{align}
     PF(x) &= (a\ sin(bx + c) + 2) \times NF\\
     \intertext{where}
-    a, b, c &= \mbox{constants that control sine function's shape} \nonumber \\
+    a &= \mbox{amplitude, peak deviation of the function from zero} \nonumber \\
+    b &= \mbox{angular frequency, rate of change of the function argument s} [\frac{radians}{s}] \nonumber \\
+    c &= \mbox{phase, specifies (in radians) where in its cycle the oscillation is at t = 0.} \nonumber \\
     x &= \mbox{midpoint value for each slice} \nonumber \\
     NF &= \mbox{Normalization factor} \nonumber
 \end{align}
@@ -78,6 +80,15 @@ with packing fraction varying based on this sine distribution.
 The genetic algorithm varies the $a$, $b$ and $c$ variables to find a combination 
 that maximizes the average $k_{eff}$ of the genetic algorithm's final generation 
 of $a$, $b$ and $c$ combinations.
+The upper and lower bounds of $a$, $b$ and $c$ are: 
+\begin{itemize}
+    \item 0 $<$ $a$ $<$ 2 
+    \item 0 $<$ $b$ $<$ $\frac{\pi}{2}$
+    \item 0 $<$ $c$ $<$ $2\pi$
+\end{itemize}
+The $a$ variable bounds were selected to keep the sine distribution from falling 
+below zero. $b$ and $c$ variable bounds are large enough to allow the genetic 
+algorithm to explore various sine distributions. 
 The OpenMC evaluator calculates $k_{eff}$. 
 Each OpenMC simulation is run with 80 active cycles, 20 inactive cycles, and 
 8000 particles to reach an uncertainty of approximately 130pcm. 
@@ -108,7 +119,7 @@ I used random sampling with a coarse-to-fine sampling scheme, previously
 discussed in Chapter \ref{chap:lit-review} to perform the hyperparameter search. 
 I started with 25 coarse experiments and fine tuned the hyperparameters
 with 15 fine experiments. 
-% explain more about 1000 evaluations gen and pop size. 
+For each experiment, I hold 
 Table \ref{tab:hyperparameter_search} shows the lower and upper bounds used 
 for random sampling of each hyperparameter. 
 \begin{table}[]
@@ -233,6 +244,8 @@ This demonstrates the robustness of the genetic algorithms to find similar solut
 different hyperparameters. 
 
 \subsection{Results for best hyperparameter set}
+I define the best-performing hyperparameter set as the experiment that produces 
+the highest average $k_{eff}$ in its final generation. 
 The best performing set of hyperparameters are from the final 
 \textit{Fine Search 2} and is experiment 39 in Table \ref{tab:topfive}
 with centre-peaking packing fraction distribution with $k_{eff max} = 1.40519$. 
@@ -263,10 +276,12 @@ The maximum $k_{eff}$ converged quickly by generation 1, however, this is not
 usually the case. 
 The genetic algorithm optimization process is stochastic, and so there is always 
 the possibility that the algorithm randomly samples a set of input parameters
-that maximizes the objective function. 
-The average $k_{eff}$ shows how the average population of individuals converge 
+that maximizes the objective function early on in the genetic algorithm 
+optimization process. 
+The average $k_{eff}$ demonstrates how the average population of individuals converge 
 towards a higher $k_{eff}$ with improvements from each generation. 
-Figure \ref{fig:keff_conv_15} and \ref{fig:pf_15} show the evolution of $k_{eff}$ 
+To demonstrate how the genetic algorithm optimization process usually goes, 
+Figures \ref{fig:keff_conv_15} and \ref{fig:pf_15} show the evolution of $k_{eff}$ 
 and packing fraction distribution through each generation of the second best 
 performing 15$^{th}$ experiment, respectively. 
 Experiment 15 demonstrates how both maximum and average $k_{eff}$ converges 
@@ -288,5 +303,16 @@ towards a higher $k_{eff}$ with improvements from each generation.
     the 15$^{th}$ experiment's hyperparameter set.}
     \label{fig:15}
 \end{figure}
-% convergence of keff
-% explain why this distribution makes sense. 
+
+Both experiments 39 and 15 have packing fraction peaking at approximately 
+0.23 in the centre of the slab and decreasing to zero at the sides of the slab.  
+The packing fraction distribution for $k_{eff max}$ is consistent with what we 
+understand from the original \gls{AHTR},: a high $k_{eff}$ occurs when there is 
+a good balance between fuel loading and moderation space. 
+Fission occurs at areas of high TRISO particle concentration at thermal flux, 
+however, the neutrons are born at fast flux and require moderation to slow down 
+to thermal ranges.
+Therefore, larger areas of low TRISO particle concentration, ensure good 
+resonance escape probability resulting in higher thermal flux, leading to more 
+fission occurring and a higher $k_{eff}$. 
+
