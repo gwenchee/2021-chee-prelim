@@ -75,7 +75,7 @@ with packing fraction varying based on this sine distribution.
     \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{triso_distribution_sine.png}} 
     \caption{Below: $PF(x) = (0.5\ sin(\frac{\pi}{3}x + \pi) + 2)  \times NF$ 
     sine distribution with red points indicating the packing fraction at each slice. 
-    Above: Straightened \acrlong{AHTR} fuel slab with varying \gls{TRISO} particle 
+    Above: Straightened \acrfull{AHTR} fuel slab with varying \gls{TRISO} particle 
     distribution across ten slices based on the sine distribution. }
     \label{fig:triso_distribution}
 \end{figure}
@@ -178,10 +178,12 @@ for random sampling of each hyperparameter.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{Hyperparameters}
+    \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
+    \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
+    upper bounds for each phase of the search is listed.}
 	\label{tab:hyperparameter_search}
     \footnotesize
-    \begin{tabular}{p{4cm}lp{3.4cm}p{3.4cm}p{3.4cm}}
+    \makebox[\textwidth][c]{\begin{tabular}{p{4cm}lp{3.4cm}p{3.4cm}p{3.4cm}}
     \hline 
     \textbf{Hyperparameter}& \textbf{Type} & \textbf{Coarse Search Bounds} & \textbf{Fine Search 1 Bounds} & \textbf{Fine Search 2 Bounds} \\
     \hline
@@ -196,7 +198,7 @@ for random sampling of each hyperparameter.
     Mutation Operator & Discrete & \texttt{mutPolynomialBounded} &\texttt{mutPolynomialBounded}&\texttt{mutPolynomialBounded}\\
     Mating Operator & Discrete& \texttt{cxOnePoint}, \texttt{cxUniform}, \texttt{cxBlend} &\texttt{cxOnePoint}, \texttt{cxUniform}, \texttt{cxBlend}&\texttt{cxOnePoint}, \texttt{cxBlend}\\ 
     \hline
-    \end{tabular}
+    \end{tabular}}
 \end{table}
 
 The objective of the initial 25 coarse experiments is to narrow down the 
@@ -256,7 +258,7 @@ experiments' scatter point are opaque.
 \begin{figure}[]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{input_hyperparameters_sens.png}} 
-    \caption{Fine hyperparameters search's results. Hyperparameters are plotted 
+    \caption{Hyperparameters search's results. Hyperparameters are plotted 
     against a,b,c input parameters, each experiment's final generation
     $k_{eff max}$, and final generation $k_{eff ave}$ with a third dimension of 
     each experiment's final population's average $k_{eff}$ indicated by each 
