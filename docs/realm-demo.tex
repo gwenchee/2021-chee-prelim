@@ -3,7 +3,7 @@
 % - Demonstrate OpenMC problem with REALM. 
 % Structure 
 % - realm demonstration of OpenMC Coupling for a toy problem. 
-In this chapter, I demonstrate using \gls{REALM} to apply a genetic algorithm 
+In this chapter, I demonstrate using \gls{REALM} to apply genetic algorithms 
 to maximize $k_{eff}$ in a single \gls{AHTR} fuel slab.  
 
 \section{Straightened AHTR Fuel Slab}
@@ -21,7 +21,7 @@ Figure \ref{fig:straightened_slab} illustrates the straightened fuel slab.
     \resizebox{0.3\textwidth}{!}{
         \hspace{1cm}
         \fbox{\begin{tabular}{ll}
-            \textcolor{fhrblue}{$\blacksquare$} & FliBe \\
+            \textcolor{fhrblue}{$\blacksquare$} & FLiBe \\
             \textcolor{fhrgrey}{$\blacksquare$} & Graphite (Fuel Plank)\\
             \textcolor{fhrred}{$\blacksquare$} & Graphite (Fuel Stripe) \\
             \textcolor{fhrblack}{$\blacksquare$} & TRISO particle 
@@ -39,20 +39,21 @@ porous carbon buffer, inner pyrolytic carbon, silicon carbide layer, and the
 outer pyrolitic carbon. 
 The \gls{TRISO} particles' dimensions remain the same.
 The $k_{eff}$ for this original straighted \gls{AHTR} configuration is 
-$1.38625 +/- 0.00109$. 
+$1.38625 \pm 0.00109$. 
 
 The \gls{REALM} optimization problem's objective is to maximize the slab's 
 $k_{eff}$, by varying the \gls{TRISO} particle packing fraction across the slab,
 while keeping total \gls{TRISO} particle total packing fraction constant at 0.0979. 
 This total packing fraction is consistent with the original straightened slab with 
 TRISO particles in fuel stripes (Figure \ref{fig:straightened_slab}). 
-The slab is divided into ten slices along the x axis between the FliBe and graphite 
-buffers resulting in ten $2.31 \times 2.55 \times 1.85\ cm^3$ slices. 
+The slab is divided into ten slices along the x axis between the \gls{FLiBe} and 
+graphite buffers resulting in ten $2.31 \times 2.55 \times 1.85\ cm^3$ slices. 
 The \gls{TRISO} particle packing fraction's distribution across slices is 
 governed by a sine distribution: 
 \begin{align}
     PF(x) &= (a\ sin(bx + c) + 2) \times NF\\
     \intertext{where}
+    PF & \mbox{packing fraction} \nonumber \\ 
     a &= \mbox{amplitude, peak deviation of the function from zero} \nonumber \\
     b &= \mbox{angular frequency, rate of change of the function argument } [\frac{radians}{s}] \nonumber \\
     c &= \mbox{phase, specifies (in radians) where in its cycle the oscillation is at t = 0.} \nonumber \\
@@ -78,9 +79,10 @@ with packing fraction varying based on this sine distribution.
     distribution across ten slices based on the sine distribution. }
     \label{fig:triso_distribution}
 \end{figure}
-The genetic algorithm varies the $a$, $b$ and $c$ variables to find a combination 
-that maximizes the average $k_{eff}$ of the genetic algorithm's final generation 
-of $a$, $b$ and $c$ combinations.
+
+In REALM, a genetic algorithm varies the $a$, $b$ and $c$ variables to find a combination 
+that produces a packing fraction distribution that maximizes the $k_{eff}$ in 
+the slab. 
 The upper and lower bounds of $a$, $b$ and $c$ are: 
 \begin{itemize}
     \item 0 $<$ $a$ $<$ 2 
@@ -311,9 +313,8 @@ that produced $k_{eff max} = 1.40519$.
     red points indicating the packing fraction at each slice. 
     Above: Straightened \acrlong{AHTR} fuel slab with varying \gls{TRISO} particle 
     distribution across ten slices based on the sine distribution. }
-    \label{fig:triso_distribution}
+    \label{fig:triso_distribution_sine_39}
 \end{figure}
-
 
 Figure \ref{fig:keff_conv_39} and \ref{fig:pf_39} show the evolution of $k_{eff}$ 
 and packing fraction distribution through each generation of the best performing 
@@ -343,6 +344,8 @@ that maximizes the objective function early on in the genetic algorithm
 optimization process. 
 The average $k_{eff}$ demonstrates how the average population of individuals converge 
 towards a higher $k_{eff}$ with improvements from each generation. 
+I used the BlueWaters supercomputer to run REALM. 
+
 To demonstrate how the genetic algorithm optimization process usually goes, 
 Figures \ref{fig:keff_conv_15} and \ref{fig:pf_15} show the evolution of $k_{eff}$ 
 and packing fraction distribution through each generation of the second best 
@@ -380,14 +383,18 @@ occurs when there is a good balance between fuel loading and moderation space.
 Fission occurs at areas of high \gls{TRISO} particle concentration at thermal flux, 
 however, the neutrons are born at fast flux and require moderation to slow down 
 to thermal ranges.
-Therefore, larger areas of low TRISO particle concentration, ensure good 
-resonance escape probability resulting in higher thermal flux, leading to more 
+Therefore, larger moderation areas ensure good resonance escape probability for 
+the fast neutrons resulting in higher thermal flux, leading to more 
 fission occurring and a higher $k_{eff}$. 
 
 Another observation is that TRISO particles peak in the centre of the slab, 
 proving that when only neutronics $k_{eff}$ is the objective function, the 
-fuel tends to want to clump in the middle. 
-However, this is not ideal for heat transfer and ensuring flat power. 
+fuel tends to want to culminate in the middle. 
+However, this is not ideal for heat transfer and ensuring flat power across 
+the core. 
+
+With these shortcomings in mind, I proceed to the future work chapter to discuss 
+the types of simulations that will be run to optimize for these other parameters. 
 
 % These ideas lead into the proposal section 
 
@@ -396,3 +403,22 @@ However, this is not ideal for heat transfer and ensuring flat power.
 % try the whole 1/3 diamond fuel elemt 
 
 \section{Summary}
+This chapter demonstrated applying \gls{REALM} to maximize $k_{eff}$ in a 
+straightened \acrfull{AHTR} fuel slab through variation in the \gls{TRISO} 
+particle packing fraction distribution. 
+I began by conducting a coarse-to-fine random sampling hyperparameter search to 
+find the genetic algorithm hyperparameters that worked best for this optimization 
+problem.
+Experiment 39 performed the best with a hyperparameter set that produced the 
+highest final generation average $k_{eff}$ of 1.40165. 
+The \gls{TRISO} particle packing fraction that produced the final generation's 
+maximum $k_{eff}$ of 1.40519 peaks at the centre of the slab with a packing 
+fraction distribution of $PF(x)=1.989\ sin(0.54x+3.143)$. 
+This problem demonstrated how effective and robust genetic algorithms are for 
+optimizing reactor parameters for an objective function. 
+This demonstration problem had a single objective function which was to maximize 
+$k_{eff}$. 
+However, there are many other objectives that should be considered such as 
+maximizing heat transfer, and minimizing power peaking in the core. 
+Thus, in the next chapter, I will propose future simulations for optimizing
+all these objective functions.

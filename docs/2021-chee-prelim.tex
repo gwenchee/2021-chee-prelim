@@ -18,7 +18,6 @@
 \usepackage{booktabs} % nice rules (thick lines) for tables
 \usepackage{array}
 \usepackage{tabularx}
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}
 \usepackage[table]{xcolor}
 \newcolumntype{b}{>{\hsize=1.0\hsize}X}
 \newcolumntype{s}{>{\hsize=.5\hsize}X}
@@ -37,15 +36,14 @@
 %\usepackage[font=small,labelfont=bf]{caption}
 \usepackage[acronym,toc]{glossaries}  % acronyms inclusion
 \usepackage{color,soul}
-\makeglossary
+%\makeglossary
 \usepackage{xspace}
 \usepackage{float}
 \usepackage{subcaption}
 \newcommand{\Cyclus}{\textsc{Cyclus}\xspace}%
 \newcommand{\Cycamore}{\textsc{Cycamore}\xspace}%
 \newcommand{\deploy}{\texttt{d3ploy}\xspace}%
-\glspatchtabularx
-
+%\glspatchtabularx
 \usepackage{amsmath}%
 \usepackage{MnSymbol}%
 \usepackage{wasysym}%
@@ -175,9 +173,9 @@ text width=22em, text centered, rounded corners, minimum height=3em]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INSERT REAL CONTENT HERE
 %
-%\include{intro}	
-%\include{lit-review}
-%\include{fhr-benchmark}
+\include{intro}	
+\include{lit-review}
+\include{fhr-benchmark}
 \include{realm}
 \include{realm-demo}
 %\include{proposal}
