@@ -80,7 +80,7 @@ with packing fraction varying based on this sine distribution.
     \label{fig:triso_distribution}
 \end{figure}
 
-In REALM, a genetic algorithm varies the $a$, $b$ and $c$ variables to find a combination 
+In \gls{REALM}, a genetic algorithm varies the $a$, $b$ and $c$ variables to find a combination 
 that produces a packing fraction distribution that maximizes the $k_{eff}$ in 
 the slab. 
 The upper and lower bounds of $a$, $b$ and $c$ are: 
@@ -95,10 +95,12 @@ algorithm to explore various sine distributions.
 The OpenMC evaluator calculates $k_{eff}$. 
 Each OpenMC simulation is run with 80 active cycles, 20 inactive cycles, and 
 8000 particles to reach an uncertainty of approximately 130pcm. 
-Figure \ref{fig:realm-input-simple} shows the REALM input file for this 
+Figure \ref{fig:realm-input-simple} shows the \gls{REALM} input file for this 
 genetic algorithm optimization problem. 
-\texttt{ahtr\_slab\_openmc.py} is the template OpenMC script that accepts 
-$a$, $b$ and $c$ from REALM as described in Chapter \ref{chap:realm}. 
+\texttt{ahtr\_slab\_openmc.py} is the template OpenMC straightened \gls{AHTR} 
+slab script that accepts $a$, $b$ and $c$ from \gls{REALM}, calculates packing 
+fraction distribution and assigns packing fraction values to each fuel slice. 
+Subsequently, \gls{REALM} runs the templated OpenMC script to generate $k_{eff}$. 
 \begin{figure}[]
     \begin{minted}[
         frame=lines,
@@ -147,10 +149,10 @@ $a$, $b$ and $c$ from REALM as described in Chapter \ref{chap:realm}.
 \end{figure}
 
 \subsection{Hyperparameter Search}
-REALM's input file allows the user to define the genetic algorithm's 
+In \gls{REALM}'s input file, the user can define the genetic algorithm's 
 hyperparameters. 
 A good hyperparameter set is able to guide the optimization process by 
-balancing exploitation and exploration to find an optimal solution more quickly 
+balancing exploitation and exploration to find an optimal solution quickly 
 and accurately. 
 Finding a good set of hyperparameters requires a trial and error process. 
 
@@ -158,8 +160,8 @@ I performed the hyperparameter search with a coarse-to-fine random sampling sche
 whose advantages were previously discussed in Section \ref{sec:balance}.
 The hyperparameters varied include: population size, number of generations, 
 mutation probability, mating probability, selection operator, selection operator's 
-k value, selection operator's tournament size, mutation operator, and mating 
-operator.  
+number of individuals, selection operator's tournament size, mutation operator, 
+and mating operator.  
 I started with 25 coarse experiments and fine tuned the hyperparameters
 with 15 more experiments. 
 For each genetic algorithm experiment, I hold the number of OpenMC evaluations 
@@ -198,7 +200,7 @@ for random sampling of each hyperparameter.
 \end{table}
 
 The objective of the initial 25 coarse experiments is to narrow down the 
-hyperparameters to find a narrower set of optimal hyperparameter bounds that 
+hyperparameters to find a smaller set of optimal hyperparameter bounds that 
 produce higher average $k_{eff}$ values in each experiment's final generation. 
 Figure \ref{fig:hyperparameter_sens} shows the hyperparameters' plotted against 
 each other with a third color dimension of the average $k_{eff}$ value in each 
@@ -234,6 +236,18 @@ the \textit{Fine Search 1 Bounds}.
 From these results, I conducted a second fine search with 5 experiments 
 (35 to 39) with further tuned hyperparameter bounds as shown in Table 
 \ref{tab:hyperparameter_search}'s \textit{Fine Search 2 Bounds} column. 
+These new hyperparameter bounds were determined based on these reasoning: 
+\begin{itemize}
+    \item Mutation probability has larger $k_{eff ave}$ between 0.2 and 0.3.
+    \item I overlooked a peaking of $k_{eff ave}$ at mating probability between 
+    0.45 and 0.6 in the previous \textit{Fine Search 1}, thus shifted the bounds. 
+    \item The highest $k_{eff ave}$ occurred for \texttt{selTournament}. 
+    \item I narrowed down mating operator options to \texttt{cxBlend} and 
+    \texttt{cxOnePoint} since they had higher $k_{eff ave}$. 
+    \item I decided to select an arbitrary number for population size, 
+    selection individuals and tournament size since they did not appear to have 
+    any correlation with $k_{eff ave}$. 
+\end{itemize}
 Figure \ref{fig:input_hyperparameters_sens} shows the relationship between 
 hyperparameter values and $a$,$b$,$c$ input parameters, final generation 
 $k_{eff max}$, and final generation $k_{eff ave}$. 
@@ -249,13 +263,19 @@ experiments' scatter point are opaque.
     scatter point's color.}
     \label{fig:input_hyperparameters_sens}
 \end{figure}
+In Figure \ref{fig:input_hyperparameters_sens}, on average, the fine experiments 
+(opaque scatter points) have higher $k_{eff ave}$ which indicates that 
+hyperparameter search process met its objective of finding hyperparameter 
+bounds that enable quicker and more accurate optimization. 
 
 Table \ref{tab:topfive} shows the hyperparameters for the five experiments 
 with the highest final generation $k_{eff ave}$.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{Input and Output Parameters}
+    \caption{Input Parameters, $k_{eff}$ results, and hyperparameter values for 
+    the five hyperparameter search experiments with the highest final generation 
+    $k_{eff ave}$.}
 	\label{tab:topfive}
     \footnotesize
     \makebox[\textwidth][c]{\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}}
@@ -295,9 +315,19 @@ distribution with peak packing fraction of 0.31 at side of the slab.
 This demonstrates the robustness of the genetic algorithms to find similar solutions with 
 different hyperparameters. 
 
+These simulations are run on the BlueWaters supercomputer \cite{ncsa_about_2017}. 
+In each \gls{REALM} simulation, a population size number of individual OpenMC 
+simulations are run at each generation. 
+Each OpenMC simulation takes approximately 13 minutes to run on a single BlueWaters 
+XE node. 
+With approximately 600 OpenMC evaluations per \gls{REALM} simulation, the total 
+\gls{REALM} simulation time is about 130 BlueWaters node-hours. 
+The hyperparameter search ran 40 REALM simulations, thus using approximately
+5200 node-hours.
+
 \subsection{Results for best hyperparameter set}
 I define the best-performing hyperparameter set as the experiment that produces 
-the highest final generation $k_{eff ave}$. 
+the highest $k_{eff ave}$ in its final generation. 
 The best performing set of hyperparameters are from the final 
 \textit{Fine Search 2} and is experiment 39 in Table \ref{tab:topfive}
 with centre-peaking packing fraction distribution with $k_{eff max} = 1.40519$. 
@@ -331,21 +361,19 @@ and packing fraction distribution through each generation of the best performing
         \caption{Maximum $k_{eff}$'s packing fraction distribution evolution.}
         \label{fig:pf_39}
     \end{subfigure}
-    \caption{ Results for each generation for REALM's genetic algorithm optimization 
-    of the Straightened \acrfull{AHTR} Fuel Slab. The REALM simulation used 
+    \caption{ Results for each generation for \gls{REALM}'s genetic algorithm optimization 
+    of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{REALM} simulation used 
     the 39$^{th}$ experiment's hyperparameter set.}
     \label{fig:39}
 \end{figure}
-The maximum $k_{eff}$ converged quickly by generation 1, however, this is not 
+The $k_{eff max}$ converged quickly by generation 1, however, this is not 
 usually the case. 
 The genetic algorithm optimization process is stochastic, and so there is always 
 the possibility that the algorithm randomly samples a set of input parameters
 that maximizes the objective function early on in the genetic algorithm 
 optimization process. 
-The average $k_{eff}$ demonstrates how the average population of individuals converge 
+The $k_{eff ave}$ demonstrates how the average population of individuals converge 
 towards a higher $k_{eff}$ with improvements from each generation. 
-I used the BlueWaters supercomputer to run REALM. 
-
 To demonstrate how the genetic algorithm optimization process usually goes, 
 Figures \ref{fig:keff_conv_15} and \ref{fig:pf_15} show the evolution of $k_{eff}$ 
 and packing fraction distribution through each generation of the second best 
@@ -364,8 +392,8 @@ towards a higher $k_{eff}$ with improvements from each generation.
         \caption{Maximum $k_{eff}$'s packing fraction distribution evolution.}
         \label{fig:pf_15}
     \end{subfigure}
-    \caption{ Results for each generation for REALM's genetic algorithm optimization 
-    of the Straightened \acrfull{AHTR} Fuel Slab. The REALM simulation used 
+    \caption{ Results for each generation for \gls{REALM}'s genetic algorithm optimization 
+    of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{REALM} simulation used 
     the 15$^{th}$ experiment's hyperparameter set.}
     \label{fig:15}
 \end{figure}
@@ -388,11 +416,11 @@ the fast neutrons resulting in higher thermal flux, leading to more
 fission occurring and a higher $k_{eff}$. 
 
 Another observation is that TRISO particles peak in the centre of the slab, 
-proving that when only neutronics $k_{eff}$ is the objective function, the 
-fuel tends to want to culminate in the middle. 
-However, this is not ideal for heat transfer and ensuring flat power across 
-the core. 
-
+proving that when the optimization problem focuses purely on the neutronics 
+of the slab by maximizing $k_{eff}$, the fuel tends to want to culminate in the 
+middle. 
+However, this is not ideal for other important reactor core qualities such as 
+good heat transfer and ensuring flat power across the core. 
 With these shortcomings in mind, I proceed to the future work chapter to discuss 
 the types of simulations that will be run to optimize for these other parameters. 
 
@@ -403,17 +431,17 @@ the types of simulations that will be run to optimize for these other parameters
 % try the whole 1/3 diamond fuel elemt 
 
 \section{Summary}
-This chapter demonstrated applying \gls{REALM} to maximize $k_{eff}$ in a 
-straightened \acrfull{AHTR} fuel slab through variation in the \gls{TRISO} 
+This chapter demonstrated successfully applying \gls{REALM} to maximize $k_{eff}$ 
+in a straightened \acrfull{AHTR} fuel slab through varying the \gls{TRISO} 
 particle packing fraction distribution. 
 I began by conducting a coarse-to-fine random sampling hyperparameter search to 
 find the genetic algorithm hyperparameters that worked best for this optimization 
 problem.
 Experiment 39 performed the best with a hyperparameter set that produced the 
 highest final generation average $k_{eff}$ of 1.40165. 
-The \gls{TRISO} particle packing fraction that produced the final generation's 
-maximum $k_{eff}$ of 1.40519 peaks at the centre of the slab with a packing 
-fraction distribution of $PF(x)=1.989\ sin(0.54x+3.143)$. 
+The \gls{TRISO} particle packing fraction distribution that produced the final 
+generation's maximum $k_{eff}$ of 1.40519 peaks at the centre of the slab with 
+a packing fraction distribution of $PF(x)=1.989\ sin(0.54x+3.143)$. 
 This problem demonstrated how effective and robust genetic algorithms are for 
 optimizing reactor parameters for an objective function. 
 This demonstration problem had a single objective function which was to maximize 
@@ -421,4 +449,4 @@ $k_{eff}$.
 However, there are many other objectives that should be considered such as 
 maximizing heat transfer, and minimizing power peaking in the core. 
 Thus, in the next chapter, I will propose future simulations for optimizing
-all these objective functions.
+for these objective functions simultaneously.
