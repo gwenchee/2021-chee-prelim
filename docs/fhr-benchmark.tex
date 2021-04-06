@@ -119,7 +119,7 @@ The Y-shaped control rod slot at the center of the Y-shape structure contains
 \gls{FLiBe} coolant when the control blade is not in the slot (as seen in 
 Figure \ref{fig:ahtr-fuel-assembly})
 \cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
-For a single fuel assembly, the internal 120-degree rotational symmetry is 
+For a single fuel assembly, the internal $120^\circ{}$ rotational symmetry is 
 represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}. 
 \begin{figure}[]
     \centering
@@ -206,26 +206,28 @@ displaces the \gls{FLiBe} that occupies the slot
 
 \section{Benchmark Specifications: Phase I}
 \label{sec:phase1}
-The \gls{FHR} benchmark's Phase I consists of a steady-state 2D model 
-(Phase I-A) and depletion (Phase I-B) of one \gls{FHR} fuel assembly. 
+The \gls{FHR} benchmark Phase I consists of two subphases.
+First, a steady-state 2D model (Phase I-A) and depletion of one \gls{FHR} fuel 
+assembly (Phase I-B).
 The benchmark required the following results for Phases I-A and I-B:
 \begin{enumerate}[label=(\alph*)]
-    \item effective multiplication factor 
-    \item reactivity coefficients ($\beta_{eff}$, fuel Doppler coefficient, FLiBe 
-    temperature coefficient, graphite temperature coefficient)
+    \item $k_{eff}$ (effective multiplication factor)
+    \item reactivity coefficients: $\beta_{eff}$, $\alpha_D$ (doppler coefficient), 
+    $\alpha_{T, FliBe}$ (\gls{FLiBe} temperature coefficient), $\alpha_{M}$ 
+    (moderator temperature coefficient)
     \item tabulated fission source distribution by one-fifth fuel stripe
-    \item neutron flux averaged over the whole model tabulated in three coarse energy groups
-    \item neutron flux distribution in three coarse energy groups
+    \item $\bar{\phi_1}, \bar{\phi_2}, \bar{\phi_3}$ (neutron flux averaged over 
+    the whole model tabulated in three coarse energy groups)
+    \item $\phi_1(\vec{x},\vec{y}), \phi_2(\vec{x},\vec{y}), \phi_3(\vec{x},\vec{y})$ 
+    (neutron flux distribution in three coarse energy groups) 
     \item fuel assembly averaged neutron spectrum
 \end{enumerate}
 Next, I report the equations used to calculate these required results.  
 
 \subsubsection{Reactivity Coefficients (b)}
-Effective delayed neutron fraction ($\beta_{eff}$) is the fraction of delayed 
-neutrons in the core. 
 I assumed one energy group and six delayed groups for $\beta_{eff}$. 
-Reactivity coefficient is the change in reactivity ($\rho$) of the material 
-per degree change in the material's temperature (T). 
+Reactivity coefficient, $\alpha$, is the change in reactivity ($\rho$) of the 
+material per degree change in the material's temperature (T). 
 I calculated each reactivity coefficient and its corresponding uncertainty 
 with these equations: 
 \begin{align}
@@ -239,27 +241,28 @@ with these equations:
 I calculated \gls{FD} with OpenMC's \texttt{fission} tally score (f) 
 for each region divided by the average \texttt{fission} tally score of all the regions:
 \begin{align}
-    FD_i &=  \frac{f_i}{f_{ave}} \\
+    FD_i &=  \frac{f_i}{f_{ave}}\ [-]\\
     \intertext{where}
-    f_i &= \mbox{fission reaction rate in a single region [reactions/src]} \nonumber \\
+    f_i &= \mbox{fission reaction rate in a single region i [reactions/src]} \nonumber \\
     f_{ave} &= \mbox{average of all $f_i$ [reactions/src]} \nonumber
 \end{align}
 The uncertainty calculations for $FD_i$ and $f_{ave}$: 
 \begin{align}
-    \delta FD_i &= |FD_i| \sqrt{(\frac{\delta f_i}{f_i})^2+(\frac{\delta f_{ave}}{f_{ave}})^2} \\
+    \delta FD_i &= |FD_i| \sqrt{\left(\frac{\delta f_i}{f_i}\right)^2+\left(\frac{\delta f_{ave}}{f_{ave}}\right)^2} \\
     \delta f_{ave} &= \frac{1}{N}\sqrt{\sum_i^Nf_i^2} \\
     \intertext{where}
     N &= \mbox{No. of fission score values} \nonumber
 \end{align}
 
 \subsubsection{Neutron Flux (d, e, f)}
-OpenMC's \texttt{flux} score is in [$\frac{neutrons\ cm}{src}$] units. 
-For the benchmark, I converted flux to [$\frac{neutrons}{cm^2s}$] units
-using the following equations:  
-
+OpenMC's \texttt{flux} score is normalized per source particle simulated, resulting 
+in [$\frac{neutrons\ cm}{src}$] units.
+This is an unnatural unit for system analysis, and thus to better compare OpenMC
+results with other codes in the benchmark, I converted flux to 
+[$\frac{neutrons}{cm^2s}$] units using the following equations:  
 \begin{align}
-    \Phi_c &= \frac{N \times \Phi_o}{V} \\
-    N &= \frac{P\times\nu}{Q\times k} \\
+    \Phi_c &= \frac{N \cdot \Phi_o}{V} \\
+    N &= \frac{P\cdot\nu}{Q\cdot k} \\
     \intertext{where}
     \Phi_c &= \mbox{converted flux [$\frac{neutrons}{cm^2s}$]} \nonumber \\ 
     \Phi_o &= \mbox{original flux [$\frac{neutrons\ cm}{src}$]} \nonumber \\
@@ -267,7 +270,8 @@ using the following equations:
     V &= \mbox{volume of fuel assembly [$cm^3$]} \nonumber \\
     P &= \mbox{power [$\frac{J}{s}$]} \nonumber \\
     \nu &= \mbox{$\frac{\nu_f}{f}$ [$\frac{neutrons}{fission}$]} \nonumber \\
-    Q &= \mbox{Energy produced per fission [$\frac{J}{fission}$]} = \mbox{$3.2044 \times 10^{-11}$ J per $U_{235}$ fission} \nonumber \\
+    Q &= \mbox{Energy produced per fission [$\frac{J}{fission}$]} \nonumber \\
+    &= \mbox{$3.2044 \times 10^{-11}$ J per $U_{235}$ fission} \nonumber \\
     k &= \mbox{$k_{eff}$ [$\frac{neutrons}{src}$]} \nonumber 
 \end{align}
 The flux standard deviation is: 
@@ -281,12 +285,14 @@ I calculated reactor power based on the given reference specific power
 \begin{align}
     P &= P_{sp} \times V_F \times \rho_F \times \frac{wt\%_{U}}{100} \\
     \intertext{where}
-    V_F &= \mbox{volume of fuel [$cm^3$]} = \frac{4}{3} \pi r_f^3 \times N_{total} \nonumber \\
-    r_f &= \mbox{radius of fuel kernel} \nonumber\\
-    N_{total} &= \mbox{total no. of TRISO particles in fuel assembly} = 101 \times 210 \times 4 \times 2 \times 6 \times 3 \nonumber\\ 
+    V_F &= \mbox{volume of fuel [$cm^3$]} \nonumber \\ 
+    &= \frac{4}{3} \pi r_f^3 \times N_{total} \nonumber \\
+    r_f &= \mbox{radius of fuel kernel within TRISO particle} \nonumber\\
+    N_{total} &= \mbox{total no. of TRISO particles in fuel assembly} \nonumber \\ 
+    &= 101 \times 210 \times 4 \times 2 \times 6 \times 3 \nonumber\\ 
     \rho_F &= \mbox{density of fuel [$g/cc$]} \nonumber \\
-    wt\%_{U} &= \frac{at\%_{U235} \times AM_{U235} + at\%_{U238} \times AM_{U238}}{\sum (at\%_i \times AM_i)} \times 100 \nonumber\\
-    AM &= \mbox{atomic mass} \nonumber
+    wt\%_{U} &= \frac{at\%_{U235} \times m_{U235} + at\%_{U238} \times m_{U238}}{\sum (at\%_i \times m_i)} \times 100 \nonumber\\
+    m &= \mbox{atomic mass} \nonumber
 \end{align}
 
 \subsection{Benchmark Specifications: Phase I-A}
@@ -300,14 +306,14 @@ Table \ref{tab:phase1a-cases} describes each case.
     \caption{Description of the \acrlong{FHR} benchmark Phase I-A cases \cite{noauthor_fluoride_nodate}.}
 	\label{tab:phase1a-cases}
     \footnotesize
-    \begin{tabular}{p{0.05\textwidth}|p{0.95\textwidth}}
+    \begin{tabular}{p{0.05\textwidth}p{0.95\textwidth}}
     \hline 
     \textbf{Case} & \textbf{Description} \\
     \hline
     1A & Reference case. Hot full power (HFP), with temperatures of 1110K for 
     fuel kernel and 948K for coolant and all other materials (including TRISO 
     particle layers other than fuel kernel). Nominal (cold) dimensions, 
-    9 wt\% enrichment, no \gls{BP}, \glspl{CR} out.\\
+    9 wt\% enrichment, no \acrlong{BP}, \acrlong{CR} out.\\
     \hline
     2AH & \Gls{HZP} with uniform temperature of 948 K, 
     otherwise same as Case 1A. Comparison with Case 1A provides HZP-to-HFP power 
@@ -316,14 +322,14 @@ Table \ref{tab:phase1a-cases} describes each case.
     2AC & \Gls{CZP}. Same as Case 2AH, but with uniform temperature 
     of 773 K. Comparison with Case 2AH provides isothermal temperature coefficient.\\
     \hline
-    3A & \gls{CR} inserted, otherwise same as Case 1A. \\
+    3A & \Acrlong{CR} inserted, otherwise same as Case 1A. \\
     \hline
-    4A & Discrete europia \gls{BP}, otherwise same as Case 1A.\\
+    4A & Discrete europia \acrlong{BP}, otherwise same as Case 1A.\\
     \hline
-    4AR & Discrete europia \gls{BP} and \gls{CR} inserted, otherwise same as 
+    4AR & Discrete europia \acrlong{BP} and \acrlong{CR} inserted, otherwise same as 
     Case 1A. \\
     \hline
-    5A & Integral (dispersed) europia \gls{BP}, otherwise same as Case 1A. \\
+    5A & Integral (dispersed) europia \acrlong{BP}, otherwise same as Case 1A. \\
     \hline
     6A & Increased \gls{HM} loading (4 to 8 layers of \gls{TRISO}) decreased C/HM 
     ratio (from about 400 to about 200) and decreased specific power to 100 W/gU, 
@@ -338,14 +344,14 @@ Table \ref{tab:phase1a-cases} describes each case.
 For Phase I-B, the benchmark specifies that each participant must produce 
 depletion results for three cases: 1B, 4B, and 7B. 
 These are the same as cases 1A, 4A, and 7A, but with depletion steps added. 
-The benchmark assumes that depletion occurs only in the fuel and \glspl{BP} and 
-that the depletion performs under the critical spectrum assumption. 
+The benchmark assumes that depletion occurs only in the fuel and burnable poisons 
+and that the depletion performs under the critical spectrum assumption. 
 
 \section{Results}
 Several organizations participated in the benchmark with various Monte Carlo
 and Deterministic neutronics codes, such as Serpent \cite{leppanen_serpent_2014}, 
 OpenMC \cite{romano_openmc_2013}, and WIMS \cite{lindley_current_2017}. 
-\gls{UIUC} participated in the benchmark with the OpenMC Monte Carlo code 
+The \gls{UIUC} participated in the benchmark with the OpenMC Monte Carlo code 
 \cite{romano_openmc_2013} and the ENDF/B-VII.1 material library 
 \cite{chadwick_endf/b-vii.1_2011}.
 The \texttt{fhr-benchmark} Github repository contains all the results submitted 
@@ -358,22 +364,23 @@ that the overall observed agreement is satisfactory.
 In the subsequent sections, I will share the results obtained by \gls{UIUC}.  
 
 \subsection{Results: Phase I-A}
-Petrovic et al. \cite{petrovic_preliminary_2021} compared the effective 
-multiplication factor ($k_{eff}$) for all participants and Phase I-A cases in 
-the \gls{FHR} benchmark. 
-They reported that the standard deviation between participants for each case 
+In a recently submitted \gls{ANS} M$\&$C 2021 conference paper (which I am a co-author on), 
+Petrovic et al. \cite{petrovic_preliminary_2021} compared \gls{FHR} benchmark 
+participants' Phase I-A $k_{eff}$ results.  
+We reported that the standard deviation between participants for each case 
 was in the 231 to 514 pcm range, acceptable and notably close given a blind 
-benchmark, assuring us that our Phase I-A results are acceptable and in agreement 
-with other benchmark participants. 
+benchmark, assuring that \gls{UIUC}'s Phase I-A results are acceptable and 
+in agreement with other benchmark participants. 
 
+\subsubsection{Results: Effective Multiplication Factor (a)}
 Table \ref{tab:phase1a-cases} reports Phase I-A $k_{eff}$ and reactivity 
 coefficients results. 
 I ran the simulations on \gls{UIUC}'s BlueWaters supercomputer with 64 XE nodes, 
 which each have 32 cores \cite{ncsa_about_2017}. 
-To reduce $k_{eff}$'s statistical uncertainty to $\sim$10pcm, I ran each simulation 
-with 500 active cycles, 100 inactive cycles, and 200000 neutrons. 
+To reduce the statistical uncertainty of $k_{eff}$ to $\sim$10pcm, I ran each 
+simulation with 500 active cycles, 100 inactive cycles, and 200000 neutrons. 
 Each simulation took \gls{WCT} ranging from 2 to 5 hours. 
-\begin{table}[H]
+\begin{table}[]
     \centering
     \onehalfspacing
     \caption{\acrlong{UIUC}'s \acrlong{FHR} Benchmark Phase I-A results 
@@ -391,15 +398,16 @@ Each simulation took \gls{WCT} ranging from 2 to 5 hours.
     1A & Reference &2.82&1.39389 & 0.006534 & -2.24$\pm$0.15 & -0.15$\pm$0.15 & -0.68$\pm$0.15\\
     2AH & \gls{HZP} &2.82&1.40395 & 0.006534 & -3.14$\pm$0.15 & -0.20$\pm$0.14 & -0.85$\pm$0.14\\
     2AC & \gls{CZP} &2.75&1.41891 & 0.006534 & -3.36$\pm$0.14 & -0.11$\pm$0.14 & 0.07$\pm$0.14\\
-    3A & \gls{CR} &2.49&1.03147 & 0.006534 & -4.03$\pm$0.28 & -0.83$\pm$0.27 & -3.18$\pm$0.29\\
-    4A & Discrete \gls{BP} &5.08&1.09766 & 0.006542 & -4.06$\pm$0.24 & -1.55$\pm$0.23 & -6.51$\pm$0.24\\
-    4AR & Discrete \gls{BP} + \gls{CR} &4.59&0.84158 & 0.006553 & -5.60$\pm$0.49 & -1.78$\pm$0.46 & -10.44$\pm$0.47\\
-    5A & Dispersed \gls{BP} &2.33&0.79837 & 0.006556 & -5.09$\pm$0.40 & -4.87$\pm$0.40 & -22.99$\pm$0.38\\
+    3A & CR &2.49&1.03147 & 0.006534 & -4.03$\pm$0.28 & -0.83$\pm$0.27 & -3.18$\pm$0.29\\
+    4A & Discrete BP &5.08&1.09766 & 0.006542 & -4.06$\pm$0.24 & -1.55$\pm$0.23 & -6.51$\pm$0.24\\
+    4AR & Discrete BP + CR &4.59&0.84158 & 0.006553 & -5.60$\pm$0.49 & -1.78$\pm$0.46 & -10.44$\pm$0.47\\
+    5A & Dispersed BP &2.33&0.79837 & 0.006556 & -5.09$\pm$0.40 & -4.87$\pm$0.40 & -22.99$\pm$0.38\\
     6A & Increased \gls{HM} &3.52&1.26294 & 0.006556 & -4.46$\pm$0.19 & 0.16$\pm$0.20 & -0.39$\pm$0.20\\
     7A & 19.75\% Enriched &2.21&1.50526 & 0.006530 & -2.49$\pm$0.13 & -0.12$\pm$0.12 & -0.62$\pm$0.12\\
     \hline
+    \multicolumn{5}{l}{BP: burnable poison, CR: control rod} \\
     \multicolumn{5}{l}{* All $k_{eff}$ values have an uncertainty of 0.00010.} \\
-    \multicolumn{5}{l}{** All $\beta_{eff}$ values have an uncertainty of 0.000001.} 
+    \multicolumn{5}{l}{** All $\beta_{eff}$ values have an uncertainty of 0.000001.}
     \end{tabular}
 \end{table}
 
@@ -417,62 +425,72 @@ it has a higher enrichment.
 However, Case 6A deviated from expectations with a lower $k_{eff}$ despite an increase 
 in \acrlong{HM} loading. 
 This behavior is due to reduced moderation and worsened fuel 
-utilization brought about by self-shielding, demonstrating that an increase in 
-fuel packing fraction does not always correspond with an increased $k_{eff}$. 
+utilization brought about by self-shielding. 
+It also demonstrates that an increase in fuel packing fraction does not always 
+correspond with an increased $k_{eff}$. 
 
-$\beta_{eff}$ increased by 10-20pcm for Cases 4A, 4AR, 5A, and 6A compared to
+\subsubsection{Results: Reactivity Coefficients (b)}
+$\beta_{eff}$ increased by 10-20[pcm] for Cases 4A, 4AR, 5A, and 6A compared to
 reference Case 1A due to the introduction of control rods and poisons that 
 shift the average neutron velocity to higher values, resulting in decreased
 thermal fission and increased fast fission \cite{torabi_neutronic_2018}.
 Table \ref{tab:phase1a-results} reports that most of the temperature coefficients 
 are negative, exemplifying the \gls{AHTR}'s passive safety behavior. 
-Negative reactivity feedback results in a self-regulating reactor; if the reactor's 
+Negative reactivity feedback results in a self-regulating reactor; if the reactor 
 power rises, resulting in temperature increase, the negative reactivity
 reduces power. 
 
-Figure \ref{fig:phase1a-c} shows the fission source distribution by 
-one-fifth fuel stripe for Cases 1A and 3A. 
+\subsubsection{Results: Fission Source Distribution (c)}
+Figure \ref{fig:phase1a-c} shows Cases 1A and 3A's fission source distribution 
+discretized by one-fifth fuel stripe. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.52\linewidth]{p1a_c1a_c.png} 
     \includegraphics[width=0.52\linewidth]{p1a_c3a_c.png} 
     \includegraphics[width=0.52\linewidth]{p1a_6a_c.png} 
-    \caption{Fission Source Distribution per one-fifth fuel stripe for 
-    \acrlong{FHR} Benchmark's Phase I-A Case 1A (top), Case 3A (middle), 
-    and Case 6A (bottom).}
+    \caption{\acrlong{UIUC} results: Normalized Fission Source Distribution [-] 
+    per one-fifth fuel stripe for \acrlong{FHR} Benchmark's Phase I-A Case 1A 
+    (top), Case 3A (middle), and Case 6A (bottom).}
     \label{fig:phase1a-c}
 \end{figure}
-Case 4AR has a similar fission source distribution as Case 3A since both 
+Case 4AR has a similar fission source distribution to Case 3A since both 
 cases have control rod insertion. 
-All other cases have similar fission source distribution shape to Case 1A. 
-For Case 1A, intuitively, I would assume that the highest fission source would 
+Case 7A has a similar fission source distribution to case 6A since both have 
+higher heavy metal loading. 
+All other cases have similar fission source distributions to Case 1A. 
+
+For Case 1A, intuitively, one might assume that the highest fission source would 
 occur in the center of the diamond fuel segment; however, the opposite is true. 
 Power peaking occurs on exterior stripes and is minimum on the interior stripes.
 Gentry et al. \cite{gentry_development_2016} reported similar power peaking 
 phenomena towards the lattice cell's exterior closest to the Y-shaped carbon 
-support structure where the thermal flux is most elevated. 
-The lowest power is found in the interiors of the lattice tri-sections. 
+support structure.  
 This fission source distribution is caused by diminished resonance escape 
 probability in the interior due to the higher relative fuel-to-carbon volume 
 ratio. 
+
 For Case 3A with an inserted control rod, the fission source is lower in 
 the one-fifth stripes closer to the control rod.  
-Cases 6A and 7A demonstrate a further diminished fission source in the interior 
+Case 6A demonstrates a further diminished fission source in the interior 
 stripes due to the higher fuel-to-carbon ratio.
 This is seen in Figure \ref{fig:phase1a-c} in which case 1A and 6A have similar 
-fission distribution shapes, but case 6A's has a bigger fission source value range. 
+fission distribution shapes, but case 6A has a bigger fission source value range. 
 
+\subsubsection{Results: Average Neutron Flux (d)}
 Figure \ref{fig:phase1a-d} shows the average neutron flux in the fuel assembly in 
 three coarse energy groups. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{phase1a-d-flux.png} 
-    \caption{\acrlong{FHR} Benchmark's Neutron flux, averaged over the whole 
-    model, tabulated in three coarse energy groups for each Phase I-A case. }
+    \caption{\acrlong{UIUC} results: \acrlong{FHR} Benchmark's Neutron flux, 
+    averaged over the whole model, tabulated in three coarse energy groups for 
+    each Phase I-A case. }
     \label{fig:phase1a-d}
 \end{figure}
 Most of the cases have the most flux in the intermediate group, followed by 
 the thermal group, and the least flux in the fast group.    
+
+\subsubsection{Results: Neutron Flux Distribution (e)}
 Figure \ref{fig:phase1a-e} shows the neutron flux distribution in a 100 $\times$ 
 100 mesh for Cases 1A, 3A, and 6A for three coarse energy groups. 
 \begin{figure}[]
@@ -480,35 +498,36 @@ Figure \ref{fig:phase1a-e} shows the neutron flux distribution in a 100 $\times$
     \includegraphics[width=\linewidth]{phase1a-e-c1a.png} 
     \includegraphics[width=\linewidth]{phase1a-e-c3a.png} 
     \includegraphics[width=\linewidth]{phase1a-e-c6a.png} 
-    \caption{\acrlong{FHR} Benchmark's Neutron flux distribution in 100 
-    $\times$ 100 mesh for three coarse energy groups: Case 1A (above), Case 3A 
-    (middle), Case 6A (below). Energy group 1: $E > 0.1$ MeV, Energy group 2: 
-    $3 \times 10^{-6} < E < 0.1$ MeV, Energy group 3: $E < 3 \times 10^{-6}$ MeV. }
+    \caption{\acrlong{UIUC} results: \acrlong{FHR} Benchmark neutron flux 
+    distribution in 100 $\times$ 100 mesh for three coarse energy groups: Case 
+    1A (above), Case 3A (middle), Case 6A (below). Energy group 1: $E > 0.1$ MeV, 
+    Energy group 2: $3 \times 10^{-6} < E < 0.1$ MeV, Energy group 3: $E < 3 \times 10^{-6}$ MeV. }
     \label{fig:phase1a-e}
 \end{figure}
 For all three cases, fast-flux peaks in the diamond-shaped sectors containing 
 the fuel stripes, whereas thermal flux peaks outside of the diamond-shaped 
 sectors. 
-This is attributed to fission occurring at thermal energies in the 
+This can be attributed to fission occurring at thermal energies in the 
 fuel stripe area. 
 For Case 3A, the thermal and intermediate neutron flux is depressed in the fuel 
 assembly's control rod region.  
-Case 6A has an increased heavy metal loading, resulting in a more pronounced 
+An increased heavy metal loading in Case 6A results in a more pronounced 
 fast-flux peaking and thermal flux dip in the fuel stripe area. 
 
+\subsubsection{Results: Neutron Spectrum (f)}
 Figure \ref{fig:phase1a-f} shows the neutron spectrum for Cases 1A and 6A. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.75\linewidth]{p1a_c1a_f.png} 
     \includegraphics[width=0.75\linewidth]{p1a_c6a_f.png} 
-    \caption{Neutron spectrum for \acrlong{FHR} Benchmark's Phase I-A Case 1A 
-    (left) and Case 6A (right).}
+    \caption{\acrlong{UIUC} results: Neutron spectrum for \acrlong{FHR} Benchmark
+    Phase I-A Case 1A (left) and Case 6A (right).}
     \label{fig:phase1a-f}
 \end{figure}
-Case 7A has a similar neutron spectrum as Case 6A since both cases have 
+Case 7A has a similar neutron spectrum to Case 6A since both cases have 
 higher fuel content. 
 All other cases have a similar neutron spectrum to Case 1A.
-The neutron spectrum is faster for Cases 6A and 7A due to more heavy metal 
+The neutron spectra in Cases 6A and 7A are faster due to more heavy metal 
 loading and higher enrichment, respectively.  
 
 \subsection{Results: Phase I-B}
@@ -517,11 +536,11 @@ for Cases 1B, 4B, and 7B.
 \begin{figure}[]
     \centering
     \includegraphics[width=1.1\linewidth]{phase1b_keff.png} 
-    \caption{\acrlong{FHR} Benchmark's Phase I-B depletion $k_{eff}$ evolution 
-    for Cases 1B, 4B, and 7B. Case 1B is the reference case, Case 4B is the 
-    discrete \gls{BP} case, and Case 7B is the 19.75$\%$ enrichment case. 
-    Error bars are included but are barely visible due to the low uncertainty 
-    of $\sim$40pcm.}
+    \caption{\acrlong{UIUC} results: \acrlong{FHR} Benchmark Phase I-B depletion 
+    $k_{eff}$ evolution for Cases 1B, 4B, and 7B. Case 1B is the reference case, 
+    Case 4B is the discrete \acrlong{BP} case, and Case 7B is the 19.75$\%$ 
+    enrichment case. Error bars are included but are barely visible due to the 
+    low $\sim$40pcm uncertainty.}
     \label{fig:phase1b_keff}
 \end{figure}
 The $k_{eff}$ at zero burnup corresponds to each case's 
@@ -531,8 +550,8 @@ Case 1B's $k_{eff}$ steadily decreases until it reaches 0.967845 at the final 70
 GWd/tU burnup. 
 Case 4B includes burnable poisons resulting in a lower initial $k_{eff}$. 
 Its $k_{eff}$ decreases at a slower rate in the beginning due to the presence of 
-burnable poisons, which decreases flux in the core. 
-At approximately 20 GWd/tU, $k_{eff}$ begins decreasing at a faster rate, assumedly
+burnable poisons, which decreases the flux in the core. 
+At approximately 20 GWd/tU, $k_{eff}$ begins decreasing at a faster rate, presumably
 due to burn-up of the poison material.   
 Case 7B has a $19.75\%$ fuel enrichment, resulting in a higher initial $k_{eff}$. 
 With a higher enrichment, the fuel can achieve a final burnup of 160 GWd/tU. 
@@ -546,7 +565,7 @@ and Phase I-A and I-B results obtained by the UIUC team.
 The benchmark results highlight the \gls{AHTR}'s passive safety behavior with 
 negative temperature coefficients. 
 Results such as a lower $k_{eff}$ for the \gls{AHTR} configuration with 
-higher heavy metal loading demonstrated how increased fuel packing does not always 
+higher heavy metal loading demonstrated that increased fuel packing does not always 
 correspond with increased $k_{eff}$ due to self-shielding effects.
 These results hint at the possibility of minimizing fuel required by optimizing 
 for inhomogeneous fuel distributions within the core. 
