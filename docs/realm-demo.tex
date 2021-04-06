@@ -3,12 +3,12 @@
 % - Demonstrate OpenMC problem with REALM. 
 % Structure 
 % - realm demonstration of OpenMC Coupling for a toy problem. 
-In this chapter, I demonstrate using \gls{REALM} to apply genetic algorithms 
+This chapter demonstrates using \gls{REALM} to apply genetic algorithms 
 to maximize $k_{eff}$ in a single \gls{AHTR} fuel slab.  
 
 \section{Straightened AHTR Fuel Slab}
 \subsection{Problem Definition}
-The objective of this demonstration is to explore how inhomogeneous fuel 
+This demonstration explores how inhomogeneous fuel 
 distributions impact $k_{eff}$ compared to homogenous fuel distributions that 
 are customary in most reactor designs. 
 The reactor core explored is a straightened slab from the \gls{FHR} benchmark's
@@ -32,43 +32,44 @@ Figure \ref{fig:straightened_slab} illustrates the straightened fuel slab.
 \end{figure}
 The slab has dimensions of $27.1 \times 3.25 \times 1.85\ cm^3$
 with periodic boundary conditions in the x and y directions and reflective 
-boundary conditions in the z direction. 
-The materials are the same as in the \gls{FHR} benchmark, with the exception 
-of the homogenization of each \gls{TRISO} particle's four outer layers: 
+boundary conditions in the z-direction. 
+The materials are the same as in the \gls{FHR} benchmark, except for 
+the homogenization of each \gls{TRISO} particle's four outer layers: 
 porous carbon buffer, inner pyrolytic carbon, silicon carbide layer, and the 
 outer pyrolitic carbon. 
 The \gls{TRISO} particles' dimensions remain the same.
-The $k_{eff}$ for this original straighted \gls{AHTR} configuration is 
+The $k_{eff}$ for this original straightened \gls{AHTR} configuration is 
 $1.38625 \pm 0.00109$. 
 
 The \gls{REALM} optimization problem's objective is to maximize the slab's 
-$k_{eff}$, by varying the \gls{TRISO} particle packing fraction across the slab,
-while keeping total \gls{TRISO} particle total packing fraction constant at 0.0979. 
+$k_{eff}$ by varying the \gls{TRISO} particle packing fraction across the slab
+while keeping total \gls{TRISO} particle the total packing fraction constant at 
+0.0979. 
 This total packing fraction is consistent with the original straightened slab with 
 TRISO particles in fuel stripes (Figure \ref{fig:straightened_slab}). 
-The slab is divided into ten slices along the x axis between the \gls{FLiBe} and 
+The slab is divided into ten slices along the x-axis between the \gls{FLiBe} and 
 graphite buffers resulting in ten $2.31 \times 2.55 \times 1.85\ cm^3$ slices. 
-The \gls{TRISO} particle packing fraction's distribution across slices is 
-governed by a sine distribution: 
+A sine distribution governs the \gls{TRISO} particle packing fraction's 
+distribution across slices:
 \begin{align}
     PF(x) &= (a\ sin(bx + c) + 2) \times NF\\
     \intertext{where}
-    PF & \mbox{packing fraction} \nonumber \\ 
+    PF &= \mbox{packing fraction} \nonumber \\ 
     a &= \mbox{amplitude, peak deviation of the function from zero} \nonumber \\
     b &= \mbox{angular frequency, rate of change of the function argument } [\frac{radians}{s}] \nonumber \\
     c &= \mbox{phase, specifies (in radians) where in its cycle the oscillation is at t = 0.} \nonumber \\
     x &= \mbox{midpoint value for each slice} \nonumber \\
     NF &= \mbox{Normalization factor} \nonumber
 \end{align}
-The sine distribution's value at each of the ten x-slices' midpoints are collected and 
-normalized by the total packing fraction to ensure that there is a consistent 
-amount of \gls{TRISO} particles in the slab. 
+The sine distribution's value at each of the ten x-slices' midpoints is collected 
+and normalized by the total packing fraction to ensure a consistent amount of 
+\gls{TRISO} particles in the slab.
 Thus, for a packing fraction distribution of 
 $PF(x) = (0.5\ sin(\frac{\pi}{3}x + \pi) + 2)  \times NF$. 
 The packing fraction for the ten slices are 0.103, 0.120, 0.049, 0.138, 
 0.076, 0.081, 0.136, 0.048, 0.125, 0.098, respectively. 
 Figure \ref{fig:triso_distribution} shows a plot of this sine distribution, highlights 
-the packing fraction at the respective midpoints, and an xy view of the slab
+the packing fraction at the respective midpoints, and an XY view of the slab
 with packing fraction varying based on this sine distribution. 
 \begin{figure}[]
     \centering
@@ -80,16 +81,16 @@ with packing fraction varying based on this sine distribution.
     \label{fig:triso_distribution}
 \end{figure}
 
-In \gls{REALM}, a genetic algorithm varies the $a$, $b$ and $c$ variables to find a combination 
-that produces a packing fraction distribution that maximizes the $k_{eff}$ in 
-the slab. 
+In \gls{REALM}, a genetic algorithm varies the $a$, $b$, and $c$ variables to 
+find a combination that produces a packing fraction distribution that maximizes 
+the slab's $k_{eff}$. 
 The upper and lower bounds of $a$, $b$ and $c$ are: 
 \begin{itemize}
     \item 0 $<$ $a$ $<$ 2 
     \item 0 $<$ $b$ $<$ $\frac{\pi}{2}$
     \item 0 $<$ $c$ $<$ $2\pi$
 \end{itemize}
-The $a$ variable bounds were selected to keep the sine distribution from falling 
+The $a$ variable's bounds were selected to keep the sine distribution from falling 
 below zero. $b$ and $c$ variable bounds are large enough to allow the genetic 
 algorithm to explore various sine distributions. 
 The OpenMC evaluator calculates $k_{eff}$. 
@@ -99,7 +100,7 @@ Figure \ref{fig:realm-input-simple} shows the \gls{REALM} input file for this
 genetic algorithm optimization problem. 
 \texttt{ahtr\_slab\_openmc.py} is the template OpenMC straightened \gls{AHTR} 
 slab script that accepts $a$, $b$ and $c$ from \gls{REALM}, calculates packing 
-fraction distribution and assigns packing fraction values to each fuel slice. 
+fraction distribution, and assigns packing fraction values to each fuel slice. 
 Subsequently, \gls{REALM} runs the templated OpenMC script to generate $k_{eff}$. 
 \begin{figure}[]
     \begin{minted}[
@@ -151,25 +152,24 @@ Subsequently, \gls{REALM} runs the templated OpenMC script to generate $k_{eff}$
 \subsection{Hyperparameter Search}
 In \gls{REALM}'s input file, the user can define the genetic algorithm's 
 hyperparameters. 
-A good hyperparameter set is able to guide the optimization process by 
+A good hyperparameter set guides the optimization process by 
 balancing exploitation and exploration to find an optimal solution quickly 
 and accurately. 
 Finding a good set of hyperparameters requires a trial and error process. 
 
 I performed the hyperparameter search with a coarse-to-fine random sampling scheme, 
 whose advantages were previously discussed in Section \ref{sec:balance}.
-The hyperparameters varied include: population size, number of generations, 
+The hyperparameters varied include population size, number of generations, 
 mutation probability, mating probability, selection operator, selection operator's 
 number of individuals, selection operator's tournament size, mutation operator, 
 and mating operator.  
-I started with 25 coarse experiments and fine tuned the hyperparameters
+I started with 25 coarse experiments and fine-tuned the hyperparameters
 with 15 more experiments. 
 For each genetic algorithm experiment, I hold the number of OpenMC evaluations 
 constant at 600.
-The population size and number of generations are correlated by the number of 
-evaluations. 
+The number of evaluations correlates the population size and number of generations. 
 I randomly sample population size and use the following equation to calculate 
-number of generations: 
+the number of generations: 
 \begin{align}
     \mbox{no. of generations} &= \frac{\mbox{no. of evaluations}}{\mbox{population size} }
 \end{align}
@@ -201,14 +201,14 @@ for random sampling of each hyperparameter.
     \end{tabular}}
 \end{table}
 
-The objective of the initial 25 coarse experiments is to narrow down the 
-hyperparameters to find a smaller set of optimal hyperparameter bounds that 
-produce higher average $k_{eff}$ values in each experiment's final generation. 
+The initial 25 coarse experiments' objective is to narrow down the hyperparameters 
+to find a smaller set of optimal hyperparameter bounds that produce higher final 
+generation $k_{eff}$ values.
 Figure \ref{fig:hyperparameter_sens} shows the hyperparameters' plotted against 
 each other with a third color dimension of the average $k_{eff}$ value in each 
 experiment's final generation. 
 The lighter the scatter point is, the larger the final population's 
-average $k_{eff}$ value is, thus the better the hyperparameter set. 
+average $k_{eff}$ value is, the better the hyperparameter set. 
 \begin{figure}[]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{hyperparameter_sens.png}} 
@@ -217,13 +217,13 @@ average $k_{eff}$ value is, thus the better the hyperparameter set.
     average $k_{eff}$ indicated by each scatter point's color.}
     \label{fig:hyperparameter_sens}
 \end{figure}
-The hyperparameters are plotted against each other to visualize interdependence 
+The hyperparameters are plotted against each other to visualize the interdependence 
 between hyperparameters. 
-From the coarse hyperparameter search, the trends that stood out to me were: 
+From the coarse hyperparameter search, the trends that stood out were: 
 \begin{itemize}
-    \item Mutation probability has larger $k_{eff ave}$ between 0.2 and 0.4. 
-    \item Mating probability has larger $k_{eff ave}$ when between 0.1 and 0.3. 
-    \item Population size has larger $k_{eff ave}$ when between 20 and 60. 
+    \item Mutation probability has a larger $k_{eff ave}$ between 0.2 and 0.4. 
+    \item Mating probability has a larger $k_{eff ave}$ when between 0.1 and 0.3. 
+    \item Population size has a larger $k_{eff ave}$ when between 20 and 60. 
 \end{itemize}
 There is also not much interdependence between hyperparameters. 
 
@@ -231,30 +231,30 @@ Next, I proceeded to the fine search.
 From Figure \ref{fig:hyperparameter_sens}, I narrowed down population size, 
 mutation probability, and mating probability bounds, as shown in Table 
 \ref{tab:hyperparameter_search}'s \textit{Fine Search 1 Bounds} column. 
-I did not see any significant trends in the other hyperparameters so I chose 
+I did not see any significant trends in the other hyperparameters, so I chose 
 to leave them as is. 
-I ran 10 more experiments (25 to 34) with sampling hyperparameters from 
+I ran ten more experiments (25 to 34) with sampling hyperparameters from 
 the \textit{Fine Search 1 Bounds}. 
-From these results, I conducted a second fine search with 5 experiments 
+From these results, I conducted a second fine search with five experiments 
 (35 to 39) with further tuned hyperparameter bounds as shown in Table 
 \ref{tab:hyperparameter_search}'s \textit{Fine Search 2 Bounds} column. 
-These new hyperparameter bounds were determined based on these reasoning: 
+These new hyperparameter bounds were determined based on these reasons: 
 \begin{itemize}
-    \item Mutation probability has larger $k_{eff ave}$ between 0.2 and 0.3.
+    \item Mutation probability has a larger $k_{eff ave}$ between 0.2 and 0.3.
     \item I overlooked a peaking of $k_{eff ave}$ at mating probability between 
     0.45 and 0.6 in the previous \textit{Fine Search 1}, thus shifted the bounds. 
     \item The highest $k_{eff ave}$ occurred for \texttt{selTournament}. 
     \item I narrowed down mating operator options to \texttt{cxBlend} and 
     \texttt{cxOnePoint} since they had higher $k_{eff ave}$. 
     \item I decided to select an arbitrary number for population size, 
-    selection individuals and tournament size since they did not appear to have 
-    any correlation with $k_{eff ave}$. 
+    selection individuals, and tournament size since they did not appear to 
+    correlate with $k_{eff ave}$ values. 
 \end{itemize}
 Figure \ref{fig:input_hyperparameters_sens} shows the relationship between 
 hyperparameter values and $a$,$b$,$c$ input parameters, final generation 
 $k_{eff max}$, and final generation $k_{eff ave}$. 
 The coarse experiments' scatter points are $50\%$ transparent, while the fine 
-experiments' scatter point are opaque. 
+experiments' scatter points are opaque. 
 \begin{figure}[]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{input_hyperparameters_sens.png}} 
@@ -266,7 +266,7 @@ experiments' scatter point are opaque.
     \label{fig:input_hyperparameters_sens}
 \end{figure}
 In Figure \ref{fig:input_hyperparameters_sens}, on average, the fine experiments 
-(opaque scatter points) have higher $k_{eff ave}$ which indicates that 
+(opaque scatter points) have higher $k_{eff ave}$, which indicates that the
 hyperparameter search process met its objective of finding hyperparameter 
 bounds that enable quicker and more accurate optimization. 
 
@@ -312,10 +312,11 @@ produced the $k_{eff max}$ from each of the top five experiments.
     \label{fig:topfiveplot}
 \end{figure}
 Four experiments had similar distributions of packing fraction peaking at approximately 
-0.23 in the centre of the slab, while one experiment had an exponential-looking 
-distribution with peak packing fraction of 0.31 at side of the slab.
-This demonstrates the robustness of the genetic algorithms to find similar solutions with 
-different hyperparameters. 
+0.23 in the center of the slab, while one experiment had an exponential-looking 
+distribution with peak packing fraction of 0.31 at the side of the slab.
+The similar final packing fraction distributions demonstrate the robustness of 
+genetic algorithms to find the optimal global solutions with different 
+hyperparameters. 
 
 These simulations are run on the BlueWaters supercomputer \cite{ncsa_about_2017}. 
 In each \gls{REALM} simulation, a population size number of individual OpenMC 
@@ -330,12 +331,13 @@ The hyperparameter search ran 40 REALM simulations, thus using approximately
 \subsection{Results for best hyperparameter set}
 I define the best-performing hyperparameter set as the experiment that produces 
 the highest $k_{eff ave}$ in its final generation. 
-The best performing set of hyperparameters are from the final 
-\textit{Fine Search 2} and is experiment 39 in Table \ref{tab:topfive}
-with centre-peaking packing fraction distribution with $k_{eff max} = 1.40519$. 
+The best performing set of hyperparameters is from the final 
+\textit{Fine Search 2}. 
+It is experiment 39 in Table \ref{tab:topfive} with center-peaking packing 
+fraction distribution with $k_{eff max} = 1.40519$. 
 Experiment 39's $k_{eff max}$ is $\sim2000$pcm larger than the original 
-straighted \gls{AHTR} configuration's $k_{eff}$. 
-Figure \ref{fig:triso_distribution_sine_39} shows the packing fraction distribution 
+straightened \gls{AHTR} configuration's $k_{eff}$. 
+Figures \ref{fig:triso_distribution_sine_39} show the packing fraction distribution 
 that produced $k_{eff max} = 1.40519$. 
 \begin{figure}[]
     \centering
@@ -350,7 +352,7 @@ that produced $k_{eff max} = 1.40519$.
 
 Figure \ref{fig:keff_conv_39} and \ref{fig:pf_39} show the evolution of $k_{eff}$ 
 and packing fraction distribution through each generation of the best performing 
-39$^{th}$ experiment, respectively. 
+39$^{th}$ experiment.
 \begin{figure}[]
     \centering
     \begin{subfigure}{\textwidth}
@@ -368,17 +370,17 @@ and packing fraction distribution through each generation of the best performing
     the 39$^{th}$ experiment's hyperparameter set.}
     \label{fig:39}
 \end{figure}
-The $k_{eff max}$ converged quickly by generation 1, however, this is not 
+The $k_{eff max}$ converged quickly by generation 1; however, this is not 
 usually the case. 
 The genetic algorithm optimization process is stochastic, and so there is always 
 the possibility that the algorithm randomly samples a set of input parameters
 that maximizes the objective function early on in the genetic algorithm 
 optimization process. 
-The $k_{eff ave}$ demonstrates how the average population of individuals converge 
-towards a higher $k_{eff}$ with improvements from each generation. 
+The $k_{eff ave}$ demonstrates how each generation's average $k_{eff}$
+converges towards a higher value with each generation's improvements
 To demonstrate how the genetic algorithm optimization process usually goes, 
 Figures \ref{fig:keff_conv_15} and \ref{fig:pf_15} show the evolution of $k_{eff}$ 
-and packing fraction distribution through each generation of the second best 
+and packing fraction distribution through each generation of the second-best 
 performing 15$^{th}$ experiment, respectively. 
 Experiment 15 demonstrates how both maximum and average $k_{eff}$ converges 
 towards a higher $k_{eff}$ with improvements from each generation.
@@ -400,37 +402,30 @@ towards a higher $k_{eff}$ with improvements from each generation.
     \label{fig:15}
 \end{figure}
 
-Both experiments 39 and 15 have packing fraction peaking at approximately 
-0.23 in the centre of the slab and decreasing to zero at the sides of the slab.  
+Both experiments 39 and 15 have packing fractions peaking at approximately 
+0.23 in the center of the slab and decreasing to zero at the slab's sides.  
 The amplitude, $a$, for the packing fraction distribution that produced $k_{eff max}$ 
-for experiment 39 and the other top five experiments (Table \ref{tab:topfive}) 
+for experiment 39 and the other top-five experiments (Table \ref{tab:topfive}) 
 have settled at the upper bound of approximately 2. 
-This shows that a larger $k_{eff}$ occurs in the slab geometry with larger 
-variations of packing fraction. 
-These observations about packing fraction distribution for $k_{eff max}$ is 
-consistent with what I understand from the original \gls{AHTR},: a high $k_{eff}$ 
+A higher amplitude, $a$, shows that a slab geometry with larger variations of 
+packing fraction results in a larger $k_{eff}$. 
+These observations about packing fraction distribution for $k_{eff max}$ are 
+consistent with what I understand from the original \gls{AHTR}: a high $k_{eff}$ 
 occurs when there is a good balance between fuel loading and moderation space. 
-Fission occurs at areas of high \gls{TRISO} particle concentration at thermal flux, 
-however, the neutrons are born at fast flux and require moderation to slow down 
+Fission occurs at areas of high \gls{TRISO} particle concentration at thermal flux;
+however, the neutrons are born at fast-flux and require moderation to slow down 
 to thermal ranges.
-Therefore, larger moderation areas ensure good resonance escape probability for 
+Therefore, larger moderation areas ensure higher resonance escape probability for 
 the fast neutrons resulting in higher thermal flux, leading to more 
 fission occurring and a higher $k_{eff}$. 
 
-Another observation is that TRISO particles peak in the centre of the slab, 
-proving that when the optimization problem focuses purely on the neutronics 
-of the slab by maximizing $k_{eff}$, the fuel tends to want to culminate in the 
-middle. 
+Another observation is that TRISO particles peak in the center of the slab, 
+proving that when the optimization problem focuses purely on the slab's neutronics 
+by maximizing $k_{eff}$, the fuel tends to want to culminate in the middle. 
 However, this is not ideal for other important reactor core qualities such as 
 good heat transfer and ensuring flat power across the core. 
 With these shortcomings in mind, I proceed to the future work chapter to discuss 
-the types of simulations that will be run to optimize for these other parameters. 
-
-% These ideas lead into the proposal section 
-
-% IDEAS 
-% vary in y direction 
-% try the whole 1/3 diamond fuel elemt 
+the types of simulations that will be run to optimize these other parameters. 
 
 \section{Summary}
 This chapter demonstrated successfully applying \gls{REALM} to maximize $k_{eff}$ 
@@ -442,13 +437,13 @@ problem.
 Experiment 39 performed the best with a hyperparameter set that produced the 
 highest final generation average $k_{eff}$ of 1.40165. 
 The \gls{TRISO} particle packing fraction distribution that produced the final 
-generation's maximum $k_{eff}$ of 1.40519 peaks at the centre of the slab with 
+generation's maximum $k_{eff}$ of 1.40519 peaks at the center of the slab with 
 a packing fraction distribution of $PF(x)=1.989\ sin(0.54x+3.143)$. 
 This problem demonstrated how effective and robust genetic algorithms are for 
 optimizing reactor parameters for an objective function. 
 This demonstration problem had a single objective function which was to maximize 
 $k_{eff}$. 
-However, there are many other objectives that should be considered such as 
-maximizing heat transfer, and minimizing power peaking in the core. 
-Thus, in the next chapter, I will propose future simulations for optimizing
-for these objective functions simultaneously.
+However, many other objectives should be considered, such as maximizing heat 
+transfer and minimizing power peaking in the core.
+Thus, in the next chapter, I propose future simulations for optimizing
+these objective functions simultaneously.
