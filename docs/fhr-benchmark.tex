@@ -8,42 +8,41 @@
 % Appendix? 
 % - More details about the geometry 
 
-The \gls{FHR} is a reactor concept that uses \gls{TRISO} fuel and a 
-low-pressure liquid fluoride-salt coolant.
+\glspl{FHR} use \gls{TRISO} fuel and a low-pressure liquid fluoride-salt coolant.
 \gls{FHR} technology combines \gls{FLiBe} coolant from \glspl{MSR} and 
 \gls{TRISO} particles from \glspl{VHTR} to enable a reactor with 
 low operating pressure, large thermal margin, and accident-tolerant 
 qualities.
-The \gls{AHTR} is a \gls{FHR} type that has plate-based fuel in a hexagonal 
+Within the \gls{FHR} reactor class, \glspl{AHTR} have plate-based fuel in a hexagonal 
 fuel assembly. 
-To address the \gls{AHTR} modeling challenges, such as multiple 
-heterogeneity and material cross-section data, the \gls{OECD}-\gls{NEA} and 
-\gls{Georgia Tech} initiated the \gls{FHR} benchmark for the \gls{AHTR} design 
-in 2019 \cite{noauthor_fluoride_nodate}. 
+To address the \gls{AHTR} modeling challenges, described in Chapter 
+\ref{chap:lit-review}, such as multiple heterogeneity and material cross-section 
+data, the \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the \gls{FHR} 
+benchmark for the \gls{AHTR} design in 2019 \cite{noauthor_fluoride_nodate}. 
 In section \ref{sec:fhr}, I gave an \gls{FHR} concept overview, 
 a \gls{AHTR} design description, a review of previous efforts 
 towards modeling these designs, and how these efforts led to the benchmark
 initiation. 
 
-The \gls{FHR} benchmark has several phases, starting with a single fuel assembly 
-simulation without burnup and gradually extending to full core depletion. 
+The three-phase \gls{FHR} benchmark begins  with a single fuel assembly 
+simulation without burnup and gradually extends to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
 
 \begin{table}[H]
     \centering
     \onehalfspacing
-    \caption{The \acrlong{FHR} benchmark's Phases \cite{noauthor_fluoride_nodate}.}
+    \caption{\acrfull{FHR} benchmark Phases \cite{noauthor_fluoride_nodate}.}
 	\label{tab:phases}
     \footnotesize
     \begin{tabular}{lclc}
     \hline 
     \textbf{Phases}& \textbf{Sub-phases} & \textbf{Description} & \textbf{Completed?} \\
     \hline
-    \multirow{ 3}{5cm}{\textbf{Phase I: fuel assembly (2D/3D with depletion)}} & I-A & 2D model, steady-state (no depletion) & \checkmark\\
+    \multirow{ 3}{5cm}{\textbf{Phase I: fuel assembly}} & I-A & 2D model, steady-state & \checkmark\\
     &I-B & 2D model depletion & \checkmark\\
     &I-C & 3D model depletion &\\
     \hline
-    \multirow{2}{5cm}{\textbf{Phase II: 3D full core with depletion}}&II-A & Steady-state (no depletion) &\\
+    \multirow{2}{5cm}{\textbf{Phase II: 3D full core}}&II-A & Steady-state &\\
     &II-B & Depletion &\\
     \hline 
     \multirow{ 2}{5.5cm}{\textbf{Phase III: 3D full core with feedback \& multicycle analysis}}&III-A & Full core depletion with feedback &\\
@@ -54,27 +53,42 @@ Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
 
 In the subsequent sections, I will describe the benchmark's specifications for 
 the \gls{AHTR} design and Phase I. Then, I will share our Phase I-A and I-B 
-results. 
+results generated with the OpenMC neutronics code \cite{romano_openmc_2013}. 
 
 \section{Benchmark Specifications: AHTR Design}
-The \acrlong{AHTR} has 3400 MWt thermal power and 1400 MW electric power 
-\cite{varma_ahtr_2012}. 
-Figure \ref{fig:reactor-schematic} shows the reactor schematic and a vertical 
+Figure \ref{fig:reactor-schematic} shows the \acrfull{AHTR} schematic and a vertical 
 cut of the reactor vessel. 
+The \gls{AHTR} operates at 3400 MWt thermal power and 1400 MWe 
+electric power \cite{varma_ahtr_2012}. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{reactor-schematic.png} 
-    \caption{\acrlong{AHTR} schematic (left) and vessel (right) 
+    \caption{\acrlong{AHTR} schematic (left) and vessel (right) reproduced from
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:reactor-schematic}
 \end{figure}
-Figure \ref{fig:ahtr} shows a single fuel assembly's geometry and all 
-assemblies' configuration in the core.
-The \gls{AHTR}'s hexagonal fuel assembly detailed 2D view is shown in 
-Figure \ref{fig:ahtr-fuel-assembly}.  
+The exterior reactor vessel has a $10m$ diameter and contains an $8m$-diameter 
+reactor core that contains 252 hexagonal fuel assemblies.
+Each fuel assembly is $6m$ high with a $5.5m$ active core region, which contains
+\gls{TRISO} particles, and $0.25m$ top and bottom non-fuelled reflector regions.
+Figure \ref{fig:ahtr}, from Chapter \ref{chap:lit-review}, shows a single 
+hexagonal fuel assembly geometry and the arrangement of all assemblies in the core.
+The dimensions specified are room temperature dimensions. 
+The benchmark's phases I and II use room temperature dimensions while phase III 
+will address dimensional changes brought about by temperature expansion. 
+Figure \ref{fig:ahtr-fuel-assembly} shows a detailed 2D view of the 
+\gls{AHTR}'s hexagonal fuel assembly. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.7\linewidth]{ahtr-fuel-element.png} 
+    \includegraphics[width=0.9\linewidth]{ahtr-fuel-element.png} 
+    \resizebox{0.4\textwidth}{!}{
+        \fbox{\begin{tabular}{ll}
+            \textcolor{fhrblue}{$\blacksquare$} & FLiBe \\
+            \textcolor{fhrgrey}{$\blacksquare$} & Graphite (Fuel Structure)\\
+            \textcolor{fhrred}{$\blacksquare$} & Graphite (Fuel Plank) \\
+            \textcolor{fhrgreen}{$\blacksquare$} & Graphite (Fuel Stripe) \\
+            \textcolor{fhryellow}{$\blacksquare$} & TRISO particle \\
+            \end{tabular}}}
     \caption{\acrlong{AHTR} fuel assembly with 18 fuel plates arranged in 
     three diamond-shaped sectors, with a central Y-shaped and external channel 
     graphite structure. Blue: FliBE coolant in between fuel assemblies and plates, 
@@ -83,50 +97,61 @@ Figure \ref{fig:ahtr-fuel-assembly}.
     with embedded TRISO particles.}
     \label{fig:ahtr-fuel-assembly}
 \end{figure}
-It features plate-type fuel with hexagonal fuel assembly consisting of eighteen 
-planks arranged in three diamond-shaped sectors, with a central Y-shaped 
-structure and external channel (wrapper).
-The diamond-shaped sections have 120-deg rotational symmetry with each other 
+The hexagonal fuel assembly consists of eighteen fuel-containing graphite planks 
+arranged in three diamond-shaped sectors, with a external channel wrapper and 
+structural Y-shape, made of C-C composite with extra notches to hold the fuel 
+planks in place. 
+The diamond-shaped sections have $120^\circ{}$ rotational symmetry with each other 
 \cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}. 
 The fuel planks have semi-cylindrical spacers attached, their radius being 
 equal to the coolant channel thickness. 
-
-Figure \ref{fig:y-shape} shows the external channel wrapper and structural 
-Y-shape, which are made of C-C composite and have extra notches to hold 
-the fuel plates in place.
-\begin{figure}[]
-    \centering
-    \includegraphics[width=\linewidth]{y-shape.png} 
-    \caption{\acrlong{AHTR} fuel assembly's structural components 
-    \cite{noauthor_fluoride_nodate}.}
-    \label{fig:y-shape}
-\end{figure}
-The gap between the fuel assemblies and fuel plates is filled with \gls{FLiBe}
-coolant. 
+\gls{FLiBe} coolant fills the gaps between the fuel planks, and between 
+assemblies (note: FliBe layer around the single assembly). 
 The Y-shaped control rod slot at the center of the Y-shape structure contains 
 \gls{FLiBe} coolant when the control blade is not in the slot (as seen in 
 Figure \ref{fig:ahtr-fuel-assembly})
 \cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}.
+For a single fuel assembly, the internal 120-degree rotational symmetry is 
+represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}. 
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.7\linewidth]{bc.png} 
+    \caption{Visualization of periodic boundary conditions for a single fuel 
+    assembly in the \gls{AHTR}, reproduced from \cite{noauthor_fluoride_nodate}.}
+    \label{fig:bc}
+\end{figure}
+
+Figure \ref{fig:ahtr-fuel-plank} magnifies a single fuel plank. 
 Each fuel plank is made of an isostatically pressed carbon with fuel stripes 
-on each outer side of the plank, as seen in Figure \ref{fig:ahtr-fuel-plank}. 
+on each outer side of the plank. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{ahtr-fuel-plank.png} 
+    \resizebox{0.4\textwidth}{!}{
+        \fbox{\begin{tabular}{ll}
+            \textcolor{fhrblue}{$\blacksquare$} & FLiBe \\
+            \textcolor{fhrgrey}{$\blacksquare$} & Graphite (Fuel Structure)\\
+            \textcolor{fhrred}{$\blacksquare$} & Graphite (Fuel Plank) \\
+            \textcolor{fhrgreen}{$\blacksquare$} & Graphite (Fuel Stripe) \\
+            \textcolor{fhryellow}{$\blacksquare$} & TRISO particle \\
+            \textcolor{fhrpink}{$\blacksquare$} & Graphite (Spacer) \\
+            \end{tabular}}}
     \caption{\acrlong{AHTR}'s fuel plank, with the magnification of 
     a spacer and segment of the fuel stripe with embedded TRISO particles.}
     \label{fig:ahtr-fuel-plank}
 \end{figure}
 The fuel stripes are prismatic regions composed of a graphite matrix filled with 
-a cubic lattice of \gls{TRISO} particles with a 40\% packing fraction. 
+a cubic lattice of \gls{TRISO} particles with 40\% packing fraction. 
 The lattice is 210 \gls{TRISO} particles wide in the x-direction, four particles 
 deep in the y-direction, and 5936 particles tall in the z-direction. 
-Each \gls{TRISO} particle has five layers (Figure \ref{fig:ahtr-triso}): 
-oxycarbide fuel kernel, porous carbon buffer, inner pyrolytic carbon, silicon 
-carbide layer, and the outer pyrolitic carbon. 
+Figure \ref{fig:ahtr-triso} shows the \gls{TRISO} particle which contains five 
+layers: oxycarbide fuel kernel, porous carbon buffer, inner pyrolytic carbon, 
+silicon carbide layer, and the outer pyrolitic carbon. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.6\linewidth]{ahtr-triso.png} 
-    \caption{\acrlong{AHTR}'s TRISO particle schematic \cite{noauthor_fluoride_nodate}.}
+    \caption{\acrlong{AHTR}'s TRISO particle schematic reproduced from 
+    \cite{noauthor_fluoride_nodate}.}
     \label{fig:ahtr-triso}
 \end{figure}
 
@@ -134,8 +159,9 @@ For reactivity control, burnable poisons and control rods are included in
 some configurations of the \gls{AHTR}. 
 The burnable poisons consist of europium oxide, $Eu_2O_3$, and have a discrete
 or integral (dispersed) option. 
-In the discrete option, small spherical $Eu_2O_3$ particles are stacked axially 
-at five locations in each fuel plank, as shown in Figure \ref{fig:discrete-poison}. 
+Figure \ref{fig:discrete-poison} shows the discrete option in which small 
+spherical $Eu_2O_3$ particles are stacked axially at five locations in each 
+fuel plank. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{discrete-poison.png} 
@@ -149,21 +175,12 @@ indented to structural sides, but excluding the graphite in spacers and
 graphite in TRISO particles). 
 Each control rod is uniformly composed of \gls{MHC} and is inserted into the 
 Y-shaped control rod slot where it displaces the \gls{FLiBe} that occupies the 
-slot (Figure \ref{fig:ahtr-fuel-assembly}). 
+slot (shown in Figure \ref{fig:ahtr-fuel-assembly}). 
 
 \section{Benchmark Specifications: Phase I}
 \label{sec:phase1}
 The \gls{FHR} benchmark's Phase I consists of a steady-state 2D model 
 (Phase I-A) and depletion (Phase I-B) of one \gls{FHR} fuel assembly. 
-For a single fuel assembly, the internal 120-degree rotational symmetry is 
-represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}. 
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.7\linewidth]{bc.png} 
-    \caption{Visualization of periodic boundary conditions for a single fuel 
-    assembly in the \gls{AHTR}\cite{noauthor_fluoride_nodate}.}
-    \label{fig:bc}
-\end{figure}
 The benchmark required the following results for Phases I-A and I-B:
 \begin{enumerate}[label=(\alph*)]
     \item effective multiplication factor 
