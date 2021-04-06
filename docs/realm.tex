@@ -33,36 +33,32 @@ REALM also strives to be effective, flexible, open-source, parallel, reproducibl
 and usable. 
 I briefly summarize how \gls{REALM} achieves these goals:  
 \begin{itemize}
-    \item Effective: \gls{REALM} is well documented, well tested, and 
+    \item Effective: \gls{REALM} is well documented, tested, and 
     version-controlled on Github \cite{chee_arfcrealm_2021}.
     \item Flexible: The proposed work aims to utilize \gls{REALM} to 
     explore arbitrary reactor geometries and inhomogeneous fuel distributions. 
     However, future users might want to utilize \gls{REALM} 
-    with other arbitrary parameters. Thus, I designed the \gls{REALM}
+    to explore other arbitrary design parameters. Thus, I designed the \gls{REALM}
     framework accordingly. The user can vary any imaginable parameter 
-    because \gls{REALM} uses a templating method to edit the coupled software's input 
-    file.
-    \item Open-source: I utilize a well-documented, open-source evolutionary algorithm 
-    Python package to drive the optimization process, and established 
-    open-source nuclear software, OpenMC \cite{romano_openmc_2013} and 
-    Moltres \cite{lindsay_introduction_2018}, to compute the objective function 
+    because \gls{REALM} uses a templating method to edit the input file of the 
+    coupled software.
+    \item Open-source: \gls{REALM} utilizes a well-documented, open-source 
+    evolutionary algorithm Python package to drive the optimization process, 
+    and established open-source nuclear software (OpenMC \cite{romano_openmc_2013} and 
+    Moltres \cite{lindsay_introduction_2018}) to compute the objective function 
     and constraints. I also provide a simple tutorial for future developers to 
     follow for coupling other nuclear software to \gls{REALM}.  
-    \item Parallel: \gls{REALM} runs parallel on \gls{HPC} machines using the 
+    \item Parallel: \gls{REALM} runs in parallel on \gls{HPC} machines using the 
     \texttt{mpi4py} Python package \cite{dalcin_mpi_2008}.
     \item Reproducible: Data from every REALM run saves into a unique, pickled 
     file (pickle is a Python module that serializes Python objects), and all 
     results from this work are available on Github. 
-    \item Usable: I did not reinvent the wheel--instead, I combined available 
-    evolutionary algorithm, nuclear transport, and thermal-hydraulics software 
-    to create an optimization tool for easy leveraging of evolutionary algorithms 
-    to construct arbitrary reactor designs. 
 \end{itemize}
 
 \gls{REALM} essentially couples an evolutionary algorithm driver with nuclear 
-software, such as nuclear transport and thermal-hydraulics codes. 
-Figure \ref{fig:genetic_alg} from Chapter \ref{chap:lit-review} outlines an 
-evolutionary algorithm's iterative problem solving process. 
+software, such as neutron transport and thermal-hydraulics codes. 
+Figure \ref{fig:genetic_alg} from Chapter \ref{chap:lit-review} outlines the 
+evolutionary algorithm iterative problem solving process. 
 I modified Figure \ref{fig:genetic_alg} to produce Figure 
 \ref{fig:genetic_alg_nuclear}, which depicts how the nuclear transport and 
 thermal-hydraulics software fit within the process. 
@@ -97,18 +93,18 @@ thermal-hydraulics software fit within the process.
     \label{fig:genetic_alg_nuclear}
 \end{figure}
 Therefore, \gls{REALM} initially reads and validates the JSON input 
-file, initializes the \gls{DEAP} genetic algorithm hyperparameters and operators, 
-and finally runs the genetic algorithm following the flow chart in Figure 
-\ref{fig:genetic_alg_nuclear}, in which the nuclear software evaluates each 
-individual's fitness. 
+file, initializes the \gls{DEAP} \cite{fortin_deap_2012} genetic algorithm 
+hyperparameters and operators, and finally runs the genetic algorithm following 
+the flow chart in Figure \ref{fig:genetic_alg_nuclear}, in which the nuclear 
+software evaluates each individual's fitness. 
 
-In the subsequent sections, I describe the evolutionary algorithm software 
+In the subsequent sections, I describe the evolutionary algorithm software (DEAP)
 that drives \gls{REALM}, the nuclear software coupled to REALM, and details about 
 the \gls{REALM} framework, such as the input file format and software architecture. 
 
 \section{Evolutionary Algorithm Driver}
-Evolutionary algorithm computation is a sophisticated field with diverse techniques 
-and mechanisms, resulting in even the most well-designed, coded-up frameworks 
+Evolutionary algorithm computation uses sophisticated, diverse techniques 
+and mechanisms, resulting in even the most well-designed, software frameworks 
 being complicated under the hood. 
 Utilizing an existing evolutionary algorithm framework brings 
 up issues in extending implementation intricacies as the user has to edit the 
