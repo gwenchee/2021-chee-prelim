@@ -28,7 +28,7 @@ The three-phase \gls{FHR} benchmark begins  with a single fuel assembly
 simulation without burnup and gradually extends to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
 
-\begin{table}[H]
+\begin{table}
     \centering
     \onehalfspacing
     \caption{\acrfull{FHR} benchmark Phases \cite{noauthor_fluoride_nodate}.}
@@ -179,8 +179,8 @@ To control reactivity, the \gls{FHR} benchmark includes \gls{AHTR} configuration
 with burnable poisons and control rods. 
 The burnable poisons consist of europium oxide, $Eu_2O_3$, and have a discrete
 or integral (dispersed) option. 
-Figure \ref{fig:discrete-poison} shows the discrete option with axially 
-stacked small spherical $Eu_2O_3$ particles at five locations in each 
+Figure \ref{fig:discrete-poison} shows the discrete option with z-direction axially 
+stacked small spherical $Eu_2O_3$ particles at five XY locations in each 
 fuel plank. 
 \begin{figure}[]
     \centering
@@ -191,7 +191,7 @@ fuel plank.
         \draw[ thick,-latex] (0,0) -- (1,1) node[anchor=south west] {$z$};
        \tkzText[above](-0.3,-0.7){}
        \end{tikzpicture} 
-    \caption{Placement of axial stacks of burnable poisons in the \acrlong{AHTR} 
+    \caption{XY Placement of z-direction axial burnable poisons stacks in the \acrlong{AHTR} 
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:discrete-poison}
 \end{figure}
@@ -300,7 +300,7 @@ For Phase I-A, the benchmark specifies that each participant must produce a
 steady-state 2D model of one fresh fuel assembly for nine cases
 and report the required results listed in Section \ref{sec:phase1}.  
 Table \ref{tab:phase1a-cases} describes each case. 
-\begin{table}[H]
+\begin{table}
     \centering
     \onehalfspacing
     \caption{Description of the \acrlong{FHR} benchmark Phase I-A cases \cite{noauthor_fluoride_nodate}.}
@@ -373,7 +373,7 @@ benchmark, assuring that \gls{UIUC}'s Phase I-A results are acceptable and
 in agreement with other benchmark participants. 
 
 \subsubsection{Results: Effective Multiplication Factor (a)}
-Table \ref{tab:phase1a-cases} reports Phase I-A $k_{eff}$ and reactivity 
+Table \ref{tab:phase1a-results} reports Phase I-A $k_{eff}$ and reactivity 
 coefficients results. 
 I ran the simulations on \gls{UIUC}'s BlueWaters supercomputer with 64 XE nodes, 
 which each have 32 cores \cite{ncsa_about_2017}. 
