@@ -67,13 +67,14 @@ electric power \cite{varma_ahtr_2012}.
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:reactor-schematic}
 \end{figure}
-The exterior reactor vessel has a $10m$ diameter and contains an $8m$-diameter 
-reactor core that contains 252 hexagonal fuel assemblies.
-Each fuel assembly is $6m$ high with a $5.5m$ active core region, which contains
+The $10m$-diameter exterior reactor vessel contains an $8m$-diameter 
+reactor core that which in turn contains 252 hexagonal fuel assemblies.
+
+Each $6m$ high fuel assembly comprises a $5.5m$ active core region, which contains
 \gls{TRISO} particles, and $0.25m$ top and bottom non-fuelled reflector regions.
 Figure \ref{fig:ahtr}, from Chapter \ref{chap:lit-review}, shows a single 
 hexagonal fuel assembly geometry and the arrangement of all assemblies in the core.
-The dimensions specified are room temperature dimensions. 
+All dimensions specified are at room temperature. 
 The benchmark's phases I and II use room temperature dimensions while phase III 
 will address dimensional changes brought about by temperature expansion. 
 Figure \ref{fig:ahtr-fuel-assembly} shows a detailed 2D view of the 
@@ -89,6 +90,13 @@ Figure \ref{fig:ahtr-fuel-assembly} shows a detailed 2D view of the
             \textcolor{fhrgreen}{$\blacksquare$} & Graphite (Fuel Stripe) \\
             \textcolor{fhryellow}{$\blacksquare$} & TRISO particle \\
             \end{tabular}}}
+            \hspace{0.5cm}
+            \begin{tikzpicture}
+                \draw[ thick,-latex] (0,0) -- (1.3,0) node[anchor=south west] {$x$};
+                \draw[ thick,-latex] (0,0) -- (0,1.3) node[anchor=south west] {$y$};
+                \draw[ thick,-latex] (0,0) -- (1.3,1.3) node[anchor=south west] {$z$};
+               \tkzText[above](-0.5,1){}
+               \end{tikzpicture} 
     \caption{\acrlong{AHTR} fuel assembly with 18 fuel plates arranged in 
     three diamond-shaped sectors, with a central Y-shaped and external channel 
     graphite structure. Blue: FliBE coolant in between fuel assemblies and plates, 
@@ -103,8 +111,8 @@ structural Y-shape, made of C-C composite with extra notches to hold the fuel
 planks in place. 
 The diamond-shaped sections have $120^\circ{}$ rotational symmetry with each other 
 \cite{varma_ahtr_2012,ramey_monte_2018,noauthor_fluoride_nodate}. 
-The fuel planks have semi-cylindrical spacers attached, their radius being 
-equal to the coolant channel thickness. 
+Semi-cylindrical spacers attach to the fuel planks with radius equalling to 
+coolant channel thickness. 
 \gls{FLiBe} coolant fills the gaps between the fuel planks, and between 
 assemblies (note: FliBe layer around the single assembly). 
 The Y-shaped control rod slot at the center of the Y-shape structure contains 
@@ -115,15 +123,20 @@ For a single fuel assembly, the internal 120-degree rotational symmetry is
 represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.7\linewidth]{bc.png} 
+    \includegraphics[width=0.72\linewidth]{bc.png} 
+    \begin{tikzpicture}
+        \draw[ thick,-latex] (0,7) -- (1.3,7) node[anchor=south west] {$x$};
+        \draw[ thick,-latex] (0,7) -- (0,8.3) node[anchor=south west] {$y$};
+        \draw[ thick,-latex] (0,7) -- (1.3,8.3) node[anchor=south west] {$z$};
+       \tkzText[above](-0.5,0){}
+       \end{tikzpicture} 
     \caption{Visualization of periodic boundary conditions for a single fuel 
     assembly in the \gls{AHTR}, reproduced from \cite{noauthor_fluoride_nodate}.}
     \label{fig:bc}
 \end{figure}
 
 Figure \ref{fig:ahtr-fuel-plank} magnifies a single fuel plank. 
-Each fuel plank is made of an isostatically pressed carbon with fuel stripes 
-on each outer side of the plank. 
+Fuel stripes line the upper and lower sides of each graphite fuel plank. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{ahtr-fuel-plank.png} 
@@ -136,17 +149,24 @@ on each outer side of the plank.
             \textcolor{fhryellow}{$\blacksquare$} & TRISO particle \\
             \textcolor{fhrpink}{$\blacksquare$} & Graphite (Spacer) \\
             \end{tabular}}}
+            \hspace{0.5cm}
+            \begin{tikzpicture}
+                \draw[ thick,-latex] (0,0) -- (1.3,0) node[anchor=south west] {$x$};
+                \draw[ thick,-latex] (0,0) -- (0,1.3) node[anchor=south west] {$y$};
+                \draw[ thick,-latex] (0,0) -- (1.3,1.3) node[anchor=south west] {$z$};
+               \tkzText[above](-0.5,1){}
+               \end{tikzpicture} 
     \caption{\acrlong{AHTR}'s fuel plank, with the magnification of 
     a spacer and segment of the fuel stripe with embedded TRISO particles.}
     \label{fig:ahtr-fuel-plank}
 \end{figure}
-The fuel stripes are prismatic regions composed of a graphite matrix filled with 
-a cubic lattice of \gls{TRISO} particles with 40\% packing fraction. 
+Each fuel stripe contains a graphite matrix filled with a cubic lattice of 
+\gls{TRISO} particles with 40\% packing fraction. 
 The lattice is 210 \gls{TRISO} particles wide in the x-direction, four particles 
 deep in the y-direction, and 5936 particles tall in the z-direction. 
-Figure \ref{fig:ahtr-triso} shows the \gls{TRISO} particle which contains five 
-layers: oxycarbide fuel kernel, porous carbon buffer, inner pyrolytic carbon, 
-silicon carbide layer, and the outer pyrolitic carbon. 
+Figure \ref{fig:ahtr-triso} shows the \gls{TRISO} particle's cross section 
+which consists of five layers: oxycarbide fuel kernel, porous carbon buffer, 
+inner pyrolytic carbon, silicon carbide layer, and the outer pyrolitic carbon. 
 \begin{figure}[]
     \centering
     \includegraphics[width=0.6\linewidth]{ahtr-triso.png} 
@@ -155,27 +175,34 @@ silicon carbide layer, and the outer pyrolitic carbon.
     \label{fig:ahtr-triso}
 \end{figure}
 
-For reactivity control, burnable poisons and control rods are included in 
-some configurations of the \gls{AHTR}. 
+To control reactivity, the \gls{FHR} benchmark includes \gls{AHTR} configurations
+with burnable poisons and control rods. 
 The burnable poisons consist of europium oxide, $Eu_2O_3$, and have a discrete
 or integral (dispersed) option. 
-Figure \ref{fig:discrete-poison} shows the discrete option in which small 
-spherical $Eu_2O_3$ particles are stacked axially at five locations in each 
+Figure \ref{fig:discrete-poison} shows the discrete option with axially 
+stacked small spherical $Eu_2O_3$ particles at five locations in each 
 fuel plank. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=\linewidth]{discrete-poison.png} 
+    \includegraphics[width=0.82\linewidth]{discrete-poison.png}
+    \begin{tikzpicture}
+        \draw[ thick,-latex] (0,0) -- (1,0) node[anchor=south west] {$x$};
+        \draw[ thick,-latex] (0,0) -- (0,1) node[anchor=south west] {$y$};
+        \draw[ thick,-latex] (0,0) -- (1,1) node[anchor=south west] {$z$};
+       \tkzText[above](-0.3,-0.7){}
+       \end{tikzpicture} 
     \caption{Placement of axial stacks of burnable poisons in the \acrlong{AHTR} 
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:discrete-poison}
 \end{figure}
-In the integral option, $Eu_2O_3$ is homogenously mixed with the fuel plank 
-graphite matrix (including the graphite in fuel stripes matrix and plank ends 
+The integral options consists of $Eu_2O_3$ homogenously mixed with the graphite 
+fuel plank (including the graphite in fuel stripes matrix and plank ends 
 indented to structural sides, but excluding the graphite in spacers and 
-graphite in TRISO particles). 
-Each control rod is uniformly composed of \gls{MHC} and is inserted into the 
-Y-shaped control rod slot where it displaces the \gls{FLiBe} that occupies the 
-slot (shown in Figure \ref{fig:ahtr-fuel-assembly}). 
+graphite in TRISO particles).
+
+The \gls{MHC} control rod inserts into the Y-shaped control rod slot where it 
+displaces the \gls{FLiBe} that occupies the slot 
+(shown in Figure \ref{fig:ahtr-fuel-assembly}). 
 
 \section{Benchmark Specifications: Phase I}
 \label{sec:phase1}
