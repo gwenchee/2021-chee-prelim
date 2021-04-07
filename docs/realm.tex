@@ -106,13 +106,13 @@ the \gls{REALM} framework, such as the input file format and software architectu
 Evolutionary algorithm computation uses sophisticated, diverse techniques 
 and mechanisms, resulting in even the most well-designed, software frameworks 
 being complicated under the hood. 
-Utilizing an existing evolutionary algorithm framework brings 
-up issues in extending implementation intricacies as the user has to edit the 
-source code \cite{fortin_deap_2012}. 
-Therefore, an evolutionary algorithm computation framework that gives the user the 
-capability to build custom evolutionary algorithms is ideal for this project.
+Utilizing an existing evolutionary algorithm framework presents implementation 
+challenges as the user must edit the source code to customize for their 
+application \cite{fortin_deap_2012}. 
+Therefore, a computation framework that gives the user the capability to build 
+custom evolutionary algorithms is ideal for this project.
 
-There are many evolutionary algorithm computation packages available: 
+Many evolutionary algorithm computation packages exist: 
 \gls{DEAP} \cite{fortin_deap_2012}, inspyred \cite{garrett_inspyred_2014}, 
 Pyevolve \cite{perone_pyevolve_2009}, and OpenBEAGLE \cite{gagne_open_2002}.
 \gls{DEAP} is the newest package and places a high value on code 
@@ -120,8 +120,8 @@ compactness and clarity \cite{fortin_deap_2012}.
 \gls{DEAP} is the only framework that allows the user to prototype evolutionary 
 algorithms rapidly and define custom algorithms without digging deep into 
 the source code to modify lines.
-This makes \gls{DEAP} the code of choice for the REALM framework's evolutionary 
-algorithm driver component. 
+Accordingly, I chose \gls{DEAP} to drive the \gls{REALM} framework's 
+evolutionary algorithm component. 
 \gls{DEAP} provides building blocks for each optimizer function and allows the 
 user to customize a specialized algorithm to fit their project \cite{fortin_deap_2012}.
 
