@@ -219,8 +219,9 @@ applied, and the results are saved.
 % include code here? 
 
 \section{Nuclear Software}
-Many nuclear software have restricted public access. 
-In the proposed work, I enabled \gls{REALM} to work with open-source nuclear 
+Many nuclear software tools, applications, libraries, packages have restricted 
+public access. 
+In the preliminary work, I enabled \gls{REALM} to work with open-source nuclear 
 transport and thermal-hydraulics software, OpenMC \cite{romano_openmc_2013} 
 and Moltres \cite{lindsay_introduction_2018}.  
 OpenMC is an open-source Monte Carlo neutron transport code capable of 
@@ -237,9 +238,10 @@ of processing units \cite{lindsay_introduction_2018}.
 OpenMC and Moltres are both open-source, well-documented, well-supported, and 
 Github version-controlled codes that can run in parallel on \gls{HPC} machines.
 Thus they achieve the \gls{REALM} goals listed at the start of this chapter, 
-making them suitable to be used as \gls{REALM}'s nuclear software.
-However, users can easily use restricted nuclear software with \gls{REALM} 
-by coupling \gls{REALM} with the restricted software on their local machine. 
+making them suitable to be used as \gls{REALM}'s nuclear dependency.
+However, users can easily use restricted nuclear software if they so desire 
+with \gls{REALM} by coupling \gls{REALM} with the restricted software on their 
+local machine. 
 In the \gls{REALM} documentation \cite{chee_arfcrealm_2021}, I outline how to couple 
 other nuclear software to \gls{REALM}. 
 
@@ -383,9 +385,9 @@ Second, the user can use predefined evaluations.
 For example, in \texttt{OpenMCEvaluation}, there is a predefined $k_{eff}$ 
 evaluation.
 The user may also add predefined evaluations to \texttt{OpenMCEvaluation} or 
-\texttt{MoltresEvaluation}, or any other coupled codes' evaluation file.
+\texttt{MoltresEvaluation}, or any other coupled software's evaluation file.
 Third, the user may include an \texttt{output\_script} that returns the desired 
-output parameters. 
+output parameter. 
 The \texttt{output\_script} must include a line that prints a dictionary containing 
 the output parameters' names and their corresponding value as key-value pairs. 
 
@@ -426,8 +428,8 @@ The optional input parameters include \texttt{mutation\_probability},
 As mentioned previously in Section \ref{sec:genetic_alg}, it is important to 
 select genetic algorithm hyperparameters that balance the extent of exploration 
 and exploitation.
-The user can define the mutation and mating probability or not define them which 
-results in the default values of 0.3 and 0.4, respectively. 
+The user can define the mutation and mating probability or use default values of 
+0.3 and 0.4, respectively. 
 For each operator, the user can choose from a list of operators and define each
 of their required hyperparameters. 
 Table \ref{tab:deap_operators} shows the available operators and their respective 
@@ -464,14 +466,14 @@ Lines 17 to 31 in the example \gls{REALM} input file (Figure \ref{fig:realm-inpu
 demonstrate \texttt{algorithm} specifications. 
 
 \section{REALM Software Architecture}
-In this section, I will describe \gls{REALM} v1.0's software architecture and 
+In this section, I will describe the \gls{REALM} v1.0 software architecture and 
 how all the parts come together to optimize reactor design. 
 Table \ref{tab:realm-architecture} outlines the classes in the \gls{REALM} software 
 and describes each class's purpose.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{Classes that makeup \gls{REALM}'s architecture and their description. }
+    \caption{Classes that make up the \gls{REALM} architecture. }
 	\label{tab:realm-architecture}
     \footnotesize
     \begin{tabular}{l|p{0.73\textwidth}}
@@ -524,7 +526,7 @@ and describes each class's purpose.
     \hline
     \end{tabular}
     \end{table}
-Figure \ref{fig:realm_archi} depicts \gls{REALM}'s software architecture. 
+Figure \ref{fig:realm_archi} depicts the \gls{REALM} software architecture. 
 \begin{figure}[]
     \centering
     \begin{tikzpicture}[node distance=0.5cm]
@@ -608,9 +610,9 @@ one optional argument.
 The mandatory arguments are the input file (\texttt{-i}) and objective (\texttt{-p}). 
 The optional argument is the checkpoint file (\texttt{-c}).  
 Thus, the structure of a command line input for running \gls{REALM} is: 
-\begin{verbatim}
-    python realm -i <input file name> -p <max or min> -c <checkpoint file name>
-\end{verbatim} 
+
+\noindent
+\texttt{python realm -i <input file name> -p <max or min> -c <checkpoint file name>}
 
 The checkpoint file holds the results from the \gls{REALM} simulation and also acts 
 as a restart file. 
@@ -618,8 +620,8 @@ Thus, if a \gls{REALM} simulation ends prematurely, the checkpoint file can be u
 to restart the code from the most recent population and continue the simulation. 
 
 \subsection{REALM Results Analysis}
-The \textbf{\textit{BackEnd}} class manages each \gls{REALM} simulation's results. 
-\textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, and it 
+The \textbf{\textit{BackEnd}} class manages results from each \gls{REALM} simulation. 
+\textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, which 
 is saved as \texttt{checkpoint.pkl} in the same directory as the input file. 
 The checkpoint file can then be reloaded into a Jupyter notebook and organized 
 to produce desired plots. 
@@ -646,10 +648,11 @@ This chapter described the \acrfull{REALM} framework developed for the
 proposed work. 
 \gls{REALM} is a Python package that applies evolutionary algorithm 
 optimization techniques to nuclear reactor design using the \acrfull{DEAP} 
-module, OpenMC, and Moltres nuclear software. 
-The motivation for \gls{REALM}'s inception is to enable reactor designers to utilize 
+module, OpenMC, and Moltres. 
+The motivation for \gls{REALM} is to enable reactor designers to utilize 
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework,
 selecting appropriate hyperparameters, and setting up its parallelization. 
 REALM is designed to be effective, flexible, open-source, parallel, 
-reproducible, and usable and is hosted on Github \cite{chee_arfcrealm_2021}. 
+reproducible, and usable. 
+\gls{REALM} is hosted on Github \cite{chee_arfcrealm_2021}. 
