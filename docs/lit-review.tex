@@ -210,13 +210,13 @@ Chapter \ref{chap:fhr-benchmark} will provide a detailed description of the
 benchmark phases and results obtained so far.
 
 \section{Additive Manufacturing}
-Additive manufacturing is the formal term for what is popularly called `3D printing' 
+Additive manufacturing is the formal term for what is popularly known as `3D printing' 
 \cite{gibson_additive_2014}. 
 The basic principle of additive manufacturing is that a model is initially generated using a
 \gls{3D CAD} system and then fabricated directly without the need for process 
 planning. 
 Additive manufacturing, as the name implies, adds material in layers, such that 
-each layer is a thin cross section of the 3D-CAD-designed part, as opposed 
+each layer is a thin cross section of \gls{3D CAD}-designed part, as opposed 
 to traditional machining which subtracts material instead 
 \cite{standard_standard_2012}. 
 All commercialized additive manufacturing machines to date use a layer-based approach, and 
@@ -235,8 +235,6 @@ Furthermore, using additive manufacturing in conjunction with other technologies
 high-power lasers, has enabled additive manufacturing of parts made from various 
 metals \cite{gibson_additive_2014}. 
 
-\subsection{Application of Additive Manufacturing to Nuclear Reactor Core Components}
-\label{sec:am}
 Additive manufacturing has progressed rapidly in the last 30 years, from rapid 
 design prototyping with polymers in the automotive industry to scale production 
 of metal components.  
@@ -247,6 +245,22 @@ additive manufacturing to produce fuel injection nozzles
 The most common metal additive manufacturing technologies, \gls{SLM}, \gls{EBM}, 
 \gls{L-DED}, and binder jetting, are not currently used to manufacture nuclear 
 power plant parts. 
+
+The U.S. \gls{DOE}, National Laboratories, \gls{EPRI} support research and 
+development efforts towards deployment, testing, and qualification 
+of additive manufacturing methods for nuclear components. 
+However, the nuclear industry's efforts to incorporate additive manufacturing 
+into the supply chain lags behind the auto and aerospace industries due to the 
+lack of clarity on regulatory pathways. 
+The aerospace and automotive industries benefit from long-standing and resourced 
+regulatory and standards development activities \cite{noauthor_roadmap_nodate}. 
+Thus, in 2019 the \gls{NRC} addressed these regulatory challenges by issuing 
+a draft action plan to prepare the agency to review applications for 
+additive manufacturing of nuclear components and clarify the industry's 
+expectations of their use \cite{noauthor_roadmap_nodate}.
+
+\subsection{Benefits of Additive Manufacturing for Nuclear Reactor Core Components}
+\label{sec:am}
 Wide-spread adoption of these methods in the nuclear industry could drastically 
 reduce fabrication costs and timelines, combine multiple systems and assembled 
 components into single parts, increase safety and performance by tailoring 
@@ -256,12 +270,12 @@ Many Generation IV advanced reactor concepts have complex geometries,
 such as hex-ducts for sodium-cooled fast reactors, that are costly and difficult 
 to fabricate using standard processing techniques. 
 Traditional manufacturing routes also restrict many viable geometries for 
-reactor designers to explore \cite{sridharan_performance_2019}. 
-However, nuclear grade material and manufacturing have high qualification standards. 
+reactor designers to explore \cite{sridharan_performance_2019}.  
 In summary, reactor core component fabrication with additive manufacturing 
 enables further optimization and improvement of fuel geometries to enhance fuel 
-performance at lower costs \cite{bergeron_early_2018}
+performance at lower costs \cite{bergeron_early_2018}. 
 
+\subsection{Demonstration of Additive Manufacturing for Nuclear Reactor Core Components}
 Recent nuclear materials experiments have demonstrated the application 
 of additive manufacturing to nuclear fuel and structural core material fabrication. 
 Rosales et al. \cite{rosales_characterizing_2019} conducted a feasibility study 
@@ -316,16 +330,20 @@ Therefore, this reiterates the possibility of leveraging additive manufacturing 
 
 \section{Nuclear Reactor Design Optimization}
 \label{sec:opt}
-The practice of nuclear reactor optimization has been around since the 
-conception of nuclear reactors. 
-Optimization has been applied to many nuclear engineering sub-fields such 
-as reactor design, reactor reloading patterns, and the nuclear fuel cycle.  
+With the conception of nuclear reactors came along the practice of nuclear 
+reactor optimization. 
+Nuclear engineering sub-fields such as reactor design, reactor reloading 
+patterns, and the nuclear fuel cycle utilize optimization.  
+Traditional manufacturing constraints limit nuclear reactor core 
+design optimization. 
 In the proposed work, we will reexamine nuclear reactor core 
-design optimization for arbitrary reactor geometries and fuel distributions. 
-Previous efforts towards nuclear reactor core design optimization were limited by 
-traditional manufacturing constraints and utilized deterministic and stochastic 
-optimization techniques, coupled with surrogate models. 
+design optimization for arbitrary reactor geometries and fuel distributions
+enabled by additive manufacturing. 
 
+\subsection{Previous Efforts for Reactor Design Optimization}
+Previous efforts towards reactor design optimization processes utilized 
+deterministic and stochastic optimization techniques, coupled with surrogate 
+models. 
 Deterministic optimization methods usually start from a guess solution.
 Then, the algorithm suggests a search direction by applying local 
 information to a pre-specified transition rule. 
@@ -345,14 +363,26 @@ attributes \cite{byrne_evolving_2014,simon_sciences_2019}.
 When multiple conflicting objectives compete no single optimum solution 
 simultaneously optimizes all objectives. 
 Instead, multi-objective optimization returns multiple optimal 
-solutions with varying degree objective values \cite{deb_multi-objective_2001}. 
+solutions that meets each objective to varying degrees \cite{deb_multi-objective_2001}. 
 For a multi-objective problem like reactor design, an ideal optimization method 
 should find widely spread solutions in the obtained non-dominated front 
 \cite{deb_multi-objective_2001}. 
+For each solution in a set of non-dominated front solutions, none of 
+the objective functions can be improved in value without degrading some of the 
+other objective values. 
 
 Recent efforts towards nuclear reactor optimization have relied heavily on 
 the aforementioned stochastic methods, with the occasional addition of 
-stochastic-deterministic hybrid methods. 
+stochastic-deterministic hybrid methods.
+
+\subsubsection{Stochastic Optimization: Simulated Annealing Method}
+Simulated annealing iteratively updates one candidate solution until it reaches 
+the termination criteria. 
+At each iteration, the simulated annealing algorithm selects a random move. 
+If the selected move improves the solution, it is always accepted; however,  
+if it does not improve the solution, the algorithm updates the solution with 
+some probability of less than 1.
+
 Sacco et al. \cite{sacco_two_2006,sacco_metropolis_2008} used stochastic 
 simulated annealing and deterministic-stochastic hybrid optimization techniques 
 to optimize reactor dimensions, enrichment, materials, etc., to 
@@ -366,12 +396,8 @@ annealing method: a highly scalable method based on the method of parallel
 simulated annealing with mixing of states \cite{kropaczek_constraint_2019} for 
 the solution of large-scale, multiconstrained problems in \gls{LWR} fuel cycle 
 optimization. 
-Peireira et al. \cite{pereira_coarse-grained_2003,pereira_parallel_2008} 
-used a coarse-grained parallel genetic algorithm and a niching genetic algorithm
-to optimize the same problem as Sacco et al. \cite{sacco_two_2006}. 
-Kamalpour et al. \cite{kamalpour_smart_2020} utilized the imperialist competitive 
-algorithm, a type of evolutionary algorithm, to optimize an \gls{FCM} fuelled 
-\gls{PWR} to extend the reactor core cycle length. 
+These papers demonstrate the simulated annealing optimization method's success in 
+reactor design optimization problems. 
 
 Nuclear reactor optimization problems require computationally 
 expensive neutronics and thermal-hydraulics software to compute the objective 
@@ -402,16 +428,27 @@ Therefore, using a simulated annealing method is only practical if a
 surrogate evaluation model is used, as described in Betzler et al. 
 \cite{betzler_design_2019} and Kumar et al. \cite{kumar_new_2015}.
 
+\subsubsection{Stochastic Optimization: Evolutionary Algorithm Method}
+Peireira et al. \cite{pereira_coarse-grained_2003,pereira_parallel_2008} 
+used a coarse-grained parallel genetic algorithm and a niching genetic algorithm
+to optimize the same problem as Sacco et al. \cite{sacco_two_2006}. 
+Kamalpour et al. \cite{kamalpour_smart_2020} utilized the imperialist competitive 
+algorithm, a type of evolutionary algorithm, to optimize a \gls{FCM} fuelled 
+\gls{PWR} to extend the reactor core cycle length. 
+
 Contrary to a single solution per iteration in deterministic and stochastic 
 simulated annealing methods, evolutionary algorithms use a population of solutions in each 
 iteration \cite{deb_multi-objective_2001}. 
-evolutionary algorithm methods mimic nature's evolutionary principles to drive 
+Evolutionary algorithm methods mimic nature's evolutionary principles to drive 
 the search towards an optimal solution. 
 With the affordability and availability of parallel computing systems, the 
 evolutionary algorithm optimization method stands out as a method 
 that easily and conveniently exploits parallel systems. 
 Further, evolutionary algorithms have proved amenable to \gls{HPC} solutions and 
 scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}. 
+Thus, for optimization problems that require high-fidelity evaluation software, 
+the evolutionary algorithm method can leverage parallel computing to find a 
+solution faster than the simulated annealing method.
 Therefore, in this proposed work, we will utilize the evolutionary algorithm 
 optimization method. 
 
@@ -420,10 +457,10 @@ Optimization}
 Previous efforts toward nuclear reactor optimization, as discussed in the above 
 section, focused on optimizing classical reactor parameters such as 
 radius of fuel pellet and clad, enrichment of fuel, pin pitch, etc. 
-With the advancements of additive manufacturing for reactor core components, 
-reactor designers are no longer geometrically constrained by conventional fuel 
-manufacturing and can optimize beyond classical parameters to enhance fuel 
-performance and safety further. 
+Additive manufacturing advancements for reactor core components remove
+conventional fuel manufacturing geometric constraints, allowing the reactor 
+designers to optimize beyond classical parameters to enhance fuel performance 
+and safety further. 
 Reactor design objectives remain consistent with past objectives, such as 
 minimizing fuel amount and minimizing the maximum fuel temperature for a given 
 power level.
@@ -450,18 +487,18 @@ model will quickly adapt and produce new global optimal designs to fit the new
 criteria.  
 
 \section{Evolutionary Algorithms} 
-\gls{AI} research is the study of `intelligent agents': any device that perceives 
+\gls{AI} research studies `intelligent agents': any device that perceives 
 its environment and takes actions that maximize its chance of successfully 
 achieving its goals \cite{david_l_poole_computational_1998}.
-Therefore, evolutionary algorithms are considered a subset of \gls{AI} as they 
-create a population of individual solutions, inspired by biological evolution, 
-and induce goals by using a `fitness function' to mutate and preferentially 
-replicate high-scoring individuals to reach an optimal solution.
+Evolutionary algorithms, a subset of \gls{AI}, create a population of individual 
+solutions, inspired by biological evolution, and induce goals by using a 
+`fitness function' to mutate and preferentially replicate high-scoring 
+individuals to reach an optimal solution.
 Evolutionary algorithms often perform well at approximating solutions to many 
 problem types because they do not make any assumptions about the 
 underlying fitness landscape.
-The most popular evolutionary algorithms used to solve multi-objective problems 
-are genetic algorithms \cite{byrne_evolving_2014, krish_practical_2011}. 
+Genetic algorithms are the most popular evolutionary algorithms for solving 
+multi-objective problems \cite{byrne_evolving_2014, krish_practical_2011}. 
 
 \subsection{Genetic Algorithms}
 \label{sec:genetic_alg}
@@ -476,7 +513,7 @@ points, improving each subsequent population's performance
 Genetic algorithms are theoretically and empirically proven to provide robust 
 search in complex spaces and are computationally simple yet powerful 
 in their search for improvement \cite{goldberg_genetic_1989}. 
-GAs are advantageous compared to deterministic and stochastic simulated 
+Genetic algorithms trounce deterministic and stochastic simulated 
 annealing optimization methods, because:
 \begin{enumerate}
     \item they search from a population of points
@@ -534,38 +571,36 @@ eliminating bad individuals from the population, and replacing them with
 copies of good individuals.
 Selection operator methods utilized in the proposed work include tournament 
 selection, best selection, and \gls{NSGA-II} selection. 
-In \textit{tournament selection}, tournaments are played between a user-defined number 
-of individuals, and the best individual is kept in the population. 
+In \textit{tournament selection}, a user-defined number of individuals play in 
+tournaments, and the best individual proceeds to the next population.
 This repeats until all the population's spots are filled. 
-In \textit{best selection}, a user-defined number of best individuals are selected, 
-and copies are made to keep the population size constant. 
-In \textit{NSGA-II selection}, parent and offspring populations are combined, and the
-best individuals (with respect to fitness and spread) are selected
-\cite{deb_fast_2002}.
-Again, copies of the best individuals are made to keep the population size constant. 
+In \textit{best selection}, the operator selects a user-defined number of best 
+individuals, and copies are made to keep the population size constant. 
+In \textit{NSGA-II selection}, the operator selects the best individuals 
+from the combination of parent and offspring populations \cite{deb_fast_2002}.
+The operator maintains population size by adding copies of the best individuals. 
 
 The selection operator cannot create any new individuals in the population 
 and only makes more copies of good individuals at the expense of not-so-good
 individuals. 
 Instead, crossover and mutation operators perform the creation of new solutions.
 
-\subsubsection{Crossover Operator}
-The crossover operator is also known as the mating operator. 
-In most crossover operators, two individuals are picked from the population at 
-random, and some portion of the individuals' attributes are exchanged with one 
+\subsubsection{Crossover/Mating Operator}
+In most crossover operators, the operator picks two individuals from the population 
+at random. 
+The operator exchanges some portion of each individuals' attributes with one 
 another to create two new individuals \cite{deb_multi-objective_2001}. 
 Crossover operator methods utilized in the proposed work include single-point
 crossover, uniform crossover, and blend crossover. 
-In the single-point crossover, two individuals are selected from the population
-and a site along the individual's definition is randomly chosen. 
-For example, if the individual is a list, an element in the list is randomly 
-chosen, and attributes on this cross site's right side are exchanged between 
-the two individuals, creating two new offspring individuals.  
+In the single-point crossover, the operator randomly selects two individuals 
+from the population and a site along the individual's definition. 
+For example, if the individual is a list, the operator randomly chooses an 
+element in the list and attributes on this cross site's right side are exchanged 
+between the two individuals, creating two new offspring individuals.  
 In a uniform crossover, the user defines an independent probability for each 
 individual's attribute to be exchanged; usually, $p=0.5$ is used. 
-In blend crossover, two offspring (O) individuals are created based on a linear 
-combination of two-parent (P) individuals using the following equations: 
-
+In blend crossover, the operator creates two offspring (O) individuals based on 
+a linear combination of two-parent (P) individuals using the following equations: 
 \begin{align}
     O_1 &= P_1 - \alpha(P_1-P_2) \\
     O_2 &= P_2 + \alpha(P_1-P_2)
@@ -574,16 +609,13 @@ combination of two-parent (P) individuals using the following equations:
  & \mbox{for each attribute on both side of the parents’ attributes (user-defined)} \nonumber 
 \end{align}
 
-To preserve some good individuals selected during the selection 
-operator stage, not all individuals are used in a crossover; this is implemented 
-by having the user define a crossover probability ($p_c$).  
-Therefore, the crossover operator is only applied to $100p_c\%$ of the 
-population; the rest are copied to the new population
+The user defines a crossover probability ($p_c$) to preserve some good 
+individuals selected during the selection operator stage.  
+Therefore, the crossover operator only operates on $100p_c\%$ of the 
+population; the rest proceed to the new population \cite{deb_multi-objective_2001}. 
+The crossover operator covers the search aspect of the genetic algorithms, 
+whereas the mutation operator keeps diversity in the population 
 \cite{deb_multi-objective_2001}. 
-
-The crossover operator is mainly responsible for the search aspect of the 
-genetic algorithms, whereas the mutation operator is needed to keep diversity 
-in the population \cite{deb_multi-objective_2001}. 
 
 \subsubsection{Mutation Operator}
 The mutation operator alters one or more attributes of an individual within 
@@ -601,16 +633,17 @@ resembling its parent, while a small $\eta$ will produce the opposite).
 \subsection{Balancing Genetic Algorithm Hyperparameters}
 \label{sec:balance}
 In the proposed work, hyperparameters refer to parameters whose value controls 
-the genetic algorithm's process such as the population size. 
+the genetic algorithm's process, such as the population size. 
 A well-performing genetic algorithm needs to balance the extent of exploration and 
-exploitation; this is done by finding a balance between the conservation of 
+exploitation; by finding a balance between the conservation of 
 valuable individuals obtained until the current generation while exploring new 
 individuals. 
-If previously obtained individuals are exploited too much, the population loses 
-its diversity, and premature convergence to a suboptimal solution is expected. 
-Alternatively, if too much stress is given on exploration, the information obtained 
-thus far has not been appropriately utilized, and the genetic algorithm's search procedure 
-behaves like a random search process \cite{deb_multi-objective_2001}. 
+With over exploitation of previously obtained individuals, the population loses 
+its diversity, resulting in premature convergence to a suboptimal solution. 
+Alternatively, if too much stress is given on exploration, the algorithm did not 
+appropriately utilize the information obtained thus far, and the genetic 
+algorithm's search procedure behaves like a random search process 
+\cite{deb_multi-objective_2001}. 
 A quantitative balance between these two issues, exploitation and exploration, 
 is challenging to achieve. 
 Deb et al. \cite{deb_multi-objective_2001} and Goldberg et al. 
@@ -635,21 +668,20 @@ Another consideration is the population size.
 A function with considerable variability in objective function values demands 
 a large population size to find a global optimum \cite{deb_multi-objective_2001}. 
 
-Therefore, finding an optimized solution with genetic algorithms require the user 
+Therefore, finding an optimized solution with genetic algorithms requires the user 
 to conduct a hyperparameter search. 
 Ng et al. \cite{ng_improving_2021} suggest that a coarse-to-fine sampling scheme 
 is the best way to perform a systematic hyperparameter search.  
-For a two-dimensional example of a coarse to fine sampling scheme, the user 
-first does a coarse sample of the entire square. 
-A fine search is then conducted on the best-performing region of the coarse 
-search. 
+For a two-dimensional example of a coarse-to-fine sampling scheme, the user 
+first does a coarse sample of the entire square, then a fine search on the 
+coarse search's best-performing region. 
 Ng et al. also suggests to use random sampling over grid sampling because of the 
 former's efficiency in high-dimensional spaces. 
 Figure \ref{fig:random_vs_grid_sampling} illustrates how grid sampling gives 
 even coverage in the original 2-d space, but provides inefficient coverage in 
 projections onto either the x1 or x2 subspace.  
-In contrast, random sampling has slightly less evenly distributed in the original 
-space, but far more evenly distributed in the subspaces.
+In contrast, random sampling produces a less even distribution in the original 
+space, but a far more even distribution in the subspaces.
 \begin{figure}[]
     \centering
     \includegraphics[width=0.8\linewidth]{random_vs_grid_sampling.png} 
