@@ -42,7 +42,7 @@ optimization robustly.
 
 \section{Fluoride-Salt-Cooled High-Temperature Reactor}
 \label{sec:fhr}
-The \gls{FHR} is a reactor concept introduced in 2003 that uses high-temperature 
+The \gls{FHR} concept introduced in 2003 uses high-temperature 
 coated-particle fuel and a low-pressure liquid fluoride-salt coolant 
 \cite{forsberg_molten-salt-cooled_2003,facilitators_fluoride-salt-cooled_2013}.
 However, the term \acrlong{FHR} was only introduced in 2010 to distinguish fluoride 
@@ -65,9 +65,9 @@ product release compared to \glspl{MSR} with liquid fuel.  \cite{ho_molten_2013}
 \glspl{LWR}, resulting in the following advantages: increased power conversion 
 efficiency, reduced waste heat generation, and co-generation and process heat 
 capabilities \cite{scarlat_design_2014}. 
-In \glspl{VHTR}, the helium coolant is held at a high pressure of approximately 
-100 atm, whereas the \gls{FHR}'s FLiBe coolant is at room pressure, resulting in lower 
-construction costs since a thick concrete reactor vessel is not required.
+\glspl{VHTR} system helium coolant's high 100 atm pressurization requires 
+an expensive thick concrete reactor vessel whereas, the \gls{FHR} system room 
+pressure FLiBe coolant does not. 
 The molten salt coolant has superior cooling and moderating properties compared 
 to helium coolant in \glspl{VHTR}. 
 Accordingly, \glspl{FHR} operate at power densities two to six times higher than 
@@ -165,14 +165,14 @@ research.
 The \emph{multiply heterogeneous} \gls{AHTR} fuel, comprised of \gls{TRISO} 
 particles embedded in strategically arranged plates, presents simulation challenges. 
 We must obtain detailed reference power distributions with individual 
-\gls{TRISO} particle fidelity to assess lower-fidelity models' accuracy.
+\gls{TRISO} particle fidelity to best understand the \gls{AHTR}'s nuances.
 However, deterministic codes that use multigroup cross sections and traditional 
 homogenization methods \cite{ramey_monte_2018}, insufficiently capture the 
 correct physics in \glspl{AHTR} due to these multiple heterogeneities
 \cite{ramey_monte_2018}. 
 In the \gls{AHTR}, single and multiple slab homogenization decreased total 
-simulation time by an order of 10; however, the homogenization introduced a 
-nontrivial error of $\sim$3\% \cite{ramey_monte_2018,cisneros_neutronics_2012}.
+neutron transport simulation time by an order of 10; however, the homogenization 
+introduced a nontrivial error of $\sim$3\% \cite{ramey_monte_2018,cisneros_neutronics_2012}.
 To determine the feasibility and safety of the \gls{AHTR} design, we must 
 calculate core physics parameters to an acceptable uncertainty. 
 With Monte Carlo neutron transport, increasing neutron histories reduces statistical 
@@ -226,7 +226,7 @@ These major differences will determine the: accuracy of the
 final part, material and mechanical properties, the time required to manufacture 
 the part, the need for post-processing, the size of additive manufacturing machine, and the overall 
 cost of the machine and the process \cite{gibson_additive_2014}. 
-Initially, additive manufacturing was only used to manufacture prototypes. 
+Initially, additive manufacturing only manufactured prototypes. 
 However, with improvements in material properties, accuracy, and overall quality 
 of additive manufacturing output, the applications for additive manufacturing expanded to the 
 point at which some industries build parts for direct assembly purposes
@@ -247,7 +247,6 @@ additive manufacturing to produce fuel injection nozzles
 The most common metal additive manufacturing technologies, \gls{SLM}, \gls{EBM}, 
 \gls{L-DED}, and binder jetting, are not currently used to manufacture nuclear 
 power plant parts. 
-Nuclear grade material and manufacturing have high qualification standards. 
 Wide-spread adoption of these methods in the nuclear industry could drastically 
 reduce fabrication costs and timelines, combine multiple systems and assembled 
 components into single parts, increase safety and performance by tailoring 
@@ -258,6 +257,7 @@ such as hex-ducts for sodium-cooled fast reactors, that are costly and difficult
 to fabricate using standard processing techniques. 
 Traditional manufacturing routes also restrict many viable geometries for 
 reactor designers to explore \cite{sridharan_performance_2019}. 
+However, nuclear grade material and manufacturing have high qualification standards. 
 In summary, reactor core component fabrication with additive manufacturing 
 enables further optimization and improvement of fuel geometries to enhance fuel 
 performance at lower costs \cite{bergeron_early_2018}
