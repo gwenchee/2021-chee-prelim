@@ -14,5 +14,61 @@
 % vary in y direction 
 % try the whole 1/3 diamond fuel elemt 
 
-The need for this work is shown by a summary of the current 
-In this chapter, I propose future simulations 
+The need for this work is shown by a summary of how additive manufacturing 
+of nuclear reactor core components frees complex reactor geometries from 
+previous manufacturing constraints enabling reactor designers to reexamine 
+reactor core design optimization.
+The literature review (Chapter \ref{chap:lit-review}) concluded that stochastic 
+evolutionary algorithm optimization methods can be leveraged to find global 
+optimums for reactor design problems in the vast exploration design space 
+enabled by additive manufacturing. 
+Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{AHTR} benchmark and 
+highlighted the reactor's benefits such as passive safety behavior with negative 
+temperature coefficients. 
+In Chapter \ref{chap:realm}, I introduced the \acrfull{REALM} software package 
+which applies evolutionary algorithm optimization techniques to nuclear 
+reactor design. 
+Chapter \ref{chap:realm-demo} demonstrated successfully applying \gls{REALM} 
+to optimize the \gls{TRISO} packing fraction distribution in an \gls{AHTR} slab. 
+
+Based on what I learnt from the preliminary work conducted, this chapter proposes 
+future simulations categorized into two groups: \gls{AHTR} development and 
+\gls{REALM} optimization. 
+For \gls{AHTR} development, I propose the following simulations: 
+\begin{itemize}
+    \item \gls{AHTR} 3D full core neutronics OpenMC simulation
+    \item \gls{AHTR} fuel slab and one-third fuel assembly multiphysics 
+    Moltres simulation
+\end{itemize}
+For \gls{REALM} optimization, I propose the following \gls{REALM} simulations: 
+\begin{itemize}
+    \item \gls{AHTR} slab geometry optimization to maximize $k_{eff}$, 
+    minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
+    x-axis distribution and \gls{FLiBe} channel shape using OpenMC. 
+    \item \gls{AHTR} one-third fuel assembly optimization to maximize $k_{eff}$, 
+    minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
+    xy axes distribution and \gls{FLiBe} channel shape using OpenMC.
+\end{itemize}
+The \gls{REALM} simulations proposed might be extended to include Moltres 
+evaluations if the \gls{AHTR} development Moltres simulations find approximations 
+and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
+
+\section{AHTR Development}
+The \gls{FHR} benchmark introduced in Chapter \ref{chap:fhr-benchmark} is an 
+ongoing project to assess the modeling and simulation capabilities for the 
+\gls{AHTR}. 
+The contributions to date from benchmark participants', including the 
+\gls{UIUC} team, are Phases I-A and I-B (2D assembly steady state and 
+depletion).  
+The upcoming phases consist of 3D neutronics models and multiphysics models. 
+Thus, in an effort to support the \gls{FHR} benchmark, the proposed work will 
+complete the benchmark's Phase I-C.
+In preparation for the later multiphysics benchmark phases, the proposed work
+will utilize Moltres to model the multi-physics for a smaller section of the 
+\gls{AHTR} geometry. 
+
+\subsection{\gls{FHR} Benchmark Phase I-C}
+
+
+\section{REALM Optimization}
+
