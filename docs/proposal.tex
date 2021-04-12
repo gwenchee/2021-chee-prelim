@@ -62,7 +62,7 @@ and I-B (2D assembly steady state and depletion) so far.
 The upcoming phases consist of 3D neutronics models and multiphysics models. 
 Thus, in an effort to support the \gls{FHR} benchmark, the proposed work will 
 complete the benchmark's Phase I-C.
-Also, Iin preparation for the later multiphysics benchmark phases, the proposed 
+Also, in preparation for the later multiphysics benchmark phases, the proposed 
 work will utilize Moltres to model the multi-physics for a smaller section of 
 the \gls{AHTR} geometry. 
 
@@ -80,7 +80,7 @@ framework \cite{gaston_moose:_2009}, contains physics kernels and boundary
 conditions to solve arbitrary-group deterministic neutron diffusion and 
 thermal-hydraulics \glspl{PDE} simultaneously on a single mesh
 \cite{lindsay_introduction_2018,park_advancement_2020}. 
-\gls{AHTR} Moltres simulations will capture thermal feedback effects, missing 
+\gls{AHTR} Moltres simulations will capture thermal feedback effects, absent
 from the purely neutronics OpenMC simulations.  
 % say stuff about Cole gentry's paper/phd. Multiphysics 
 
@@ -90,5 +90,27 @@ and NESTLE
 
 
 \section{REALM Optimization}
-
+Chapter \ref{chap:realm-demo} demonstrated \gls{REALM}'s success with the
+demonstration problem, and concluded that the problem should be further
+developed by considering other objectives such as maximizing heat transfer and 
+minimizing power peaking in the core. 
+In the proposed work, I will explore each objective separately and then together.
+Table \ref{tab:objectives} describes each objective and how the objective will 
+be quantified. 
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{}
+	\label{tab:objectives}
+    \footnotesize
+    \begin{tabular}{p{4cm}l}
+    \hline 
+    \textbf{Objective}& \textbf{Quantification}  \\
+    \hline
+    Best neutronics & Maximize $k_{eff}$\\ 
+    Maximize heat transfer & Maximize flux near FLiBe coolant \\
+    Minimize power peaking & Minimize $P_{high}-P_{low}$ \\
+    \hline
+    \end{tabular}
+\end{table}
 
