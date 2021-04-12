@@ -100,17 +100,100 @@ be quantified.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{}
+    \caption{\acrfull{REALM} optimization problem objectives with their quantification 
+    descriptions.}
 	\label{tab:objectives}
     \footnotesize
-    \begin{tabular}{p{4cm}l}
+    \begin{tabular}{p{4cm}p{8cm}}
     \hline 
     \textbf{Objective}& \textbf{Quantification}  \\
     \hline
     Best neutronics & Maximize $k_{eff}$\\ 
-    Maximize heat transfer & Maximize flux near FLiBe coolant \\
+    Maximize heat transfer & Maximize $\phi_{total}$ in areas along FLiBe coolant \\
     Minimize power peaking & Minimize $P_{high}-P_{low}$ \\
     \hline
     \end{tabular}
 \end{table}
-
+The slab parameters that will be varied to meet the described problem objectives 
+include: 
+\begin{itemize}
+    \item \gls{TRISO} particle packing fraction distribution
+    \item \gls{FLiBe} coolant channel shape 
+\end{itemize} 
+I will conduct these optimizations for the straightened \gls{AHTR} fuel slab 
+geometry (as seen in Figure \ref{fig:straightened_slab}) and for one 
+diamond-shaped sector containing six fuel slabs (as seen in Figure 
+\ref{fig:ahtr-fuel-assembly}) with x-y periodic and z reflective boundary 
+conditions. 
+Table \ref{tab:realm_simulations} outlines the details of the proposed 
+simulations. 
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{Proposed \acrfull{REALM} simulations for optimizing \acrfull{AHTR}
+    fuel assembly. Simulations explore two geometries: straightened \gls{AHTR} 
+    fuel slab and \gls{AHTR}'s diamond-shaped section containing six fuel slabs.}
+	\label{tab:realm_simulations}
+    \footnotesize
+    \begin{tabular}{clll}
+    \hline 
+    \textbf{Simulation}& \textbf{AHTR Geometry} & \textbf{Objectives} & \textbf{Varying Parameters}  \\
+    \hline
+    1 & Single fuel slab & \tabitem Maximize heat transfer &\tabitem TRISO distribution \\
+    2 & Single fuel slab & \tabitem Minimize power peaking & \tabitem TRISO distribution \\
+    3 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
+    4 & Single fuel slab & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
+    5 & Single fuel slab & \tabitem Minimize power peaking & \tabitem FLiBe channel shape \\
+    6 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
+      & & \tabitem Maximize heat transfer & \\
+      & & \tabitem Minimize power peaking & \\ 
+    7 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
+      & & \tabitem Maximize heat transfer & \\
+      & & \tabitem Minimize power peaking & \\     
+    8 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
+      & & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
+      & & \tabitem Minimize power peaking & \\   
+    9 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
+      & & \tabitem Maximize heat transfer & \\
+      & & \tabitem Minimize power peaking & \\ 
+    10 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
+      & & \tabitem Maximize heat transfer & \\
+      & & \tabitem Minimize power peaking & \\     
+    11 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
+      & & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
+      & & \tabitem Minimize power peaking & \\  
+    \hline
+    \end{tabular}
+\end{table}
+I will use the optimal hyperparameters derived in Section 
+\ref{sec:hyperparameter_search} for the proposed simulations. 
+Ideally, a new hyperparameter search should be conducted for each simulation to 
+find the best hyperparameter set for each unique problem; however, the 
+computational expense for conducting 11 hyperparameter searches is impractical.
+Using the same hyperparameter set is acceptable because the problems are similar. 
+% talk about how hyperparameters that work are around the same for similar problems. 
+The optimal hyperparameters are summarized in Table \ref{tab:best_hyperparameters}.
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{Hyperparameter values for the best hyperparameter set calculated in 
+    Section \ref{sec:hyperparameter_search}.}
+	\label{tab:best_hyperparameters}
+    \footnotesize
+    \begin{tabular}{ll}
+    \hline 
+    \textbf{Hyperparameters}& \textbf{Values}  \\
+    \hline
+    Population size & 60\\ 
+    Generations & 10\\
+    Mutation probability & 0.23\\ 
+    Mating probability & 0.46\\
+    Selection operator & \texttt{selTournament}\\
+    Selection individuals & 15\\
+    Selection tournament size & 5\\ 
+    Mutation operator & \texttt{mutPolynomialBounded}\\ 
+    Mating operator & \text{cxBlend}\\ 
+    \hline
+    \end{tabular}
+\end{table}
+\section{Conclusion}
