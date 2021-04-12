@@ -40,8 +40,29 @@ the homogenization of each \gls{TRISO} particle's four outer layers:
 porous carbon buffer, inner pyrolytic carbon, silicon carbide layer, and the 
 outer pyrolytic carbon. 
 The \gls{TRISO} particles' dimensions remain the same.
-The $k_{eff}$ for this original straightened \gls{AHTR} configuration is 
-$1.38625 \pm 0.00109$. 
+Table \ref{tab:keff_triso} reports the $k_{eff}$ for this original straightened 
+\gls{AHTR} configuration with and without the outer layer \gls{TRISO} 
+homogenization.
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{Straightened \acrfull{AHTR} fuel slab's $k_{eff}$ for case with 
+    no \gls{TRISO} homogenization and case with homogenization of four outer 
+    layers. Both simulations were run on one BlueWaters XE Node.}
+	\label{tab:keff_triso}
+    \footnotesize
+    \begin{tabular}{llc}
+    \hline 
+    \textbf{TRISO Homogenization}& \textbf{$k_{eff}$} & \textbf{Simulation time [s]}  \\
+    \hline 
+    None & $1.38548 \pm 0.00124$ & 233\\ 
+    4 outer layers & $1.38625 \pm 0.00109$ & 168\\ 
+    \hline
+    \end{tabular}
+\end{table}
+The \gls{TRISO} particle outer four layer homogenization resulted in a $30\%$ 
+speed-up without compromising accuracy as both $k_{eff}$ values are within 
+each other's uncertainty.
 
 The \gls{REALM} optimization problem's objective is to maximize the slab's 
 $k_{eff}$ by varying the \gls{TRISO} particle packing fraction across the slab
