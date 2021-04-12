@@ -94,6 +94,8 @@ The approximations and assumptions to be explored include:
     \item Macroscopic cross section generation, energy and spatial discretization
 \end{itemize}
 
+% talk about macroscopic XS generation with OpenMC. Will have to write the 
+% script to couple OpenMC to Moltres 
 
 \section{REALM Optimization}
 Chapter \ref{chap:realm-demo} demonstrated \gls{REALM}'s success with the
@@ -131,6 +133,7 @@ geometry (as seen in Figure \ref{fig:straightened_slab}) and for one
 diamond-shaped sector containing six fuel slabs (as seen in Figure 
 \ref{fig:ahtr-fuel-assembly}) with x-y periodic and z reflective boundary 
 conditions. 
+% show how x-y variation will occur. 
 Table \ref{tab:realm_simulations} outlines the details of the proposed 
 simulations. 
 \begin{table}[]
@@ -145,32 +148,35 @@ simulations.
     \hline 
     \textbf{Simulation}& \textbf{AHTR Geometry} & \textbf{Objectives} & \textbf{Varying Parameters}  \\
     \hline
-    1 & Single fuel slab & \tabitem Maximize heat transfer &\tabitem TRISO distribution \\
-    2 & Single fuel slab & \tabitem Minimize power peaking & \tabitem TRISO distribution \\
-    3 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
-    4 & Single fuel slab & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
-    5 & Single fuel slab & \tabitem Minimize power peaking & \tabitem FLiBe channel shape \\
-    6 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
+    1 & Single fuel slab & \tabitem Maximize $k_{eff}$ &\tabitem TRISO distribution \\
+    2 & Single fuel slab & \tabitem Maximize heat transfer &\tabitem TRISO distribution \\
+    3 & Single fuel slab & \tabitem Minimize power peaking & \tabitem TRISO distribution \\
+    4 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
+    5 & Single fuel slab & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
+    6 & Single fuel slab & \tabitem Minimize power peaking & \tabitem FLiBe channel shape \\
+    7 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
       & & \tabitem Maximize heat transfer & \\
       & & \tabitem Minimize power peaking & \\ 
-    7 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
+    8 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
       & & \tabitem Maximize heat transfer & \\
       & & \tabitem Minimize power peaking & \\     
-    8 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
+    9 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
       & & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
       & & \tabitem Minimize power peaking & \\   
-    9 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
+    10 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
       & & \tabitem Maximize heat transfer & \\
       & & \tabitem Minimize power peaking & \\ 
-    10 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
+    11 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
       & & \tabitem Maximize heat transfer & \\
       & & \tabitem Minimize power peaking & \\     
-    11 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
+    12 & Diamond section with 6 fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
       & & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
       & & \tabitem Minimize power peaking & \\  
     \hline
     \end{tabular}
 \end{table}
+% Simulation 1 was conducted in Chapter 5 but I want to explore it further with 
+% larger a bounds since it capped out at 2. 
 I will use the optimal hyperparameters derived in Section 
 \ref{sec:hyperparameter_search} for the proposed simulations. 
 Ideally, a new hyperparameter search should be conducted for each simulation to 
