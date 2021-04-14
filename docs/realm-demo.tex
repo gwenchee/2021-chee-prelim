@@ -1,15 +1,17 @@
-\chapter{REALM Demonstration}
+\chapter{AHTR Optimization Preliminary Work}
 \label{chap:realm-demo}
 % Main Gist 
 % - Demonstrate OpenMC problem with REALM. 
 % Structure 
 % - realm demonstration of OpenMC Coupling for a toy problem. 
-This chapter demonstrates using \gls{REALM} to apply genetic algorithms 
+In this chapter, I demonstrates using \gls{REALM} to apply genetic algorithms 
 to maximize $k_{eff}$ in a single \gls{AHTR} fuel slab. 
+Then, I will discuss the preliminary work completed for \gls{AHTR} multiphysics 
+simulations.
 The \texttt{dissertation-results} Github repository contains all the scripts, 
 results, and plots shown in this chapter \cite{chee_dissertation-results_2021}.
 
-\section{Straightened AHTR Fuel Slab}
+\section{REALM Optimization: Straightened AHTR Fuel Slab}
 \subsection{Problem Definition}
 This demonstration explores how inhomogeneous fuel distributions impact $k_{eff}$ 
 compared with homogenous fuel distributions customary in most reactor designs. 
@@ -450,6 +452,9 @@ This is nonideal for other important reactor core qualities, such as
 good heat transfer and ensuring flat power across the core. 
 With these shortcomings in mind, I proceed to the future work chapter to discuss 
 the proposed simulations that will optimize these other parameters. 
+
+\section{AHTR Multiphysics Model Preliminary Work}
+% compare TRISO particles 
 
 \section{Summary}
 This chapter demonstrated successfully applying \gls{REALM} to maximize $k_{eff}$ 
