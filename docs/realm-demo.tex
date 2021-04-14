@@ -356,6 +356,7 @@ The hyperparameter search ran 40 \gls{REALM} simulations, thus using approximate
 5200 node-hours.
 
 \subsection{Results for Best Hyperparameter Set}
+\label{sec:best}
 I define the best-performing hyperparameter set as the experiment that produces 
 the highest $k_{eff ave}$ in its final generation. 
 \textit{Fine Search 2}'s experiment 39 produces the best performing 
@@ -465,7 +466,7 @@ thermal-hydraulics \glspl{PDE} simultaneously on a single mesh
 \gls{AHTR} Moltres simulations will capture thermal feedback effects, absent
 from the purely neutronics OpenMC simulations.  
 The objective of setting up the Moltres \gls{AHTR} simulation is to eventually 
-couple Moltres with \gls{REALM} to do \gls{AHTR} multiphysics optimization. 
+couple Moltres with \gls{REALM} for \gls{AHTR} multiphysics optimization. 
 
 The benefits of Moltres over other multiphysics codes, RELAP5 and NESTLE 
 (described in Section \ref{sec:previous_ahtr}) for coupled neutronics and 
@@ -490,19 +491,24 @@ long Moltres runtime.
 For successful Moltres simulation of the \gls{AHTR} geometry, suitable spatial 
 and energy homogenization that preserves accuracy while maintaining an acceptable 
 runtime must be established. 
-In the next section, I use the continuous energy and spatial OpenMC simulation 
-to generate multi-group cross section data defined over discretized energy groups 
-and spatial segments. 
-I then use OpenMC's multi-group calculation mode with the previously generated 
-multi-group cross section data. 
-I then compare $k_{eff}$ for the continuous and multi-group simulations to 
-determine if the energy and spatial homogenization used are acceptable. 
 
 \subsection{Straightened AHTR Fuel Slab Multigroup Simulation}
+I use the continuous energy and spatial OpenMC simulation to generate 
+multi-group cross section data defined over discretized energy groups 
+and spatial segments. 
+I then use OpenMC's multi-group calculation mode with the previously generated 
+multi-group cross section data to calculate $k_{eff}$. 
+Comparison of $k_{eff}$ for the continuous and multi-group simulations
+determines if the energy and spatial homogenization used are acceptable. 
+
+The straightened AHTR fuel slab simulations in this section use the \gls{TRISO} 
+particle distribution that generated $k_{eff max}$ from the best hyperparameter 
+set (Section \ref{sec:best}). 
 For spatial homogenization of the straightened \gls{AHTR} fuel slab, I used 
 OpenMC's \textit{cell} domain type to compute multi-group cross sections for 
 different \textit{cells}. 
-
+The slab is discretized into 13 \textit{cells}: FLiBe, left graphite, right 
+graphite, and 10 fuel slices (each slice has a different packing fraction).  
 
 I used the four group energy structure derived by Gentry et al 
 \cite{gentry_development_2016} for \gls{AHTR} geometries. 
@@ -524,6 +530,25 @@ Table \ref{tab:energy_structures} defines the group boundaries.
     2 & $9.1188\times 10^{-3}$ & $2.9023\times 10^{-5}$\\
     3 & $2.9023\times 10^{-5}$ & $1.8554\times 10^{-6}$\\
     4 & $1.8554\times 10^{-6}$ & $1.0000\times 10^{-12}$\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{Straightened \acrfull{AHTR} fuel slab's $k_{eff}$ for case with 
+    continuous energy and space, and case with spatial and energy homogenization. 
+    Both simulations were run on one BlueWaters XE Node, with 80 active cycles, 
+    20 inactive cycles, and 8000 particles.}
+	\label{tab:keff_multigroup}
+    \footnotesize
+    \begin{tabular}{lll}
+    \hline 
+    \textbf{Homogenization}& \textbf{$k_{eff}$} & \textbf{Simulation time [s]}  \\
+    \hline 
+    None & $1.40473 \pm 0.00115$ & 808\\ 
+    Spatial and Energy & $1.40499 \pm 0.00109$ & 50\\ 
     \hline
     \end{tabular}
 \end{table}
