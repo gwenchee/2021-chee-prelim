@@ -8,7 +8,7 @@
 % Appendix? 
 % - More details about the geometry 
 
-\glspl{FHR} use \gls{TRISO} fuel and a low-pressure liquid fluoride-salt coolant.
+\acrfullpl{FHR} use \gls{TRISO} fuel and a low-pressure liquid fluoride-salt coolant.
 \gls{FHR} technology combines \gls{FLiBe} coolant from \glspl{MSR} and 
 \gls{TRISO} particles from \glspl{VHTR} to enable a reactor with 
 low operating pressure, large thermal margin, and accident-tolerant 
@@ -20,18 +20,18 @@ To address the \gls{AHTR} modeling challenges, described in Chapter
 data, the \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the \gls{FHR} 
 benchmark for the \gls{AHTR} design in 2019 \cite{noauthor_fluoride_nodate}. 
 In section \ref{sec:fhr}, I gave an \gls{FHR} concept overview, 
-a \gls{AHTR} design description, a review of previous efforts 
+an \gls{AHTR} design description, a review of previous efforts 
 towards modeling these designs, and how these efforts led to the benchmark
 initiation. 
 
 The three-phase \gls{FHR} benchmark begins  with a single fuel assembly 
 simulation without burnup and gradually extends to full core depletion. 
 Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
-
 \begin{table}
     \centering
     \onehalfspacing
-    \caption{\acrfull{FHR} benchmark Phases \cite{noauthor_fluoride_nodate}.}
+    \caption{\acrfull{OECD} \acrfull{NEA} \acrfull{FHR} benchmark Phases 
+    \cite{noauthor_fluoride_nodate}.}
 	\label{tab:phases}
     \footnotesize
     \begin{tabular}{lclc}
@@ -50,12 +50,11 @@ Table \ref{tab:phases} outlines the complete and incomplete benchmark phases.
     \hline
     \end{tabular}
 \end{table}
-
 In the subsequent sections, I will describe the benchmark's specifications for 
 the \gls{AHTR} design and Phase I. Then, I will share our Phase I-A and I-B 
 results generated with the OpenMC neutronics code \cite{romano_openmc_2013}. 
 
-\section{Benchmark Specifications: AHTR Design}
+\section{FHR Benchmark \acrlong{AHTR} Design}
 Figure \ref{fig:reactor-schematic} shows the \acrfull{AHTR} schematic and a vertical 
 cut of the reactor vessel. 
 The \gls{AHTR} operates at 3400 MWt thermal power and 1400 MWe 
@@ -204,7 +203,7 @@ The \gls{MHC} control rod inserts into the Y-shaped control rod slot where it
 displaces the \gls{FLiBe} that occupies the slot 
 (shown in Figure \ref{fig:ahtr-fuel-assembly}). 
 
-\section{Benchmark Specifications: Phase I}
+\section{Benchmark Phase I Specifications}
 \label{sec:phase1}
 The \gls{FHR} benchmark Phase I consists of two subphases.
 First, a steady-state 2D model (Phase I-A) and depletion of one \gls{FHR} fuel 
@@ -295,7 +294,7 @@ I calculated reactor power based on the given reference specific power
     m &= \mbox{atomic mass} \nonumber
 \end{align}
 
-\subsection{Benchmark Specifications: Phase I-A}
+\subsection{Phase I-A Specifications}
 For Phase I-A, the benchmark specifies that each participant must produce a 
 steady-state 2D model of one fresh fuel assembly for nine cases
 and report the required results listed in Section \ref{sec:phase1}.  
@@ -340,7 +339,7 @@ Table \ref{tab:phase1a-cases} describes each case.
     \end{tabular}
 \end{table}
 
-\subsection{Benchmark Specifications: Phase I-B}
+\subsection{Phase I-B Specifications}
 For Phase I-B, the benchmark specifies that each participant must produce 
 depletion results for three cases: 1B, 4B, and 7B. 
 These are the same as cases 1A, 4A, and 7A, but with depletion steps added. 
