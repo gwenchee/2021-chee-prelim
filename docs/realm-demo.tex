@@ -508,8 +508,29 @@ For spatial homogenization of the straightened \gls{AHTR} fuel slab, I used
 OpenMC's \textit{cell} domain type to compute multi-group cross sections for 
 different \textit{cells}. 
 The slab is discretized into 13 \textit{cells}: FLiBe, left graphite, right 
-graphite, and 10 fuel slices (each slice has a different packing fraction).  
-
+graphite, and 10 fuel slices (each slice has a different packing fraction). 
+Figure \ref{fig:straightened_slab_mg} illustrates the \gls{AHTR} spatial 
+homogenization for the OpenMC multi-group calculation. 
+\begin{figure}[]
+    \centering
+    \includegraphics[width=\linewidth]{straightened_slab_mg.png}
+    \raggedright
+    \resizebox{0.5\textwidth}{!}{
+        \hspace{1cm}
+        \fbox{\begin{tabular}{llll}
+            \textcolor{fhrblue}{$\blacksquare$} & FLiBe & 
+            \textcolor{fhrgrey}{$\blacksquare$} & Left Graphite \\
+            \textcolor{fhrred}{$\blacksquare$} & Right Graphite &
+            \textcolor{fhrpink}{$\blacksquare$} & Fuel Slice 1/6 \\
+            \textcolor{fhryellow}{$\blacksquare$} & Fuel Slice 2/7 &
+            \textcolor{fhrorange}{$\blacksquare$} & Fuel Slice 3/8 \\
+            \textcolor{fhrgreen}{$\blacksquare$} & Fuel Slice 4/9 &
+            \textcolor{fhrpurple}{$\blacksquare$} & Fuel Slice 5/10 \\
+            \end{tabular}}}
+    \caption{Straightened \acrfull{AHTR} fuel slab spatially discretized into 
+    13 \textit{cells} for OpenMC multi-group calculation.}
+    \label{fig:straightened_slab_mg}
+\end{figure}
 I used the four group energy structure derived by Gentry et al 
 \cite{gentry_development_2016} for \gls{AHTR} geometries. 
 Table \ref{tab:energy_structures} defines the group boundaries. 
