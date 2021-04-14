@@ -455,6 +455,78 @@ the proposed simulations that will optimize these other parameters.
 
 \section{AHTR Multiphysics Model Preliminary Work}
 % compare TRISO particles 
+I will use the open source simulation tool, Moltres, to conduct multiphysics 
+simulations of the \gls{AHTR}. 
+Moltres, an application built atop the \gls{MOOSE} parallel finite element 
+framework \cite{gaston_moose:_2009}, contains physics kernels and boundary 
+conditions to solve arbitrary-group deterministic neutron diffusion and 
+thermal-hydraulics \glspl{PDE} simultaneously on a single mesh
+\cite{lindsay_introduction_2018,park_advancement_2020}. 
+\gls{AHTR} Moltres simulations will capture thermal feedback effects, absent
+from the purely neutronics OpenMC simulations.  
+The objective of setting up the Moltres \gls{AHTR} simulation is to eventually 
+couple Moltres with \gls{REALM} to do \gls{AHTR} multiphysics optimization. 
+
+The benefits of Moltres over other multiphysics codes, RELAP5 and NESTLE 
+(described in Section \ref{sec:previous_ahtr}) for coupled neutronics and 
+thermal-hydraulics simulation: 
+\begin{itemize}
+  \item Moltres supports up to 3-D meshes, solving neutron diffusion and 
+  thermal-hydraulics \glspl{PDE} simultaneously on the same mesh. This is much 
+  more flexible compared to \gls{NESTLE} and RELAP5 which only support 
+  rectangular and hexagonal assembly lattices. Therefore, Moltres can be utilized 
+  to easily explore arbitrary reactor geometries.
+  \item Moltres tightly couples neutronics and thermal-hydraulics, thus 
+  provides higher accuracy. 
+  \item Moltres, a \gls{MOOSE}-based application, uses MPI for parallel computing 
+  and can be compiled and run on \glspl{HPC}. 
+\end{itemize}
+
+To run Moltres simulations, the user provides group constant data from a neutron 
+transport solver, such as OpenMC, for Moltres' multigroup neutron diffusion 
+calculations and a mesh file representing the geometry of the reactor. 
+A TRISO-level fidelity mesh file is impractical and will result in extremely 
+long Moltres runtime. 
+For successful Moltres simulation of the \gls{AHTR} geometry, suitable spatial 
+and energy homogenization that preserves accuracy while maintaining an acceptable 
+runtime must be established. 
+In the next section, I use the continuous energy and spatial OpenMC simulation 
+to generate multi-group cross section data defined over discretized energy groups 
+and spatial segments. 
+I then use OpenMC's multi-group calculation mode with the previously generated 
+multi-group cross section data. 
+I then compare $k_{eff}$ for the continuous and multi-group simulations to 
+determine if the energy and spatial homogenization used are acceptable. 
+
+\subsection{Straightened AHTR Fuel Slab Multigroup Simulation}
+For spatial homogenization of the straightened \gls{AHTR} fuel slab, I used 
+OpenMC's \textit{cell} domain type to compute multi-group cross sections for 
+different \textit{cells}. 
+
+
+I used the four group energy structure derived by Gentry et al 
+\cite{gentry_development_2016} for \gls{AHTR} geometries. 
+Table \ref{tab:energy_structures} defines the group boundaries. 
+\begin{table}[]
+    \centering
+    \onehalfspacing
+    \caption{4-group energy structures for \acrfull{AHTR} geometry 
+    derived by \cite{gentry_development_2016}.}
+	\label{tab:energy_structures}
+    \footnotesize
+    \begin{tabular}{lll}
+    \hline
+    \multicolumn{3}{c}{\textbf{Group Boundaries [MeV]}} \\ 
+    \hline
+    \textbf{Group $\#$}& \textbf{Upper Bound} & \textbf{Lower Bound}  \\
+    \hline 
+    1 & $2.0000\times 10^1$ & $9.1188\times 10^{-3}$ \\ 
+    2 & $9.1188\times 10^{-3}$ & $2.9023\times 10^{-5}$\\
+    3 & $2.9023\times 10^{-5}$ & $1.8554\times 10^{-6}$\\
+    4 & $1.8554\times 10^{-6}$ & $1.0000\times 10^{-12}$\\
+    \hline
+    \end{tabular}
+\end{table}
 
 \section{Summary}
 This chapter demonstrated successfully applying \gls{REALM} to maximize $k_{eff}$ 
