@@ -99,19 +99,31 @@ I used OpenMC to model the neutronics of the \gls{AHTR} for the \gls{FHR} benchm
 thus, I will add the capability to extract group constants from OpenMC output 
 files to the Moltres Python group constants extraction script. 
 
-I propose the following steps for \gls{AHTR} multiphysics simulation modeling: 
-\begin{enumerate}
-  \item Section \ref{sec:multiphysics_homo} demonstrated that multigroup neutronics 
-  simulation of a four-group energy and spatial homogenization of the \gls{AHTR} 
-  fuel slab generated a $k_{eff}$ within uncertainty of the continuous energy and 
-  space neutronics simulation. I will utilize these homogenizations to create 
-  group constants for the Moltres \gls{AHTR} fuel slab simulation. I will then 
-  set up a mesh for the \gls{AHTR} fuel slab and run a steady-state Moltres 
-  simulation. 
-\end{enumerate}
-% moltres ahtr slab simulation 
-% openmc test out multigroup homogenizations for 1/3 fuel assembly 
-% moltres ahtr 1/3 fuel assembly simulation
+Section \ref{sec:multiphysics_homo} demonstrated that multigroup neutronics 
+simulation with four-group energy and spatial homogenization of the \gls{AHTR} 
+fuel slab generated a $k_{eff}$ within uncertainty of the continuous energy and 
+space neutronics simulation. I will utilize these homogenizations to create 
+group constants for the Moltres \gls{AHTR} fuel slab simulation. I will then 
+set up a mesh for the \gls{AHTR} fuel slab and run a Moltres simulation and 
+verify Moltres' ability to reproduce the following key neutronics parameters: 
+\begin{itemize}
+  \item $k_{eff}$ (effective multiplication factor)
+  \item reactivity coefficients: $\beta_{eff}$, $\alpha_D$ (doppler coefficient), 
+  $\alpha_{T, FliBe}$ (\gls{FLiBe} temperature coefficient), $\alpha_{M}$ 
+  (moderator temperature coefficient)
+  \item Neutron energy spectrum 
+  \item $\phi_1(\vec{x},\vec{y}), \phi_2(\vec{x},\vec{y}), \phi_3(\vec{x},\vec{y})$ 
+  (neutron flux distribution in four coarse energy groups) 
+\end{itemize}
+Once verified, I will run a steady-state Moltres multiphysics simulation to 
+determine the maximum temperature in the fuel slab at steady-state. 
+
+With information gleaned from the Moltres \gls{AHTR} fuel slab simulation, I 
+will test out energy and spatial homogenization for generating group constants 
+for a one-third \gls{AHTR} fuel assembly model.  
+Then proceed to set up the one-third \gls{AHTR} fuel assembly model simulation
+and verify its key neutronics parameters, and finally run a steady-state 
+Moltres simulation. 
 
 \section{REALM Optimization}
 Chapter \ref{chap:realm-demo} demonstrated \gls{REALM}'s success with the
