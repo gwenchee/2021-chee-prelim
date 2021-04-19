@@ -4,14 +4,15 @@
 % - Demonstrate OpenMC problem with REALM. 
 % Structure 
 % - realm demonstration of OpenMC Coupling for a toy problem. 
-In this chapter, I demonstrates using \gls{REALM} to apply genetic algorithms 
-to maximize $k_{eff}$ in a single \gls{AHTR} fuel slab. 
-Then, I will discuss the preliminary work completed for \gls{AHTR} multiphysics 
-simulations.
+This chapter demonstrates the preliminary work completed for \gls{AHTR} optimization. 
+I used \gls{REALM} to apply genetic algorithms to maximize $k_{eff}$ in a single 
+\gls{AHTR} fuel slab. 
+Then, I presented spatial and energy homogenizations for applications to 
+\gls{AHTR} multiphysics simulations.
 The \texttt{dissertation-results} Github repository contains all the scripts, 
 results, and plots shown in this chapter \cite{chee_dissertation-results_2021}.
 
-\section{REALM Optimization: Straightened AHTR Fuel Slab}
+\section{REALM Optimization: AHTR Fuel Slab}
 \subsection{Problem Definition}
 This demonstration explores how inhomogeneous fuel distributions impact $k_{eff}$ 
 compared with homogenous fuel distributions customary in most reactor designs. 
@@ -58,11 +59,11 @@ homogenization.
     \textbf{TRISO Homogenization}& \textbf{$k_{eff}$} & \textbf{Simulation time [s]}  \\
     \hline 
     None & $1.38548 \pm 0.00124$ & 233\\ 
-    4 outer layers & $1.38625 \pm 0.00109$ & 168\\ 
+    Four outer layers & $1.38625 \pm 0.00109$ & 168\\ 
     \hline
     \end{tabular}
 \end{table}
-The \gls{TRISO} particle outer four layer homogenization resulted in a $30\%$ 
+The \gls{TRISO} particle outer four-layer homogenization resulted in a $30\%$ 
 speed-up without compromising accuracy as both $k_{eff}$ values are within 
 each other's uncertainty.
 
@@ -106,9 +107,9 @@ with packing fraction varying based on this sine distribution.
 \end{figure}
 
 In \gls{REALM}, a genetic algorithm varies the $a$, $b$, and $c$ variables to 
-find a combination which produces a packing fraction distribution that maximizes 
+find a combination that produces a packing fraction distribution that maximizes 
 the slab's $k_{eff}$. 
-I defined the upper and lower bounds of $a$, $b$ and $c$ as: 
+I defined the upper and lower bounds of $a$, $b$, and $c$ as: 
 \begin{itemize}
     \item 0 $<$ $a$ $<$ 2 
     \item 0 $<$ $b$ $<$ $\frac{\pi}{2}$
@@ -228,12 +229,11 @@ for each hyperparameter's random sampling.
 \end{table}
 
 The initial 25 coarse experiments' sought to narrow down the hyperparameters 
-to find a smaller set of optimal hyperparameter bounds that produce higher final 
-generation $k_{eff}$ values.
+to find a smaller set of hyperparameter bounds that produce higher $k_{eff}$ values.
 Figure \ref{fig:hyperparameter_sens} shows the hyperparameters' plotted against 
 each other with a third color dimension representing the $k_{eff ave}$ 
 value in each experiment's final generation. 
-Lighter scatter points indicate higher final population $k_{eff ave}$ values 
+Lighter scatter points indicate higher final population $k_{eff ave}$ values, 
 which suggests better hyperparameter sets. 
 \begin{figure}[]
     \centering
@@ -259,7 +259,7 @@ mutation probability, and mating probability bounds, as shown in Table
 \ref{tab:hyperparameter_search}'s \textit{Fine Search 1 Bounds} column. 
 I found no significant trends in the other hyperparameters, so I left them 
 as is. 
-I ran ten more experiments (25 to 34) sampling hyperparameters from 
+I ran ten more experiments (25 to 34), sampling hyperparameters from 
 the \textit{Fine Search 1 Bounds}. 
 From these results, I conducted a second fine search with five experiments 
 (35 to 39) with further tuned hyperparameter bounds, as shown in Table 
@@ -279,7 +279,7 @@ I determined these new hyperparameter bounds based on these reasons:
 Figure \ref{fig:input_hyperparameters_sens} shows the relationship between 
 hyperparameter values and $a$, $b$, $c$ control parameters, final generation 
 $k_{eff max}$, and final generation $k_{eff ave}$. 
-The coarse experiments' scatter points are made $50\%$ transparent, while the fine 
+The coarse experiments' scatter points are $50\%$ transparent, while the fine 
 experiments' scatter points are opaque. 
 \begin{figure}[]
     \centering
@@ -340,8 +340,9 @@ produced the $k_{eff max}$ from the top five experiments.
     \label{fig:topfiveplot}
 \end{figure}
 Four experiments had similar packing fraction distributions peaking at approximately 
-0.23 in the slab's center, while one experiment had an exponential-like 
-distribution with a peak packing fraction of 0.31 at the slab's side.
+0.23 in the slab's center. 
+In contrast, one experiment had an exponential-like distribution with a peak 
+packing fraction of 0.31 at the slab's side.
 The similar final packing fraction distributions demonstrate genetic algorithms' 
 robustness to find the optimal global solutions with different hyperparameters. 
 
@@ -350,7 +351,7 @@ In each \gls{REALM} simulation, each generation runs a population size number
 of individual OpenMC simulations. 
 Each OpenMC simulation takes approximately 13 minutes to run on a single BlueWaters 
 XE node. 
-With approximately 600 OpenMC evaluations per \gls{REALM} simulation, the total 
+With approximately 600 OpenMC evaluations per \gls{REALM} simulation, the
 \gls{REALM} simulation takes about 130 BlueWaters node-hours. 
 The hyperparameter search ran 40 \gls{REALM} simulations, thus using approximately
 5200 node-hours.
@@ -433,30 +434,31 @@ Both Experiments 39 and 15 have packing fractions peaking at approximately
 The amplitude, $a$, for the packing fraction distribution that produced $k_{eff max}$ 
 for Experiment 39 and the other top-five experiments (Table \ref{tab:topfive}) 
 have settled at the upper bound of approximately 2. 
-A higher amplitude, $a$, shows that a slab geometry with bigger packing fraction 
+A higher amplitude, $a$, shows that a slab geometry with larger packing fraction 
 variations results in a higher $k_{eff}$. 
 These observations about packing fraction distribution for $k_{eff max}$ are 
 consistent with conclusions from the \gls{FHR} benchmark (Chapter 
 \ref{chap:fhr-benchmark}): a high $k_{eff}$ occurs with a good balance between 
 fuel loading and moderation space. 
 Fission occurs at high \gls{TRISO} particle concentration areas at thermal flux;
-however, the neutrons are born at fast-flux and require moderation to slow down 
+however, the neutrons are born at fast flux and require moderation to slow down 
 to thermal ranges.
 Therefore, larger moderation areas ensure higher resonance escape probability for 
 the fast neutrons resulting in higher thermal flux, leading to more 
 fission occurring and a higher $k_{eff}$. 
 
 I also observed that \gls{TRISO} particle packing fraction peaks in the center 
-of the slab, proving that if the optimization problem focuses purely on the slab's neutronics 
-by maximizing $k_{eff}$, the fuel tends to culminate in the middle. 
-This is nonideal for other important reactor core qualities, such as 
-good heat transfer and ensuring flat power across the core. 
+of the slab, proving that if the optimization problem focuses purely on the 
+slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the 
+middle. 
+Center-peaking fuel density is nonideal for other important reactor core 
+qualities, such as good heat transfer and ensuring flat power across the core. 
 With these shortcomings in mind, I proceed to the future work chapter to discuss 
-the proposed simulations that will optimize these other parameters. 
+the proposed simulations to optimize these other parameters. 
 
 \section{AHTR Multiphysics Model Preliminary Work}
 % compare TRISO particles 
-I will use the open source simulation tool, Moltres, to conduct multiphysics 
+I will use the open-source simulation tool, Moltres, to conduct multiphysics 
 simulations of the \gls{AHTR}. 
 Moltres, an application built atop the \gls{MOOSE} parallel finite element 
 framework \cite{gaston_moose:_2009}, contains physics kernels and boundary 
@@ -469,14 +471,14 @@ The objective of setting up the Moltres \gls{AHTR} simulation is to eventually
 couple Moltres with \gls{REALM} for \gls{AHTR} multiphysics optimization. 
 
 The benefits of Moltres over other multiphysics codes, RELAP5 and NESTLE 
-(described in Section \ref{sec:previous_ahtr}) for coupled neutronics and 
-thermal-hydraulics simulation: 
+(used previously for \gls{AHTR} modeling and described in Section 
+\ref{sec:previous_ahtr}), for coupled neutronics and thermal-hydraulics simulation: 
 \begin{itemize}
   \item Moltres supports up to 3-D meshes, solving neutron diffusion and 
-  thermal-hydraulics \glspl{PDE} simultaneously on the same mesh. This is much 
-  more flexible compared to \gls{NESTLE} and RELAP5 which only support 
-  rectangular and hexagonal assembly lattices. Therefore, Moltres can be utilized 
-  to easily explore arbitrary reactor geometries.
+  thermal-hydraulics \glspl{PDE} simultaneously on the same mesh 
+  \cite{park_advancement_2020}. This is much more flexible than 
+  \gls{NESTLE} and RELAP5, which only support rectangular and hexagonal assembly 
+  lattices. Therefore, Moltres can explore arbitrary reactor geometries easily.
   \item Moltres tightly couples neutronics and thermal-hydraulics, thus 
   provides higher accuracy. 
   \item Moltres, a \gls{MOOSE}-based application, uses MPI for parallel computing 
@@ -486,31 +488,31 @@ thermal-hydraulics simulation:
 To run Moltres simulations, the user provides group constant data from a neutron 
 transport solver, such as OpenMC, for Moltres' multigroup neutron diffusion 
 calculations and a mesh file representing the geometry of the reactor. 
-A TRISO-level fidelity mesh file is impractical and will result in extremely 
+A TRISO-level fidelity mesh file is impractical and will result in an extremely 
 long Moltres runtime. 
-For successful Moltres simulation of the \gls{AHTR} geometry, suitable spatial 
-and energy homogenization that preserves accuracy while maintaining an acceptable 
-runtime must be established. 
+For successful Moltres simulation of the \gls{AHTR} geometry, I must establish 
+suitable spatial and energy homogenization that preserves accuracy while 
+maintaining an acceptable runtime.
 
 \subsection{Straightened AHTR Fuel Slab Multigroup Simulation}
 I use the continuous energy and spatial OpenMC simulation to generate 
-multi-group cross section data defined over discretized energy groups 
+multigroup cross section data defined over discretized energy groups 
 and spatial segments. 
-I then use OpenMC's multi-group calculation mode with the previously generated 
-multi-group cross section data to calculate $k_{eff}$. 
-Comparison of $k_{eff}$ for the continuous and multi-group simulations
+I then use OpenMC's multigroup calculation mode with the previously generated 
+multigroup cross section data to calculate $k_{eff}$. 
+Comparison of $k_{eff}$ for the continuous and multigroup simulations
 determines if the energy and spatial homogenization used are acceptable. 
 
-The straightened AHTR fuel slab simulations in this section use the \gls{TRISO} 
+In this section, the straightened AHTR fuel slab simulations use the \gls{TRISO} 
 particle distribution that generated $k_{eff max}$ from the best hyperparameter 
 set (Section \ref{sec:best}). 
 For spatial homogenization of the straightened \gls{AHTR} fuel slab, I used 
-OpenMC's \textit{cell} domain type to compute multi-group cross sections for 
+OpenMC's \textit{cell} domain type to compute multigroup cross sections for 
 different \textit{cells}. 
-The slab is discretized into 13 \textit{cells}: FLiBe, left graphite, right 
-graphite, and 10 fuel slices (each slice has a different packing fraction). 
+I discretized the slab into 13 \textit{cells}: FLiBe, left graphite, right 
+graphite, and ten fuel slices (each slice has a different packing fraction). 
 Figure \ref{fig:straightened_slab_mg} illustrates the \gls{AHTR} spatial 
-homogenization for the OpenMC multi-group calculation. 
+homogenization for the OpenMC multigroup calculation. 
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{straightened_slab_mg.png}
@@ -528,10 +530,10 @@ homogenization for the OpenMC multi-group calculation.
             \textcolor{fhrpurple}{$\blacksquare$} & Fuel Slice 5/10 \\
             \end{tabular}}}
     \caption{Straightened \acrfull{AHTR} fuel slab spatially discretized into 
-    13 \textit{cells} for OpenMC multi-group calculation.}
+    13 \textit{cells} for OpenMC multigroup calculation.}
     \label{fig:straightened_slab_mg}
 \end{figure}
-I used the four group energy structure derived by Gentry et al 
+I used the four group energy structure derived by Gentry et al. 
 \cite{gentry_development_2016} for \gls{AHTR} geometries. 
 Table \ref{tab:energy_structures} defines the group boundaries. 
 \begin{table}[]
@@ -556,15 +558,15 @@ Table \ref{tab:energy_structures} defines the group boundaries.
 \end{table}
 
 Table \ref{tab:keff_multigroup} shows the $k_{eff}$ values from the continuous 
-energy and spatial simulation, and the spatial and energy homogenized simulation. 
-There 26pcm difference between $k_{eff}$ values are within both uncertainty values, 
+energy and spatial simulation and the spatial and energy homogenized simulation. 
+The 26pcm difference between $k_{eff}$ values is within both uncertainty values, 
 assuring that the spatial and energy homogenization used is suitable for generating 
 group constants for Moltres. 
 \begin{table}[]
     \centering
     \onehalfspacing
     \caption{Straightened \acrfull{AHTR} fuel slab's $k_{eff}$ for case with 
-    continuous energy and space, and case with spatial and energy homogenization. 
+    continuous energy and space and case with spatial and energy homogenization. 
     Both simulations were run on one BlueWaters XE Node, with 80 active cycles, 
     20 inactive cycles, and 8000 particles.}
 	\label{tab:keff_multigroup}
@@ -580,12 +582,19 @@ group constants for Moltres.
 \end{table}
 
 \section{Summary}
-This chapter demonstrated successfully applying \gls{REALM} to maximize $k_{eff}$ 
-in a straightened \acrfull{AHTR} fuel slab by varying the \gls{TRISO} 
-particle packing fraction distribution. 
-I began by conducting a coarse-to-fine random sampling hyperparameter search to 
-find the genetic algorithm hyperparameters that worked best for this optimization 
-problem.
+This chapter demonstrated the preliminary work completed for \gls{AHTR} 
+optimization. 
+I conducted a multigroup \gls{AHTR} slab simulation with four-group energy 
+and spatial homogenization, which resulted in $k_{eff}$ within the uncertainty of 
+the continuous energy and space simulation. 
+The minimal keff difference assures that I can use these homogenizations when 
+generating group constants for Moltres. 
+I also successfully applied \gls{REALM} to maximize $k_{eff}$ in a straightened 
+\acrfull{AHTR} fuel slab by varying the \gls{TRISO} particle packing fraction 
+distribution. 
+The optimization process began with a coarse-to-fine random sampling 
+hyperparameter search to find the genetic algorithm hyperparameters that worked 
+best. 
 Experiment 39 performed the best with a hyperparameter set that produced the 
 highest final generation $k_{eff ave}$ of 1.40165. 
 The \gls{TRISO} particle packing fraction distribution that produced the final 
