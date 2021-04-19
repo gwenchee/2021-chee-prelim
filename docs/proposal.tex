@@ -22,18 +22,21 @@ The literature review (Chapter \ref{chap:lit-review}) concluded that stochastic
 evolutionary algorithm optimization methods can be leveraged to find global 
 optimums for reactor design problems in the vast exploration design space 
 enabled by additive manufacturing. 
-Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{AHTR} benchmark and 
-highlighted the reactor's benefits such as passive safety behavior with negative 
-temperature coefficients. 
+Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{FHR} benchmark 
+(\gls{AHTR} design) and highlighted the reactor's benefits such as passive safety 
+behavior with negative temperature coefficients. 
 In Chapter \ref{chap:realm}, I introduced the \acrfull{REALM} software package 
 which applies evolutionary algorithm optimization techniques to nuclear 
 reactor design. 
 Chapter \ref{chap:realm-demo} demonstrated successfully applying \gls{REALM} 
 to optimize the \gls{TRISO} packing fraction distribution in an \gls{AHTR} slab. 
 
-Based on what I learnt from the preliminary work conducted, this chapter proposes 
+Based on the preliminary work conducted, this chapter proposes 
 future simulations categorized into two groups: \gls{AHTR} development and 
 \gls{REALM} optimization. 
+The objective of the proposed work is to further address \gls{AHTR} modeling
+challenges and demonstrate using \gls{REALM} for multi-objective \gls{AHTR} 
+optimization for arbitrary geometries and fuel distribution. 
 For \gls{AHTR} development, I propose the following simulations: 
 \begin{itemize}
     \item \gls{AHTR} 3D full core neutronics OpenMC simulation
@@ -49,9 +52,6 @@ For \gls{REALM} optimization, I propose the following \gls{REALM} simulations:
     minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
     xy axes distribution and \gls{FLiBe} channel shape using OpenMC.
 \end{itemize}
-The \gls{REALM} simulations proposed might be extended to include Moltres 
-evaluations if the \gls{AHTR} development Moltres simulations find approximations 
-and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
 
 \section{AHTR Model Development}
 The \gls{FHR} benchmark introduced in Chapter \ref{chap:fhr-benchmark} is an 
@@ -73,6 +73,7 @@ The benchmark organizer's will release Phase I-C's detailed specifications and
 required results in June 2021.
 
 \subsection{AHTR Multiphysics Model}
+\label{sec:ahtr_multiphysics_model}
 Setting up a Moltres multiphysics simulation requires the user to provide group 
 constant data from a neutron transport solver, such as OpenMC. 
 The group constants used for neutronics calculations in Moltres are 
@@ -236,6 +237,12 @@ The optimal hyperparameters are summarized in Table \ref{tab:best_hyperparameter
     \hline
     \end{tabular}
 \end{table}
+
+The REALM simulations proposed in Table \ref{tab:realm_simulations} might be 
+extended to include Moltres evaluations if the proposed \gls{AHTR} multiphysics
+Moltres simulations (Section \ref{sec:ahtr_multiphysics_model}) find approximations 
+and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
+
 
 \section{Conclusion}
 % summarize what the proposed work aims to demonstrate.
