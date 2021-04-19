@@ -73,25 +73,45 @@ The benchmark organizer's will release Phase I-C's detailed specifications and
 required results in June 2021.
 
 \subsection{AHTR Multiphysics Model}
+Setting up a Moltres multiphysics simulation requires the user to provide group 
+constant data from a neutron transport solver, such as OpenMC. 
+The group constants used for neutronics calculations in Moltres are 
+\cite{lindsay_introduction_2018,park_advancement_2020}: 
+\begin{align*}
+  &\Sigma^f_{g} \text{: macroscopic fission cross section in group $g$,} \\
+  &\Sigma^r_{g} \text{: macroscopic removal cross section in group $g$,} \\
+  &\Sigma^s_{g' \rightarrow g} \text{: macroscopic scattering cross section
+  from group $g$' to $g$,} \\
+  &D_g \text{: diffusion coefficient of neutrons in group $g$,} \\
+  &\epsilon_g \text{: average fission energy per fission by a neutron from
+  group $g$,} \\
+  &\nu \text{: average neutron yield per fission by a neutron from group
+  $g$,} \\
+  &\frac{1}{v} \text{: inverse neutron speed in group $g$,} \\
+  &\lambda_i \text{: decay constant of \gls{DNP} group $i$,} \\
+  &\beta_{eff} \text{: effective delayed neutron fraction.} \\
+\end{align*}
+These group constants are extracted from the neutron transport solver's output files 
+using a Python script from the Moltres Github repository \cite{lindsay_moltres_2017}. 
+The Python script currently enables extraction from Serpent 
+\cite{leppanen_serpent_2014} and SCALE \cite{bucholz_scale:_1982} output files.
+I used OpenMC to model the neutronics of the \gls{AHTR} for the \gls{FHR} benchmark, 
+thus, I will add the capability to extract group constants from OpenMC output 
+files to the Moltres Python group constants extraction script. 
 
-
-The most crucial step for successful Moltres simulation of \gls{AHTR} geometry 
-is homogenization of the \gls{TRISO} particles. 
-% problem is with the mesh computationally expensive to have TRISO particles 
-% steps to reach Moltres model of AHTR. 
-
-%The approximations and assumptions to be explored include: 
-%\begin{itemize}
-%    \item TRISO homogenization
-%    \item Macroscopic cross section generation, energy and spatial discretization
-%\end{itemize}
-
-% talk about macroscopic XS generation with OpenMC. Will have to write the 
-% script to couple OpenMC to Moltres
-
-% what is okay? 
-% 200pcm ?
-% based on our BW allocation. 
+I propose the following steps for \gls{AHTR} multiphysics simulation modeling: 
+\begin{enumerate}
+  \item Section \ref{sec:multiphysics_homo} demonstrated that multigroup neutronics 
+  simulation of a four-group energy and spatial homogenization of the \gls{AHTR} 
+  fuel slab generated a $k_{eff}$ within uncertainty of the continuous energy and 
+  space neutronics simulation. I will utilize these homogenizations to create 
+  group constants for the Moltres \gls{AHTR} fuel slab simulation. I will then 
+  set up a mesh for the \gls{AHTR} fuel slab and run a steady-state Moltres 
+  simulation. 
+\end{enumerate}
+% moltres ahtr slab simulation 
+% openmc test out multigroup homogenizations for 1/3 fuel assembly 
+% moltres ahtr 1/3 fuel assembly simulation
 
 \section{REALM Optimization}
 Chapter \ref{chap:realm-demo} demonstrated \gls{REALM}'s success with the
