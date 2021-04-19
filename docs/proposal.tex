@@ -63,8 +63,7 @@ The upcoming phases consist of 3D neutronics models and multiphysics models.
 Thus, in an effort to support the \gls{FHR} benchmark, the proposed work will 
 complete the benchmark's Phase I-C.
 Also, in preparation for the later multiphysics benchmark phases, the proposed 
-work will utilize Moltres to model the multi-physics for a smaller section of 
-the \gls{AHTR} geometry. 
+work will utilize Moltres to model the \gls{AHTR} multi-physics.
 
 \subsection{FHR Benchmark Phase I-C}
 The \gls{FHR} benchmark's Phase I-C extends the 2D assembly model from Phases 
@@ -90,11 +89,11 @@ The group constants used for neutronics calculations in Moltres are
   $g$,} \\
   &\frac{1}{v} \text{: inverse neutron speed in group $g$,} \\
   &\lambda_i \text{: decay constant of \gls{DNP} group $i$,} \\
-  &\beta_{eff} \text{: effective delayed neutron fraction.} \\
+  &\beta_{eff} \text{: effective delayed neutron fraction.} 
 \end{align*}
 These group constants are extracted from the neutron transport solver's output files 
 using a Python script from the Moltres Github repository \cite{lindsay_moltres_2017}. 
-The Python script currently enables extraction from Serpent 
+The Python script currently enables group constant extraction from Serpent 
 \cite{leppanen_serpent_2014} and SCALE \cite{bucholz_scale:_1982} output files.
 I used OpenMC to model the neutronics of the \gls{AHTR} for the \gls{FHR} benchmark, 
 thus, I will add the capability to extract group constants from OpenMC output 
@@ -127,7 +126,7 @@ and verify its key neutronics parameters, and finally run a steady-state
 Moltres simulation. 
 
 \section{REALM Optimization}
-Chapter \ref{chap:realm-demo} demonstrated \gls{REALM}'s success with the
+Section \ref{sec:realm_opt_ahtr_slab} demonstrated \gls{REALM}'s success with the
 demonstration problem, and concluded that the problem should be further
 developed by considering other objectives such as maximizing heat transfer and 
 minimizing power peaking in the core. 
