@@ -241,27 +241,29 @@ additive manufacturing, with the evolutionary algorithm optimization technique
 that works well to find global optimums in multi-objective design problems 
 such as nuclear reactor optimization. 
 
-For preliminary work, I designed the \gls{REALM} Python package that applies 
+In the preliminary work, I designed the \gls{REALM} Python package that applies 
 evolutionary algorithm optimization techniques to nuclear reactor design using 
 the \gls{DEAP} Python module, OpenMC, and Moltres.
 The motivation for \gls{REALM} is to enable reactor designers to utilize 
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework.
 With the many benefits of \glspl{AHTR}, I chose to apply the evolutionary 
-algorithm optimization methods to this reactor type, and also participate in 
-the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmarking exercise. 
+algorithm optimization methods to this reactor type.
 
-For preliminary work, I applied \gls{REALM} to maximize $k_{eff}$ 
-in the \gls{AHTR} fuel slab by varying the \gls{TRISO} particle packing fraction 
-distribution. 
-The \gls{TRISO} particle packing fraction distribution that produced the final 
-generation's maximum $k_{eff}$ peaked at the slab's center.
+For preliminary work, I participated in Phase I-A and I-B of the \gls{OECD} 
+\gls{NEA}'s \gls{FHR} benchmarking exercise. 
+I also applied \gls{REALM} to a single objective function problem: maximize 
+$k_{eff}$ in the \gls{AHTR} fuel slab by varying the \gls{TRISO} particle 
+packing fraction distribution. 
 This problem demonstrated the effectiveness and robustness of genetic algorithms 
 at optimizing reactor parameters for an objective function. 
-This demonstration problem had a single objective function, which was to maximize 
-$k_{eff}$. 
 However, many other objectives should be considered, such as maximizing heat 
 transfer, and minimizing power peaking in the core.
 
-Therefore in this chapter, I propose to further explore using REALM for 
-multi-objective \gls{AHTR} optimization of arbitrary geometries and fuel distribution.
+Therefore, I propose to further explore using \gls{REALM} for multi-objective 
+\gls{AHTR} optimization of arbitrary geometries and fuel distribution.
+Optimization objectives include maximizing $k_{eff}$, maximizing heat transfer, 
+and maximizing power peaking. 
+I also propose to further address \gls{AHTR} modeling challenges by completing 
+Phase I-C of the \gls{FHR} benchmark and set up Moltres simulations to model 
+\gls{AHTR} multiphysics.
