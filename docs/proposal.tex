@@ -222,7 +222,7 @@ Table \ref{tab:best_hyperparameters} summarizes the optimal hyperparameters.
     \end{tabular}
 \end{table}
 
-The REALM simulations proposed in Table \ref{tab:realm_simulations} might be 
+The REALM simulations proposed in Table \ref{tab:realm_simulations} could be 
 extended to include Moltres evaluations if the proposed \gls{AHTR} multiphysics
 Moltres simulations (Section \ref{sec:ahtr_multiphysics_model}) find approximations 
 and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
@@ -230,3 +230,38 @@ and assumptions that maintain accuracy while keeping acceptable Moltres runtimes
 
 \section{Conclusion}
 % summarize what the proposed work aims to demonstrate.
+Additive manufacturing of nuclear reactor components is a quickly 
+developing field thanks to breakthroughs in additive manufacturing fabrication 
+of metal components. 
+The promise of cheaper and faster manufacturing of reactor components with 
+additive manufacturing frees complex reactor geometries from previous manufacturing 
+constraints and allows reactor designers to reexamine reactor design optimization. 
+Therefore, I propose to explore the vast design space enabled by 
+additive manufacturing, with the evolutionary algorithm optimization technique 
+that works well to find global optimums in multi-objective design problems 
+such as nuclear reactor optimization. 
+
+For preliminary work, I designed the \gls{REALM} Python package that applies 
+evolutionary algorithm optimization techniques to nuclear reactor design using 
+the \gls{DEAP} Python module, OpenMC, and Moltres.
+The motivation for \gls{REALM} is to enable reactor designers to utilize 
+robust evolutionary algorithm optimization methods without going 
+through the cumbersome process of setting up a genetic algorithm framework.
+With the many benefits of \glspl{AHTR}, I chose to apply the evolutionary 
+algorithm optimization methods to this reactor type, and also participate in 
+the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmarking exercise. 
+
+For preliminary work, I applied \gls{REALM} to maximize $k_{eff}$ 
+in the \gls{AHTR} fuel slab by varying the \gls{TRISO} particle packing fraction 
+distribution. 
+The \gls{TRISO} particle packing fraction distribution that produced the final 
+generation's maximum $k_{eff}$ peaked at the slab's center.
+This problem demonstrated the effectiveness and robustness of genetic algorithms 
+at optimizing reactor parameters for an objective function. 
+This demonstration problem had a single objective function, which was to maximize 
+$k_{eff}$. 
+However, many other objectives should be considered, such as maximizing heat 
+transfer, and minimizing power peaking in the core.
+
+Therefore in this chapter, I propose to further explore using REALM for 
+multi-objective \gls{AHTR} optimization of arbitrary geometries and fuel distribution.
