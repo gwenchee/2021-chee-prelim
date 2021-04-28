@@ -17,6 +17,8 @@ results, and plots shown in this chapter \cite{chee_dissertation-results_2021}.
 \subsection{Problem Definition}
 This demonstration explores how inhomogeneous fuel distributions impact $k_{eff}$ 
 compared with homogenous fuel distributions customary in most reactor designs. 
+I use OpenMC v0.12.0 for these neutronics calculations with the ENDF/B-VII.1
+data library \cite{chadwick_endf/b-vii.1_2011}. 
 The reactor core explored is a straightened slab from the \gls{FHR} benchmark's
 \gls{AHTR} design.
 Figure \ref{fig:straightened_slab} illustrates the straightened fuel slab. 
@@ -37,8 +39,8 @@ Figure \ref{fig:straightened_slab} illustrates the straightened fuel slab.
     \label{fig:straightened_slab}
 \end{figure}
 The slab has $27.1 \times 3.25 \times 1.85\ cm^3$ dimensions
-with periodic boundary conditions in the x and y directions and reflective 
-boundary conditions in the z-direction. 
+with periodic boundary conditions in the x-y axis and reflective 
+boundary conditions in the z axis. 
 The materials are the same as in the \gls{FHR} benchmark, except for 
 the homogenization of each \gls{TRISO} particle's four outer layers: 
 porous carbon buffer, inner pyrolytic carbon, silicon carbide layer, and the 
@@ -90,13 +92,13 @@ distribution across slices:
 I collected and normalized the sine distribution's value at each of the ten 
 x-slices' midpoints by the total packing fraction to ensure a consistent number 
 of \gls{TRISO} particles in the slab.
-For a packing fraction distribution of 
+For example, a packing fraction distribution of 
 $PF(x) = \left(0.5\cdot sin(\frac{\pi}{3}\cdot x + \pi) + 2\right)  \cdot NF$, 
-the packing fraction for the ten slices are 0.103, 0.120, 0.049, 0.138, 
-0.076, 0.081, 0.136, 0.048, 0.125, and 0.098, respectively. 
+results in the following packing fractions for the ten slices: 0.103, 0.120, 
+0.049, 0.138, 0.076, 0.081, 0.136, 0.048, 0.125, and 0.098. 
 Figure \ref{fig:triso_distribution} shows this sine distribution, highlights 
-the packing fraction at the respective midpoints, and displays the slab's XY-view
-with packing fraction varying based on this sine distribution. 
+the packing fraction at the respective midpoints, and displays the slab's x-y 
+axis view with packing fraction varying based on this sine distribution. 
 \begin{figure}[]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{triso_distribution_sine.png}} 
@@ -313,7 +315,7 @@ with the highest final generation $k_{eff ave}$.
     \hline 
     \textbf{Control/Output Parameters}& \textbf{Experiment 6} & \textbf{Experiment 15} & \textbf{Experiment 24} & \textbf{Experiment 36} & \textbf{Experiment 39}\\
     \hline 
-    $k_{eff ave}$ [-] & 1.39876 &1.40175&1.40118&1.39906&1.40165\\ 
+    $k_{eff ave}$ [-] & 1.39876 &1.40155&1.40118&1.39906&1.40165\\ 
     $k_{eff max}$ [-] & 1.40954 &1.40440&1.40365&1.40590&1.40519\\ 
     a [-] & 1.993&1.998&1.999&1.997&1.989\\
     b [$\frac{radians}{cm}$] & 0.057&0.367&0.320&0.339&0.354\\ 
@@ -337,7 +339,9 @@ produced the $k_{eff max}$ from the top five experiments.
 \begin{figure}[]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1\linewidth]{topfive_plot.png}} 
-    \caption{}
+    \caption{Packing fraction distribution across the x-axis of the \acrfull{AHTR} 
+    slab for the five hyperparameter search experiments with the highest final generation 
+    $k_{eff ave}$.}
     \label{fig:topfiveplot}
 \end{figure}
 Four experiments had similar packing fraction distributions peaking at approximately 
@@ -363,9 +367,10 @@ I define the best-performing hyperparameter set as the experiment that produces
 the highest $k_{eff ave}$ in its final generation. 
 \textit{Fine Search 2}'s experiment 39 produces the best performing 
 hyperparameter set, shown in Table \ref{tab:topfive}, with 
-center-peaking packing fraction distribution with $k_{eff max} = 1.40519$. 
+center-peaking packing fraction distribution of $k_{eff max} = 1.40519$. 
 Experiment 39's $k_{eff max}$ exceeds the original straightened \gls{AHTR} 
-configuration's $k_{eff}$ by $\sim2000$pcm. 
+configuration's $k_{eff}$ by $\sim2000$pcm, proving that optimizing
+inhomogenous fuel distributions enables better neutronics. 
 Figure \ref{fig:triso_distribution_sine_39} shows the packing fraction distribution 
 that produced $k_{eff max} = 1.40519$. 
 \begin{figure}[]
@@ -391,7 +396,7 @@ experiment's generations.
     \end{subfigure}
     \begin{subfigure}{\textwidth}
         \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{pf_39.png}} 
-        \caption{Maximum $k_{eff}$'s packing fraction distribution evolution.}
+        \caption{$k_{eff max}$'s packing fraction distribution evolution.}
         \label{fig:pf_39}
     \end{subfigure}
     \caption{ Results for each generation for \gls{REALM}'s genetic algorithm optimization 
@@ -421,7 +426,7 @@ towards a higher $k_{eff}$ with improvements from each generation.
     \end{subfigure}
     \begin{subfigure}{\textwidth}
         \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{pf_15.png}} 
-        \caption{Maximum $k_{eff}$'s packing fraction distribution evolution.}
+        \caption{$k_{eff max}$'s packing fraction distribution evolution.}
         \label{fig:pf_15}
     \end{subfigure}
     \caption{ Results for each generation for \gls{REALM}'s genetic algorithm optimization 
@@ -454,8 +459,6 @@ slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the
 middle. 
 Center-peaking fuel density is nonideal for other important reactor core 
 qualities, such as good heat transfer and ensuring flat power across the core. 
-With these shortcomings in mind, I proceed to the future work chapter to discuss 
-the proposed simulations to optimize these other parameters. 
 
 \section{AHTR Multiphysics Model Preliminary Work}
 \label{sec:multiphysics_homo}
@@ -497,7 +500,7 @@ suitable spatial and energy homogenization that preserves accuracy while
 maintaining an acceptable runtime.
 
 \subsection{Straightened AHTR Fuel Slab Multigroup Simulation}
-I use the continuous energy and spatial OpenMC simulation to generate 
+I use the continuous energy OpenMC simulation to generate 
 multigroup cross section data defined over discretized energy groups 
 and spatial segments. 
 I then use OpenMC's multigroup calculation mode with the previously generated 
@@ -560,7 +563,7 @@ Table \ref{tab:energy_structures} defines the group boundaries.
 \end{table}
 
 Table \ref{tab:keff_multigroup} shows the $k_{eff}$ values from the continuous 
-energy and spatial simulation and the spatial and energy homogenized simulation. 
+energy simulation and the spatial and energy homogenized simulation. 
 The 26pcm difference between $k_{eff}$ values is within both uncertainty values, 
 assuring that the spatial and energy homogenization used is suitable for generating 
 group constants for Moltres. 
@@ -588,9 +591,9 @@ This chapter demonstrated the preliminary work completed for \gls{AHTR}
 optimization. 
 I conducted a multigroup \gls{AHTR} slab simulation with four-group energy 
 and spatial homogenization, which resulted in $k_{eff}$ within the uncertainty of 
-the continuous energy and space simulation. 
-The minimal keff difference assures that I can use these homogenizations when 
-generating group constants for Moltres. 
+the continuous energy simulation. 
+The minimal $k_{eff}$ difference assures that I can use these homogenizations 
+when generating group constants for Moltres. 
 I also successfully applied \gls{REALM} to maximize $k_{eff}$ in a straightened 
 \acrfull{AHTR} fuel slab by varying the \gls{TRISO} particle packing fraction 
 distribution. 
