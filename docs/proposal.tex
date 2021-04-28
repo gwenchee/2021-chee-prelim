@@ -1,20 +1,20 @@
 \chapter{Future Work and Proposed Simulations}
 
-The need for this work is shown by a summary of how additive manufacturing 
+I demonstrated the need for this work by a summary of how additive manufacturing 
 of nuclear reactor core components frees complex reactor geometries from 
-previous manufacturing constraints enabling reactor designers to reexamine 
+traditional manufacturing constraints and enables reactor designers to reexamine 
 reactor core design optimization.
 The literature review (Chapter \ref{chap:lit-review}) concluded that stochastic 
 evolutionary algorithm optimization methods could find global 
 optimums for reactor design problems in the vast exploration design space 
 enabled by additive manufacturing. 
-Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{FHR} benchmark 
-(\gls{AHTR} design) and highlighted the reactor's benefits, such as passive safety 
+Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{FHR} benchmark with 
+the \gls{AHTR} design and highlighted its benefits, such as passive safety 
 behavior with negative temperature coefficients. 
-Chapter \ref{chap:realm} introduced the \acrfull{REALM} software package 
+Chapter \ref{chap:realm} introduced the \acrfull{REALM} software package, 
 which applies evolutionary algorithm optimization techniques to nuclear 
 reactor design. 
-Chapter \ref{chap:realm-demo} demonstrated successfully applying \gls{REALM} 
+In chapter \ref{chap:realm-demo}, I successfully applied \gls{REALM} 
 to optimize the \gls{TRISO} packing fraction distribution in an \gls{AHTR} slab. 
 
 Based on the preliminary work conducted, this chapter proposes 
@@ -33,17 +33,17 @@ For \gls{REALM} optimization, I propose the following \gls{REALM} simulations:
 \begin{itemize}
     \item \gls{AHTR} slab geometry optimization to maximize $k_{eff}$, 
     minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
-    x-axis distribution and \gls{FLiBe} channel shape using OpenMC. 
+    x-axis distribution and \gls{FLiBe} channel shape using OpenMC
     \item \gls{AHTR} one-third fuel assembly optimization to maximize $k_{eff}$, 
     minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
-    XY axes distribution and \gls{FLiBe} channel shape using OpenMC.
+    x-y axis distribution and \gls{FLiBe} channel shape using OpenMC
 \end{itemize}
 
 \section{AHTR Model Development}
 The \gls{FHR} benchmark introduced in Chapter \ref{chap:fhr-benchmark} is an 
 ongoing \gls{NEA} project to assess the modeling and simulation capabilities 
 for the \gls{AHTR}. 
-Benchmark participants', including the \gls{UIUC} team, contributed Phases I-A 
+Benchmark participants, including the \gls{UIUC} team, contributed Phases I-A 
 and I-B (2D assembly steady-state and depletion) so far.  
 The upcoming phases consist of 3D neutronics models and multiphysics models. 
 Thus, to support the \gls{FHR} benchmark, the proposed work will complete the 
@@ -61,21 +61,21 @@ required results in June 2021.
 \label{sec:ahtr_multiphysics_model}
 Setting up a Moltres multiphysics simulation requires the user to provide group 
 constant data from a neutron transport solver, such as OpenMC. 
-The group constants used for neutronics calculations in Moltres are 
+Moltres neutronics calculations use the following group constants:
 \cite{lindsay_introduction_2018,park_advancement_2020}: 
 \begin{align*}
-  &\Sigma^f_{g} \text{: macroscopic fission cross section in group $g$,} \\
-  &\Sigma^r_{g} \text{: macroscopic removal cross section in group $g$,} \\
+  &\Sigma^f_{g} \text{: macroscopic fission cross section in group $g$} \\
+  &\Sigma^r_{g} \text{: macroscopic removal cross section in group $g$} \\
   &\Sigma^s_{g' \rightarrow g} \text{: macroscopic scattering cross section
-  from group $g$' to $g$,} \\
-  &D_g \text{: diffusion coefficient of neutrons in group $g$,} \\
+  from group $g$' to $g$} \\
+  &D_g \text{: diffusion coefficient of neutrons in group $g$} \\
   &\epsilon_g \text{: average fission energy per fission by a neutron from
-  group $g$,} \\
+  group $g$} \\
   &\nu \text{: average neutron yield per fission by a neutron from group
-  $g$,} \\
-  &\frac{1}{v} \text{: inverse neutron speed in group $g$,} \\
-  &\lambda_i \text{: decay constant of \gls{DNP} group $i$,} \\
-  &\beta_{eff} \text{: effective delayed neutron fraction.} 
+  $g$} \\
+  &\frac{1}{v} \text{: inverse neutron speed in group $g$} \\
+  &\lambda_i \text{: decay constant of \gls{DNP} group $i$} \\
+  &\beta_{eff} \text{: effective delayed neutron fraction} 
 \end{align*}
 These group constants are extracted from the neutron transport solver's output files 
 using a Python script from the Moltres Github repository \cite{lindsay_moltres_2017}. 
@@ -85,20 +85,20 @@ I used OpenMC to model the neutronics of the \gls{AHTR} for the \gls{FHR} benchm
 thus, I will add the capability to extract group constants from OpenMC output 
 files to the Moltres Python group constants extraction script. 
 
-Section \ref{sec:multiphysics_homo} demonstrated that multigroup neutronics 
+Section \ref{sec:multiphysics_homo} demonstrated that the multigroup neutronics 
 simulation with four-group energy and spatial homogenization of the \gls{AHTR} 
 fuel slab generated a $k_{eff}$ within uncertainty of the continuous energy and 
 space neutronics simulation. I will utilize these homogenizations to create 
 group constants for the Moltres \gls{AHTR} fuel slab simulation. I will then 
-set up a mesh for the \gls{AHTR} fuel slab and run a Moltres simulation and 
+set up a mesh for the \gls{AHTR} fuel slab, run a Moltres simulation, and 
 verify Moltres' ability to reproduce the following key neutronics parameters: 
 \begin{itemize}
   \item $k_{eff}$ (effective multiplication factor)
   \item reactivity coefficients: $\beta_{eff}$, $\alpha_D$ (doppler coefficient), 
-  $\alpha_{T, FliBe}$ (\gls{FLiBe} temperature coefficient), $\alpha_{M}$ 
+  $\alpha_{T, FliBe}$ (\gls{FLiBe} temperature coefficient), and $\alpha_{M}$ 
   (moderator temperature coefficient)
   \item Neutron energy spectrum 
-  \item $\phi_1(\vec{x},\vec{y}), \phi_2(\vec{x},\vec{y}), \phi_3(\vec{x},\vec{y})$ 
+  \item $\phi_1(\vec{x},\vec{y}), \phi_2(\vec{x},\vec{y}), and \phi_3(\vec{x},\vec{y})$ 
   (neutron flux distribution in four coarse energy groups) 
 \end{itemize}
 Once verified, I will run a steady-state Moltres multiphysics simulation to 
@@ -107,18 +107,18 @@ determine the maximum temperature in the fuel slab at steady-state.
 With information gleaned from the Moltres \gls{AHTR} fuel slab simulation, I 
 will test out energy and spatial homogenization for generating group constants 
 for a one-third \gls{AHTR} fuel assembly model.  
-Then, proceed to set up the one-third \gls{AHTR} fuel assembly model simulation, 
-verify its key neutronics parameters, and finally run a steady-state Moltres 
-simulation.
+Then, I will proceed to set up the one-third \gls{AHTR} fuel assembly model 
+simulation, verify its key neutronics parameters, and finally, run a steady-state 
+Moltres simulation.
 
 \section{REALM Optimization}
 Section \ref{sec:realm_opt_ahtr_slab} concluded that the \gls{AHTR} slab 
 optimization problem should be further developed by considering other objectives 
 such as maximizing heat transfer and minimizing power peaking in the core. 
 In the proposed work, I will explore each objective separately and then together.
-Table \ref{tab:objectives} describes each objective and how the objective will 
-be quantified. 
-\begin{table}[]
+Table \ref{tab:objectives} describes each objective and how I will quantify 
+each objective. 
+\begin{table}[!htbp]
     \centering
     \onehalfspacing
     \caption{\acrfull{REALM} optimization problem objectives with their quantification 
@@ -135,17 +135,15 @@ be quantified.
     \hline
     \end{tabular}
 \end{table}
-The slab parameters that will be varied to meet the described problem objectives 
-include: 
+I will vary the following slab parameters to meet the described problem objectives: 
 \begin{itemize}
     \item \gls{TRISO} particle packing fraction distribution
     \item \gls{FLiBe} coolant channel shape 
 \end{itemize} 
 I will conduct these optimizations for the straightened \gls{AHTR} fuel slab 
 geometry (as seen in Figure \ref{fig:straightened_slab}) and for one 
-diamond-shaped sector containing six fuel slabs (as seen in Figure 
-\ref{fig:ahtr-fuel-assembly}) with x-y periodic and z reflective boundary 
-conditions. 
+diamond-shaped sector (as seen in Figure \ref{fig:ahtr-fuel-assembly}) with 
+x-y axis periodic and z axis reflective boundary conditions. 
 % show how x-y variation will occur. 
 Table \ref{tab:realm_simulations} outlines the details of the proposed 
 simulations. 
@@ -154,7 +152,7 @@ simulations.
     \onehalfspacing
     \caption{Proposed \acrfull{REALM} simulations for optimizing \acrfull{AHTR}
     fuel assembly. Simulations explore two geometries: straightened \gls{AHTR} 
-    fuel slab and \gls{AHTR}'s diamond-shaped section containing six fuel slabs.}
+    fuel slab and \gls{AHTR}'s diamond-shaped section, containing six fuel slabs.}
 	\label{tab:realm_simulations}
     \footnotesize
     \begin{tabular}{clll}
@@ -195,7 +193,8 @@ I will use the optimal hyperparameters derived in Section
 Ideally, a new hyperparameter search should be conducted for each simulation to 
 find the best hyperparameter set for each unique problem; however, the 
 computational expense for conducting 11 hyperparameter searches is impractical.
-Using the same hyperparameter set is acceptable because the problems are similar. 
+I find it acceptable to use the same hyperparameter set because of the problems' 
+similarity. 
 % talk about how hyperparameters that work are around the same for similar problems. 
 Table \ref{tab:best_hyperparameters} summarizes the optimal hyperparameters.
 \begin{table}[]
@@ -222,41 +221,38 @@ Table \ref{tab:best_hyperparameters} summarizes the optimal hyperparameters.
     \end{tabular}
 \end{table}
 
-The REALM simulations proposed in Table \ref{tab:realm_simulations} could be 
-extended to include Moltres evaluations if the proposed \gls{AHTR} multiphysics
+I will extend the REALM simulations proposed in Table \ref{tab:realm_simulations} 
+to include Moltres evaluations if the proposed \gls{AHTR} multiphysics
 Moltres simulations (Section \ref{sec:ahtr_multiphysics_model}) find approximations 
 and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
 
-
 \section{Conclusion}
-% summarize what the proposed work aims to demonstrate.
-Additive manufacturing of nuclear reactor components is a quickly 
-developing field thanks to breakthroughs in additive manufacturing fabrication 
-of metal components. 
+Breakthroughs in additive manufacturing fabrication of metal components have 
+expedited the development of additive manufacturing of nuclear reactor components.
 The promise of cheaper and faster manufacturing of reactor components with 
 additive manufacturing frees complex reactor geometries from previous manufacturing 
 constraints and allows reactor designers to reexamine reactor design optimization. 
 Therefore, I propose to explore the vast design space enabled by 
-additive manufacturing, with the evolutionary algorithm optimization technique 
-that works well to find global optimums in multi-objective design problems 
+additive manufacturing with the evolutionary algorithm optimization technique 
+that works well to find global optimums in multi-objective design problems, 
 such as nuclear reactor optimization. 
 
 In the preliminary work, I designed the \gls{REALM} Python package that applies 
 evolutionary algorithm optimization techniques to nuclear reactor design using 
 the \gls{DEAP} Python module, OpenMC, and Moltres.
-The motivation for \gls{REALM} is to enable reactor designers to utilize 
+\gls{REALM} seeks to enable reactor designers to utilize 
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework.
 With the many benefits of \glspl{AHTR}, I chose to apply the evolutionary 
 algorithm optimization methods to this reactor type.
-I participated in Phase I-A and I-B of the \gls{OECD} \gls{NEA}'s \gls{FHR} 
+I participated in Phase I-A and I-B of the \acrfull{OECD} \gls{NEA}'s \gls{FHR} 
 benchmarking exercise. 
 I also applied \gls{REALM} to a single objective function problem: maximize 
 $k_{eff}$ in the \gls{AHTR} fuel slab by varying the \gls{TRISO} particle 
 packing fraction distribution. 
 This problem demonstrated the effectiveness and robustness of genetic algorithms 
 at optimizing reactor parameters for an objective function. 
-However, many other objectives should be considered, such as maximizing heat 
+However, many other objectives should also be considered, such as maximizing heat 
 transfer and minimizing power peaking in the core.
 
 Therefore, I propose to further explore using \gls{REALM} for multi-objective 
@@ -264,5 +260,5 @@ Therefore, I propose to further explore using \gls{REALM} for multi-objective
 Optimization objectives include maximizing $k_{eff}$, maximizing heat transfer, 
 and maximizing power peaking. 
 I also propose to further address \gls{AHTR} modeling challenges by completing 
-Phase I-C of the \gls{FHR} benchmark and set up Moltres simulations to model 
+Phase I-C of the \gls{FHR} benchmark and to set up Moltres simulations to model 
 \gls{AHTR} multiphysics.
