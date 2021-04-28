@@ -279,8 +279,8 @@ calculated using the OpenMC evaluator that accepts input parameters:
                 "output1": {"operator": [">=", "<"], "constrained_val": [1.0, 1.5]}
             }, 
             "algorithm": {
-                "objective": "min", 
-                "optimized_variable": "output1", 
+                "objective": ["min"], 
+                "optimized_variable": ["output1"], 
                 "pop_size": 100, 
                 "generations": 10, 
                 "mutation_probability": 0.5,
@@ -605,14 +605,14 @@ and install it from source.
 REALM is run from the command line interface. 
 A user should first set up the \gls{REALM} JSON input file and evaluator 
 scripts in a directory. 
-When running \gls{REALM} from the command line, there are two mandatory arguments and 
+When running \gls{REALM} from the command line, there is one mandatory argument and 
 one optional argument. 
-The mandatory arguments are the input file (\texttt{-i}) and objective (\texttt{-p}). 
+The mandatory argument is the input file (\texttt{-i}). 
 The optional argument is the checkpoint file (\texttt{-c}).  
 Thus, the structure of a command line input for running \gls{REALM} is: 
 
 \noindent
-\texttt{python realm -i <input file name> -p <max or min> -c <checkpoint file name>}
+\texttt{python realm -i <input file name> -c <checkpoint file name>}
 
 The checkpoint file holds the results from the \gls{REALM} simulation and also acts 
 as a restart file. 
