@@ -1,9 +1,5 @@
 \chapter{AHTR Optimization Preliminary Work}
 \label{chap:realm-demo}
-% Main Gist 
-% - Demonstrate OpenMC problem with REALM. 
-% Structure 
-% - realm demonstration of OpenMC Coupling for a toy problem. 
 This chapter demonstrates the preliminary work completed for \gls{AHTR} optimization. 
 I used \gls{REALM} to apply genetic algorithms to maximize $k_{eff}$ in a single 
 \gls{AHTR} fuel slab. 
@@ -53,7 +49,7 @@ homogenization.
     \centering
     \onehalfspacing
     \caption{Straightened \acrfull{AHTR} fuel slab's $k_{eff}$ for case with 
-    no \gls{TRISO} homogenization and case with homogenization of four outer 
+    no \gls{TRISO} homogenization and case with homogenization of the four outer 
     layers. Both simulations were run on one BlueWaters XE Node.}
 	\label{tab:keff_triso}
     \footnotesize
@@ -112,7 +108,7 @@ axis view with packing fraction varying based on this sine distribution.
 In \gls{REALM}, a genetic algorithm varies the $a$, $b$, and $c$ variables to 
 find a combination that produces a packing fraction distribution that maximizes 
 the slab's $k_{eff}$. 
-I defined the upper and lower bounds of $a$, $b$, and $c$ as: 
+I defined $a$, $b$, and $c$'s upper and lower bounds as: 
 \begin{itemize}
     \item 0 $<$ $a$ $<$ 2 
     \item 0 $<$ $b$ $<$ $\frac{\pi}{2}$
@@ -185,7 +181,7 @@ hyperparameters.
 A good hyperparameter set guides the optimization process by 
 balancing exploitation and exploration to find an optimal solution quickly 
 and accurately. 
-Finding a good set of hyperparameters requires a trial-and-error process. 
+Finding a good hyperparameter set requires a trial-and-error process. 
 
 I performed the hyperparameter search with a coarse-to-fine random sampling scheme, 
 whose advantages I previously discussed in Section \ref{sec:balance}.
@@ -463,8 +459,8 @@ qualities, such as good heat transfer and ensuring flat power across the core.
 \section{AHTR Multiphysics Model Preliminary Work}
 \label{sec:multiphysics_homo}
 % compare TRISO particles 
-I will use the open-source simulation tool, Moltres, to conduct multiphysics 
-simulations of the \gls{AHTR}. 
+I will use the open-source simulation tool, Moltres, to conduct \gls{AHTR} 
+multiphysics simulations. 
 Moltres, an application built atop the \gls{MOOSE} parallel finite element 
 framework \cite{gaston_moose:_2009}, contains physics kernels and boundary 
 conditions to solve arbitrary-group deterministic neutron diffusion and 
@@ -492,10 +488,10 @@ The benefits of Moltres over other multiphysics software, RELAP5 and NESTLE
 
 To run Moltres simulations, the user provides group constant data from a neutron 
 transport solver, such as OpenMC, for Moltres' multigroup neutron diffusion 
-calculations and a mesh file representing the geometry of the reactor. 
+calculations and a mesh file representing the reactor geometry. 
 A TRISO-level fidelity mesh file is impractical and will result in an extremely 
 long Moltres runtime. 
-For successful Moltres simulation of the \gls{AHTR} geometry, I must establish 
+For successful \gls{AHTR} Moltres simulation, I must establish 
 suitable spatial and energy homogenization that preserves accuracy while 
 maintaining an acceptable runtime.
 

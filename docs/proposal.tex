@@ -83,7 +83,7 @@ A Python script from the Moltres Github repository \cite{lindsay_moltres_2017}
 extracts group constants from the neutron transport solver's output files.
 The Python script currently enables group constant extraction from Serpent 
 \cite{leppanen_serpent_2014} and SCALE \cite{bucholz_scale:_1982} output files.
-I used OpenMC to model the neutronics of the \gls{AHTR} for the \gls{FHR} benchmark;
+I used OpenMC to model the \gls{AHTR} neutronics for the \gls{FHR} benchmark;
 thus, I will add the capability to extract group constants from OpenMC output 
 files to the Moltres Python group constants extraction script. 
 
@@ -147,8 +147,7 @@ geometry (as seen in Figure \ref{fig:straightened_slab}) and for one
 diamond-shaped sector (as seen in Figure \ref{fig:ahtr-fuel-assembly}) with 
 x-y axis periodic and z axis reflective boundary conditions. 
 % show how x-y variation will occur. 
-Table \ref{tab:realm_simulations} outlines the details of the proposed 
-simulations. 
+Table \ref{tab:realm_simulations} outlines the proposed simulations' details. 
 \begin{table}[]
     \centering
     \onehalfspacing
@@ -229,8 +228,9 @@ Moltres simulations (Section \ref{sec:ahtr_multiphysics_model}) find approximati
 and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
 
 \section{Conclusion}
-Breakthroughs in additive manufacturing fabrication of metal components have 
-expedited the development of additive manufacturing of nuclear reactor components.
+Breakthroughs in metal component additive manufacturing fabrication have 
+expedited the development of methods for nuclear reactor component additive 
+manufacturing.
 The promise of cheaper and faster manufacturing of reactor components with 
 additive manufacturing frees complex reactor geometries from previous manufacturing 
 constraints and allows reactor designers to reexamine reactor design optimization. 
@@ -245,7 +245,7 @@ the \gls{DEAP} Python module, OpenMC, and Moltres.
 \gls{REALM} seeks to enable reactor designers to utilize 
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework.
-With the many benefits of \glspl{AHTR}, I chose to apply the evolutionary 
+With the many \glspl{AHTR} benefits, I chose to apply the evolutionary 
 algorithm optimization methods to this reactor type.
 I participated in Phase I-A and I-B of the \acrfull{OECD} \gls{NEA}'s \gls{FHR} 
 benchmarking exercise. 
@@ -262,5 +262,5 @@ Therefore, I propose to further explore using \gls{REALM} for multi-objective
 Optimization objectives include maximizing $k_{eff}$, maximizing heat transfer, 
 and maximizing power peaking. 
 I also propose to further address \gls{AHTR} modeling challenges by completing 
-Phase I-C of the \gls{FHR} benchmark and to set up Moltres simulations to model 
+the \gls{FHR} benchmark's Phase I-C and to set up Moltres simulations to model 
 \gls{AHTR} multiphysics.
