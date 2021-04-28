@@ -1,11 +1,11 @@
 \chapter{Future Work and Proposed Simulations}
 
-I demonstrated the need for this work by a summary of how additive manufacturing 
-of nuclear reactor core components frees complex reactor geometries from 
-traditional manufacturing constraints and enables reactor designers to reexamine 
-reactor core design optimization.
-The literature review (Chapter \ref{chap:lit-review}) concluded that stochastic 
-evolutionary algorithm optimization methods could find global 
+I demonstrated the need for this work with a summary in Chapter \ref{chap:lit-review}
+of how additive manufacturing of nuclear reactor core components frees complex 
+reactor geometries from traditional manufacturing constraints and enables 
+reactor designers to reexamine reactor core design optimization.
+The literature review (Chapter \ref{chap:lit-review}) also concluded that 
+stochastic evolutionary algorithm optimization methods could find global 
 optimums for reactor design problems in the vast exploration design space 
 enabled by additive manufacturing. 
 Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{FHR} benchmark with 
@@ -79,8 +79,8 @@ Moltres neutronics calculations use the following group constants:
   &\lambda_i \text{: decay constant of \gls{DNP} group $i$} \\
   &\beta_{eff} \text{: effective delayed neutron fraction} 
 \end{align*}
-These group constants are extracted from the neutron transport solver's output files 
-using a Python script from the Moltres Github repository \cite{lindsay_moltres_2017}. 
+A Python script from the Moltres Github repository \cite{lindsay_moltres_2017}
+extracts group constants from the neutron transport solver's output files.
 The Python script currently enables group constant extraction from Serpent 
 \cite{leppanen_serpent_2014} and SCALE \cite{bucholz_scale:_1982} output files.
 I used OpenMC to model the neutronics of the \gls{AHTR} for the \gls{FHR} benchmark;

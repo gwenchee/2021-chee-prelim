@@ -41,7 +41,7 @@ Figure \ref{fig:straightened_slab} illustrates the straightened fuel slab.
 The slab has $27.1 \times 3.25 \times 1.85\ cm^3$ dimensions
 with periodic boundary conditions in the x-y axis and reflective 
 boundary conditions in the z axis. 
-The materials are the same as in the \gls{FHR} benchmark, except for 
+I use the same materials as in the \gls{FHR} benchmark, except for 
 the homogenization of each \gls{TRISO} particle's four outer layers: 
 porous carbon buffer, inner pyrolytic carbon, silicon carbide layer, and the 
 outer pyrolytic carbon. 
@@ -67,8 +67,8 @@ homogenization.
     \end{tabular}
 \end{table}
 The \gls{TRISO} particle outer four-layer homogenization resulted in a $30\%$ 
-speed-up without compromising accuracy as both $k_{eff}$ values are within 
-each other's uncertainty.
+speed-up without compromising accuracy with $k_{eff}$ values within each 
+other's uncertainty.
 
 The \gls{REALM} optimization problem's objective is to maximize the slab's 
 $k_{eff}$ by varying the \gls{TRISO} particle packing fraction across the slab
@@ -605,9 +605,7 @@ highest final generation $k_{eff ave}$ of 1.40165.
 The \gls{TRISO} particle packing fraction distribution that produced the final 
 generation's maximum $k_{eff}$ of 1.40519 peaks at the slab's center with 
 packing fraction distribution: $PF(x)=1.989\ sin(0.54x+3.143)$. 
-This problem demonstrated the effectiveness and robustness of genetic algorithms 
-at optimizing reactor parameters for an objective function. 
-This demonstration problem had a single objective function, which was to maximize 
+This demonstration problem had a single objective function of maximizing
 $k_{eff}$. 
 However, many other objectives should be considered, such as maximizing heat 
 transfer and minimizing power peaking in the core.
