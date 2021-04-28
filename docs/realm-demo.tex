@@ -253,8 +253,8 @@ From the coarse hyperparameter search, I noticed the following trends:
     \item Mutation probability has a higher $k_{eff ave}$, between 0.2 and 0.4. 
     \item Mating probability has a higher $k_{eff ave}$, between 0.1 and 0.3. 
     \item Population size has a higher $k_{eff ave}$, between 20 and 60. 
-\end{itemize}
-There is also no interdependence between hyperparameters. 
+    \item No obvious interdependence between hyperparameters. 
+\end{itemize} 
 
 Next, I proceeded to the fine searches. 
 From Figure \ref{fig:hyperparameter_sens}, I narrowed down population size, 
@@ -457,7 +457,7 @@ I also observed that \gls{TRISO} particle packing fraction peaks in the center
 of the slab, proving that if the optimization problem focuses purely on the 
 slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the 
 middle. 
-Center-peaking fuel density is nonideal for other important reactor core 
+Center-peaking fuel density is nonideal for other key reactor core 
 qualities, such as good heat transfer and ensuring flat power across the core. 
 
 \section{AHTR Multiphysics Model Preliminary Work}
@@ -475,7 +475,7 @@ from the purely neutronics OpenMC simulations.
 The objective of setting up the Moltres \gls{AHTR} simulation is to eventually 
 couple Moltres with \gls{REALM} for \gls{AHTR} multiphysics optimization. 
 
-The benefits of Moltres over other multiphysics codes, RELAP5 and NESTLE 
+The benefits of Moltres over other multiphysics software, RELAP5 and NESTLE 
 (used previously for \gls{AHTR} modeling and described in Section 
 \ref{sec:previous_ahtr}), for coupled neutronics and thermal-hydraulics simulation: 
 \begin{itemize}
@@ -486,8 +486,8 @@ The benefits of Moltres over other multiphysics codes, RELAP5 and NESTLE
   lattices. Therefore, Moltres can explore arbitrary reactor geometries easily.
   \item Moltres tightly couples neutronics and thermal-hydraulics, thus 
   provides higher accuracy. 
-  \item Moltres, a \gls{MOOSE}-based application, uses MPI for parallel computing 
-  and can be compiled and run on \glspl{HPC}. 
+  \item Moltres, a \gls{MOOSE}-based application, uses MPI for parallel computing,
+  and compiles and runs on \glspl{HPC}. 
 \end{itemize}
 
 To run Moltres simulations, the user provides group constant data from a neutron 
