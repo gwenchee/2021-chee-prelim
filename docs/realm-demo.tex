@@ -82,10 +82,10 @@ It does so by varying the \gls{TRISO} particle packing fraction across the slab
 while keeping the total packing fraction constant at 0.0979. 
 This total packing fraction is consistent with the original straightened slab with 
 TRISO particles in fuel stripes (Figure \ref{fig:straightened_slab}). 
-I divided the slab into ten slices along the x-axis between the \gls{FLiBe} and 
-graphite buffers, resulting in ten $2.31 \times 2.55 \times 1.85\ cm^3$ slices. 
+I divided the slab into ten cells along the x-axis between the \gls{FLiBe} and 
+graphite buffers, resulting in ten $2.31 \times 2.55 \times 1.85\ cm^3$ cells. 
 A sine distribution governs the \gls{TRISO} particle packing fraction's 
-distribution across slices:
+distribution across cells:
 \begin{align}
     PF(x) &= \left(a\cdot sin(b\cdot x + c) + 2\right) \cdot NF\\
     \intertext{where}
@@ -93,15 +93,14 @@ distribution across slices:
     a &= \mbox{amplitude, peak deviation of the function from zero } [-] \nonumber \\
     b &= \mbox{angular frequency, rate of change of the function argument } [\frac{radians}{cm}] \nonumber \\
     c &= \mbox{phase, the position in its cycle the oscillation is at t = 0 } [radians]\nonumber \\
-    x &= \mbox{midpoint value for each slice } [cm]\nonumber \\
+    x &= \mbox{midpoint value for each cell } [cm]\nonumber \\
     NF &= \mbox{Normalization factor } [-]\nonumber
 \end{align}
-I collected and normalized the sine distribution's value at each of the ten 
-x-slices' midpoints by the total packing fraction to ensure a consistent number 
-of \gls{TRISO} particles in the slab.
+The normalization factor ensures a consistent total packing fraction 
+in the slab regardless the \gls{TRISO} particle distribution.
 For example, a packing fraction distribution of 
 $PF(x) = \left(0.5\cdot sin(\frac{\pi}{3}\cdot x + \pi) + 2\right)  \cdot NF$, 
-results in the following packing fractions for the ten slices: 0.103, 0.120, 
+results in the following packing fractions for the ten cells: 0.103, 0.120, 
 0.049, 0.138, 0.076, 0.081, 0.136, 0.048, 0.125, and 0.098. 
 Figure \ref{fig:triso_distribution} shows this sine distribution, highlights 
 the packing fraction at the respective midpoints, and displays the slab's x-y 
@@ -110,9 +109,9 @@ axis view with packing fraction varying based on this sine distribution.
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{triso_distribution_sine.png}} 
     \caption{Above: Straightened \acrfull{AHTR} fuel slab with varying \gls{TRISO} particle 
-    distribution across ten slices based on the sine distribution. 
+    distribution across ten cells based on the sine distribution. 
     Below: $PF(x) = (0.5\ sin(\frac{\pi}{3}x + \pi) + 2)  \times NF$ 
-    sine distribution with red points indicating the packing fraction at each slice. }
+    sine distribution with red points indicating the packing fraction at each cell. }
     \label{fig:triso_distribution}
 \end{figure}
 
@@ -136,7 +135,7 @@ Figure \ref{fig:realm-input-simple} shows the \gls{REALM} input file for this
 genetic algorithm optimization problem. 
 \texttt{ahtr\_slab\_openmc.py} is the template OpenMC straightened \gls{AHTR} 
 slab script that accepts $a$, $b$ and $c$ from \gls{REALM}, calculates packing 
-fraction distribution, and assigns packing fraction values to each fuel slice. 
+fraction distribution, and assigns packing fraction values to each fuel cell. 
 Subsequently, \gls{REALM} runs the templated OpenMC script to generate $k_{eff}$. 
 \begin{figure}[]
     \begin{minted}[
@@ -387,9 +386,9 @@ that produced $k_{eff max} = 1.40519$.
     \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{triso_distribution_sine_39.png}} 
     \caption{Experiment 39 packing distribution that produced $k_{eff max} = 1.40519$. 
     Below: $PF(x) = (1.98\ sin(0.35x+3.14)+2)  \times NF$ sine distribution with 
-    red points indicating the packing fraction at each slice. 
+    red points indicating the packing fraction at each cell. 
     Above: Straightened \acrfull{AHTR} fuel slab with varying \gls{TRISO} particle 
-    distribution across ten slices based on the sine distribution. }
+    distribution across ten cells based on the sine distribution. }
     \label{fig:triso_distribution_sine_39}
 \end{figure}
 
@@ -408,9 +407,9 @@ experiment's generations.
         \caption{$k_{eff max}$ packing fraction distribution evolution.}
         \label{fig:pf_39}
     \end{subfigure}
-    \caption{ Results for each generation for \gls{REALM}'s genetic algorithm optimization 
-    of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{REALM} simulation used 
-    the 39$^{th}$ experiment's hyperparameter set.}
+    \caption{Each generation's results for \gls{REALM}'s genetic algorithm 
+    optimization of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{REALM} 
+    simulation used the 39$^{th}$ experiment's hyperparameter set.}
     \label{fig:39}
 \end{figure}
 The $k_{eff max}$ converged quickly by generation 1; however, this usually 
@@ -449,8 +448,8 @@ In both Experiments 39 and 15, packing fractions peaked at approximately
 The amplitude, $a$, for the packing fraction distribution that produced $k_{eff max}$ 
 for Experiment 39 and the other top-five experiments (Table \ref{tab:topfive}) 
 have settled at the upper bound of approximately 2. 
-A higher amplitude, $a$, shows that a slab geometry with larger packing fraction 
-variations results in a higher $k_{eff}$. 
+A large sine distribution amplitude, $a$, demonstrates that a slab geometry 
+with larger packing fraction variations results in a higher $k_{eff}$. 
 These observations about packing fraction distribution for $k_{eff max}$ are 
 consistent with conclusions from the \gls{FHR} benchmark (Chapter 
 \ref{chap:fhr-benchmark}): a high $k_{eff}$ occurs with a good balance between 
@@ -525,7 +524,7 @@ For spatial homogenization of the straightened \gls{AHTR} fuel slab, I used
 OpenMC's \textit{cell} domain type to compute multigroup cross sections for 
 different \textit{cells}. 
 I discretized the slab into 13 \textit{cells}: FLiBe, left graphite, right 
-graphite, and ten fuel slices (each slice has a different packing fraction). 
+graphite, and ten fuel cells (each cell has a different packing fraction). 
 Figure \ref{fig:straightened_slab_mg} illustrates the \gls{AHTR} spatial 
 homogenization for the OpenMC multigroup calculation. 
 \begin{figure}[]
@@ -538,11 +537,11 @@ homogenization for the OpenMC multigroup calculation.
             \textcolor{fhrblue}{$\blacksquare$} & FLiBe & 
             \textcolor{fhrgrey}{$\blacksquare$} & Left Graphite \\
             \textcolor{fhrred}{$\blacksquare$} & Right Graphite &
-            \textcolor{fhrpink}{$\blacksquare$} & Fuel Slice 1/6 \\
-            \textcolor{fhryellow}{$\blacksquare$} & Fuel Slice 2/7 &
-            \textcolor{fhrorange}{$\blacksquare$} & Fuel Slice 3/8 \\
-            \textcolor{fhrgreen}{$\blacksquare$} & Fuel Slice 4/9 &
-            \textcolor{fhrpurple}{$\blacksquare$} & Fuel Slice 5/10 \\
+            \textcolor{fhrpink}{$\blacksquare$} & Fuel cell 1/6 \\
+            \textcolor{fhryellow}{$\blacksquare$} & Fuel cell 2/7 &
+            \textcolor{fhrorange}{$\blacksquare$} & Fuel cell 3/8 \\
+            \textcolor{fhrgreen}{$\blacksquare$} & Fuel cell 4/9 &
+            \textcolor{fhrpurple}{$\blacksquare$} & Fuel cell 5/10 \\
             \end{tabular}}}
     \caption{Straightened \acrfull{AHTR} fuel slab spatially discretized into 
     13 \textit{cells} for OpenMC multigroup calculation.}
