@@ -14,7 +14,7 @@ behavior with negative temperature coefficients.
 Chapter \ref{chap:realm} introduced the \acrfull{REALM} software package, 
 which applies evolutionary algorithm optimization techniques to nuclear 
 reactor design. 
-In chapter \ref{chap:realm-demo}, I successfully applied \gls{REALM} 
+In Chapter \ref{chap:realm-demo}, I successfully applied \gls{REALM} 
 to optimize the \gls{TRISO} packing fraction distribution in an \gls{AHTR} slab
 and demonstrated the neutron transport energy and spatial homogenizations for 
 generating group constants for Moltres. 
@@ -34,10 +34,10 @@ For \gls{AHTR} development, I propose the following simulations:
 For \gls{REALM} optimization, I propose the following \gls{REALM} simulations: 
 \begin{itemize}
     \item \gls{AHTR} slab geometry optimization to maximize $k_{eff}$, 
-    minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
+    minimize power peaking factor ($PPF$), and maximize heat transfer ($\dot{Q}$) by varying \gls{TRISO} 
     x-axis distribution and \gls{FLiBe} channel shape using OpenMC
     \item \gls{AHTR} one-third fuel assembly optimization to maximize $k_{eff}$, 
-    minimize power peaking, and maximize heat transfer by varying \gls{TRISO} 
+    minimize power peaking factor, and maximize heat transfer by varying \gls{TRISO} 
     x-y axis distribution and \gls{FLiBe} channel shape using OpenMC
 \end{itemize}
 
@@ -116,7 +116,7 @@ Moltres simulation.
 \section{REALM Optimization}
 Section \ref{sec:realm_opt_ahtr_slab} concluded that the \gls{AHTR} slab 
 optimization problem should be further developed by considering other objectives 
-such as maximizing heat transfer and minimizing power peaking in the core. 
+such as maximizing heat transfer and minimizing power peaking factor. 
 In the proposed work, I will explore each objective separately and then together.
 Table \ref{tab:objectives} describes each objective and how I will quantify 
 each objective. 
@@ -127,19 +127,19 @@ each objective.
     descriptions.}
 	\label{tab:objectives}
     \footnotesize
-    \begin{tabular}{p{4cm}p{8cm}}
+    \begin{tabular}{p{5cm}p{7cm}}
     \hline 
     \textbf{Objective}& \textbf{Quantification}  \\
     \hline
     Best neutronics & Maximize $k_{eff}$\\ 
     Maximize heat transfer & Maximize $\phi_{total}$ in areas along FLiBe coolant \\
-    Minimize power peaking & Minimize $P_{high}-P_{low}$ \\
+    Minimize power peaking factor & Minimize $P_{high}-P_{low}$ \\
     \hline
     \end{tabular}
 \end{table}
 I will vary the following slab parameters to meet the described problem objectives: 
 \begin{itemize}
-    \item \gls{TRISO} particle packing fraction distribution
+    \item \gls{TRISO} particle packing fraction distribution $\rho_{TRISO}(\vec{r})$
     \item \gls{FLiBe} coolant channel shape 
 \end{itemize} 
 I will conduct these optimizations for the straightened \gls{AHTR} fuel slab 
@@ -153,37 +153,39 @@ Table \ref{tab:realm_simulations} outlines the proposed simulations' details.
     \onehalfspacing
     \caption{Proposed \acrfull{REALM} simulations for optimizing \acrfull{AHTR}
     fuel assembly. Simulations explore two geometries: straightened \gls{AHTR} 
-    fuel slab and \gls{AHTR}'s diamond-shaped section, containing six fuel slabs.}
+    fuel slab and \gls{AHTR}'s diamond-shaped section, containing six fuel slabs.
+    $\dot{Q}$: Heat transfer, $PPF$: Power Peaking Factor, 
+    $\rho_{TRISO}(\vec{r})$: \gls{TRISO} particle distribution}
 	\label{tab:realm_simulations}
     \footnotesize
     \begin{tabular}{clll}
     \hline 
     \textbf{Simulation}& \textbf{AHTR Geometry} & \textbf{Objectives} & \textbf{Varying Parameters}  \\
     \hline
-    1 & Single fuel slab & \tabitem Maximize $k_{eff}$ &\tabitem TRISO distribution \\
-    2 & Single fuel slab & \tabitem Maximize heat transfer &\tabitem TRISO distribution \\
-    3 & Single fuel slab & \tabitem Minimize power peaking & \tabitem TRISO distribution \\
-    4 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
-    5 & Single fuel slab & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
-    6 & Single fuel slab & \tabitem Minimize power peaking & \tabitem FLiBe channel shape \\
-    7 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
-      & & \tabitem Maximize heat transfer & \\
-      & & \tabitem Minimize power peaking & \\ 
-    8 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
-      & & \tabitem Maximize heat transfer & \\
-      & & \tabitem Minimize power peaking & \\     
-    9 & Single fuel slab & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
-      & & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
-      & & \tabitem Minimize power peaking & \\   
-    10 & Diamond section with six fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\ 
-      & & \tabitem Maximize heat transfer & \\
-      & & \tabitem Minimize power peaking & \\ 
-    11 & Diamond section with six fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem FLiBe channel shape \\ 
-      & & \tabitem Maximize heat transfer & \\
-      & & \tabitem Minimize power peaking & \\     
-    12 & Diamond section with six fuel slabs & \tabitem Maximize $k_{eff}$ & \tabitem TRISO distribution \\  
-      & & \tabitem Maximize heat transfer & \tabitem FLiBe channel shape \\
-      & & \tabitem Minimize power peaking & \\  
+    1 & Single fuel slab & \tabitem max($k_{eff}$) &\tabitem $\rho_{TRISO}(\vec{r})$ \\
+    2 & Single fuel slab & \tabitem max($\dot{Q}$) &\tabitem $\rho_{TRISO}(\vec{r})$ \\
+    3 & Single fuel slab & \tabitem min($PPF$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\
+    4 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem FLiBe channel shape \\ 
+    5 & Single fuel slab & \tabitem max($\dot{Q}$) & \tabitem FLiBe channel shape \\
+    6 & Single fuel slab & \tabitem min($PPF$) & \tabitem FLiBe channel shape \\
+    7 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\ 
+      & & \tabitem max($\dot{Q}$) & \\
+      & & \tabitem min($PPF$) & \\ 
+    8 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem FLiBe channel shape \\ 
+      & & \tabitem max($\dot{Q}$) & \\
+      & & \tabitem min($PPF$) & \\     
+    9 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\  
+      & & \tabitem max($\dot{Q}$) & \tabitem FLiBe channel shape \\
+      & & \tabitem min($PPF$) & \\   
+    10 & Diamond section with six fuel slabs & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\ 
+      & & \tabitem max($\dot{Q}$) & \\
+      & & \tabitem min($PPF$) & \\ 
+    11 & Diamond section with six fuel slabs & \tabitem max($k_{eff}$) & \tabitem FLiBe channel shape \\ 
+      & & \tabitem max($\dot{Q}$) & \\
+      & & \tabitem min($PPF$) & \\     
+    12 & Diamond section with six fuel slabs & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\  
+      & & \tabitem max($\dot{Q}$) & \tabitem FLiBe channel shape \\
+      & & \tabitem min($PPF$) & \\  
     \hline
     \end{tabular}
 \end{table}
@@ -254,12 +256,12 @@ packing fraction distribution.
 This problem demonstrated the effectiveness and robustness of genetic algorithms 
 at optimizing reactor parameters for an objective function. 
 However, many other objectives should also be considered, such as maximizing heat 
-transfer and minimizing power peaking in the core.
+transfer and minimizing power peaking factor.
 
 Therefore, I propose to further explore using \gls{REALM} for multi-objective 
 \gls{AHTR} optimization of arbitrary geometries and fuel distribution.
 Optimization objectives include maximizing $k_{eff}$, maximizing heat transfer, 
-and minimizing power peaking. 
+and minimizing power peaking factor. 
 I also propose to further address \gls{AHTR} modeling challenges by completing 
 the \gls{FHR} benchmark Phase I-C and to set up Moltres simulations to model 
 \gls{AHTR} multiphysics.
