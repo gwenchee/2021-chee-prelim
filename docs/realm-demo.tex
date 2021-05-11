@@ -1,15 +1,15 @@
 \chapter{AHTR Optimization Preliminary Work}
-\label{chap:realm-demo}
+\label{chap:rollo-demo}
 This chapter demonstrates the preliminary work completed for \gls{AHTR} optimization. 
-I used \gls{REALM} to apply genetic algorithms to maximize $k_{eff}$ in a single 
+I used \gls{ROLLO} to apply genetic algorithms to maximize $k_{eff}$ in a single 
 \gls{AHTR} fuel slab. 
 Then, I presented spatial and energy homogenizations for applications to 
 \gls{AHTR} multiphysics simulations.
 The \texttt{dissertation-results} Github repository contains all the scripts, 
 results, and plots shown in this chapter \cite{chee_dissertation-results_2021}.
 
-\section{REALM Optimization: AHTR Fuel Slab}
-\label{sec:realm_opt_ahtr_slab}
+\section{ROLLO Optimization: AHTR Fuel Slab}
+\label{sec:rollo_opt_ahtr_slab}
 This demonstration problem explores how heterogenous fuel distributions impact 
 $k_{eff}$ compared with homogenous fuel distributions customary in most reactor 
 designs. 
@@ -77,7 +77,7 @@ The \gls{TRISO} particle outer four-layer homogenization resulted in a $30\%$
 speed-up without compromising accuracy with $k_{eff}$ values within each 
 other's uncertainty.
 
-The \gls{REALM} optimization objective aims to maximize the slab $k_{eff}$. 
+The \gls{ROLLO} optimization objective aims to maximize the slab $k_{eff}$. 
 It does so by varying the \gls{TRISO} particle packing fraction across the slab
 while keeping the total packing fraction constant at 0.0979. 
 This total packing fraction is consistent with the original straightened slab with 
@@ -115,7 +115,7 @@ axis view with packing fraction varying based on this sine distribution.
     \label{fig:triso_distribution}
 \end{figure}
 
-In \gls{REALM}, a genetic algorithm varies the $a$, $b$, and $c$ variables to 
+In \gls{ROLLO}, a genetic algorithm varies the $a$, $b$, and $c$ variables to 
 find a combination that produces a packing fraction distribution that maximizes 
 the slab's $k_{eff}$. 
 I defined $a$, $b$, and $c$'s upper and lower bounds as: 
@@ -131,12 +131,12 @@ algorithm to explore various sine distributions.
 The OpenMC evaluator calculates $k_{eff}$. 
 OpenMC runs each simulation with 80 active cycles, 20 inactive cycles, and 
 8000 particles to reach $\sim$130pcm uncertainty. 
-Figure \ref{fig:realm-input-simple} shows the \gls{REALM} input file for this 
+Figure \ref{fig:rollo-input-simple} shows the \gls{ROLLO} input file for this 
 genetic algorithm optimization problem. 
 \texttt{ahtr\_slab\_openmc.py} is the template OpenMC straightened \gls{AHTR} 
-slab script that accepts $a$, $b$ and $c$ from \gls{REALM}, calculates packing 
+slab script that accepts $a$, $b$ and $c$ from \gls{ROLLO}, calculates packing 
 fraction distribution, and assigns packing fraction values to each fuel cell. 
-Subsequently, \gls{REALM} runs the templated OpenMC script to generate $k_{eff}$. 
+Subsequently, \gls{ROLLO} runs the templated OpenMC script to generate $k_{eff}$. 
 \begin{figure}[]
     \begin{minted}[
         frame=lines,
@@ -178,15 +178,15 @@ Subsequently, \gls{REALM} runs the templated OpenMC script to generate $k_{eff}$
         }
         
     \end{minted}
-    \caption{\acrfull{REALM} JSON input file to maximize $k_{eff}$ in the 
+    \caption{\acrfull{ROLLO} JSON input file to maximize $k_{eff}$ in the 
     straightened \acrfull{AHTR} fuel slab by varying packing fraction distribution 
     with control variables $a$, $b$, and $c$.}
-    \label{fig:realm-input-simple}
+    \label{fig:rollo-input-simple}
 \end{figure}
 
 \subsection{Hyperparameter Search}
 \label{sec:hyperparameter_search}
-In a \gls{REALM} input file, the user defines hyperparameters for the genetic 
+In a \gls{ROLLO} input file, the user defines hyperparameters for the genetic 
 algorithm.
 A good hyperparameter set guides the optimization process by 
 balancing exploitation and exploration to find an optimal solution quickly 
@@ -360,13 +360,13 @@ The similar final packing fraction distributions demonstrate genetic algorithms'
 robustness to find the optimal global solutions with different hyperparameters. 
 
 I ran these simulations on the BlueWaters supercomputer \cite{ncsa_about_2017}. 
-In each \gls{REALM} simulation, each generation runs a population size number 
+In each \gls{ROLLO} simulation, each generation runs a population size number 
 of individual OpenMC simulations. 
 Each OpenMC simulation takes approximately 13 minutes to run on a single BlueWaters 
 XE node. 
-With approximately 600 OpenMC evaluations per \gls{REALM} simulation, the
-\gls{REALM} simulation takes about 130 BlueWaters node-hours. 
-The hyperparameter search ran 40 \gls{REALM} simulations, thus using approximately
+With approximately 600 OpenMC evaluations per \gls{ROLLO} simulation, the
+\gls{ROLLO} simulation takes about 130 BlueWaters node-hours. 
+The hyperparameter search ran 40 \gls{ROLLO} simulations, thus using approximately
 5200 node-hours.
 
 \subsection{Results for Best Hyperparameter Set}
@@ -407,8 +407,8 @@ experiment's generations.
         \caption{$k_{eff max}$ packing fraction distribution evolution.}
         \label{fig:pf_39}
     \end{subfigure}
-    \caption{Each generation's results for \gls{REALM}'s genetic algorithm 
-    optimization of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{REALM} 
+    \caption{Each generation's results for \gls{ROLLO}'s genetic algorithm 
+    optimization of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{ROLLO} 
     simulation used the 39$^{th}$ experiment's hyperparameter set.}
     \label{fig:39}
 \end{figure}
@@ -437,8 +437,8 @@ towards a higher $k_{eff}$ with improvements from each generation.
         \caption{$k_{eff max}$'s packing fraction distribution evolution.}
         \label{fig:pf_15}
     \end{subfigure}
-    \caption{ Results for each generation for \gls{REALM}'s genetic algorithm optimization 
-    of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{REALM} simulation used 
+    \caption{ Results for each generation for \gls{ROLLO}'s genetic algorithm optimization 
+    of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{ROLLO} simulation used 
     the 15$^{th}$ experiment's hyperparameter set.}
     \label{fig:15}
 \end{figure}
@@ -481,7 +481,7 @@ thermal-hydraulics \glspl{PDE} simultaneously on a single mesh
 \gls{AHTR} Moltres simulations will capture thermal feedback effects, absent
 from the purely neutronics OpenMC simulations.  
 The objective of setting up the Moltres \gls{AHTR} simulation is to eventually 
-couple Moltres with \gls{REALM} for \gls{AHTR} multiphysics optimization. 
+couple Moltres with \gls{ROLLO} for \gls{AHTR} multiphysics optimization. 
 
 The benefits of Moltres over other multiphysics software, RELAP5 and NESTLE 
 (used previously for \gls{AHTR} modeling and described in Section 
@@ -602,7 +602,7 @@ and spatial homogenization, which resulted in $k_{eff}$ within the uncertainty o
 the continuous energy simulation. 
 The minimal $k_{eff}$ difference assures that I can use these homogenizations 
 when generating group constants for Moltres. 
-I also successfully applied \gls{REALM} to maximize $k_{eff}$ in a straightened 
+I also successfully applied \gls{ROLLO} to maximize $k_{eff}$ in a straightened 
 \acrfull{AHTR} fuel slab by varying the \gls{TRISO} particle packing fraction 
 distribution. 
 The optimization process began with a coarse-to-fine random sampling 

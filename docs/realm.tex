@@ -1,4 +1,4 @@
-\chapter{REALM: Reactor Evolutionary Algorithm Optimizer}
+\chapter{ROLLO: Reactor evOLutionary aLgorithm Optimizer}
 % Main Gist 
 % - Genetic Algorithms / DEAP have been applied to a multitude of problems, 
 %   but barely to nuclear. DEAP was created to be easily coupled with other
@@ -6,10 +6,10 @@
 % Structure 
 % - Realm framework
 % - Coupling to OpenMC and Moltres
-\label{chap:realm}
-In this chapter, I introduce the \gls{REALM} framework developed for the
+\label{chap:rollo}
+In this chapter, I introduce the \gls{ROLLO} framework developed for the
 proposed work.
-\gls{REALM} is a Python package that applies evolutionary algorithm 
+\gls{ROLLO} is a Python package that applies evolutionary algorithm 
 optimization techniques to nuclear reactor design. 
 Applying evolutionary algorithms to nuclear design problems is not new, as I
 previously discussed in Section \ref{sec:opt}, and available evolutionary algorithm 
@@ -24,38 +24,38 @@ Furthermore, computing fitness values with nuclear software is computationally
 expensive, necessitating using supercomputers and setting up parallelization 
 for the genetic algorithm.
 
-Therefore, the motivation behind creating \gls{REALM} is to limit these inconveniences and 
+Therefore, the motivation behind creating \gls{ROLLO} is to limit these inconveniences and 
 facilitate using evolutionary algorithms for reactor design optimization.
-\gls{REALM} provides a general genetic algorithm framework, sets up 
+\gls{ROLLO} provides a general genetic algorithm framework, sets up 
 parallelization for the user, and promotes usability with an input file 
 that only exposes mandatory parameters.
-REALM also strives to be effective, flexible, open-source, parallel, reproducible, 
+rollo also strives to be effective, flexible, open-source, parallel, reproducible, 
 and usable. 
-I briefly summarize how \gls{REALM} achieves these goals:  
+I briefly summarize how \gls{ROLLO} achieves these goals:  
 \begin{itemize}
-    \item Effective: \gls{REALM} is well documented, tested, and 
-    version-controlled on Github \cite{chee_arfcrealm_2021}.
-    \item Flexible: The proposed work aims to utilize \gls{REALM} to 
+    \item Effective: \gls{ROLLO} is well documented, tested, and 
+    version-controlled on Github \cite{chee_arfcrollo_2021}.
+    \item Flexible: The proposed work aims to utilize \gls{ROLLO} to 
     explore arbitrary reactor geometries and inhomogeneous fuel distributions. 
-    However, future users might want to utilize \gls{REALM} 
-    to explore other arbitrary design parameters. Thus, I designed the \gls{REALM}
+    However, future users might want to utilize \gls{ROLLO} 
+    to explore other arbitrary design parameters. Thus, I designed the \gls{ROLLO}
     framework accordingly. The user can vary any imaginable parameter 
-    because \gls{REALM} uses a templating method to edit the input file of the 
+    because \gls{ROLLO} uses a templating method to edit the input file of the 
     coupled software.
-    \item Open-source: \gls{REALM} utilizes a well-documented, open-source 
+    \item Open-source: \gls{ROLLO} utilizes a well-documented, open-source 
     evolutionary algorithm Python package to drive the optimization process, 
     and established open-source nuclear software (OpenMC \cite{romano_openmc_2013} and 
     Moltres \cite{lindsay_introduction_2018}) to compute the objective function 
     and constraints. I also provide a simple tutorial for future developers to 
-    follow for coupling other nuclear software to \gls{REALM}.  
-    \item Parallel: \gls{REALM} runs in parallel on \gls{HPC} machines using the 
+    follow for coupling other nuclear software to \gls{ROLLO}.  
+    \item Parallel: \gls{ROLLO} runs in parallel on \gls{HPC} machines using the 
     \texttt{mpi4py} Python package \cite{dalcin_mpi_2008}.
-    \item Reproducible: Data from every \gls{REALM} run saves into a unique, pickled 
+    \item Reproducible: Data from every \gls{ROLLO} run saves into a unique, pickled 
     file (pickle is a Python module that serializes Python objects), and all 
     results from this work are available on Github. 
 \end{itemize}
 
-\gls{REALM} essentially couples an evolutionary algorithm driver with nuclear 
+\gls{ROLLO} essentially couples an evolutionary algorithm driver with nuclear 
 software, such as neutron transport and thermal-hydraulics codes. 
 Figure \ref{fig:genetic_alg} from Chapter \ref{chap:lit-review} outlines the 
 evolutionary algorithm iterative problem solving process. 
@@ -92,15 +92,15 @@ thermal-hydraulics software fit within the process.
     genetic algorithm. Nuclear software evaluates each new population.}
     \label{fig:genetic_alg_nuclear}
 \end{figure}
-Therefore, \gls{REALM} initially reads and validates the JSON input 
+Therefore, \gls{ROLLO} initially reads and validates the JSON input 
 file, initializes the \gls{DEAP} \cite{fortin_deap_2012} genetic algorithm 
 hyperparameters and operators, and finally runs the genetic algorithm following 
 the flow chart in Figure \ref{fig:genetic_alg_nuclear}, in which the nuclear 
 software evaluates each individual's fitness. 
 
 In the subsequent sections, I describe the evolutionary algorithm software (DEAP)
-that drives \gls{REALM}, the nuclear software coupled to \gls{REALM}, and details about 
-the \gls{REALM} framework, such as the input file format and software architecture. 
+that drives \gls{ROLLO}, the nuclear software coupled to \gls{ROLLO}, and details about 
+the \gls{ROLLO} framework, such as the input file format and software architecture. 
 
 \section{Evolutionary Algorithm Driver}
 Evolutionary algorithm computation uses sophisticated, diverse techniques 
@@ -120,7 +120,7 @@ compactness and clarity \cite{fortin_deap_2012}.
 \gls{DEAP} is the only framework that allows the user to prototype evolutionary 
 algorithms rapidly and define custom algorithms without digging deep into 
 the source code to modify hyperparameters and their application methods.
-Accordingly, I chose \gls{DEAP} to drive the \gls{REALM} framework's 
+Accordingly, I chose \gls{DEAP} to drive the \gls{ROLLO} framework's 
 evolutionary algorithm component. 
 \gls{DEAP} provides building blocks for each optimizer function and allows the 
 user to customize a specialized algorithm to fit their project \cite{fortin_deap_2012}.
@@ -173,10 +173,10 @@ Figure \ref{fig:deap-code} illustrates \gls{DEAP}'s usage of the \textit{creator
         toolbox.register("mate", tools.cxOnePoint)
     \end{minted}
     \caption{DEAP sample code demonstrating the usage of the \textit{creator} and
-    \textit{toolbox} modules to initialize the genetic algorithm. In \gls{REALM}, \gls{DEAP}'s 
+    \textit{toolbox} modules to initialize the genetic algorithm. In \gls{ROLLO}, \gls{DEAP}'s 
     \textit{creator} and \textit{toolbox} modules are initialized in the source 
     code based on the genetic algorithm parameters defined by the user in the 
-    \gls{REALM} input file. }
+    \gls{ROLLO} input file. }
     \label{fig:deap-code}
 \end{figure}
 Line 2 creates a single-objective fitness class, \texttt{Objective}. 
@@ -195,8 +195,8 @@ specifying variation operators (\texttt{select}, \texttt{mutate}, \texttt{mate})
 and evaluating individual fitness (\texttt{evaluate}) \cite{fortin_deap_2012}. 
 Lines 12-13 define the evaluation function that returns the fitness values. 
 
-\gls{REALM} initializes \gls{DEAP}'s \textit{creator} and \textit{toolbox} modules 
-based on the genetic algorithm parameters defined by the user in the \gls{REALM} 
+\gls{ROLLO} initializes \gls{DEAP}'s \textit{creator} and \textit{toolbox} modules 
+based on the genetic algorithm parameters defined by the user in the \gls{ROLLO} 
 input file. 
 The evaluation function runs the nuclear software and returns user-defined 
 fitness values. 
@@ -221,7 +221,7 @@ applied, and the results are saved.
 \section{Nuclear Software}
 Many nuclear software tools, applications, libraries, packages have restricted 
 public access. 
-In the preliminary work, I enabled \gls{REALM} to work with open-source nuclear 
+In the preliminary work, I enabled \gls{ROLLO} to work with open-source nuclear 
 transport and thermal-hydraulics software, OpenMC \cite{romano_openmc_2013} 
 and Moltres \cite{lindsay_introduction_2018}.  
 OpenMC is an open-source Monte Carlo neutron transport code capable of 
@@ -237,20 +237,20 @@ of processing units \cite{lindsay_introduction_2018}.
 
 OpenMC and Moltres are both open-source, well-documented, well-supported, and 
 Github version-controlled codes that can run in parallel on \gls{HPC} machines.
-Thus they achieve the \gls{REALM} goals listed at the start of this chapter, 
-making them suitable to be used as \gls{REALM}'s nuclear dependency.
+Thus they achieve the \gls{ROLLO} goals listed at the start of this chapter, 
+making them suitable to be used as \gls{ROLLO}'s nuclear dependency.
 However, users can easily use restricted nuclear software if they so desire 
-with \gls{REALM} by coupling \gls{REALM} with the restricted software on their 
+with \gls{ROLLO} by coupling \gls{ROLLO} with the restricted software on their 
 local machine. 
-In the \gls{REALM} documentation \cite{chee_arfcrealm_2021}, I outline how to couple 
-other nuclear software to \gls{REALM}. 
+In the \gls{ROLLO} documentation \cite{chee_arfcrollo_2021}, I outline how to couple 
+other nuclear software to \gls{ROLLO}. 
 
-\section{REALM Input File}
-REALM's input file is in JSON format. 
+\section{rollo Input File}
+rollo's input file is in JSON format. 
 There are four sections that the user must define: \\ \texttt{control\_variables}, 
 \texttt{evaluators}, \texttt{constraints}, and \texttt{algorithm}. 
-Figure \ref{fig:realm-input} shows an example \gls{REALM} input file. 
-In this simulation, \gls{REALM} uses a genetic algorithm with the defined 
+Figure \ref{fig:rollo-input} shows an example \gls{ROLLO} input file. 
+In this simulation, \gls{ROLLO} uses a genetic algorithm with the defined 
 hyperparameters to minimize the \texttt{output1} parameter which is 
 calculated using the OpenMC evaluator that accepts input parameters: 
 \texttt{variable1} and \texttt{variable2}. 
@@ -295,43 +295,43 @@ calculated using the OpenMC evaluator that accepts input parameters:
             }
         }
     \end{minted}
-    \caption{\acrfull{REALM} sample JSON input file.}
-    \label{fig:realm-input}
+    \caption{\acrfull{ROLLO} sample JSON input file.}
+    \label{fig:rollo-input}
 \end{figure}
 
-Next, I will describe how to define each section of a \gls{REALM} input file. 
-The \gls{REALM} documentation \cite{chee_arfcrealm_2021} provides further 
-descriptions for setting up a \gls{REALM} input file.
+Next, I will describe how to define each section of a \gls{ROLLO} input file. 
+The \gls{ROLLO} documentation \cite{chee_arfcrollo_2021} provides further 
+descriptions for setting up a \gls{ROLLO} input file.
 
 \subsection{Control Variables}
 Control variables are parameters the genetic algorithm will vary. 
 For each control variable, the user must specify its minimum and maximum values.
-For example, Lines 2 to 5 in Figure \ref{fig:realm-input} demonstrate that the 
+For example, Lines 2 to 5 in Figure \ref{fig:rollo-input} demonstrate that the 
 control variables, \texttt{variable1} and \texttt{variable2}, 
 will be varied from 0 to 10 and -1 to 0, respectively. 
 
 \subsection{Evaluators}
-Evaluators are the nuclear software \gls{REALM} utilizes to calculate objective functions. 
+Evaluators are the nuclear software \gls{ROLLO} utilizes to calculate objective functions. 
 Presently, only \texttt{openmc} and \texttt{moltres} evaluators are available 
-in \gls{REALM}.
-In a single \gls{REALM} input file, a user may define any number of evaluators. 
+in \gls{ROLLO}.
+In a single \gls{ROLLO} input file, a user may define any number of evaluators. 
 For each evaluator, mandatory input parameters are \texttt{input\_script}, 
 \texttt{inputs}, and \texttt{outputs}, and the optional input parameter is
 \texttt{output\_script}. 
 The \texttt{input\_script} is input file template's name for the evaluator software. 
-The user must include a input file template in the same directory as the \gls{REALM} input 
+The user must include a input file template in the same directory as the \gls{ROLLO} input 
 file. 
 The \texttt{inputs} parameter lists the control variables that are placed into the 
 input file template. 
-REALM utilizes jinja2 templating to insert the control variable values into the 
+rollo utilizes jinja2 templating to insert the control variable values into the 
 \texttt{input\_script}. 
-Lines 6 to 12 in the \gls{REALM} input file (Figure \ref{fig:realm-input}) demonstrate 
+Lines 6 to 12 in the \gls{ROLLO} input file (Figure \ref{fig:rollo-input}) demonstrate 
 that \texttt{variable1} and \texttt{variable2} are \texttt{inputs} into the 
 \texttt{openmc\_inp.py} \texttt{input\_script}. 
 Figure \ref{fig:openmcinp.py} shows the template and templated openmc script; 
 once the \texttt{openmc\_inp.py} \texttt{input\_script} is templated, 
 \texttt{\{\{variable1\}\}} and \texttt{\{\{variable2\}\}}  on Lines 3 and 4 will be 
-replaced with values selected by the \gls{REALM} genetic algorithm. 
+replaced with values selected by the \gls{ROLLO} genetic algorithm. 
 \begin{figure}[]
     \begin{minipage}{0.4\textwidth}
         \centering
@@ -378,8 +378,8 @@ The \texttt{outputs} parameter lists the output variables that the evaluator
 will return to the genetic algorithm. 
 These output parameters are also known as the objective functions used to 
 evaluate the individual.  
-\gls{REALM} uses three methods to return an output parameter. 
-First, if the output parameter is also an input parameter, \gls{REALM} will automatically 
+\gls{ROLLO} uses three methods to return an output parameter. 
+First, if the output parameter is also an input parameter, \gls{ROLLO} will automatically 
 return the input parameter's value. 
 Second, the user can use predefined evaluations. 
 For example, in \texttt{OpenMCEvaluation}, there is a predefined $k_{eff}$ 
@@ -397,9 +397,9 @@ Any individual that does not meet the defined constraints is removed from the
 population, encouraging the proliferation of individuals that meet the 
 constraints. 
 For each constrained output parameter, the user lists the \texttt{operator}s 
-and \texttt{constrained\_val}s as in Line 15 of the \gls{REALM} input file 
-(Figure \ref{fig:realm-input}). 
-Thus, for this \gls{REALM} simulation, \texttt{output\_1} is constrained to be 
+and \texttt{constrained\_val}s as in Line 15 of the \gls{ROLLO} input file 
+(Figure \ref{fig:rollo-input}). 
+Thus, for this \gls{ROLLO} simulation, \texttt{output\_1} is constrained to be 
 $>= 1.0$ and $< 1.5$. 
 
 \subsection{Algorithm}
@@ -438,7 +438,7 @@ hyperparameters.
     \centering
     \onehalfspacing
     \caption{Selection, mutation, and mating operators available in 
-    \acrfull{REALM} and their corresponding hyperparameters. }
+    \acrfull{ROLLO} and their corresponding hyperparameters. }
 	\label{tab:deap_operators}
     \footnotesize
     \begin{tabular}{l|p{0.23\textwidth}|p{0.55\textwidth}}
@@ -462,26 +462,26 @@ The default mutation operator is \texttt{mutPolynomialBounded} with default
 \texttt{eta} and \texttt{indpb} values of 0.3. 
 The default mating operator is \texttt{cxBlend} with a default \texttt{alpha} 
 of 0.4. 
-Lines 17 to 31 in the example \gls{REALM} input file (Figure \ref{fig:realm-input}) 
+Lines 17 to 31 in the example \gls{ROLLO} input file (Figure \ref{fig:rollo-input}) 
 demonstrate \texttt{algorithm} specifications. 
 
-\section{REALM Software Architecture}
-In this section, I will describe the \gls{REALM} v1.0 software architecture and 
+\section{rollo Software Architecture}
+In this section, I will describe the \gls{ROLLO} v1.0 software architecture and 
 how all the parts come together to optimize reactor design. 
-Table \ref{tab:realm-architecture} outlines the classes in the \gls{REALM} software 
+Table \ref{tab:rollo-architecture} outlines the classes in the \gls{ROLLO} software 
 and describes each class's purpose.
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{Classes that make up the \gls{REALM} architecture. }
-	\label{tab:realm-architecture}
+    \caption{Classes that make up the \gls{ROLLO} architecture. }
+	\label{tab:rollo-architecture}
     \footnotesize
     \begin{tabular}{l|p{0.73\textwidth}}
     \hline
     \textbf{Class} & \textbf{Description} \\ \hline
     \textbf{\textit{InputValidation}} & The \textbf{\textit{InputValidation}} class contains methods 
-    to read and validate the JSON \gls{REALM} input file to 
-    ensure the user defined all key parameters. If they did not, \gls{REALM} 
+    to read and validate the JSON \gls{ROLLO} input file to 
+    ensure the user defined all key parameters. If they did not, \gls{ROLLO} 
     raises an exception to tell the user which parameters are missing. \\
     \hline
     \textbf{\textit{Evaluation}} & \gls{DEAP}'s fitness evaluator (as mentioned in Section 
@@ -516,7 +516,7 @@ and describes each class's purpose.
     function produced by \textbf{\textit{Evaluation}}, and saves all the results 
     with \textbf{\textit{BackEnd}}. \\
     \hline
-    \textbf{\textit{Executor}} & The \textbf{\textit{Executor}} class drives the \gls{REALM} code
+    \textbf{\textit{Executor}} & The \textbf{\textit{Executor}} class drives the \gls{ROLLO} code
     execution with the following steps: \\
     & 1) User input file validation with \textbf{\textit{InputValidation}} \\
     & 2) Evaluation function generation with \textbf{\textit{Evaluation}} \\
@@ -526,7 +526,7 @@ and describes each class's purpose.
     \hline
     \end{tabular}
     \end{table}
-Figure \ref{fig:realm_archi} depicts the \gls{REALM} software architecture. 
+Figure \ref{fig:rollo_archi} depicts the \gls{ROLLO} software architecture. 
 \begin{figure}[]
     \centering
     \begin{tikzpicture}[node distance=0.5cm]
@@ -559,12 +559,12 @@ Figure \ref{fig:realm_archi} depicts the \gls{REALM} software architecture.
         \draw [arrow] (7) -- ([shift={(0.cm,0.25cm)}]7.north) -| ([shift={(-0.5cm,-1.25cm)}]6.west) -- ([shift={(0cm,-1.25cm)}]6.west);
         \draw [arrow] (5) -- ([shift={(0cm,0cm)}]5.east) -- ([shift={(-0.5cm,-1cm)}]7.west)--([shift={(0cm,-1cm)}]7.west);
     \end{tikzpicture}
-    \caption{Visualization of \gls{REALM} architecture.}
-    \label{fig:realm_archi}
+    \caption{Visualization of \gls{ROLLO} architecture.}
+    \label{fig:rollo_archi}
 \end{figure}
-% how to run realm: python realm -i square.json -p max
-When the user runs a \gls{REALM} input file, the \textbf{\textit{Executor}} class 
-drives \gls{REALM}'s execution from beginning to end.
+% how to run rollo: python rollo -i square.json -p max
+When the user runs a \gls{ROLLO} input file, the \textbf{\textit{Executor}} class 
+drives \gls{ROLLO}'s execution from beginning to end.
 The \textbf{\textit{Executor}} calls \textbf{\textit{InputValidation}} to 
 parse the input file to ensure that the user defined all mandatory parameters
 and used the correct formatting.
@@ -590,43 +590,43 @@ hyperparameters from the \gls{DEAP} toolbox, apply constraints defined in the
 the evaluation function created by the \textbf{\textit{Evaluator}} object, all 
 the while saving the results using the \textbf{\textit{BackEnd}} class. 
 
-In the \gls{REALM} Github repository \cite{chee_arfcrealm_2021}, I included a tests 
+In the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}, I included a tests 
 directory that contains unit tests for all methods in the classes described 
 above. 
 
-\subsection{Installing and Running REALM}
-% python realm -i square.json -p max 
+\subsection{Installing and Running rollo}
+% python rollo -i square.json -p max 
 % checkpoint.pkl 
-There are two ways to install \gls{REALM}.
-First, a user can utilize \gls{PyPI} to install \gls{REALM}: \texttt{pip install realm}.
-Second, a user can download the \gls{REALM} Github repository \cite{chee_arfcrealm_2021}
+There are two ways to install \gls{ROLLO}.
+First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{pip install rollo}.
+Second, a user can download the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}
 and install it from source. 
 
-REALM is run from the command line interface. 
-A user should first set up the \gls{REALM} JSON input file and evaluator 
+rollo is run from the command line interface. 
+A user should first set up the \gls{ROLLO} JSON input file and evaluator 
 scripts in a directory. 
-When running \gls{REALM} from the command line, there is one mandatory argument and 
+When running \gls{ROLLO} from the command line, there is one mandatory argument and 
 one optional argument. 
 The mandatory argument is the input file (\texttt{-i}). 
 The optional argument is the checkpoint file (\texttt{-c}).  
-Thus, the structure of a command line input for running \gls{REALM} is: 
+Thus, the structure of a command line input for running \gls{ROLLO} is: 
 
 \noindent
-\texttt{python realm -i <input file name> -c <checkpoint file name>}
+\texttt{python rollo -i <input file name> -c <checkpoint file name>}
 
-The checkpoint file holds the results from the \gls{REALM} simulation and also acts 
+The checkpoint file holds the results from the \gls{ROLLO} simulation and also acts 
 as a restart file. 
-Thus, if a \gls{REALM} simulation ends prematurely, the checkpoint file can be used 
+Thus, if a \gls{ROLLO} simulation ends prematurely, the checkpoint file can be used 
 to restart the code from the most recent population and continue the simulation. 
 
-\subsection{REALM Results Analysis}
-The \textbf{\textit{BackEnd}} class manages results from each \gls{REALM} simulation. 
+\subsection{rollo Results Analysis}
+The \textbf{\textit{BackEnd}} class manages results from each \gls{ROLLO} simulation. 
 \textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, which 
 is saved as \texttt{checkpoint.pkl} in the same directory as the input file. 
 The checkpoint file can then be reloaded into a Jupyter notebook and organized 
 to produce desired plots. 
-Examples of \gls{REALM} results analysis can be found in the \gls{REALM} documentation 
-\cite{chee_arfcrealm_2021}. 
+Examples of \gls{ROLLO} results analysis can be found in the \gls{ROLLO} documentation 
+\cite{chee_arfcrollo_2021}. 
 
 The evaluation function creates a new directory for each software, generation, 
 and individual and stores the templated input file and output files associated 
@@ -636,7 +636,7 @@ For example, the directory containing files associated with an OpenMC run for
 the tenth individual in the genetic algorithm's third generation will be named: 
 \texttt{openmc\_2\_9}.
 
-%\subsection{Using REALM on a HPC}
+%\subsection{Using rollo on a HPC}
 
 
 %\section{Hyperparameter Search}
@@ -644,15 +644,15 @@ the tenth individual in the genetic algorithm's third generation will be named:
 %guide the learning process for a specific dataset. 
 
 \section{Summary}
-This chapter described the \acrfull{REALM} framework developed for the
+This chapter described the \acrfull{ROLLO} framework developed for the
 proposed work. 
-\gls{REALM} is a Python package that applies evolutionary algorithm 
+\gls{ROLLO} is a Python package that applies evolutionary algorithm 
 optimization techniques to nuclear reactor design using the \acrfull{DEAP} 
 module, OpenMC, and Moltres. 
-The motivation for \gls{REALM} is to enable reactor designers to utilize 
+The motivation for \gls{ROLLO} is to enable reactor designers to utilize 
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework,
 selecting appropriate hyperparameters, and setting up its parallelization. 
-REALM is designed to be effective, flexible, open-source, parallel, 
+rollo is designed to be effective, flexible, open-source, parallel, 
 reproducible, and usable. 
-\gls{REALM} is hosted on Github \cite{chee_arfcrealm_2021}. 
+\gls{ROLLO} is hosted on Github \cite{chee_arfcrollo_2021}. 

@@ -11,19 +11,19 @@ enabled by additive manufacturing.
 Chapter \ref{chap:fhr-benchmark} introduced the \acrfull{FHR} benchmark with 
 the \gls{AHTR} design and highlighted its benefits, such as passive safety 
 behavior with negative temperature coefficients. 
-Chapter \ref{chap:realm} introduced the \acrfull{REALM} software package, 
+Chapter \ref{chap:rollo} introduced the \acrfull{ROLLO} software package, 
 which applies evolutionary algorithm optimization techniques to nuclear 
 reactor design. 
-In Chapter \ref{chap:realm-demo}, I successfully applied \gls{REALM} 
+In Chapter \ref{chap:rollo-demo}, I successfully applied \gls{ROLLO} 
 to optimize the \gls{TRISO} packing fraction distribution in an \gls{AHTR} slab
 and demonstrated the neutron transport energy and spatial homogenizations for 
 generating group constants for Moltres. 
 
 Based on the preliminary work conducted, this chapter proposes 
 future simulations categorized into two groups: \gls{AHTR} development and 
-\gls{REALM} optimization. 
+\gls{ROLLO} optimization. 
 The proposed work aims to address \gls{AHTR} modeling challenges further and 
-demonstrate using \gls{REALM} for multi-objective \gls{AHTR} 
+demonstrate using \gls{ROLLO} for multi-objective \gls{AHTR} 
 optimization of arbitrary geometries and fuel distribution. 
 For \gls{AHTR} development, I propose the following simulations: 
 \begin{itemize}
@@ -31,7 +31,7 @@ For \gls{AHTR} development, I propose the following simulations:
     \item \gls{AHTR} fuel slab and one-third fuel assembly multiphysics 
     Moltres simulation
 \end{itemize}
-For \gls{REALM} optimization, I propose the following \gls{REALM} simulations: 
+For \gls{ROLLO} optimization, I propose the following \gls{ROLLO} simulations: 
 \begin{itemize}
     \item \gls{AHTR} slab geometry optimization to maximize $k_{eff}$, 
     minimize power peaking factor ($PPF$), and maximize heat transfer ($\dot{Q}$) by varying \gls{TRISO} 
@@ -113,8 +113,8 @@ Then, I will proceed to set up the one-third \gls{AHTR} fuel assembly model
 simulation, verify its key neutronics parameters, and finally, run a steady-state 
 Moltres simulation.
 
-\section{REALM Optimization}
-Section \ref{sec:realm_opt_ahtr_slab} concluded that the \gls{AHTR} slab 
+\section{ROLLO Optimization}
+Section \ref{sec:rollo_opt_ahtr_slab} concluded that the \gls{AHTR} slab 
 optimization problem should be further developed by considering other objectives 
 such as maximizing heat transfer and minimizing power peaking factor. 
 In the proposed work, I will explore each objective separately and then together.
@@ -123,7 +123,7 @@ each objective.
 \begin{table}[!htbp]
     \centering
     \onehalfspacing
-    \caption{\acrfull{REALM} optimization problem objectives with their quantification 
+    \caption{\acrfull{ROLLO} optimization problem objectives with their quantification 
     descriptions.}
 	\label{tab:objectives}
     \footnotesize
@@ -147,16 +147,16 @@ geometry (as seen in Figure \ref{fig:straightened_slab}) and for one
 diamond-shaped sector (as seen in Figure \ref{fig:ahtr-fuel-assembly}) with 
 x-y axis periodic and z axis reflective boundary conditions. 
 % show how x-y variation will occur. 
-Table \ref{tab:realm_simulations} outlines the proposed simulations' details. 
+Table \ref{tab:rollo_simulations} outlines the proposed simulations' details. 
 \begin{table}[]
     \centering
     \onehalfspacing
-    \caption{Proposed \acrfull{REALM} simulations for optimizing \acrfull{AHTR}
+    \caption{Proposed \acrfull{ROLLO} simulations for optimizing \acrfull{AHTR}
     fuel assembly. Simulations explore two geometries: straightened \gls{AHTR} 
     fuel slab and \gls{AHTR}'s diamond-shaped section, containing six fuel slabs.
     $\dot{Q}$: Heat transfer, $PPF$: Power Peaking Factor, 
     $\rho_{TRISO}(\vec{r})$: \gls{TRISO} particle distribution}
-	\label{tab:realm_simulations}
+	\label{tab:rollo_simulations}
     \footnotesize
     \begin{tabular}{clll}
     \hline 
@@ -223,7 +223,7 @@ Table \ref{tab:best_hyperparameters} summarizes the optimal hyperparameters.
     \end{tabular}
 \end{table}
 
-I will extend the REALM simulations proposed in Table \ref{tab:realm_simulations} 
+I will extend the ROLLO simulations proposed in Table \ref{tab:rollo_simulations} 
 to include Moltres evaluations if the proposed \gls{AHTR} multiphysics
 Moltres simulations (Section \ref{sec:ahtr_multiphysics_model}) find approximations 
 and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
@@ -240,17 +240,17 @@ additive manufacturing with the evolutionary algorithm optimization technique
 to find global optima in multi-objective design problems, such as nuclear 
 reactor optimization. 
 
-In the preliminary work, I designed the \gls{REALM} Python package that applies 
+In the preliminary work, I designed the \gls{ROLLO} Python package that applies 
 evolutionary algorithm optimization techniques to nuclear reactor design using 
 the \gls{DEAP} Python module, OpenMC, and Moltres.
-\gls{REALM} seeks to enable reactor designers to utilize 
+\gls{ROLLO} seeks to enable reactor designers to utilize 
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework.
 The many advantageous features of \glspl{AHTR} led me to choose to apply the 
 evolutionary algorithm optimization methods to this reactor type.
 I participated in Phase I-A and I-B of the \acrfull{OECD} \gls{NEA}'s \gls{FHR} 
 benchmarking exercise. 
-I also applied \gls{REALM} to a single objective function problem: maximize 
+I also applied \gls{ROLLO} to a single objective function problem: maximize 
 $k_{eff}$ in the \gls{AHTR} fuel slab by varying the \gls{TRISO} particle 
 packing fraction distribution. 
 This problem demonstrated the effectiveness and robustness of genetic algorithms 
@@ -258,7 +258,7 @@ at optimizing reactor parameters for an objective function.
 However, many other objectives should also be considered, such as maximizing heat 
 transfer and minimizing power peaking factor.
 
-Therefore, I propose to further explore using \gls{REALM} for multi-objective 
+Therefore, I propose to further explore using \gls{ROLLO} for multi-objective 
 \gls{AHTR} optimization of arbitrary geometries and fuel distribution.
 Optimization objectives include maximizing $k_{eff}$, maximizing heat transfer, 
 and minimizing power peaking factor. 
