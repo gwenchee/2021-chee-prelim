@@ -25,18 +25,19 @@ With the many benefits of \glspl{FHR} and growing interest in the nuclear scienc
 community with \gls{FHR} designs, I chose to apply the optimization methods to 
 this reactor type, and also participate in the \acrlong{OECD} (OECD) 
 \acrlong{NEA}'s (NEA) \gls{FHR} benchmarking exercise. 
-Thus, we begin this literature review with an overview of the \gls{FHR} concept, 
+Thus, I begin this literature review with an overview of the \gls{FHR} concept, 
 then go into detail about one specific \gls{FHR} design: the \gls{AHTR}, 
 previous efforts and technical challenges of modeling the design, and a 
 description of how these efforts led to the \gls{OECD} \gls{NEA}'s initiation of 
 the \gls{AHTR} benchmark.
-Next, we outline additive manufacturing's history and describe the current research towards applying 
-additive manufacturing to the fabrication of nuclear reactor core components. 
-We also review previous efforts towards nuclear reactor design optimization, 
+Next, I outline additive manufacturing's history and describe the current research 
+towards applying additive manufacturing to the fabrication of nuclear reactor 
+core components. 
+I also review previous efforts towards nuclear reactor design optimization, 
 describe how additive manufacturing of nuclear reactor components enables optimization for 
 less constrained reactor geometries, and types of optimization methods that can be 
 leveraged in this expanded design space.   
-Finally, we give a background of evolutionary algorithms and detail a specific 
+Finally, I give a background of evolutionary algorithms and detail a specific 
 evolutionary algorithm: the genetic algorithm and how it works to conduct global 
 optimization robustly.
 
@@ -92,12 +93,12 @@ The \gls{AHTR} has 3400 MWt thermal power and 1400 MW electric power with
 inlet/outlet temperatures of 650/700$^{\circ}$C \cite{varma_ahtr_2012}.  
 Figure \ref{fig:ahtr} shows the prismatic AHTR's fuel assembly and core 
 configuration.  
-Each hexagonal fuel element features plate-type fuel consisting of eighteen planks 
+Each hexagonal fuel assembly features plate-type fuel consisting of eighteen planks 
 arranged in three diamond-shaped sectors, with a central Y-shaped structure 
 and external channel (wrapper).
-Each fuel plank contains an isostatically pressed carbon with fuel stripes 
+The fuel planks contain an isostatically pressed carbon with fuel stripes 
 on each plank's outer side.
-Each fuel stripe is a graphite matrix filled with a cubic lattice of 
+Within each fuel stripe is a graphite matrix filled with a cubic lattice of 
 \gls{TRISO} particles. 
 The core consists of 252 assemblies radially surrounded by reflectors
 \cite{ramey_monte_2018}. 
@@ -166,7 +167,7 @@ research.
 
 The \emph{multiply heterogeneous} \gls{AHTR} fuel, comprised of \gls{TRISO} 
 particles embedded in strategically arranged plates, presents simulation challenges. 
-We must obtain detailed reference power distributions with individual 
+Researchers must obtain detailed reference power distributions with individual 
 \gls{TRISO} particle fidelity to best understand the \gls{AHTR}'s nuances.
 However, deterministic codes that use multigroup cross sections and traditional 
 homogenization methods \cite{ramey_monte_2018}, insufficiently capture the 
@@ -175,7 +176,7 @@ correct physics in \glspl{AHTR} due to these multiple heterogeneities
 In the \gls{AHTR}, single and multiple slab homogenization decreased total 
 neutron transport simulation time by an order of 10; however, the homogenization 
 introduced a nontrivial error of $\sim$3\% \cite{ramey_monte_2018,cisneros_neutronics_2012}.
-To determine the feasibility and safety of the \gls{AHTR} design, we must 
+To determine the feasibility and safety of the \gls{AHTR} design, researchers must 
 calculate core physics parameters to an acceptable uncertainty. 
 With Monte Carlo neutron transport, increasing neutron histories reduces statistical 
 uncertainty but increases computational cost typically, requiring the use of 
@@ -218,9 +219,9 @@ assemblies in each ring, and more fidelity is placed on the primary and
 To address and further understand the technical challenges described 
 in the previous section, in 2019, the OECD-NEA initiated a benchmark exercise 
 to assess the modeling and simulation capabilities for \glspl{AHTR} with 
-\gls{TRISO} fuel embedded in fuel planks of hexagonal fuel elements
+\gls{TRISO} fuel embedded in fuel planks of hexagonal fuel assemblies
 \cite{noauthor_fluoride_nodate}. 
-The benchmark plans to have three phases, starting from a single fuel element 
+The benchmark plans to have three phases, starting from a single fuel assembly
 simulation without burnup, gradually extending to full core depletion and feedback. 
 The benchmark's overarching objective is to identify the applicability, accuracy, 
 and practicality of the latest methods and codes to assess the current state 
@@ -249,7 +250,7 @@ These major differences will determine the: accuracy of the
 final part, material and mechanical properties, the time required to manufacture 
 the part, the need for post-processing, the size of additive manufacturing machine, and the overall 
 cost of the machine and the process \cite{gibson_additive_2014}. 
-Initially, additive manufacturing only manufactured prototypes. 
+Initially, industries only utilized additive manufacturing for manufacturing prototypes. 
 However, with improvements in material properties, accuracy, and overall quality 
 of additive manufacturing output, the applications for additive manufacturing expanded to the 
 point at which some industries build parts for direct assembly purposes
@@ -359,7 +360,7 @@ Nuclear engineering sub-fields such as reactor design, reactor reloading
 patterns, and the nuclear fuel cycle utilize optimization.  
 Traditional manufacturing constraints limit nuclear reactor core 
 design optimization. 
-In the proposed work, we will reexamine nuclear reactor core 
+In the proposed work, I will reexamine nuclear reactor core 
 design optimization for arbitrary reactor geometries and fuel distributions
 enabled by additive manufacturing. 
 
@@ -472,7 +473,7 @@ scalable to tens of thousands of processors \cite{kropaczek_constraint_2019}.
 Thus, for optimization problems that require high-fidelity evaluation software, 
 the evolutionary algorithm method can leverage parallel computing to find a 
 solution faster than the simulated annealing method.
-Therefore, in this proposed work, we will utilize the evolutionary algorithm 
+Therefore, in this proposed work, I will utilize the evolutionary algorithm 
 optimization method. 
 
 \subsection{Impact of Additive Manufacturing on Nuclear Reactor Design 
@@ -487,8 +488,8 @@ and safety further.
 Reactor design objectives remain consistent with past objectives, such as 
 minimizing fuel amount and minimizing the maximum fuel temperature for a given 
 power level.
-However, we can now approach the nuclear design problems with truly arbitrary 
-geometries, no longer limited by traditional geometric shapes that are 
+However, reactor designers can now approach the nuclear design problems with truly 
+arbitrary geometries, no longer limited by traditional geometric shapes that are 
 easy to manufacture with traditional processes: slabs as fuel planks, cylinders 
 as fuel rods, spheres as fuel pebbles, axis-aligned coolant channels, etc  
 \cite{sobes_artificial_2020}.
