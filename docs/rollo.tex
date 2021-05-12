@@ -245,8 +245,8 @@ local machine.
 In the \gls{ROLLO} documentation \cite{chee_arfcrollo_2021}, I outline how to couple 
 other nuclear software to \gls{ROLLO}. 
 
-\section{rollo Input File}
-rollo's input file is in JSON format. 
+\section{ROLLO Input File}
+\gls{ROLLO}'s input file is in JSON format. 
 There are four sections that the user must define: \\ \texttt{control\_variables}, 
 \texttt{evaluators}, \texttt{constraints}, and \texttt{algorithm}. 
 Figure \ref{fig:rollo-input} shows an example \gls{ROLLO} input file. 
@@ -323,7 +323,7 @@ The user must include a input file template in the same directory as the \gls{RO
 file. 
 The \texttt{inputs} parameter lists the control variables that are placed into the 
 input file template. 
-rollo utilizes jinja2 templating to insert the control variable values into the 
+\gls{ROLLO} utilizes jinja2 templating to insert the control variable values into the 
 \texttt{input\_script}. 
 Lines 6 to 12 in the \gls{ROLLO} input file (Figure \ref{fig:rollo-input}) demonstrate 
 that \texttt{variable1} and \texttt{variable2} are \texttt{inputs} into the 
@@ -465,7 +465,7 @@ of 0.4.
 Lines 17 to 31 in the example \gls{ROLLO} input file (Figure \ref{fig:rollo-input}) 
 demonstrate \texttt{algorithm} specifications. 
 
-\section{rollo Software Architecture}
+\section{\gls{ROLLO} Software Architecture}
 In this section, I will describe the \gls{ROLLO} v1.0 software architecture and 
 how all the parts come together to optimize reactor design. 
 Table \ref{tab:rollo-architecture} outlines the classes in the \gls{ROLLO} software 
@@ -594,7 +594,7 @@ In the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}, I included a te
 directory that contains unit tests for all methods in the classes described 
 above. 
 
-\subsection{Installing and Running rollo}
+\subsection{Installing and Running \gls{ROLLO}}
 % python rollo -i square.json -p max 
 % checkpoint.pkl 
 There are two ways to install \gls{ROLLO}.
@@ -602,7 +602,7 @@ First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{pip install
 Second, a user can download the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}
 and install it from source. 
 
-rollo is run from the command line interface. 
+\gls{ROLLO} is run from the command line interface. 
 A user should first set up the \gls{ROLLO} JSON input file and evaluator 
 scripts in a directory. 
 When running \gls{ROLLO} from the command line, there is one mandatory argument and 
@@ -619,7 +619,7 @@ as a restart file.
 Thus, if a \gls{ROLLO} simulation ends prematurely, the checkpoint file can be used 
 to restart the code from the most recent population and continue the simulation. 
 
-\subsection{rollo Results Analysis}
+\subsection{\gls{ROLLO} Results Analysis}
 The \textbf{\textit{BackEnd}} class manages results from each \gls{ROLLO} simulation. 
 \textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, which 
 is saved as \texttt{checkpoint.pkl} in the same directory as the input file. 
@@ -653,6 +653,6 @@ The motivation for \gls{ROLLO} is to enable reactor designers to utilize
 robust evolutionary algorithm optimization methods without going 
 through the cumbersome process of setting up a genetic algorithm framework,
 selecting appropriate hyperparameters, and setting up its parallelization. 
-rollo is designed to be effective, flexible, open-source, parallel, 
+\gls{ROLLO} is designed to be effective, flexible, open-source, parallel, 
 reproducible, and usable. 
 \gls{ROLLO} is hosted on Github \cite{chee_arfcrollo_2021}. 
