@@ -105,13 +105,22 @@ An open fuel cycle results in \gls{VHTR} systems' ranking well in proliferation
 resistance and physical protection and neutrally in sustainability 
 \cite{gif_technology_2002}. 
 
-In the proposed work, we explore the \gls{FHR} concept, which 
+In the proposed PhD work, I will explore the \gls{FHR} concept, which 
 combines the best aspects of \gls{MSR} and \gls{VHTR} technologies. 
 \glspl{FHR} use high-temperature coated-particle fuel (similar to the \glspl{VHTR}) 
 and a low-pressure liquid fluoride-salt coolant (similar to the \glspl{MSR})
 \cite{forsberg_fluoride-salt-cooled_2012,facilitators_fluoride-salt-cooled_2013}.
-% add more connecction
+The proposed work focuses on a prismatic \gls{FHR} design with hexagonal fuel 
+assemblies consisting of \gls{TRISO} fuel particles embedded in planks, i.e., 
+the \gls{AHTR} design.
+To address and further understand the technical challenges associated with the 
+\gls{AHTR} design, such as the \emph{multiply heterogeneous} \gls{AHTR} fuel, 
+I will participate in the \gls{OECD}-\gls{NEA}'s \gls{FHR} benchmarking 
+exercise.
 
+In the next section of the proposed PhD work, I will explore the impact of 
+additive manufacturing technology advancements on reactor geometry
+optimization, specifically for the \gls{AHTR} design.
 In recent years, additive manufacturing technology, popularly known as `3D printing', 
 has advanced and altered the manufacturing and design of engineered hardware
 \cite{simpson_considerations_2019}. 
@@ -149,11 +158,12 @@ cylinder height, fuel enrichment, etc
 Leveraging additive manufacturing technology enables us to surpass classical 
 manufacturing constraints, such as straight fuel channels or homogenous fuel 
 enrichment, and optimize for arbitrary geometries and parameters 
-such as non-uniform channel shapes, and inhomogeneous fuel distribution throughout 
-the core. 
+such as non-uniform channel shapes, and inhomogeneous fuel distribution 
+throughout the core. 
 
-Multi-objective design problems inevitably require a trade-off between 
-desirable attributes \cite{byrne_evolving_2014,simon_sciences_2019}. 
+Multi-objective design problems, such as reactor design optimization, 
+inevitably require a trade-off between desirable attributes 
+\cite{byrne_evolving_2014,simon_sciences_2019}. 
 For example, the neutron economy and fuel enrichment trade-off in nuclear 
 reactor design. 
 A reactor design should maximize neutron economy and minimize fuel enrichment 
@@ -178,28 +188,32 @@ Genetic algorithms imitate natural selection to evolve solutions by
     better than the previous generations
 \end{enumerate} 
 
-Therefore, in this work, I propose designing an optimization tool that uses 
-the evolutionary algorithm optimization technique with nuclear transport and 
+To enable the use of evolutionary algorithms for reactor design optimization,
+in this preliminary work I designed an optimization tool that 
+uses the evolutionary algorithm optimization technique with nuclear transport and 
 thermal-hydraulics software. 
-With this tool, I will explore nonuniform FHR reactor core parameters, now 
-possible with additive manufacturing technology, to fully optimize reactor systems. 
+In this preliminary work, I demonstrate using the optimization tool to maximize 
+$k_{eff}$ in an \gls{AHTR} fuel slab by varying fuel distribution. 
+In the proposed PhD scope, I will further demonstrate using evolutionary 
+algorithms for multi-objective \gls{AHTR} optimization of arbitrary geometries 
+and fuel distribution, which are now possible with additive manufacturing 
+technology. 
 
 \section{Objectives}
-I developed the proposed work's main objectives based on leveraging 
-artificial intelligence tools with validated nuclear transport and 
+I developed the proposed PhD scope's main objectives based on further understanding 
+the \gls{AHTR} design through neutronics and thermal-hydraulics modeling, and 
+leveraging artificial intelligence tools with validated nuclear transport and 
 thermal-hydraulics software to create an open-source tool which 
-generates optimal reactor designs quickly. 
+enables nuclear reactor design optimization with arbitrary parameters.
 The proposed work's objectives are: 
 
 \vspace{0.2cm} 
 \noindent
 \begin{enumerate}[label=\textbf{\Roman*}]
-\item \textbf{Model the \gls{FHR} with established 
-nuclear transport and thermal-hydraulics software}.
-To demonstrate success in modeling the \gls{FHR} with nuclear transport and 
-thermal-hydraulics software before using the optimization tool, we will 
-participate in the \gls{OECD} \gls{NEA}'s \gls{FHR} benchmark 
-\cite{noauthor_fluoride_nodate}. 
+\item \textbf{Model the \gls{FHR} with established nuclear transport software}.
+To demonstrate success in modeling the \gls{FHR} with nuclear transport before 
+using the optimization tool, I will participate in the \gls{OECD} \gls{NEA}'s 
+\gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
 
 \item \textbf{Develop a tool that applies evolutionary algorithms to optimize nuclear 
 reactor design}. 
@@ -210,24 +224,28 @@ nuclear transport and thermal-hydraulics software. This tool will run parallel o
 reproducibility, effectiveness, and usability 
 \cite{list_ten_2017,osborne_ten_2014,sandve_ten_2013}. 
 
-\item \textbf{Optimize a nuclear reactor design with the optimization tool and a 
-neutronics software}. 
-We will demonstrate successful implementation of the optimization tool with a
-nuclear transport software by optimizing a simple \gls{FHR} model for a single 
-objective function. 
+\item \textbf{Demonstrate optimization tool with a single objective AHTR 
+design optimization problem}.
+I will demonstrate successful implementation of the optimization tool with a
+nuclear transport software by optimizing an \gls{AHTR} fuel slab's fuel 
+distribution for a single objective function. 
 
-\item \textbf{Tune hyperparameters with the optimization tool for a neutronics problem}.
-Hyperparameter selection will impact the effectiveness of the algorithm 
-for our problem. 
-Therefore, we must conduct a hyperparameter search to find ones that work best 
-for our problem. 
+\item \textbf{Model the \gls{FHR} with established thermal-hydraulics software}.
+To demonstrate success in modeling the \gls{FHR} with thermal hydraulics before 
+using the optimization tool, I will participate in the \gls{OECD} \gls{NEA}'s 
+\gls{FHR} benchmark \cite{noauthor_fluoride_nodate}.
 
-\item \textbf{Demonstrate nuclear reactor design optimization and hyperparameter 
-search with the optimization tool for a neutronics and thermal-hydraulics problem}.
-We will demonstrate successful implementation of the optimization tool and 
-hyperparameter tuning with the nuclear transport and thermal-hydraulics tools 
-for an \gls{FHR} model.  
+\item \textbf{Demonstrate multi-objective nuclear reactor design optimizations 
+for neutronics and thermal-hydraulics problems}.
+I will demonstrate successful use of the optimization tool for multi-objective 
+\gls{AHTR} optimization. 
+I will vary parameters such as reactor geometry and fuel distribution with 
+objectives such as maximizing $k_{eff}$, maximizing heat transfer, and 
+minimizing power peaking factor. 
 \end{enumerate}
+
+This preliminary work completes objectives I, II, and III. 
+Objectives I, II, and III provide a proof of concept 
 
 \section{Outline}
 This document outlines the motivation, preliminary work, and future work proposed 
