@@ -34,12 +34,32 @@ For \gls{AHTR} development, I propose the following simulations:
 For \gls{ROLLO} optimization, I propose the following \gls{ROLLO} simulations: 
 \begin{itemize}
     \item \gls{AHTR} slab geometry optimization to maximize $k_{eff}$, 
-    minimize power peaking factor ($PPF$), and maximize heat transfer ($\dot{Q}$) by varying \gls{TRISO} 
-    x-axis distribution and \gls{FLiBe} channel shape using OpenMC
+    minimize power peaking factor ($PPF$), and maximize heat transfer ($\dot{Q}$) 
+    by varying \gls{TRISO} x-axis distribution and \gls{FLiBe} channel shape using OpenMC
     \item \gls{AHTR} one-third fuel assembly optimization to maximize $k_{eff}$, 
     minimize power peaking factor, and maximize heat transfer by varying \gls{TRISO} 
     x-y axis distribution and \gls{FLiBe} channel shape using OpenMC
 \end{itemize}
+
+The proposed \gls{AHTR} simulations contributes to the \gls{OECD}-\gls{NEA}
+\gls{FHR} benchmark, which aims to understand the technical challenges and validate 
+the available neutron transport and thermal-hydraulics software for the \gls{AHTR}
+design.
+Previous efforts toward nuclear reactor optimization, focused on optimizing 
+classical reactor parameters such as radius of fuel pellet and clad, enrichment 
+of fuel, pin pitch, etc. 
+The promise of cheaper and faster manufacturing of reactor components with 
+additive manufacturing frees complex reactor geometries from previous 
+manufacturing constraints and allows reactor designers to reexamine reactor 
+design optimization. 
+Thus, the proposed multi-objective \gls{ROLLO} simulations will be the first 
+to explore optimizing arbitrary reactor geometries and fuel distributions. 
+The results from these optimization problems will inform on how heterogenous 
+fuel distributions and arbitrary coolant channel shapes perform compared to 
+classical distributions and shapes for the \gls{AHTR} design. 
+These optimization problems will also demonstrate \gls{ROLLO}'s capabilities 
+for multi-objective reactor design optimization, and \gls{ROLLO}'s open-source 
+availability will enable other reactor designers to utilize the tool as well. 
 
 \section{AHTR Model Development}
 The \gls{FHR} benchmark introduced in Chapter \ref{chap:fhr-benchmark} is an 
