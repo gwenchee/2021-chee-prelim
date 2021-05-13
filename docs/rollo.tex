@@ -8,7 +8,7 @@
 % - Coupling to OpenMC and Moltres
 \label{chap:rollo}
 In this chapter, I introduce the \gls{ROLLO} framework developed as preliminary
-work for the PhD work.
+work for the proposed PhD scope.
 \gls{ROLLO} is a Python package that applies evolutionary algorithm 
 techniques to optimize nuclear reactor design. 
 Applying evolutionary algorithms to nuclear design problems is not new, as I
@@ -49,7 +49,7 @@ I briefly summarize how \gls{ROLLO} achieves these goals:
     and constraints. I also provide a simple tutorial for future developers to 
     follow for coupling other nuclear software to \gls{ROLLO}.  
     \item Parallel: Users have the option to run \gls{ROLLO} in parallel using 
-    either the \texttt{multiprocessing} or \texttt{mpi4py} Python packages 
+    either the \texttt{multiprocessing\_on\_dill} or \texttt{mpi4py} Python packages 
     \cite{dalcin_mpi_2008}.
     \item Reproducible: Data from every \gls{ROLLO} run saves into a unique, pickled 
     file (pickle is a Python module that serializes Python objects), and all 
@@ -315,8 +315,8 @@ Presently, only \texttt{openmc} and \texttt{moltres} evaluators are available
 in \gls{ROLLO}.
 In a single \gls{ROLLO} input file, a user may define any number of evaluators. 
 For each evaluator, mandatory input parameters are \texttt{input\_script}, 
-\texttt{inputs}, and \texttt{outputs}, and the optional input parameter is
-\texttt{output\_script}. 
+\texttt{inputs}, and \texttt{outputs}, and the optional input parameters are
+\texttt{output\_script} and \texttt{keep\_files}. 
 The \texttt{input\_script} is input file template's name for the evaluator software. 
 The user must include a input file template in the same directory as the \gls{ROLLO} input 
 file. 
@@ -389,6 +389,8 @@ Third, the user may include an \texttt{output\_script} that returns the desired
 output parameter. 
 The \texttt{output\_script} must include a line that prints a dictionary containing 
 the output parameters' names and their corresponding value as key-value pairs. 
+The \texttt{keep\_files} parameter accepts true or false, which directs \gls{ROLLO}
+to save or not save each evaluations templated input file and output files.
 
 \subsection{Constraints}
 In the constraints section, the user can define constraints on any output parameter. 
@@ -425,7 +427,7 @@ There are three options for the \texttt{parallel} parameter: \textit{none},
 \textit{multiprocessing}, and \textit{mpi\_evals}.
 The \textit{none} option results in ROLLO running without parallelization, and
 the \textit{multiprocessing} option results in ROLLO using the 
-multiprocessing$\_$on$\_$dill Python module to run ROLLO's nuclear software 
+\texttt{multiprocessing\_on\_dill} Python module to run ROLLO's nuclear software 
 evaluations in parallel.
 The \textit{mpi\_evals} option is specially created for supercomputer 
 parallelization, and will be further discussed in Section \ref{sec:rollo_parallel}.
@@ -595,7 +597,7 @@ hyperparameters from the \gls{DEAP} toolbox, apply constraints defined in the
 the evaluation function created by the \textbf{\textit{Evaluator}} object, all 
 the while saving the results using the \textbf{\textit{BackEnd}} class. 
 
-In the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}, I included a tests 
+In the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}, I include a tests 
 directory that contains unit tests for all methods in the classes described 
 above. 
 
@@ -603,7 +605,8 @@ above.
 % python rollo -i square.json -p max 
 % checkpoint.pkl 
 There are two ways to install \gls{ROLLO}.
-First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{pip install rollo}.
+First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{pip install rollo}
+\cite{chee_rollo_nodate}.
 Second, a user can download the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}
 and install it from source. 
 
@@ -617,21 +620,34 @@ The optional argument is the checkpoint file (\texttt{-c}).
 Thus, the structure of a command line input for running \gls{ROLLO} is: 
 
 \noindent
-\texttt{python rollo -i <input file name> -c <checkpoint file name>}
+\texttt{rollo -i <input file name> -c <checkpoint file name>}
 
 The checkpoint file holds the results from the \gls{ROLLO} simulation and also acts 
 as a restart file. 
 Thus, if a \gls{ROLLO} simulation ends prematurely, the checkpoint file can be used 
 to restart the code from the most recent population and continue the simulation. 
+The user must include each evaluator software's input script template 
+and optional output script in the same directory as the \gls{ROLLO} input file. 
 
-\subsection{Running ROLLO in Parallel}
+\subsection{ROLLO parallelization for High Performance Computers}
 \label{sec:rollo_parallel}
+The \textit{mpi\_evals} option is specially created for supercomputer 
+parallelization, particularly the BlueWaters supercomputer \cite{ncsa_about_2017}.
+The \texttt{multiprocessing\_on\_dill} Python module only parallelizes the \gls{ROLLO}
+simulation across one BlueWaters node, thus, to enable parallelization across 
+multiple BlueWaters nodes, the \texttt{mpi4py} Python module is used. 
+However, the user must ensure that the nuclear evaluation software does not 
+utilize MPI for parallelization. 
+I had to recompile OpenMC without MPI to successfully use the 
+\textit{mpi\_evals} option.
+Therefore, \textit{mpi\_evals} uses MPI to run each nuclear software evaluation
+in parallel on different BlueWaters nodes. 
 
 \subsection{\gls{ROLLO} Results Analysis}
 The \textbf{\textit{BackEnd}} class manages results from each \gls{ROLLO} simulation. 
 \textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, which 
 is saved as \texttt{checkpoint.pkl} in the same directory as the input file. 
-The checkpoint file can then be reloaded into a Jupyter notebook and organized 
+The checkpoint file can be loaded into a Jupyter notebook and organized 
 to produce desired plots. 
 Examples of \gls{ROLLO} results analysis can be found in the \gls{ROLLO} documentation 
 \cite{chee_arfcrollo_2021}. 
@@ -643,10 +659,13 @@ The generation and individual values are indexed by zero.
 For example, the directory containing files associated with an OpenMC run for 
 the tenth individual in the genetic algorithm's third generation will be named: 
 \texttt{openmc\_2\_9}.
+If the \texttt{keep\_files} parameter in the \texttt{evaluators} section of the 
+input file is set false, \gls{ROLLO} will delete each directory once it 
+extracts the fitness values. 
 
 \section{Summary}
-This chapter described the \acrfull{ROLLO} framework developed for the
-proposed work. 
+This chapter described the \acrfull{ROLLO} framework developed as
+preliminary work for the proposed PhD scope.
 \gls{ROLLO} is a Python package that applies evolutionary algorithm 
 optimization techniques to nuclear reactor design using the \acrfull{DEAP} 
 module, OpenMC, and Moltres. 
