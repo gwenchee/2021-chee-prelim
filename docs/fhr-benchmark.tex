@@ -62,7 +62,7 @@ electric power \cite{varma_ahtr_2012}.
 \begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{reactor-schematic.png} 
-    \caption{\acrlong{AHTR} schematic (left) and vessel (right) reproduced from
+    \caption{\acrfull{AHTR} schematic (left) and vessel (right) reproduced from
     \cite{noauthor_fluoride_nodate}.}
     \label{fig:reactor-schematic}
 \end{figure}
@@ -96,12 +96,9 @@ Figure \ref{fig:ahtr-fuel-assembly} shows a detailed 2D view of the
                 \draw[ thick,-latex] (0,0) -- (1.3,1.3) node[anchor=south west] {$z$};
                \tkzText[above](-0.5,1){}
                \end{tikzpicture} 
-    \caption{\acrlong{AHTR} fuel assembly with 18 fuel plates arranged in 
+    \caption{\acrfull{AHTR} fuel assembly with 18 fuel plates arranged in 
     three diamond-shaped sectors, with a central Y-shaped and external channel 
-    graphite structure. Blue: FliBE coolant in between fuel assemblies and plates, 
-    and in the control rod slot, Gray: graphite structural components, 
-    Red: graphite fuel plank, Pink: graphite spacers, Green: graphite matrix 
-    with embedded TRISO particles.}
+    graphite structure.}
     \label{fig:ahtr-fuel-assembly}
 \end{figure}
 The hexagonal fuel assembly consists of eighteen fuel-containing graphite planks 
@@ -130,7 +127,7 @@ represented by periodic boundary conditions, as seen in Figure \ref{fig:bc}.
        \tkzText[above](-0.5,0){}
        \end{tikzpicture} 
     \caption{Visualization of periodic boundary conditions for a single fuel 
-    assembly in the \gls{AHTR}, reproduced from \cite{noauthor_fluoride_nodate}.}
+    assembly in the \acrfull{AHTR}, reproduced from \cite{noauthor_fluoride_nodate}.}
     \label{fig:bc}
 \end{figure}
 
@@ -155,8 +152,8 @@ Fuel stripes line the upper and lower sides of each graphite fuel plank.
                 \draw[ thick,-latex] (0,0) -- (1.3,1.3) node[anchor=south west] {$z$};
                \tkzText[above](-0.5,1){}
                \end{tikzpicture} 
-    \caption{\acrlong{AHTR}'s fuel plank, with the magnification of 
-    a spacer and segment of the fuel stripe with embedded TRISO particles.}
+    \caption{\acrfull{AHTR}'s fuel plank, with the magnification of 
+    a spacer and segment of the fuel stripe with embedded \gls{TRISO} particles.}
     \label{fig:ahtr-fuel-plank}
 \end{figure}
 Each fuel stripe contains a graphite matrix filled with a cubic lattice of 
@@ -205,10 +202,14 @@ displaces the \gls{FLiBe} that occupies the slot
 
 \section{Benchmark Phase I Specifications}
 \label{sec:phase1}
-The \gls{FHR} benchmark Phase I consists of two subphases.
-First, a steady-state 2D model (Phase I-A) and depletion of one \gls{FHR} fuel 
-assembly (Phase I-B).
-The benchmark required the following results for Phases I-A and I-B:
+The \gls{FHR} benchmark Phase I consists of three subphases.
+First, a steady-state 2D model (Phase I-A), depletion of one 2D \gls{FHR} fuel 
+assembly (Phase I-B), and depletion of one 3D \gls{FHR} fuel assembly 
+(Phase I-C).
+Benchmark organizers have only released Phase I-A and I-B's specifications, thus 
+Phase I-C's specifications will be omitted in this section.
+
+The benchmark requires the following results for Phases I-A and I-B:
 \begin{enumerate}[label=(\alph*)]
     \item $k_{eff}$ (effective multiplication factor)
     \item reactivity coefficients: $\beta_{eff}$, $\alpha_D$ (doppler coefficient), 
@@ -257,7 +258,7 @@ The uncertainty calculations for $FD_i$ and $f_{ave}$:
 OpenMC's \texttt{flux} score is normalized per source particle simulated, resulting 
 in [$\frac{neutrons\ cm}{src}$] units.
 This is an unnatural unit for system analysis, and thus to better compare OpenMC
-results with other codes in the benchmark, I converted flux to 
+results with other software results in the benchmark, I converted flux to 
 [$\frac{neutrons}{cm^2s}$] units using the following equations:  
 \begin{align}
     \Phi_c &= \frac{N \cdot \Phi_o}{V} \\
@@ -348,7 +349,7 @@ and that the depletion performs under the critical spectrum assumption.
 
 \section{Benchmark Phase I Results}
 Several organizations participated in the benchmark with various Monte Carlo
-and Deterministic neutronics codes, such as Serpent \cite{leppanen_serpent_2014}, 
+and Deterministic neutronics software, such as Serpent \cite{leppanen_serpent_2014}, 
 OpenMC \cite{romano_openmc_2013}, and WIMS \cite{lindley_current_2017}. 
 The \gls{UIUC} participated in the benchmark with the OpenMC Monte Carlo code 
 \cite{romano_openmc_2013} and the ENDF/B-VII.1 material library 
@@ -428,12 +429,11 @@ it has a higher enrichment.
 However, Case 6A deviated from expectations with a lower $k_{eff}$ despite an increase 
 in \acrlong{HM} loading. 
 This behavior is due to reduced moderation and worsened fuel 
-utilization brought about by self-shielding. 
-It also demonstrates that an increase in fuel packing fraction does not always 
-correspond with an increased $k_{eff}$. 
+utilization brought about by self-shielding, demonstrating that an increase in 
+fuel packing fraction does not always correspond with an increased $k_{eff}$. 
 
 \subsubsection{Results: Reactivity Coefficients (b)}
-$\beta_{eff}$ increased by 10-20[pcm] for Cases 4A, 4AR, 5A, and 6A compared to
+$\beta_{eff}$ increased by 10--20[pcm] for Cases 4A, 4AR, 5A, and 6A compared to
 reference Case 1A due to the introduction of control rods and poisons that 
 shift the average neutron velocity to higher values, resulting in decreased
 thermal fission and increased fast fission \cite{torabi_neutronic_2018}.
@@ -450,7 +450,7 @@ discretized by one-fifth fuel stripe.
     \centering
     \includegraphics[width=0.52\linewidth]{p1a_c1a_c.png} 
     \includegraphics[width=0.52\linewidth]{p1a_c3a_c.png} 
-    \includegraphics[width=0.52\linewidth]{p1a_6a_c.png} 
+    \includegraphics[width=0.52\linewidth]{p1a_c6a_c.png} 
     \caption{\acrlong{UIUC} results: Normalized Fission Source Distribution [-] 
     per one-fifth fuel stripe for \acrlong{FHR} Benchmark's Phase I-A Case 1A 
     (top), Case 3A (middle), and Case 6A (bottom).}
