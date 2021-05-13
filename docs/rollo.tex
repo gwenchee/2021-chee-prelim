@@ -7,10 +7,10 @@
 % - Realm framework
 % - Coupling to OpenMC and Moltres
 \label{chap:rollo}
-In this chapter, I introduce the \gls{ROLLO} framework developed for the
-proposed work.
+In this chapter, I introduce the \gls{ROLLO} framework developed as preliminary
+work for the PhD work.
 \gls{ROLLO} is a Python package that applies evolutionary algorithm 
-optimization techniques to nuclear reactor design. 
+techniques to optimize nuclear reactor design. 
 Applying evolutionary algorithms to nuclear design problems is not new, as I
 previously discussed in Section \ref{sec:opt}, and available evolutionary algorithm 
 packages can be customized for reactor design optimization problems. 
@@ -29,14 +29,14 @@ facilitate using evolutionary algorithms for reactor design optimization.
 \gls{ROLLO} provides a general genetic algorithm framework, sets up 
 parallelization for the user, and promotes usability with an input file 
 that only exposes mandatory parameters.
-rollo also strives to be effective, flexible, open-source, parallel, reproducible, 
+\gls{ROLLO} also strives to be effective, flexible, open-source, parallel, reproducible, 
 and usable. 
 I briefly summarize how \gls{ROLLO} achieves these goals:  
 \begin{itemize}
     \item Effective: \gls{ROLLO} is well documented, tested, and 
     version-controlled on Github \cite{chee_arfcrollo_2021}.
     \item Flexible: The proposed work aims to utilize \gls{ROLLO} to 
-    explore arbitrary reactor geometries and inhomogeneous fuel distributions. 
+    explore arbitrary reactor geometries and heterogeneous fuel distributions. 
     However, future users might want to utilize \gls{ROLLO} 
     to explore other arbitrary design parameters. Thus, I designed the \gls{ROLLO}
     framework accordingly. The user can vary any imaginable parameter 
@@ -48,8 +48,9 @@ I briefly summarize how \gls{ROLLO} achieves these goals:
     Moltres \cite{lindsay_introduction_2018}) to compute the objective function 
     and constraints. I also provide a simple tutorial for future developers to 
     follow for coupling other nuclear software to \gls{ROLLO}.  
-    \item Parallel: \gls{ROLLO} runs in parallel on \gls{HPC} machines using the 
-    \texttt{mpi4py} Python package \cite{dalcin_mpi_2008}.
+    \item Parallel: Users have the option to run \gls{ROLLO} in parallel using 
+    either the \texttt{multiprocessing} or \texttt{mpi4py} Python packages 
+    \cite{dalcin_mpi_2008}.
     \item Reproducible: Data from every \gls{ROLLO} run saves into a unique, pickled 
     file (pickle is a Python module that serializes Python objects), and all 
     results from this work are available on Github. 
@@ -84,8 +85,8 @@ thermal-hydraulics software fit within the process.
             \draw [arrow] (5) -- node[anchor=east] {yes} (6);
             \draw [arrow] (5) -- ([shift={(0.5cm,0cm)}]5.east)-- node[anchor=west] {no} ([shift={(0.5cm,0cm)}]3.east)--(3);
             \matrix [draw,above right,yshift=10.7cm, xshift=0cm] at (current bounding box.south east) {
-            \node [bbblock,label=right:\textbf{EA: Evolutionary algorithm}] {}; \\
-            \node [boblock,label=right:\textbf{NS: Nuclear software}] {}; \\
+            \node [bbblock,label=right:\textbf{EA: Evolutionary Algorithm}] {}; \\
+            \node [boblock,label=right:\textbf{NS: Nuclear Software}] {}; \\
             };
     \end{tikzpicture}
     \caption{Process of finding optimal solutions for a problem with a 
@@ -107,7 +108,7 @@ Evolutionary algorithm computation uses sophisticated, diverse techniques
 and mechanisms, resulting in even the most well-designed, software frameworks 
 being complicated under the hood. 
 Utilizing an existing evolutionary algorithm framework presents implementation 
-challenges as the user must edit the source code to customize for their 
+challenges as the user must edit the framework's source code to customize for their 
 application and hyperparameters \cite{fortin_deap_2012}. 
 Therefore, a computation framework that gives the user the capability to build 
 custom evolutionary algorithms is ideal for this project.
@@ -188,7 +189,7 @@ Line 3 derives an \texttt{Individual} class from the standard Python list type,
 and defines its fitness attribute to be the newly created \texttt{Objective} object. 
 Lines 5-9 initialize the \gls{DEAP} toolbox, register 
 \texttt{variable\_1} and \texttt{variable\_2} with their upper and lower bounds, 
-and define the \texttt{individual\_creator} function to return an 
+and defines the \texttt{individual\_creator} function to return an 
 \texttt{Individual} initialized with \texttt{variable\_1}, and \texttt{variable\_2}. 
 Lines 10-11 and 14-17 are aliases for initializing individuals and population, 
 specifying variation operators (\texttt{select}, \texttt{mutate}, \texttt{mate}), 
@@ -215,8 +216,6 @@ Then, it enters a generational loop.
 During each iteration, selection, mating, and mutation operators are applied to 
 the population, then, the new individuals are evaluated, the constraints are 
 applied, and the results are saved.
-
-% include code here? 
 
 \section{Nuclear Software}
 Many nuclear software tools, applications, libraries, packages have restricted 
@@ -283,15 +282,15 @@ calculated using the OpenMC evaluator that accepts input parameters:
                 "optimized_variable": ["output1"], 
                 "pop_size": 100, 
                 "generations": 10, 
-                "mutation_probability": 0.5,
-                "mating_probability": 0.5,
-                "selection_operator": {"operator": "selBest", "k": 1},
+                "mutation_probability": 0.23,
+                "mating_probability": 0.46,
+                "selection_operator": {"operator": "selTournament", "k": 15, "tournsize":5},
                 "mutation_operator": {
                     "operator": "mutPolynomialBounded",
-                    "indpb": 0.5,
-                    "eta": 0.5
+                    "indpb": 0.23,
+                    "eta": 0.23
                 },
-                "mating_operator": {"operator": "cxOnePoint"}
+                "mating_operator": {"operator": "cxBlend", "alpha": 0.46}
             }
         }
     \end{minted}
@@ -403,33 +402,39 @@ Thus, for this \gls{ROLLO} simulation, \texttt{output\_1} is constrained to be
 $>= 1.0$ and $< 1.5$. 
 
 \subsection{Algorithm}
-%Selection Operator: Tournament selection Selection pressure, a probabilistic 
-%measure of a chromosome's likelihood of participation in the tournament based 
-%on the participant selection pool size, is easily adjusted by changing the 
-%tournament size, the reason is that if the tournament size is larger, weak 
-%individuals have a smaller chance to be selected, because, if a weak 
-%individual is selected to be in a tournament, there is a higher probability 
-%that a stronger individual is also in that tournament.
-
 In the algorithm section, the user defines all the hyperparameters for the 
 genetic algorithm. 
 The mandatory input parameters include \texttt{optimized\_variable}, 
 \texttt{objective}, \texttt{pop\_size}, and \texttt{generations}.
-The user specifies an \texttt{optimized\_variable}, which must be an output 
-parameter from the evaluators' \texttt{outputs}. 
-The user has the option to maximize or minimize this \texttt{optimized\_variable}
-by defining the \texttt{objective} variable as \texttt{max} or \texttt{min}. 
+The user may define a single or multi objective optimization problem with 
+the \texttt{optimized\_variable} and \texttt{objective} parameters.
+The user specifies a list of \\ \texttt{optimized\_variable}s, which must be
+output parameters from the evaluators' \texttt{outputs}. 
+The user has the option to maximize or minimize each of the 
+\texttt{optimized\_variable}s by defining the \texttt{objective} parameter as 
+a list of \texttt{max} or \texttt{min} values which correspond to the variable 
+order in the \texttt{optimized\_variable} parameter.
 The user must also specify the population size (\texttt{pop\_size}) and number 
 of generations (\texttt{generations}) in the genetic algorithm. 
 
-The optional input parameters include \texttt{mutation\_probability}, 
-\texttt{mating\_probability}, \\ \texttt{selection\_operator}, 
-\texttt{mutation\_operator}, and \texttt{mating\_operator}. 
+The optional input parameters include \texttt{parallel}, 
+\texttt{mutation\_probability}, \\ \texttt{mating\_probability}, 
+\texttt{selection\_operator}, \texttt{mutation\_operator}, 
+and \texttt{mating\_operator}. 
+There are three options for the \texttt{parallel} parameter: \textit{none}, 
+\textit{multiprocessing}, and \textit{mpi\_evals}.
+The \textit{none} option results in ROLLO running without parallelization, and
+the \textit{multiprocessing} option results in ROLLO using the 
+multiprocessing$\_$on$\_$dill Python module to run ROLLO's nuclear software 
+evaluations in parallel.
+The \textit{mpi\_evals} option is specially created for supercomputer 
+parallelization, and will be further discussed in Section \ref{sec:rollo_parallel}.
+
 As mentioned previously in Section \ref{sec:genetic_alg}, it is important to 
 select genetic algorithm hyperparameters that balance the extent of exploration 
 and exploitation.
 The user can define the mutation and mating probability or use default values of 
-0.3 and 0.4, respectively. 
+0.23 and 0.46, respectively. 
 For each operator, the user can choose from a list of operators and define each
 of their required hyperparameters. 
 Table \ref{tab:deap_operators} shows the available operators and their respective 
@@ -456,12 +461,12 @@ hyperparameters.
     \end{tabular}
     \end{table}
 % fill this out properly later. 
-The default selection operator is \texttt{selNSGA2} with a default
-\texttt{k} value, two-thirds the population size. 
+The default selection operator is \texttt{selTournament} with a default
+\texttt{k} value of 15 and \texttt{tournsize} value of 5. 
 The default mutation operator is \texttt{mutPolynomialBounded} with default
-\texttt{eta} and \texttt{indpb} values of 0.3. 
+\texttt{eta} and \texttt{indpb} values of 0.23. 
 The default mating operator is \texttt{cxBlend} with a default \texttt{alpha} 
-of 0.4. 
+of 0.46. 
 Lines 17 to 31 in the example \gls{ROLLO} input file (Figure \ref{fig:rollo-input}) 
 demonstrate \texttt{algorithm} specifications. 
 
@@ -619,6 +624,9 @@ as a restart file.
 Thus, if a \gls{ROLLO} simulation ends prematurely, the checkpoint file can be used 
 to restart the code from the most recent population and continue the simulation. 
 
+\subsection{Running ROLLO in Parallel}
+\label{sec:rollo_parallel}
+
 \subsection{\gls{ROLLO} Results Analysis}
 The \textbf{\textit{BackEnd}} class manages results from each \gls{ROLLO} simulation. 
 \textbf{\textit{BackEnd}} puts all the results in a pickled dictionary, which 
@@ -635,13 +643,6 @@ The generation and individual values are indexed by zero.
 For example, the directory containing files associated with an OpenMC run for 
 the tenth individual in the genetic algorithm's third generation will be named: 
 \texttt{openmc\_2\_9}.
-
-%\subsection{Using rollo on a HPC}
-
-
-%\section{Hyperparameter Search}
-%Hyperparameters are a model configuration argument specified by the developer to 
-%guide the learning process for a specific dataset. 
 
 \section{Summary}
 This chapter described the \acrfull{ROLLO} framework developed for the
