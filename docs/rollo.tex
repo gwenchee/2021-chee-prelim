@@ -605,7 +605,8 @@ above.
 % python rollo -i square.json -p max 
 % checkpoint.pkl 
 There are two ways to install \gls{ROLLO}.
-First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{pip install rollo}
+First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{python -m 
+pip install rollo}
 \cite{chee_rollo_nodate}.
 Second, a user can download the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}
 and install it from source. 
@@ -620,7 +621,7 @@ The optional argument is the checkpoint file (\texttt{-c}).
 Thus, the structure of a command line input for running \gls{ROLLO} is: 
 
 \noindent
-\texttt{rollo -i <input file name> -c <checkpoint file name>}
+\texttt{python -m rollo -i <input file name> -c <checkpoint file name>}
 
 The checkpoint file holds the results from the \gls{ROLLO} simulation and also acts 
 as a restart file. 
