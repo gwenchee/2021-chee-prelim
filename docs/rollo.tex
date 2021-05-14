@@ -49,8 +49,8 @@ I briefly summarize how \gls{ROLLO} achieves these goals:
     and constraints. I also provide a simple tutorial for future developers to 
     follow for coupling other nuclear software to \gls{ROLLO}.  
     \item Parallel: Users have the option to run \gls{ROLLO} in parallel using 
-    either the \texttt{multiprocessing\_on\_dill} or \texttt{mpi4py} Python packages 
-    \cite{dalcin_mpi_2008}.
+    either the \\ \texttt{multiprocessing\_on\_dill} or \texttt{mpi4py} Python 
+    packages \cite{dalcin_mpi_2008}.
     \item Reproducible: Data from every \gls{ROLLO} run saves into a unique, pickled 
     file (pickle is a Python module that serializes Python objects), and all 
     results from this work are available on Github. 
@@ -284,7 +284,7 @@ calculated using the OpenMC evaluator that accepts input parameters:
                 "generations": 10, 
                 "mutation_probability": 0.23,
                 "mating_probability": 0.46,
-                "selection_operator": {"operator": "selTournament", "k": 15, "tournsize":5},
+                "selection_operator": {"operator": "selTournament", "inds": 15, "tournsize":5},
                 "mutation_operator": {
                     "operator": "mutPolynomialBounded",
                     "indpb": 0.23,
@@ -452,9 +452,9 @@ hyperparameters.
     \hline
     \textbf{Operator} & \textbf{Available Options} & \textbf{Hyperparameters} \\ \hline
     \multirow{4}{1cm}{Selection} & \multirow{2}{2cm}{\texttt{selTournament}} & \texttt{tournsize}: no. of individuals in each tournament\\ 
-    & & \texttt{k}: no. of individuals to select \\ \cline{2-3}
-    & \texttt{selNSGA2} & \texttt{k}: no. of individuals to select\\ \cline{2-3}
-    & \texttt{selBest} & \texttt{k}: no. of individuals to select\\ \hline
+    & & \texttt{inds}: no. of individuals to select \\ \cline{2-3}
+    & \texttt{selNSGA2} & \texttt{inds}: no. of individuals to select\\ \cline{2-3}
+    & \texttt{selBest} & \texttt{inds}: no. of individuals to select\\ \hline
     \multirow{2}{1cm}{Mutation} & \multirow{2}{2cm}{\texttt{mutPolynomialBounded}} & \texttt{eta}: crowding degree of the mutation\\  
     && \texttt{indpb}: independent probability for each attribute to be mutated\\ \hline
     \multirow{3}{1cm}{Mating} & \texttt{cxOnePoint} & -\\ \cline{2-3}
@@ -464,7 +464,7 @@ hyperparameters.
     \end{table}
 % fill this out properly later. 
 The default selection operator is \texttt{selTournament} with a default
-\texttt{k} value of 15 and \texttt{tournsize} value of 5. 
+\texttt{inds} value of 15 and \texttt{tournsize} value of 5. 
 The default mutation operator is \texttt{mutPolynomialBounded} with default
 \texttt{eta} and \texttt{indpb} values of 0.23. 
 The default mating operator is \texttt{cxBlend} with a default \texttt{alpha} 
