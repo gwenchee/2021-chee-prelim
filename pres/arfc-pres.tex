@@ -1,0 +1,195 @@
+%        File: arfc-beamer.tex
+%     Created: Sun May 5 10:00 PM 2013 C
+%
+
+
+%\documentclass[11pt,handout]{beamer}
+\documentclass[9pt]{beamer}
+\usetheme[white]{Illinois}
+\title[Short Title]{Fluoride-Salt-Cooled High-Temperature Reactor Design Optimization with Evolutionary Algorithms \\ Preliminary Exam}
+\author[Your Name]{Gwendolyn J.Y. Chee}
+\date[09.13.2021]{September 13, 2021}
+\institute{
+Dept. of Nuclear, Plasma and Radiological Engineering \\ University of Illinois at Urbana-Champaign
+}
+
+%\usepackage{bbding}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{booktabs} % nice rules for tables
+\usepackage{microtype} % if using PDF
+\usepackage{bigints}
+\usepackage{minted}
+\usepackage{subfigure}
+
+\newcommand{\Cyclus}{\textsc{Cyclus}\xspace}%
+\newcommand{\Cycamore}{\textsc{Cycamore}\xspace}%
+\newcommand{\deploy}{\texttt{d3ploy}\xspace}%
+\newcommand{\units}[1] {\:\text{#1}}%
+\newcommand{\SN}{S$_N$}%{S$_\text{N}$}%{$S_N$}%
+\DeclareMathOperator{\erf}{erf}
+%I need some complimentary error funcitons... 
+\DeclareMathOperator{\erfc}{erfc}
+%page numbers
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{caption}[numbered]
+%Those icons in the references are terrible looking
+\setbeamertemplate{bibliography item}[text]
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows, decorations, shapes}
+
+\usetikzlibrary{shapes.geometric,arrows}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=blue!30]
+\tikzstyle{object} = [ellipse, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\definecolor{illiniblue}{HTML}{B1C6E2}
+\definecolor{illiniorange}{HTML}{f8c2a2}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{oblock} = [rectangle, draw, fill=illiniorange, 
+text width=15em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{bblock} = [rectangle, draw, fill=illiniblue, 
+text width=15em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\usepackage{tabularx}
+\newcolumntype{b}{>{\hsize=1.0\hsize}X}
+\newcolumntype{s}{>{\hsize=.5\hsize}X}
+\newcolumntype{m}{>{\hsize=.75\hsize}X}
+\newcolumntype{x}{>{\hsize=.25\hsize}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\def\arraystretch{1}
+%%%% Acronym support
+\usepackage{multirow}
+\usepackage{graphicx,subfigure}
+
+\usepackage[acronym,toc]{glossaries}
+\include{acros}
+
+\makeglossaries
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+
+%try to get rid of header on title page\dots
+\makeatletter
+    \newenvironment{withoutheadline}{
+        \setbeamertemplate{headline}[default]
+        \def\beamer@entrycode{\vspace*{-\headheight}}
+    }{}
+\makeatother
+
+% add slide numbers
+\makeatother
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+    \rightline{\insertframenumber{} / \inserttotalframenumber\hspace*{1ex}}
+  }%
+  \vskip0pt%
+}
+\makeatletter
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% From uw-beamer Here's a handy bit of code to place at 
+%% the beginning of your presentation (after \begin{document}):
+\newcommand*{\alphabet}{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}
+\newlength{\highlightheight}
+\newlength{\highlightdepth}
+\newlength{\highlightmargin}
+\setlength{\highlightmargin}{2pt}
+\settoheight{\highlightheight}{\alphabet}
+\settodepth{\highlightdepth}{\alphabet}
+\addtolength{\highlightheight}{\highlightmargin}
+\addtolength{\highlightdepth}{\highlightmargin}
+\addtolength{\highlightheight}{\highlightdepth}
+\newcommand*{\Highlight}{\rlap{\textcolor{HighlightBackground}{\rule[-\highlightdepth]{\linewidth}{\highlightheight}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%--------------------------------%%
+\begin{withoutheadline}
+\frame{
+  \titlepage
+}
+\end{withoutheadline}
+
+%%--------------------------------%%
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Introduction}
+\subsection{Motivation}
+\input{intro_motivation}
+
+\subsection{Objectives}
+\input{intro_objectives}
+
+\section{Background}
+\subsection{Fluoride-Salt-Cooled High-Temperature Reactor}
+\input{bg_fhr}
+\subsection{Additive Manufacturing}
+\input{bg_am}
+\subsection{Nuclear Reactor Design Optimization}
+\input{bg_opt}
+\subsection{Evolutionary Algorithms}
+\input{bg_ea}
+\subsection{Background Summary}
+\input{bg_summary}
+
+\section{Fluoride-Salt-Cooled High-Temperature Reactor Benchmark}
+\subsection{Benchmark Description}
+\input{bm_descr}
+\subsection{FHR Benchmark Advanced High Temperature Reactor Design}
+\input{bm_ahtr}
+\subsection{Benchmark Phase I Results}
+\input{bm_phase1}
+
+\section{Reactor evOLutionary aLgorithm Optimizer (ROLLO)}
+\subsection{ROLLO objectives}
+\input{rollo_obj}
+\subsection{Evolutionary Algorithm Driver}
+\input{rollo_ea}
+\subsection{ROLLO Input File}
+\input{rollo_input}
+\subsection{ROLLO Software Architecture}
+\input{rollo_sw}
+
+\section{AHTR Optimization Preliminary Work}
+\subsection{ROLLO Optimization: AHTR Fuel Slab}
+\input{prelim_opt}
+\subsection{AHTR Multiphysics Model Preliminary Work}
+\input{prelim_multiphysics}
+
+\section{Future Work and Proposed Simulations}
+\subsection{AHTR Model Development}
+\input{future_ahtr}
+\subsection{ROLLO Optimization}
+\input{future_rollo}
+\subsection{Conclusion}
+\input{future_concl}
+
+
+\input{acks}
+%%--------------------------------%%
+%%--------------------------------%%
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \bibliographystyle{plain}
+  {\footnotesize \bibliography{../docs/2021-chee-prelim.bib} }
+
+\end{frame}
+
+%%--------------------------------%%
+
+
+\end{document}
+
+
+
