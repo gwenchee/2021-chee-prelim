@@ -43,7 +43,9 @@ The periodic surfaces are: 1-3, 2-4.
             \textcolor{fhrblack}{$\blacksquare$} & TRISO particle 
 
             \end{tabular}}}
-    \caption{Straightened \acrfull{AHTR} fuel slab.}
+    \caption{Straightened \acrfull{AHTR} fuel slab, with periodic surface: 1-3, 2-4. 
+    Original slanted fuel slabs can be seen in Figures \ref{fig:ahtr-fuel-assembly} 
+    and \ref{fig:ahtr-fuel-plank}.}
     \label{fig:straightened_slab}
 \end{figure}
 The slab has $27.1 \times 3.25 \times 1.85\ cm^3$ dimensions with reflective 
@@ -296,8 +298,9 @@ experiments' scatter points are opaque.
     \caption{Hyperparameters search's results for all 40 experiments (coarse 
     and fine). I plotted the hyperparameters against: a,b,c control parameters, 
     each experiment's final generation $k_{eff max}$, and final generation 
-    $\overline{k_{eff}}$ with a third dimension representing each experiment's final 
-    population's $\overline{k_{eff}}$. Coarse experiments' (0 to 24) scatter points 
+    $\overline{k_{eff}}$ with a third color dimension representing each experiment's final 
+    population's $\overline{k_{eff}}$ (color bar representing the $k_{eff}$ values 
+    provided on the right side of the figure). Coarse experiments' (0 to 24) scatter points 
     are $50\%$ transparent, while the fine experiments' (24 to 39) scatter points 
     are opaque. }
     \label{fig:input_hyperparameters_sens}
@@ -377,7 +380,7 @@ the highest $\overline{k_{eff}}$ in its final generation.
 hyperparameter set, shown in Table \ref{tab:topfive}, with 
 center-peaking packing fraction distribution of $max(k_{eff}) = 1.40519$. 
 Experiment 39's $k_{eff max}$ exceeds the original straightened \gls{AHTR} 
-configuration's $k_{eff}$ by $\sim2000$pcm, proving that optimizing
+configuration's $k_{eff}$ by $\sim2000$pcm, demonstrating that optimizing
 inhomogenous fuel distributions enables better neutronics. 
 Figure \ref{fig:triso_distribution_sine_39} shows the packing fraction distribution 
 that produced $k_{eff max} = 1.40519$. 
@@ -462,7 +465,7 @@ the fast neutrons resulting in higher thermal flux, leading to more
 fission occurring and a higher $k_{eff}$. 
 
 I also observed that \gls{TRISO} particle packing fraction peaks in the center 
-of the slab, proving that if the optimization problem focuses purely on the 
+of the slab, showing that if the optimization problem focuses purely on the 
 slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the 
 middle. 
 Center-peaking fuel density is nonideal for other key reactor core 
@@ -485,7 +488,8 @@ couple Moltres with \gls{ROLLO} for \gls{AHTR} multiphysics optimization.
 
 The benefits of Moltres over other multiphysics software, RELAP5 and NESTLE 
 (used previously for \gls{AHTR} modeling and described in Section 
-\ref{sec:previous_ahtr}), for coupled neutronics and thermal-hydraulics simulation: 
+\ref{sec:previous_ahtr}) for the purposes of this work, for coupled neutronics 
+and thermal-hydraulics simulation are: 
 \begin{itemize}
   \item Moltres supports up to 3-D meshes, solving neutron diffusion and 
   thermal-hydraulics \glspl{PDE} simultaneously on the same mesh 

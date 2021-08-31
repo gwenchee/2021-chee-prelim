@@ -62,7 +62,8 @@ Figure \ref{fig:genetic_alg} from Chapter \ref{chap:lit-review} outlines the
 evolutionary algorithm iterative problem solving process. 
 I modified Figure \ref{fig:genetic_alg} to produce Figure 
 \ref{fig:genetic_alg_nuclear}, which depicts how the nuclear transport and 
-thermal-hydraulics software fit within the process. 
+thermal-hydraulics software fit within \gls{ROLLO}'s evolutionary algorithm 
+optimization process. 
 \begin{figure}[]
     \centering
     \begin{tikzpicture}[node distance=1.7cm]
@@ -93,7 +94,7 @@ thermal-hydraulics software fit within the process.
     genetic algorithm. Nuclear software evaluates each new population.}
     \label{fig:genetic_alg_nuclear}
 \end{figure}
-Therefore, \gls{ROLLO} initially reads and validates the JSON input 
+\gls{ROLLO} initially reads and validates the JSON input 
 file, initializes the \gls{DEAP} \cite{fortin_deap_2012} genetic algorithm 
 hyperparameters and operators, and finally runs the genetic algorithm following 
 the flow chart in Figure \ref{fig:genetic_alg_nuclear}, in which the nuclear 
@@ -308,6 +309,8 @@ For each control variable, the user must specify its minimum and maximum values.
 For example, Lines 2 to 5 in Figure \ref{fig:rollo-input} demonstrate that the 
 control variables, \texttt{variable1} and \texttt{variable2}, 
 will be varied from 0 to 10 and -1 to 0, respectively. 
+For example, in traditional reactor design, a control variable might be fuel 
+enrichment. 
 
 \subsection{Evaluators}
 Evaluators are the nuclear software \gls{ROLLO} utilizes to calculate objective functions. 
@@ -402,6 +405,8 @@ and \texttt{constrained\_val}s as in Line 15 of the \gls{ROLLO} input file
 (Figure \ref{fig:rollo-input}). 
 Thus, for this \gls{ROLLO} simulation, \texttt{output\_1} is constrained to be 
 $>= 1.0$ and $< 1.5$. 
+For example, in reactor design, a constraint might be maximum temperature in the 
+core.
 
 \subsection{Algorithm}
 In the algorithm section, the user defines all the hyperparameters for the 
@@ -462,7 +467,6 @@ hyperparameters.
     & \texttt{cxBlend} & \texttt{alpha}: Extent of the interval in which the new values can be drawn for each attribute on both side of the parents’ attributes\\ \hline
     \end{tabular}
     \end{table}
-% fill this out properly later. 
 The default selection operator is \texttt{selTournament} with a default
 \texttt{inds} value of 15 and \texttt{tournsize} value of 5. 
 The default mutation operator is \texttt{mutPolynomialBounded} with default
@@ -575,15 +579,15 @@ drives \gls{ROLLO}'s execution from beginning to end.
 The \textbf{\textit{Executor}} calls \textbf{\textit{InputValidation}} to 
 parse the input file to ensure that the user defined all mandatory parameters
 and used the correct formatting.
-Next, it initializes an \textbf{\textit{Evaluator}} object based on the 
+Next, it initializes an \textbf{\textit{Evaluation}} object based on the 
 \texttt{evaluators} specifications in the input file. 
-It uses the \textbf{\textit{Evaluator}} object to create a function that will 
+It uses the \textbf{\textit{Evaluation}} object to create a function that will 
 run each evaluator software with the desired input parameters and return the 
 output parameters calculated by the evaluator software. 
 Next, it uses the \textbf{\textit{ToolboxGenerator}} to create an initialized 
 DEAP toolbox object based on the input file's \texttt{algorithm} specifications. 
 The \textbf{\textit{ToolboxGenerator}} object accepts the 
-\textbf{\textit{Evaluator}} object and registers it as the toolbox's `evaluate' 
+\textbf{\textit{Evaluation}} object and registers it as the toolbox's `evaluate' 
 tool.  
 Then, it initializes a \textbf{\textit{Constraints}} object to contain 
 \texttt{constraints} specified in the input file. 
@@ -594,7 +598,7 @@ Finally, the \textbf{\textit{Executor}} class uses a method in the
 \textbf{\textit{Algorithm}} object to run a general genetic algorithm with 
 hyperparameters from the \gls{DEAP} toolbox, apply constraints defined in the 
 \textbf{\textit{Constraints}} object, and calculate objective functions using 
-the evaluation function created by the \textbf{\textit{Evaluator}} object, all 
+the evaluation function created by the \textbf{\textit{Evaluation}} object, all 
 the while saving the results using the \textbf{\textit{BackEnd}} class. 
 
 In the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}, I include a tests 
@@ -608,8 +612,8 @@ There are two ways to install \gls{ROLLO}.
 First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{python -m 
 pip install rollo}
 \cite{chee_rollo_nodate}.
-Second, a user can download the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}
-and install it from source. 
+Second, a user can download the \gls{ROLLO} repository \cite{chee_arfcrollo_2021}
+from Github and install it from source. 
 
 \gls{ROLLO} is run from the command line interface. 
 A user should first set up the \gls{ROLLO} JSON input file and evaluator 

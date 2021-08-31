@@ -4,7 +4,7 @@ Chapter \ref{chap:lit-review} demonstrated the need for this work with a summary
 of how additive manufacturing of nuclear reactor core components frees complex 
 reactor geometries from traditional manufacturing constraints and enables 
 reactor designers to reexamine reactor core design optimization.
-The literature review (Chapter \ref{chap:lit-review}) also concluded that 
+The literature review (Chapter \ref{chap:lit-review}) also showed that 
 stochastic evolutionary algorithm optimization methods could find global 
 optimums for reactor design problems in the vast exploration design space 
 enabled by additive manufacturing. 
@@ -21,15 +21,16 @@ generating group constants for Moltres.
 
 Based on the preliminary work conducted, this chapter proposes 
 future simulations categorized into two groups: \gls{AHTR} development and 
-\gls{ROLLO} optimization. 
+\gls{AHTR} optimization with \gls{ROLLO}. 
 The proposed work aims to address \gls{AHTR} modeling challenges further and 
 demonstrate using \gls{ROLLO} for multi-objective \gls{AHTR} 
 optimization of arbitrary geometries and fuel distribution. 
 For \gls{AHTR} development, I propose the following simulations: 
 \begin{itemize}
-    \item \gls{AHTR} 3D full core neutronics OpenMC simulation
+    \item \gls{AHTR} 3D full core neutronics OpenMC simulation (Benchmark's Phase I-C and 
+    Preliminary Phase II)
     \item \gls{AHTR} fuel slab and one-third fuel assembly multiphysics 
-    Moltres simulation
+    Moltres simulation (Benchmark's Preliminary Phase III)
 \end{itemize}
 For \gls{ROLLO} optimization, I propose the following \gls{ROLLO} simulations: 
 \begin{itemize}
@@ -151,7 +152,7 @@ each objective.
     \hline 
     \textbf{Objective}& \textbf{Quantification}  \\
     \hline
-    Best neutronics & Maximize $k_{eff}$\\ 
+    Maximize fuel utilization & Maximize $k_{eff}$\\ 
     Maximize heat transfer & Maximize $\phi_{total}$ in areas along FLiBe coolant \\
     Minimize power peaking factor & Minimize $P_{high}-P_{low}$ \\
     \hline

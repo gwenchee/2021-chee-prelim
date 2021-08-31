@@ -195,7 +195,6 @@ The integral options consists of $Eu_2O_3$ homogenously mixed with the graphite
 fuel plank (including the graphite in fuel stripes matrix and plank ends 
 indented to structural sides, but excluding the graphite in spacers and 
 graphite in TRISO particles).
-
 The \gls{MHC} control rod inserts into the Y-shaped control rod slot where it 
 displaces the \gls{FLiBe} that occupies the slot 
 (shown in Figure \ref{fig:ahtr-fuel-assembly}). 
@@ -203,8 +202,8 @@ displaces the \gls{FLiBe} that occupies the slot
 \section{Benchmark Phase I Specifications}
 \label{sec:phase1}
 The \gls{FHR} benchmark Phase I consists of three subphases.
-First, a steady-state 2D model (Phase I-A), depletion of one 2D \gls{FHR} fuel 
-assembly (Phase I-B), and depletion of one 3D \gls{FHR} fuel assembly 
+First, a steady-state 2D model (Phase I-A), next depletion of one 2D \gls{FHR} fuel 
+assembly (Phase I-B), and finally depletion of one 3D \gls{FHR} fuel assembly 
 (Phase I-C).
 Benchmark organizers have only released Phase I-A and I-B's specifications, thus 
 Phase I-C's specifications will be omitted in this section.
@@ -212,9 +211,9 @@ Phase I-C's specifications will be omitted in this section.
 The benchmark requires the following results for Phases I-A and I-B:
 \begin{enumerate}[label=(\alph*)]
     \item $k_{eff}$ (effective multiplication factor)
-    \item reactivity coefficients: $\beta_{eff}$, $\alpha_D$ (doppler coefficient), 
-    $\alpha_{T, FliBe}$ (\gls{FLiBe} temperature coefficient), $\alpha_{M}$ 
-    (moderator temperature coefficient)
+    \item reactivity coefficients: $\beta_{eff}$ (effective delayed neutron fraction), 
+    $\alpha_D$ (doppler coefficient), $\alpha_{T, FliBe}$ (\gls{FLiBe} temperature 
+    coefficient), $\alpha_{M}$ (moderator temperature coefficient)
     \item tabulated fission source distribution by one-fifth fuel stripe
     \item $\bar{\phi_1}, \bar{\phi_2}, \bar{\phi_3}$ (neutron flux averaged over 
     the whole model tabulated in three coarse energy groups)
@@ -287,7 +286,7 @@ I calculated reactor power based on the given reference specific power
     \intertext{where}
     V_F &= \mbox{volume of fuel [$cm^3$]} \nonumber \\ 
     &= \frac{4}{3} \pi r_f^3 \times N_{total} \nonumber \\
-    r_f &= \mbox{radius of fuel kernel within TRISO particle} \nonumber\\
+    r_f &= \mbox{radius of fuel kernel within TRISO particl [cm]} \nonumber\\
     N_{total} &= \mbox{total no. of TRISO particles in fuel assembly} \nonumber \\ 
     &= 101 \times 210 \times 4 \times 2 \times 6 \times 3 \nonumber\\ 
     \rho_F &= \mbox{density of fuel [$g/cc$]} \nonumber \\
@@ -343,21 +342,12 @@ Table \ref{tab:phase1a-cases} describes each case.
 \subsection{Phase I-B Specifications}
 For Phase I-B, the benchmark specifies that each participant must produce 
 depletion results for three cases: 1B, 4B, and 7B. 
-These are the same as cases 1A, 4A, and 7A, but with depletion steps added. 
+These are the same as cases 1A, 4A, and 7A (described in Table \ref{tab:phase1a-cases}), 
+but with depletion steps added. 
 The benchmark assumes that depletion occurs only in the fuel and burnable poisons 
 and that the depletion performs under the critical spectrum assumption. 
 
 \section{Benchmark Phase I Results}
-Several organizations participated in the benchmark with various Monte Carlo
-and Deterministic neutronics software, such as Serpent \cite{leppanen_serpent_2014}, 
-OpenMC \cite{romano_openmc_2013}, and WIMS \cite{lindley_current_2017}. 
-The \gls{UIUC} participated in the benchmark with the OpenMC Monte Carlo code 
-\cite{romano_openmc_2013} and the ENDF/B-VII.1 material library 
-\cite{chadwick_endf/b-vii.1_2011}.
-The \gls{UIUC} team consists of myself and my advisor, Dr. Kathryn Huff. 
-I contributed Methodology, Software, Validation, Formal Analysis, and 
-Visualization, while Dr. Huff contributed Resources, Supervision, and Funding 
-acquisition.
 The \texttt{fhr-benchmark} Github repository contains all the results submitted 
 by \gls{UIUC} for the \gls{FHR} benchmark \cite{chee_arfcfhr-benchmark_2021}. 
 The benchmark used a phased blind approach -- participants were asked to 

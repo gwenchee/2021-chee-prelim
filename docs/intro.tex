@@ -81,8 +81,11 @@ This proposed work will consider the \gls{MSR} and \gls{VHTR} systems.
 \gls{MSR} systems produce fission power in a circulating molten salt fuel mixture. 
 It has a closed fuel cycle tailored to the efficient utilization of plutonium 
 and minor actinides. 
-Molten fluoride salts have very low vapor pressure, which reduces stress on the 
-system. 
+Researchers recommend molten fluoride salts because they have high uranium solubility, 
+chemical stability, very low vapor pressure even at high temperatures, good heat 
+transfer properties, resistance against radiation damage, and are inert to common
+structural materials \cite{rosenthal_molten-salt_1970}.  
+Molten fluoride salts' low vapor pressure ensures reduced stress on the system. 
 MSR systems also incorporate inherent system safety with fail-safe drainage, 
 passive cooling, and a low inventory of volatile fission products in the fuel. 
 \gls{MSR} systems closed fuel cycle and excellent waste burndown performance 
@@ -97,7 +100,7 @@ their large number of subsystems \cite{gif_technology_2002}.
 high outlet temperature for high-temperature heat applications, such as hydrogen 
 production. 
 Graphite-moderated and helium-cooled, \glspl{VHTR} use \gls{TRISO} fuel
-which easily withstands high burnup and temperature.  
+which withstands high burnup and temperature \cite{gif_technology_2002}.  
 \gls{VHTR} systems' high hydrogen production efficiency, high safety and 
 reliability, and inherent fuel and reactor safety features make it highly 
 ranked in economics. 
@@ -105,18 +108,21 @@ An open fuel cycle results in \gls{VHTR} systems' ranking well in proliferation
 resistance and physical protection and neutrally in sustainability 
 \cite{gif_technology_2002}. 
 
-In the proposed PhD work, I will explore the \gls{FHR} concept, which 
-combines the best aspects of \gls{MSR} and \gls{VHTR} technologies. 
+In the proposed PhD work, I will work on modeling and optimization of the 
+\gls{FHR} concept, which combines the best aspects of \gls{MSR} and \gls{VHTR} 
+technologies. 
 \glspl{FHR} use high-temperature coated-particle fuel (similar to the \glspl{VHTR}) 
 and a low-pressure liquid fluoride-salt coolant (similar to the \glspl{MSR})
 \cite{forsberg_fluoride-salt-cooled_2012,facilitators_fluoride-salt-cooled_2013}.
 The proposed work focuses on a prismatic \gls{FHR} design with hexagonal fuel 
 assemblies consisting of \gls{TRISO} fuel particles embedded in planks, i.e., 
 the \gls{AHTR} design.
-To address and further understand the technical challenges associated with the 
-\gls{AHTR} design, such as the \emph{multiply heterogeneous} \gls{AHTR} fuel, 
-I will participate in the \gls{OECD}-\gls{NEA}'s \gls{FHR} benchmarking 
-exercise.
+The \gls{AHTR} design has \emph{triple heterogeneity} due to the complex fuel 
+geometry resulting in complex reactor physics and significant modeling challenges 
+\cite{petrovic_benchmark_2021}. 
+To further understand and address the technical challenges associated with the 
+\gls{AHTR} design, I will participate in the \gls{OECD}-\gls{NEA}'s \gls{FHR} 
+benchmarking exercise \cite{petrovic_benchmark_2021}.
 
 In the next section of the proposed PhD work, I will explore the impact of 
 additive manufacturing technology advancements on reactor geometry
@@ -127,18 +133,18 @@ has advanced and altered the manufacturing and design of engineered hardware
 The automotive and aircraft industries have successfully fabricated car and 
 airplane components with key additive manufacturing technologies that are 
 relevant to nuclear reactor core structures \cite{murr_frontiers_2016}.  
-For example, Boeing successfully used additive manufacturing to reduce weight 
-in the 787 Dreamliner \cite{noauthor_printed_2017} and SES-15 spacecraft 
-\cite{noauthor_boeing_nodate}. 
 The highly-regulated aerospace industry's successful additive manufacturing 
-applications shows promise for the also highly-regulated nuclear industry.  
+applications, such as the Boeing 787 Dreamliner's 3-D printed structural titanium 
+parts that reduced titanium alloy required while maintaining structural integrity
+\cite{noauthor_printed_2017}, show promise for applying additive manufacturing 
+technologies to the also highly-regulated nuclear industry.  
 Using additive manufacturing to fabricate nuclear reactor components could 
 drastically reduce cost and timelines, and increase safety and performance by 
 tailoring local material properties and redesigning for optimal geometries
 \cite{simpson_considerations_2019}. 
 
 With further advancement of additive manufacturing technologies, a reactor 
-core could be 3D printed in the near future. 
+core could be 3D printed within the next decade. 
 \gls{ORNL} leads this initiative through the 2019 \gls{TCR} Demonstration 
 Program. 
 The \gls{TCR} program will leverage recent scientific achievements in advanced 
@@ -183,43 +189,47 @@ Genetic algorithms imitate natural selection to evolve solutions by
 \cite{renner_genetic_2003}: 
 \begin{enumerate}
     \item maintaining a population of solutions
-    \item allowing fitter solutions to reproduce
-    \item letting lesser fit solutions die off, resulting in final solutions that are 
+    \item allowing more optimal solutions to reproduce
+    \item letting less optimal solutions die off, resulting in final solutions that are 
     better than the previous generations
 \end{enumerate} 
 
 To enable the use of evolutionary algorithms for reactor design optimization,
-in this preliminary work I designed an optimization tool that 
-uses the evolutionary algorithm optimization technique with nuclear transport and 
-thermal-hydraulics software. 
-In this preliminary work, I demonstrate using the optimization tool to maximize 
-$k_{eff}$ in an \gls{AHTR} fuel slab by varying fuel distribution. 
+I designed an optimization tool that uses the evolutionary algorithm optimization 
+technique with neutron transport and thermal-hydraulics software to find flexible, 
+arbitrary, and optimal reactor geometries enabled by additive manufacturing technology. 
+For proof of concept in this preliminary work, I demonstrate using the 
+optimization tool to maximize $k_{eff}$ in an \gls{AHTR} fuel slab by varying 
+fuel distribution. 
 In the proposed PhD scope, I will further demonstrate using evolutionary 
 algorithms for multi-objective \gls{AHTR} optimization of arbitrary geometries 
 and fuel distribution, which are now possible with additive manufacturing 
 technology. 
 
 \section{Objectives}
-I developed the proposed PhD scope's main objectives based on further understanding 
-the \gls{AHTR} design through neutronics and thermal-hydraulics modeling, and 
-leveraging artificial intelligence tools with validated nuclear transport and 
-thermal-hydraulics software to create an open-source tool which 
-enables nuclear reactor design optimization with arbitrary parameters.
+My proposed PhD scope is split into two components. 
+First, I aim to further our understanding of the \gls{AHTR} design's complexities 
+through neutronics and thermal-hydraulics modeling. 
+Second, I aim to leverage evolutionary algorithms to create an open-source tool 
+which enables nuclear reactor design optimization for non-conventional reactor 
+geometries and fuel distributions. 
+I will demonstrate the tool through flexible \gls{AHTR} optimization problems.  
 The proposed work's objectives are: 
 
 \vspace{0.2cm} 
 \noindent
 \begin{enumerate}[label=\textbf{\Roman*}]
-\item \textbf{Model the \gls{FHR} with established nuclear transport software}.
-To demonstrate success in modeling the \gls{FHR} with nuclear transport before 
+\item \textbf{Model the \gls{FHR} with established neutron transport software, OpenMC}.
+To demonstrate success in neutron transport modeling of the \gls{FHR} before 
 using the optimization tool, I will participate in the \gls{OECD} \gls{NEA}'s 
 \gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
+I will use the OpenMC neutron transport software \cite{romano_openmc_2013}. 
 
 \item \textbf{Develop a tool that applies evolutionary algorithms to optimize nuclear 
 reactor design}. 
 This tool will not reinvent the wheel---it will utilize a well-documented 
 and validated open-source evolutionary algorithm Python package with established 
-nuclear transport and thermal-hydraulics software. This tool will run parallel on 
+neutron transport and thermal-hydraulics software. This tool will run parallel on 
 \gls{HPC} machines, be open-source, and follow the rules for ensuring 
 reproducibility, effectiveness, and usability 
 \cite{list_ten_2017,osborne_ten_2014,sandve_ten_2013}. 
@@ -227,25 +237,27 @@ reproducibility, effectiveness, and usability
 \item \textbf{Demonstrate optimization tool with a single objective AHTR 
 design optimization problem}.
 I will demonstrate successful implementation of the optimization tool with a
-nuclear transport software by optimizing an \gls{AHTR} fuel slab's fuel 
+neutron transport software by optimizing an \gls{AHTR} fuel slab's fuel 
 distribution for a single objective function. 
 
 \item \textbf{Model the \gls{FHR} with established thermal-hydraulics software}.
-To demonstrate success in modeling the \gls{FHR} with thermal hydraulics before 
+To demonstrate success in thermal hydraulics modeling of the \gls{FHR} before 
 using the optimization tool, I will participate in the \gls{OECD} \gls{NEA}'s 
-\gls{FHR} benchmark \cite{noauthor_fluoride_nodate}.
+\gls{FHR} benchmark \cite{noauthor_fluoride_nodate}. 
+I will use Moltres, a MOOSE-based application for modeling coupled neutronics 
+and thermal-hydraulics physics in \glspl{MSR}. 
 
 \item \textbf{Demonstrate multi-objective nuclear reactor design optimizations 
 for neutronics and thermal-hydraulics problems}.
-I will demonstrate successful use of the optimization tool for multi-objective 
-\gls{AHTR} optimization. 
+To demonstrate successful use of the optimization tool for multi-objective 
+\gls{AHTR} optimization, 
 I will vary parameters such as reactor geometry and fuel distribution with 
 objectives such as maximizing $k_{eff}$, maximizing heat transfer, and 
 minimizing power peaking factor. 
 \end{enumerate}
 
-This preliminary work completes objectives I, II, and III. 
-These objectives provide the basis and proof of concept for objectives IV and V. 
+This preliminary work begins on objectives I, II, and III, which provides 
+the basis and proof of concept for objectives IV and V. 
 
 \section{Outline}
 This document outlines the motivation, preliminary work, and future work proposed 
