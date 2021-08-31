@@ -27,7 +27,7 @@ demonstrate using \gls{ROLLO} for multi-objective \gls{AHTR}
 optimization of arbitrary geometries and fuel distribution. 
 For \gls{AHTR} development, I propose the following simulations: 
 \begin{itemize}
-    \item \gls{AHTR} 3D full core neutronics OpenMC simulation (Benchmark's Phase I-C and 
+    \item \gls{AHTR} 3D assembly neutronics OpenMC simulation (Benchmark's Phase I-C and 
     Preliminary Phase II)
     \item \gls{AHTR} fuel slab and one-third fuel assembly multiphysics 
     Moltres simulation (Benchmark's Preliminary Phase III)
@@ -70,15 +70,15 @@ Benchmark participants, including the \gls{UIUC} team, contributed Phases I-A
 and I-B (2D assembly steady-state and depletion) so far.  
 The upcoming phases consist of 3D neutronics models and multiphysics models. 
 Thus, to support the \gls{FHR} benchmark, the proposed work will complete the 
-benchmark's Phase I-C.
-In preparation for the later multiphysics benchmark phases, the proposed 
+benchmark's Phase I-C and begin preliminary work for Phase II.
+In preparation for the later multiphysics benchmark phase III, the proposed 
 work will utilize Moltres to model \gls{AHTR} multiphysics.
 
 \subsection{FHR Benchmark Phase I-C}
 The \gls{FHR} benchmark's Phase I-C extends the 2D assembly model from Phases 
 I-A and I-B into a 3D assembly model. 
 The benchmark organizers will release the Phase I-C detailed specifications and 
-required results in June 2021.
+required results in late 2021.
 
 \subsection{AHTR Multiphysics Model}
 \label{sec:ahtr_multiphysics_model}
@@ -152,7 +152,7 @@ each objective.
     \hline 
     \textbf{Objective}& \textbf{Quantification}  \\
     \hline
-    Maximize fuel utilization & Maximize $k_{eff}$\\ 
+    Maximize $k_{eff}$ & Maximize $k_{eff}$\\ 
     Maximize heat transfer & Maximize $\phi_{total}$ in areas along FLiBe coolant \\
     Minimize power peaking factor & Minimize $P_{high}-P_{low}$ \\
     \hline

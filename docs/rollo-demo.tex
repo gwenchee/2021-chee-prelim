@@ -352,7 +352,7 @@ produced the $k_{eff max}$ from the top five experiments.
     \makebox[\textwidth][c]{\includegraphics[width=1\linewidth]{topfive_plot.png}} 
     \caption{Packing fraction distribution across the x-axis of the \acrfull{AHTR} 
     slab for the five hyperparameter search experiments with the highest final generation 
-    $\overline{k_{eff}}$.}
+    $\overline{k_{eff}}$. $k_{eff}$ uncertainty are $\sim$130pcm.}
     \label{fig:topfiveplot}
 \end{figure}
 Four experiments had similar packing fraction distributions peaking at approximately 
@@ -383,11 +383,11 @@ Experiment 39's $k_{eff max}$ exceeds the original straightened \gls{AHTR}
 configuration's $k_{eff}$ by $\sim2000$pcm, demonstrating that optimizing
 inhomogenous fuel distributions enables better neutronics. 
 Figure \ref{fig:triso_distribution_sine_39} shows the packing fraction distribution 
-that produced $k_{eff max} = 1.40519$. 
+that produced $k_{eff max} = 1.40519 \pm 0.00130$. 
 \begin{figure}[]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.1\linewidth]{triso_distribution_sine_39.png}} 
-    \caption{Experiment 39 packing distribution that produced $k_{eff max} = 1.40519$. 
+    \caption{Experiment 39 packing distribution that produced $k_{eff max} = 1.40519 \pm 0.00130$. 
     Below: $PF(x) = (1.98\ sin(0.35x+3.14)+2)  \times NF$ sine distribution with 
     red points indicating the packing fraction at each cell. 
     Above: Straightened \acrfull{AHTR} fuel slab with varying \gls{TRISO} particle 
@@ -412,7 +412,8 @@ experiment's generations.
     \end{subfigure}
     \caption{Each generation's results for \gls{ROLLO}'s genetic algorithm 
     optimization of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{ROLLO} 
-    simulation used the 39$^{th}$ experiment's hyperparameter set.}
+    simulation used the 39$^{th}$ experiment's hyperparameter set. $k_{eff}$ 
+    uncertainty are $\sim$130pcm.}
     \label{fig:39}
 \end{figure}
 The $k_{eff max}$ converged quickly by generation 1; however, this usually 
@@ -442,7 +443,7 @@ towards a higher $k_{eff}$ with improvements from each generation.
     \end{subfigure}
     \caption{ Results for each generation for \gls{ROLLO}'s genetic algorithm optimization 
     of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{ROLLO} simulation used 
-    the 15$^{th}$ experiment's hyperparameter set.}
+    the 15$^{th}$ experiment's hyperparameter set. $k_{eff}$ uncertainty are $\sim$130pcm.}
     \label{fig:15}
 \end{figure}
 
@@ -470,6 +471,8 @@ slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the
 middle. 
 Center-peaking fuel density is nonideal for other key reactor core 
 qualities, such as maximal heat transfer and minimal power peaking factor (PPF).
+Thus, the \gls{AHTR} slab optimization problem must be extended to include 
+these key reactor core qualities. 
 
 \section{AHTR Multiphysics Model Preliminary Work}
 \label{sec:multiphysics_homo}
@@ -613,7 +616,7 @@ The optimization process began with a coarse-to-fine random sampling
 hyperparameter search to find the genetic algorithm hyperparameters that worked 
 best. 
 Experiment 39 performed the best with a hyperparameter set that produced the 
-highest final generation $\overline{k_{eff}}$ of 1.40165. 
+highest final generation $\overline{k_{eff}}$ of 1.40165 $\pm$ 0.00130. 
 The \gls{TRISO} particle packing fraction distribution that produced the final 
 generation's maximum $k_{eff}$ of 1.40519 peaks at the slab's center with 
 packing fraction distribution: $PF(x)=1.989\ sin(0.54x+3.143)$. 
