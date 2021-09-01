@@ -22,7 +22,6 @@ Dept. of Nuclear, Plasma and Radiological Engineering \\ University of Illinois 
 \usepackage{microtype} % if using PDF
 \usepackage{bigints}
 \usepackage{minted}
-\usepackage{subfigure}
 
 \newcommand{\Cyclus}{\textsc{Cyclus}\xspace}%
 \newcommand{\Cycamore}{\textsc{Cycamore}\xspace}%
@@ -38,6 +37,7 @@ Dept. of Nuclear, Plasma and Radiological Engineering \\ University of Illinois 
 %Those icons in the references are terrible looking
 \setbeamertemplate{bibliography item}[text]
 
+\usepackage{tkz-euclide}
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows, decorations, shapes}
 
@@ -55,6 +55,12 @@ text width=15em, text centered, rounded corners, minimum height=4em]
 text width=15em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 
+\definecolor{fhrblue}{HTML}{0000ff}
+\definecolor{fhrgrey}{HTML}{808080}
+\definecolor{fhrred}{HTML}{f10a0a}
+\definecolor{fhrgreen}{HTML}{2f6d39}
+\definecolor{fhryellow}{HTML}{fdfe36}
+
 \usepackage{tabularx}
 \newcolumntype{b}{>{\hsize=1.0\hsize}X}
 \newcolumntype{s}{>{\hsize=.5\hsize}X}
@@ -65,7 +71,8 @@ text width=15em, text centered, rounded corners, minimum height=4em]
 \def\arraystretch{1}
 %%%% Acronym support
 \usepackage{multirow}
-\usepackage{graphicx,subfigure}
+\usepackage{graphicx}
+\usepackage{subcaption}
 
 \usepackage[acronym,toc]{glossaries}
 \include{acros}
@@ -125,58 +132,64 @@ text width=15em, text centered, rounded corners, minimum height=4em]
 }
 
 \section{Introduction}
-\subsection{Motivation}
-\input{intro_motivation}
+\subsection{Motivation: AHTR Model Development}
+\input{intro_motivation1}
 
-\subsection{Objectives}
-\input{intro_objectives}
+\subsection{Objectives: AHTR Model Development}
+\input{intro_objectives1}
 
-\section{Background}
-\subsection{Fluoride-Salt-Cooled High-Temperature Reactor}
-\input{bg_fhr}
-\subsection{Additive Manufacturing}
-\input{bg_am}
-\subsection{Nuclear Reactor Design Optimization}
-\input{bg_opt}
-\subsection{Evolutionary Algorithms}
-\input{bg_ea}
-\subsection{Background Summary}
-\input{bg_summary}
+\subsection{Motivation: AHTR Optimization}
+\input{intro_motivation2}
 
-\section{Fluoride-Salt-Cooled High-Temperature Reactor Benchmark}
-\subsection{Benchmark Description}
-\input{bm_descr}
-\subsection{FHR Benchmark Advanced High Temperature Reactor Design}
-\input{bm_ahtr}
-\subsection{Benchmark Phase I Results}
-\input{bm_phase1}
+\subsection{Objectives: AHTR Optimization}
+\input{intro_objectives2}
 
-\section{Reactor evOLutionary aLgorithm Optimizer (ROLLO)}
-\subsection{ROLLO objectives}
-\input{rollo_obj}
-\subsection{Evolutionary Algorithm Driver}
-\input{rollo_ea}
-\subsection{ROLLO Input File}
-\input{rollo_input}
-\subsection{ROLLO Software Architecture}
-\input{rollo_sw}
+%\section{Background}
+%\subsection{Fluoride-Salt-Cooled High-Temperature Reactor}
+%\input{bg_fhr}
+%\subsection{Additive Manufacturing}
+%\input{bg_am}
+%\subsection{Nuclear Reactor Design Optimization}
+%\input{bg_opt}
+%\subsection{Evolutionary Algorithms}
+%\input{bg_ea}
+%\subsection{Background Summary}
+%\input{bg_summary}
 
-\section{AHTR Optimization Preliminary Work}
-\subsection{ROLLO Optimization: AHTR Fuel Slab}
-\input{prelim_opt}
-\subsection{AHTR Multiphysics Model Preliminary Work}
-\input{prelim_multiphysics}
+%\section{Fluoride-Salt-Cooled High-Temperature Reactor Benchmark}
+%\subsection{Benchmark Description}
+%\input{bm_descr}
+%\subsection{FHR Benchmark Advanced High Temperature Reactor Design}
+%\input{bm_ahtr}
+%\subsection{Benchmark Phase I Results}
+%\input{bm_phase1}
 
-\section{Future Work and Proposed Simulations}
-\subsection{AHTR Model Development}
-\input{future_ahtr}
-\subsection{ROLLO Optimization}
-\input{future_rollo}
-\subsection{Conclusion}
-\input{future_concl}
+%\section{Reactor evOLutionary aLgorithm Optimizer (ROLLO)}
+%\subsection{ROLLO objectives}
+%\input{rollo_obj}
+%\subsection{Evolutionary Algorithm Driver}
+%\input{rollo_ea}
+%\subsection{ROLLO Input File}
+%\input{rollo_input}
+%\subsection{ROLLO Software Architecture}
+%\input{rollo_sw}
+
+%\section{AHTR Optimization Preliminary Work}
+%\subsection{ROLLO Optimization: AHTR Fuel Slab}
+%\input{prelim_opt}
+%\subsection{AHTR Multiphysics Model Preliminary Work}
+%\input{prelim_multiphysics}
+
+%\section{Future Work and Proposed Simulations}
+%\subsection{AHTR Model Development}
+%\input{future_ahtr}
+%\subsection{ROLLO Optimization}
+%\input{future_rollo}
+%\subsection{Conclusion}
+%\input{future_concl}
 
 
-\input{acks}
+%\input{acks}
 %%--------------------------------%%
 %%--------------------------------%%
 \begin{frame}[allowframebreaks]
