@@ -7,7 +7,6 @@
 % - Results from benchmark
 % Appendix? 
 % - More details about the geometry 
-
 \acrfullpl{FHR} use \gls{TRISO} fuel and a low-pressure liquid fluoride-salt coolant.
 \gls{FHR} technology combines \gls{FLiBe} coolant from \glspl{MSR} and 
 \gls{TRISO} particles from \glspl{VHTR} to enable a reactor with 
@@ -15,14 +14,23 @@ low operating pressure, large thermal margin, and accident-tolerant
 qualities.
 Within the \gls{FHR} reactor class, \glspl{AHTR} have plate-based fuel in a hexagonal 
 fuel assembly. 
-To address the \gls{AHTR} modeling challenges, described in Chapter 
-\ref{chap:lit-review}, such as multiple heterogeneity and material cross-section 
-data, the \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the \gls{FHR} 
-benchmark for the \gls{AHTR} design in 2019 \cite{noauthor_fluoride_nodate}. 
 In section \ref{sec:fhr}, I gave an \gls{FHR} concept overview, 
 an \gls{AHTR} design description, a review of previous efforts 
 towards modeling these designs, and how these efforts led to the benchmark
 initiation. 
+
+To address the \gls{AHTR} modeling challenges, described in Chapter 
+\ref{chap:lit-review}, such as multiple heterogeneity and material cross-section 
+data, the \gls{OECD}-\gls{NEA} and \gls{Georgia Tech} initiated the \gls{FHR} 
+benchmark for the \gls{AHTR} design in 2019 \cite{noauthor_fluoride_nodate}. 
+The \gls{UIUC} participates in the benchmark with the OpenMC Monte Carlo code 
+\cite{romano_openmc_2013} using the ENDF/B-VII.1 material cross section library 
+\cite{chadwick_endf/b-vii.1_2011}.
+The \gls{UIUC} team consists of myself and my advisors, Professor Kathryn Huff and Dr
+Madicken Munk. 
+I contributed methodology, software, validation, formal analysis, and 
+visualization, while Professor Huff and Dr Munk contributed resources, supervision, 
+and funding acquisition.
 
 The three-phase \gls{FHR} benchmark begins with a single fuel assembly 
 simulation without burnup and gradually extends to full core depletion. 
@@ -353,7 +361,7 @@ by \gls{UIUC} for the \gls{FHR} benchmark \cite{chee_arfcfhr-benchmark_2021}.
 The benchmark used a phased blind approach -- participants were asked to 
 submit Phase I-A and I-B results without knowledge of other submissions. 
 Petrovic et al. \cite{petrovic_preliminary_2021} describes the preliminary 
-results of the benchmark results across several institutions and concludes 
+results of the benchmark across several institutions and concludes 
 that the overall observed agreement is satisfactory. 
 In the subsequent sections, I will share the results obtained by \gls{UIUC}.  
 
@@ -536,8 +544,8 @@ for Cases 1B, 4B, and 7B.
     low $\sim$40pcm uncertainty.}
     \label{fig:phase1b_keff}
 \end{figure}
-The $k_{eff}$ at zero burnup corresponds to each case's 
-corresponding Phase I-A $k_{eff}$ value reported in Table \ref{tab:phase1a-results}. 
+The $k_{eff}$ at zero burnup corresponds to each case's Phase I-A $k_{eff}$ value 
+reported in Table \ref{tab:phase1a-results}. 
 Case 1B is the reference case with $9\%$ fuel enrichment and no \glspl{BP}. 
 Case 1B's $k_{eff}$ steadily decreases until it reaches 0.967845 at the final 70 
 GWd/tU burnup. 
@@ -549,13 +557,14 @@ due to burn-up of the poison material.
 Case 7B has a $19.75\%$ fuel enrichment, resulting in a higher initial $k_{eff}$. 
 With a higher enrichment, the fuel can achieve a final burnup of 160 GWd/tU. 
 
+\pagebreak
 \section{Summary}
 % more enrichment / more HM does not mean higher keff, there is shielding 
 % effects, thus, this leads us to believe that the phenomena is not as expected. 
 
 This chapter described the \gls{FHR} benchmark specifications, \gls{AHTR} design,
 and Phase I-A and I-B results obtained by the UIUC team, consisting of myself 
-and my advisor. 
+and my advisors. 
 The benchmark results highlight the \gls{AHTR}'s passive safety behavior with 
 negative temperature coefficients. 
 Results such as a lower $k_{eff}$ for the \gls{AHTR} configuration with 

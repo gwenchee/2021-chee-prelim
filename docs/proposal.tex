@@ -34,12 +34,14 @@ For \gls{AHTR} development, I propose the following simulations:
 \end{itemize}
 For \gls{ROLLO} optimization, I propose the following \gls{ROLLO} simulations: 
 \begin{itemize}
-    \item \gls{AHTR} slab geometry optimization to maximize $k_{eff}$, 
+    \item \gls{AHTR} slab geometry optimization to minimize fuel amount, 
     minimize power peaking factor ($PPF$), and maximize heat transfer ($\dot{Q}$) 
-    by varying \gls{TRISO} x-axis distribution and \gls{FLiBe} channel shape using OpenMC
-    \item \gls{AHTR} one-third fuel assembly optimization to maximize $k_{eff}$, 
+    by varying \gls{TRISO} x-axis distribution, total fuel packing fraction, 
+    and \gls{FLiBe} channel shape using OpenMC
+    \item \gls{AHTR} one-third fuel assembly optimization to minimize fuel amount, 
     minimize power peaking factor, and maximize heat transfer by varying \gls{TRISO} 
-    x-y axis distribution and \gls{FLiBe} channel shape using OpenMC
+    x-y axis distribution total fuel packing fraction, and \gls{FLiBe} channel 
+    shape using OpenMC
 \end{itemize}
 
 The proposed \gls{AHTR} simulations contributes to the \gls{OECD}-\gls{NEA}
@@ -71,7 +73,7 @@ and I-B (2D assembly steady-state and depletion) so far.
 The upcoming phases consist of 3D neutronics models and multiphysics models. 
 Thus, to support the \gls{FHR} benchmark, the proposed work will complete the 
 benchmark's Phase I-C and begin preliminary work for Phase II.
-In preparation for the later multiphysics benchmark phase III, the proposed 
+In preparation for the later multiphysics benchmark Phase III, the proposed 
 work will utilize Moltres to model \gls{AHTR} multiphysics.
 
 \subsection{FHR Benchmark Phase I-C}
@@ -152,7 +154,7 @@ each objective.
     \hline 
     \textbf{Objective}& \textbf{Quantification}  \\
     \hline
-    Maximize $k_{eff}$ & Maximize $k_{eff}$\\ 
+    Minimize fuel amount & Minimize total fuel packing fraction \\ 
     Maximize heat transfer & Maximize $\phi_{total}$ in areas along FLiBe coolant \\
     Minimize power peaking factor & Minimize $P_{high}-P_{low}$ \\
     \hline
@@ -161,8 +163,10 @@ each objective.
 I will vary the following slab parameters to meet the described problem objectives: 
 \begin{itemize}
     \item \gls{TRISO} particle packing fraction distribution $\rho_{TRISO}(\vec{r})$
+    \item Total fuel packing fraction
     \item \gls{FLiBe} coolant channel shape 
 \end{itemize} 
+I will also include a constraint that $k_{eff} > 1$.
 I will conduct these optimizations for the straightened \gls{AHTR} fuel slab 
 geometry (as seen in Figure \ref{fig:straightened_slab}) and for one 
 diamond-shaped sector (as seen in Figure \ref{fig:ahtr-fuel-assembly}) with 
@@ -175,7 +179,7 @@ Table \ref{tab:rollo_simulations} outlines the proposed simulations' details.
     \caption{Proposed \acrfull{ROLLO} simulations for optimizing \acrfull{AHTR}
     fuel assembly. Simulations explore two geometries: straightened \gls{AHTR} 
     fuel slab and \gls{AHTR}'s diamond-shaped section, containing six fuel slabs.
-    $\dot{Q}$: Heat transfer, $PPF$: Power Peaking Factor, 
+    PF: Total Fuel Packing Fraction, $\dot{Q}$: Heat transfer, $PPF$: Power Peaking Factor, 
     $\rho_{TRISO}(\vec{r})$: \gls{TRISO} particle distribution}
 	\label{tab:rollo_simulations}
     \footnotesize
@@ -189,15 +193,15 @@ Table \ref{tab:rollo_simulations} outlines the proposed simulations' details.
     4 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem FLiBe channel shape \\ 
     5 & Single fuel slab & \tabitem max($\dot{Q}$) & \tabitem FLiBe channel shape \\
     6 & Single fuel slab & \tabitem min($PPF$) & \tabitem FLiBe channel shape \\
-    7 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\ 
-      & & \tabitem max($\dot{Q}$) & \\
+    7 & Single fuel slab & \tabitem min(PF)) & \tabitem $\rho_{TRISO}(\vec{r})$ \\ 
+      & & \tabitem max($\dot{Q}$) & \tabitem PF \\
       & & \tabitem min($PPF$) & \\ 
-    8 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem FLiBe channel shape \\ 
+    8 & Single fuel slab & \tabitem min(PF)) & \tabitem FLiBe channel shape \\ 
       & & \tabitem max($\dot{Q}$) & \\
       & & \tabitem min($PPF$) & \\     
-    9 & Single fuel slab & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\  
-      & & \tabitem max($\dot{Q}$) & \tabitem FLiBe channel shape \\
-      & & \tabitem min($PPF$) & \\   
+    9 & Single fuel slab & \tabitem min(PF) & \tabitem $\rho_{TRISO}(\vec{r})$ \\  
+      & & \tabitem max($\dot{Q}$) & \tabitem PF \\
+      & & \tabitem min($PPF$) & \tabitem FLiBe channel shape\\   
     10 & Diamond section with six fuel slabs & \tabitem max($k_{eff}$) & \tabitem $\rho_{TRISO}(\vec{r})$ \\ 
       & & \tabitem max($\dot{Q}$) & \\
       & & \tabitem min($PPF$) & \\ 
@@ -249,6 +253,7 @@ to include Moltres evaluations if the proposed \gls{AHTR} multiphysics
 Moltres simulations (Section \ref{sec:ahtr_multiphysics_model}) find approximations 
 and assumptions that maintain accuracy while keeping acceptable Moltres runtimes.
 
+\pagebreak
 \section{Conclusion}
 Breakthroughs in metal component additive manufacturing fabrication have 
 expedited the development of methods for nuclear reactor component additive 
@@ -258,8 +263,8 @@ additive manufacturing frees complex reactor geometries from previous manufactur
 constraints and allows reactor designers to reexamine reactor design optimization. 
 Therefore, I propose to explore the vast design space enabled by 
 additive manufacturing with the evolutionary algorithm optimization technique 
-to find global optima in multi-objective design problems, such as nuclear 
-reactor optimization. 
+to find global optima in nuclear reactor core design optimization for arbitrary 
+reactor geometries and fuel distributions.
 
 In the preliminary work, I designed the \gls{ROLLO} Python package that applies 
 evolutionary algorithm optimization techniques to nuclear reactor design using 

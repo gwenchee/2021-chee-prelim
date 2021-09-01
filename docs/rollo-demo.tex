@@ -6,15 +6,15 @@ I used \gls{ROLLO} to apply genetic algorithms to maximize $k_{eff}$ in a single
 Then, I presented spatial and energy homogenizations for applications to 
 \gls{AHTR} multiphysics simulations.
 The \texttt{dissertation-results} Github repository contains all the scripts, 
-results, and plots shown in this chapter \cite{chee_dissertation-results_2021}.
+results, and plots shown in this chapter \cite{chee_dissertation_2021}.
 
 \section{ROLLO Optimization: AHTR Fuel Slab}
 \label{sec:rollo_opt_ahtr_slab}
 This demonstration problem explores how heterogenous fuel distributions impact 
 $k_{eff}$ compared with homogenous fuel distributions customary in most reactor 
 designs. 
-I use OpenMC v0.12.0 for these neutronics calculations with the ENDF/B-VII.1
-data library \cite{chadwick_endf/b-vii.1_2011}. 
+I use OpenMC v0.12.0 \cite{romano_openmc_2013} for these neutronics calculations 
+with the ENDF/B-VII.1 data library \cite{chadwick_endf/b-vii.1_2011}. 
 
 \subsection{Problem Definition}
 The reactor core explored is a single fuel slab from the \gls{FHR} benchmark
@@ -43,8 +43,9 @@ The periodic surfaces are: 1-3, 2-4.
             \textcolor{fhrblack}{$\blacksquare$} & TRISO particle 
 
             \end{tabular}}}
-    \caption{Straightened \acrfull{AHTR} fuel slab, with periodic surface: 1-3, 2-4. 
-    Original slanted fuel slabs can be seen in Figures \ref{fig:ahtr-fuel-assembly} 
+    \caption{Straightened \acrfull{AHTR} fuel slab, with x-y periodic surfaces: 
+    1-3, 2-4, and reflective z-axis surfaces (out of the page). Original slanted
+    fuel slabs can be seen in Figures \ref{fig:ahtr-fuel-assembly} 
     and \ref{fig:ahtr-fuel-plank}.}
     \label{fig:straightened_slab}
 \end{figure}

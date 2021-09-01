@@ -34,7 +34,7 @@ and usable.
 I briefly summarize how \gls{ROLLO} achieves these goals:  
 \begin{itemize}
     \item Effective: \gls{ROLLO} is well documented, tested, and 
-    version-controlled on Github \cite{chee_arfcrollo_2021}.
+    version-controlled on Github \cite{chee_rollo_2021}.
     \item Flexible: The proposed work aims to utilize \gls{ROLLO} to 
     explore arbitrary reactor geometries and heterogeneous fuel distributions. 
     However, future users might want to utilize \gls{ROLLO} 
@@ -47,7 +47,7 @@ I briefly summarize how \gls{ROLLO} achieves these goals:
     and established open-source nuclear software (OpenMC \cite{romano_openmc_2013} and 
     Moltres \cite{lindsay_introduction_2018}) to compute the objective function 
     and constraints. I also provide a simple tutorial for future developers to 
-    follow for coupling other nuclear software to \gls{ROLLO}.  
+    follow for coupling other nuclear software to \gls{ROLLO} \cite{chee_documentation_2021}.  
     \item Parallel: Users have the option to run \gls{ROLLO} in parallel using 
     either the \\ \texttt{multiprocessing\_on\_dill} or \texttt{mpi4py} Python 
     packages \cite{dalcin_mpi_2008}.
@@ -242,7 +242,7 @@ making them suitable to be used as \gls{ROLLO}'s nuclear dependency.
 However, users can easily use restricted nuclear software if they so desire 
 with \gls{ROLLO} by coupling \gls{ROLLO} with the restricted software on their 
 local machine. 
-In the \gls{ROLLO} documentation \cite{chee_arfcrollo_2021}, I outline how to couple 
+In the \gls{ROLLO} documentation \cite{chee_documentation_2021}, I outline how to couple 
 other nuclear software to \gls{ROLLO}. 
 
 \section{ROLLO Input File}
@@ -300,7 +300,7 @@ calculated using the OpenMC evaluator that accepts input parameters:
 \end{figure}
 
 Next, I will describe how to define each section of a \gls{ROLLO} input file. 
-The \gls{ROLLO} documentation \cite{chee_arfcrollo_2021} provides further 
+The \gls{ROLLO} documentation \cite{chee_documentation_2021} provides further 
 descriptions for setting up a \gls{ROLLO} input file.
 
 \subsection{Control Variables}
@@ -320,13 +320,13 @@ In a single \gls{ROLLO} input file, a user may define any number of evaluators.
 For each evaluator, mandatory input parameters are \texttt{input\_script}, 
 \texttt{inputs}, and \texttt{outputs}, and the optional input parameters are
 \texttt{output\_script} and \texttt{keep\_files}. 
-The \texttt{input\_script} is input file template's name for the evaluator software. 
+The \texttt{input\_script} is the input file template's name for the evaluator software. 
 The user must include a input file template in the same directory as the \gls{ROLLO} input 
 file. 
 The \texttt{inputs} parameter lists the control variables that are placed into the 
 input file template. 
-\gls{ROLLO} utilizes jinja2 templating to insert the control variable values into the 
-\texttt{input\_script}. 
+\gls{ROLLO} utilizes jinja2 templating \cite{ronacher_welcome_2018} to insert 
+the control variable values into the \texttt{input\_script}. 
 Lines 6 to 12 in the \gls{ROLLO} input file (Figure \ref{fig:rollo-input}) demonstrate 
 that \texttt{variable1} and \texttt{variable2} are \texttt{inputs} into the 
 \texttt{openmc\_inp.py} \texttt{input\_script}. 
@@ -601,7 +601,7 @@ hyperparameters from the \gls{DEAP} toolbox, apply constraints defined in the
 the evaluation function created by the \textbf{\textit{Evaluation}} object, all 
 the while saving the results using the \textbf{\textit{BackEnd}} class. 
 
-In the \gls{ROLLO} Github repository \cite{chee_arfcrollo_2021}, I include a tests 
+In the \gls{ROLLO} Github repository \cite{chee_rollo_2021}, I include a tests 
 directory that contains unit tests for all methods in the classes described 
 above. 
 
@@ -611,8 +611,8 @@ above.
 There are two ways to install \gls{ROLLO}.
 First, a user can utilize \gls{PyPI} to install \gls{ROLLO}: \texttt{python -m 
 pip install rollo}
-\cite{chee_rollo_nodate}.
-Second, a user can download the \gls{ROLLO} repository \cite{chee_arfcrollo_2021}
+\cite{chee_rollo_2021}.
+Second, a user can download the \gls{ROLLO} repository \cite{chee_rollo_2021}
 from Github and install it from source. 
 
 \gls{ROLLO} is run from the command line interface. 
@@ -655,11 +655,11 @@ is saved as \texttt{checkpoint.pkl} in the same directory as the input file.
 The checkpoint file can be loaded into a Jupyter notebook and organized 
 to produce desired plots. 
 Examples of \gls{ROLLO} results analysis can be found in the \gls{ROLLO} documentation 
-\cite{chee_arfcrollo_2021}. 
+\cite{chee_documentation_2021}. 
 
 The evaluation function creates a new directory for each software, generation, 
-and individual and stores the templated input file and output files associated 
-with that particular run. 
+and individual, where it then stores the templated input file and output files 
+associated with that particular run. 
 The generation and individual values are indexed by zero. 
 For example, the directory containing files associated with an OpenMC run for 
 the tenth individual in the genetic algorithm's third generation will be named: 
@@ -680,4 +680,4 @@ through the cumbersome process of setting up a genetic algorithm framework,
 selecting appropriate hyperparameters, and setting up its parallelization. 
 \gls{ROLLO} is designed to be effective, flexible, open-source, parallel, 
 reproducible, and usable. 
-\gls{ROLLO} is hosted on Github \cite{chee_arfcrollo_2021}. 
+\gls{ROLLO} is hosted on Github \cite{chee_rollo_2021}. 
