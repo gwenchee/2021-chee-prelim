@@ -1,0 +1,84 @@
+\begin{frame}
+    \frametitle{Progress}
+    \begin{itemize}
+        \item Scope I: AHTR Model Development for the FHR Benchmark
+    \end{itemize}
+    \vspace{-0.8cm}
+    \begin{figure}[]
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
+            \node [gblock] (a) {\textbf{Phase I-A}};
+            \node [bblock] (b) [right of=a] {\textbf{Phase I-B}};
+            \node [oblock] (c) [right of=b] {\textbf{Phase I-C, Preliminary Phase II}};
+            \node [bblock] (d) [right of=c] {\textbf{Preliminary Phase III}};
+            \node [noblock] (e) [above of=a, yshift=-2.3cm] {Stage I-1};
+            \node [noblock] (e) [above of=b, yshift=-2.3cm] {Stage I-2};
+            \node [noblock] (e) [above of=c, yshift=-2.3cm] {Stage I-3};
+            \node [noblock] (e) [above of=d, yshift=-2.3cm] {Stage I-4};
+            \node [greyblock] (e) [below of=a, yshift= 2cm, font=\small] {AHTR 2D assembly steady state model};
+            \node [greyblock] (e) [below of=b, yshift= 2cm, font=\small] {AHTR 2D assembly depletion model};
+            \node [lgreyblock] (e) [below of=c, yshift= 2cm, font=\small] {AHTR 3D assembly steady state and depletion models};
+            \node [lgreyblock] (e) [below of=d, yshift= 2cm, font=\small] {AHTR 2D plank and assembly multiphysics steady state models};
+            \draw [arrow] (a) -- (b);
+            \draw [arrow] (b) -- (c);
+            \draw [arrow] (c) -- (d);
+        \end{tikzpicture}}
+    \end{figure}
+    \begin{figure}
+        \resizebox{0.25\textwidth}{!}{
+            \fbox{\begin{tabular}{ll}
+                \textcolor{illinigreen}{$\blacksquare$} & Completed \\
+                \textcolor{illiniblue}{$\blacksquare$} & In Progress \\
+                \textcolor{illiniorange}{$\blacksquare$} & Planned \\
+                \end{tabular}}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Progress}
+    \begin{itemize}
+        \item Scope II: ROLLO Development and AHTR Optimization Demonstration
+    \end{itemize}
+    \vspace{-0.8cm}
+    \begin{figure}[]
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tikzpicture}[node distance=1.2cm,auto,>=latex']
+            \node [gblock] (a) {\textbf{ROLLO v1.0 Build}};
+            \node [lgblock] (b) [right of=a, xshift=2.3cm] 
+            {\textbf{ROLLO v1.0 Single Objective Problem Demonstration}};
+            \node [oblock] (c) [right of=b, xshift=2.3cm] 
+            {\textbf{ROLLO v1.0 Single Objective Problems}};
+            \node [oblock] (d) [right of=c, xshift=2.3cm] 
+            {\textbf{ROLLO v1.0 Multi Objective Problems}};
+            \node [noblock] (e) [above of=a] {Stage II-1};
+            \node [noblock] (e) [above of=b] {Stage II-2};
+            \node [noblock] (e) [above of=c] {Stage II-3};
+            \node [noblock] (e) [above of=d] {Stage II-4};
+            \node [greyblock] (e) [below of=a, yshift= -0.35cm, font=\small] 
+            {Build first version of ROLLO based on design specifications};
+            \node [lgreyblock] (e) [below of=b, yshift= -0.85cm, font=\small] 
+            {Demonstrate ROLLO's capabilities with a single objective reactor 
+            design problem: vary TRISO particle distribution in AHTR fuel slab 
+            to maximize keff};
+            \node [llgreyblock] (e) [below of=c, xshift=1.8cm, yshift= -0.7cm, font=\small] 
+            {Explore non-conventional reactor designs by varying TRISO particle 
+            distribution, total fuel packing fraction, and FliBe coolant channel
+            shape with the following objectives alone and in combination: 
+            minimize fuel amount, maximize heat transfer, minimize power peaking 
+            factor.};
+            \draw [arrow] (a) -- (b);
+            \draw [arrow] (b) -- (c);
+            \draw [arrow] (c) -- (d);
+        \end{tikzpicture}}
+    \end{figure}
+\begin{figure}
+    \resizebox{0.25\textwidth}{!}{
+        \fbox{\begin{tabular}{ll}
+            \textcolor{illinigreen}{$\blacksquare$} & Completed \\
+            \textcolor{illiniblue}{$\blacksquare$} & In Progress \\
+            \textcolor{illiniorange}{$\blacksquare$} & Planned \\
+            \end{tabular}}}
+\end{figure}
+\end{frame}
