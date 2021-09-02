@@ -2,13 +2,6 @@
     \frametitle{Research Objectives}
     \begin{block}{Technical Gap}
       \begin{itemize}
-        \item Previous efforts towards nuclear reactor optimization focuses
-        on optimizing classical reactor parameters such as radius of fuel pellet 
-        and clad, enrichment of fuel, pin pitch, etc.
-        \item Additive manufacturing advancements enable reactor designers to 
-        optimize beyond conventional manufacturing shapes that are easy to 
-        manufacture such as slabs as fuel planks, cylinders as rods, axis-aligned
-        coolant channels 
         \item Applying evolutionary algorithms to nuclear design problems is not new,
         however, evolutionary algorithm setup is highly customizable, A reactor 
         designer unfamiliar with evolutionary algorithms will have to go through 
@@ -16,9 +9,19 @@
         needs and determine which operators and hyperparameters work best for their problem
       \end{itemize}
     \end{block}
-    \begin{block}{Scope 2: }
+    \begin{block}{Scope 2: Develop and demonstrate an evolutionary algorithm 
+        optimization tool for multi-objective AHTR optimization of non-conventional 
+        geometries and fuel distribution}
       \begin{itemize}
-        \item f
+        \item Objectives
+        \begin{itemize}
+            \item Develop a tool that applies evolutionary algorithms with established 
+            neutron transport and thermal hydraulics software to optimize reactor 
+            design. The tool must be open-source, reproducible, effective, usable,
+            and supports HPC parallelization. 
+            \item Demonstrate successful implementation of the optimization tool 
+            with OpenMC for single and multi-objective AHTR optimization
+        \end{itemize}
         \end{itemize}
     \end{block}
   \end{frame}

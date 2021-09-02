@@ -48,11 +48,25 @@ Dept. of Nuclear, Plasma and Radiological Engineering \\ University of Illinois 
 
 \definecolor{illiniblue}{HTML}{B1C6E2}
 \definecolor{illiniorange}{HTML}{f8c2a2}
+\definecolor{illinigreen}{HTML}{a0deb1}
+\definecolor{grey}{HTML}{dce3de}
 \usetikzlibrary{shapes.geometric, arrows}
 \tikzstyle{oblock} = [rectangle, draw, fill=illiniorange, 
-text width=15em, text centered, rounded corners, minimum height=4em]
+text width=9em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{bblock} = [rectangle, draw, fill=illiniblue, 
-text width=15em, text centered, rounded corners, minimum height=4em]
+text width=8em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{gblock} = [rectangle, draw, fill=illinigreen, 
+text width=8em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{lgblock} = [rectangle, draw, fill=illinigreen, 
+text width=9em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{noblock} = [rectangle,
+text width=8em, text centered, minimum height=4em]
+\tikzstyle{greyblock} = [rectangle, fill=grey, 
+text width=8em, minimum height=4em, rounded corners]
+\tikzstyle{lgreyblock} = [rectangle, fill=grey, 
+text width=9em, minimum height=4em, rounded corners]
+\tikzstyle{llgreyblock} = [rectangle, fill=grey, 
+text width=20em, minimum height=4em, rounded corners]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 
 \definecolor{fhrblue}{HTML}{0000ff}
@@ -144,50 +158,25 @@ text width=15em, text centered, rounded corners, minimum height=4em]
 \subsection{Objectives: AHTR Optimization}
 \input{intro_objectives2}
 
-%\section{Background}
-%\subsection{Fluoride-Salt-Cooled High-Temperature Reactor}
-%\input{bg_fhr}
-%\subsection{Additive Manufacturing}
-%\input{bg_am}
-%\subsection{Nuclear Reactor Design Optimization}
-%\input{bg_opt}
-%\subsection{Evolutionary Algorithms}
-%\input{bg_ea}
-%\subsection{Background Summary}
-%\input{bg_summary}
+\section{Methodology}
+\subsection{FHR Benchmark Specifications}
+\input{method_fhr}
+\subsection{ROLLO Tool Design}
+\input{method_tool}
 
-%\section{Fluoride-Salt-Cooled High-Temperature Reactor Benchmark}
-%\subsection{Benchmark Description}
-%\input{bm_descr}
-%\subsection{FHR Benchmark Advanced High Temperature Reactor Design}
-%\input{bm_ahtr}
-%\subsection{Benchmark Phase I Results}
-%\input{bm_phase1}
-
-%\section{Reactor evOLutionary aLgorithm Optimizer (ROLLO)}
-%\subsection{ROLLO objectives}
-%\input{rollo_obj}
-%\subsection{Evolutionary Algorithm Driver}
-%\input{rollo_ea}
-%\subsection{ROLLO Input File}
-%\input{rollo_input}
-%\subsection{ROLLO Software Architecture}
-%\input{rollo_sw}
-
-%\section{AHTR Optimization Preliminary Work}
-%\subsection{ROLLO Optimization: AHTR Fuel Slab}
-%\input{prelim_opt}
-%\subsection{AHTR Multiphysics Model Preliminary Work}
-%\input{prelim_multiphysics}
-
-%\section{Future Work and Proposed Simulations}
-%\subsection{AHTR Model Development}
-%\input{future_ahtr}
-%\subsection{ROLLO Optimization}
-%\input{future_rollo}
-%\subsection{Conclusion}
-%\input{future_concl}
-
+\section{Proposed work and preliminary results}
+\subsection{Progress Chart}
+\input{proposed_progress}
+\subsection{Stage I-1: FHR Benchmark Phase I-A (Completed)}
+\input{proposed_i1}
+\subsection{Stage I-2: FHR Benchmark Phase I-B (In Progress)}
+\input{proposed_i2}
+\subsection{Stage I-3: FHR Benchmark Phase I-C and II (Planned)}
+\input{proposed_i3}
+\subsection{Stage I-4: FHR Benchmark III (Planned)}
+\input{proposed_i4}
+\subsection{Stage II-1: ROLLO v1.0 Build}
+\input{proposed_ii1}
 
 %\input{acks}
 %%--------------------------------%%
