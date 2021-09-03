@@ -1,8 +1,8 @@
 \begin{frame}
-    \frametitle{ROLLO: Reactor evOLutionary aLgorithm Optimizer}
+    \frametitle{Proposed Tool's Design Goals}
     \begin{itemize}
-        \item ROLLO is a Python package that applies evolutionary algorithm
-        techniques to optimize nuclear reactor design.
+        \item ROLLO (Reactor evOLutionary aLgorithm Optimizer) is a Python package 
+        that applies evolutionary algorithm techniques to optimize nuclear reactor design.
         \item ROLLO couples an evolutionary algorithm driver, Distributed 
         Evolutionary Algorithms in Python (DEAP), with 
         nuclear software, such as neutron transport OpenMC and thermal-hydraulics 
@@ -24,19 +24,14 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{ROLLO: Reactor evOLutionary aLgorithm Optimizer}
+    \frametitle{ROLLO Flow Chart}
     \begin{figure}
-        \includegraphics[width=0.8\linewidth]{figures/rollo-flow.png} 
+        \begin{minipage}[c]{0.3\textwidth}
         \caption{Process of finding optimal solutions for a problem with a 
         genetic algorithm. Nuclear software evaluates each new population.}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{ROLLO Class Architecture}
-    \begin{figure}
-        \centering
-        \includegraphics[width=1.1\linewidth]{figures/rollo-architecture.png} 
-        \caption{Visualization of ROLLO architecture.}
+        \end{minipage}\hfill
+        \begin{minipage}[c]{0.7\textwidth}
+        \includegraphics[width=\linewidth]{figures/rollo-flow.png} 
+        \end{minipage}
     \end{figure}
 \end{frame}
