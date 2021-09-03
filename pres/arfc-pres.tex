@@ -87,7 +87,8 @@ text width=20em, minimum height=4em, rounded corners]
 \usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{subcaption}
-
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
 \usepackage[acronym,toc]{glossaries}
 \include{acros}
 
@@ -183,10 +184,13 @@ text width=20em, minimum height=4em, rounded corners]
 \input{proposed_ii1}
 \subsection{Stage II-2: ROLLO v1.0 Demonstration (Completed)}
 \input{proposed_ii2}
-\subsection{Stage II-3: ROLLO v1.0 Single Objective Problems}
+\subsection{Stage II-3: ROLLO Single Objective Problems}
 \input{proposed_ii3}
+\subsection{Stage II-4: ROLLO Multi-Objective Problems}
+\input{proposed_ii4}
 
 \section{Conclusion}
+\input{concl}
 
 %\input{acks}
 %%--------------------------------%%
