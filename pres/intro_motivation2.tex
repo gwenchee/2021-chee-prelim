@@ -3,43 +3,42 @@
     \begin{block}{Impact of Additive Manufacturing Technology Advancements on 
         Reactor Design Optimization}
         \begin{itemize}
-            \item Additive manufacturing technology, popularly known as `3D printing', 
-            has advanced and altered the manufacturing and design of engineered hardware
-            \cite{simpson_considerations_2019}. 
             \item With further advancement of additive manufacturing technologies, a reactor 
-            core could be 3D printed in the near future. 
-            \acrlong{ORNL} leads this initiative through the 2019 \acrlong{TCR} Demonstration 
-            Program. 
-            \item Leveraging additive manufacturing technology enables us to surpass classical 
-            manufacturing constraints, such as straight fuel channels or homogenous fuel 
-            enrichment, and optimize for arbitrary geometries and parameters 
+            core could be 3D printed in the near future
+            \item Leveraging additive manufacturing enables us to surpass classical 
+            manufacturing constraints and optimize for arbitrary geometries and parameters 
             such as non-uniform channel shapes, and inhomogeneous fuel distribution 
-            throughout the core. 
+            throughout the core
           \end{itemize}
     \end{block}
+    \begin{figure}[]
+      \includegraphics[width=0.2\linewidth]{figures/wavy-channels.png}
+      \caption{Example of future reactor design with additively manufactured wavy 
+      flow channels}
+  \end{figure}
   \end{frame}
 
   \begin{frame}
     \frametitle{Evolutionary Algorithm Optimization}
     \begin{block}{Evolutionary Algorithms for Reactor Design Optimization}
+    \begin{minipage}[c]{0.6\textwidth}
         \begin{itemize}
-            \item With a substantial increase and change in an arbitrary geometry's design space, it
-            becomes time consuming for a human reactor designer to thoroughly explore and find optimal
-            geometries in the expanded design space. Instead, we can leverage artificial intelligence (AI)
-            optimization methods (such as evolutionary algorithms) to promptly explore the large design
-            space to find global optimal designs.
-            \item Evolutionary algorithms have proven successful in optimizing multi-objective 
-            problems such as reactor design optimization, as they can find solutions at the global 
-            optimum and also take advantage of parallel systems. 
+            \item We can leverage evolutionary algorithm optimization to 
+            explore the large design space enabled by 3D printing to find global 
+            optimal designs
+            \item Evolutionary algorithms have proven successful in optimizing 
+            multi-objective problems as they can find solutions at the global 
+            optimum and take advantage of parallel systems
             \item Evolutionary algorithms imitate natural selection to evolve solutions 
-            \cite{renner_genetic_2003}:
-            \begin{itemize}
-                \item maintaining a population of solutions
-                \item allowing more optimal solutions to reproduce 
-                \item letting less optimal solutions to die off resulting in 
-                solutions that are better than previous generations
             \end{itemize}
-            \end{itemize}
-    \end{block}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.4\textwidth}
+    \centering
+    \begin{figure}
+      \includegraphics[width=0.8\linewidth]{figures/ea-flow.png} 
+      \caption{Evolutionary algorithm flow \cite{renner_genetic_2003}. }
+    \end{figure}
+  \end{minipage}
+  \end{block}
   \end{frame}
     
