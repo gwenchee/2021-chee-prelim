@@ -1,5 +1,6 @@
 \begin{frame}
     \frametitle{Conclusion}
+    AHTR Model Development for the FHR Benchmark
     \begin{itemize}
         \item Relevance
         \begin{itemize}
@@ -11,7 +12,7 @@
             \item I participated in Phase I-A and I-B (2D AHTR assembly steady state 
             and depletion models) of the OECD NEA's FHR benchmarking exercise. 
         \end{itemize} 
-        \item Future Work
+        \item Planned Work
         \begin{itemize}
             \item Submit Phase I-C Results (3D assembly steady state and 
             depletion models)
@@ -43,6 +44,8 @@
 
 \begin{frame}
     \frametitle{Conclusion}
+    ROLLO Tool Development and AHTR 
+    Optimization Demonstration
     \begin{itemize}
         \item Relevance
         \begin{itemize}
@@ -60,7 +63,7 @@
             problem: maximize $k_{eff}$ in the AHTR slab by varying the 
             TRISO particle distribution. 
         \end{itemize} 
-        \item Future Work
+        \item Planned Work
         \begin{itemize}
             \item Explore non-conventional AHTR designs with multi-objective optimizations. 
             \item Objectives: min(fuel amount), max(heat transfer), min(power peaking factor) 
@@ -70,7 +73,7 @@
     \vspace{-0.4cm}
     \begin{figure}[]
         \centering
-        \resizebox{0.75\textwidth}{!}{
+        \resizebox{0.85\textwidth}{!}{
         \begin{tikzpicture}[node distance=1.2cm,auto,>=latex']
             \node [gblock] (a) {\textbf{ROLLO v1.0 Build}};
             \node [lgblock] (b) [right of=a, xshift=2.3cm] 
@@ -83,18 +86,6 @@
             \node [noblock] (e) [above of=b] {Stage II-2};
             \node [noblock] (e) [above of=c] {Stage II-3};
             \node [noblock] (e) [above of=d] {Stage II-4};
-            \node [greyblock] (e) [below of=a, yshift= -0.35cm, font=\small] 
-            {Build first version of ROLLO based on design specifications};
-            \node [lgreyblock] (e) [below of=b, yshift= -0.85cm, font=\small] 
-            {Demonstrate ROLLO's capabilities with a single objective reactor 
-            design problem: vary TRISO particle distribution in AHTR fuel slab 
-            to maximize keff};
-            \node [llgreyblock] (e) [below of=c, xshift=1.8cm, yshift= -0.7cm, font=\small] 
-            {Explore non-conventional reactor designs by varying TRISO particle 
-            distribution, total fuel packing fraction, and FliBe coolant channel
-            shape with the following objectives alone and in combination: 
-            minimize fuel amount, maximize heat transfer, minimize power peaking 
-            factor.};
             \draw [arrow] (a) -- (b);
             \draw [arrow] (b) -- (c);
             \draw [arrow] (c) -- (d);

@@ -11,6 +11,10 @@
         PF(x) &= \left(a\cdot sin(b\cdot x + c) + 2\right) \cdot NF
     \end{align*}
     \begin{figure}[]
+        \centering
+        \includegraphics[width=0.6\linewidth]{../docs/figures/straightened_slab.png} 
+    \end{figure}
+    \begin{figure}[]
         \includegraphics[width=0.6\linewidth]{../docs/figures/straightened_slab_mg.png}
         \caption{AHTR fuel slab spatially discretized into 10 cells with varying 
         TRISO particle distributions.}
@@ -65,21 +69,21 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Completed Stage II-2: Hyperparameter Search}
-    \begin{itemize}
-        \item I started with 25 coarse experiments and fine-tuned the hyperparameters
-        with 15 more experiments
-        \item For each genetic algorithm experiment, the number 
-        of OpenMC evaluations remained constant at 600
-    \end{itemize}
-    \begin{table}
-        \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
-    \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
-    upper bounds for each search phase are listed.}
-        \includegraphics[width=0.8\linewidth]{figures/hyperparameter-search.png} 
-    \end{table}
-\end{frame}
+%\begin{frame}
+%    \frametitle{Completed Stage II-2: Hyperparameter Search}
+%    \begin{itemize}
+%        \item I started with 25 coarse experiments and fine-tuned the hyperparameters
+%        with 15 more experiments
+%        \item For each genetic algorithm experiment, the number 
+%        of OpenMC evaluations remained constant at 600
+%    \end{itemize}
+%    \begin{table}
+%        \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
+%    \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
+%    upper bounds for each search phase are listed.}
+%        \includegraphics[width=0.8\linewidth]{figures/hyperparameter-search.png} 
+%    \end{table}
+%\end{frame}
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Hyperparameter Search}
@@ -103,20 +107,10 @@
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Results from best hyperparameter set}
-    \begin{itemize}
-        \item I define the best-performing hyperparameter set as the experiment that produces 
-        the highest $\overline{k_{eff}}$ in its final generation. 
-        \item The $k_{eff}$ evolution and packing fraction distribution through 
-        the best performing 39$^{th}$ experiment's generations
-    \end{itemize}
     \begin{figure}[]
         \centering
-        \includegraphics[width=0.55\linewidth]{../docs/figures/keff_conv_39.png}
-        \includegraphics[width=0.55\linewidth]{../docs/figures/pf_39.png}
-        \caption{Each generation's results for ROLLO's genetic algorithm 
-        optimization of the Straightened \acrfull{AHTR} Fuel Slab. The \gls{ROLLO} 
-        simulation used the 39$^{th}$ experiment's hyperparameter set. $k_{eff}$ 
-        uncertainty are $\sim$130pcm.}
+        \includegraphics[width=\linewidth]{../docs/figures/keff_conv_39.png}
+        \caption{keff evolution.}
     \end{figure}
 \end{frame}
 
