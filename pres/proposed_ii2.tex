@@ -1,24 +1,20 @@
 \begin{frame}
     \frametitle{Completed Stage II-2: ROLLO v1.0 Demonstration}
     \begin{itemize}
-        \item I demonstrate ROLLO's capabilities with a single objective design 
-        problem: maximize $k_{eff}$ by varying TRISO particle distribution in an 
-        AHTR fuel slab while keeping total packing fraction constant
-        \item I divided the slab into ten cells along the x-axis between the FliBe and 
-        graphite buffers, resulting in ten cells. A sine distribution governs the 
-        TRISO particle packing fraction's distribution across cells:
+        \item Single objective design problem: maximize $k_{eff}$ by varying 
+        TRISO particle distribution in an AHTR fuel slab while keeping total 
+        packing fraction constant
+        \item A sine distribution governs the TRISO particle packing fraction's 
+        distribution across 10 cells:
     \end{itemize}
-    \small
     \begin{align*}
-        PF(x) &= \left(a\cdot sin(b\cdot x + c) + 2\right) \cdot NF\\
-        \intertext{where}
-        PF &= \mbox{packing fraction } [-] \nonumber \\ 
-        a &= \mbox{amplitude, peak deviation of the function from zero } [-] \nonumber \\
-        b &= \mbox{angular frequency, rate of change of the function argument } [\frac{radians}{cm}] \nonumber \\
-        c &= \mbox{phase, the position in its cycle the oscillation is at t = 0 } [radians]\nonumber \\
-        x &= \mbox{midpoint value for each cell } [cm]\nonumber \\
-        NF &= \mbox{Normalization factor } [-]\nonumber
+        PF(x) &= \left(a\cdot sin(b\cdot x + c) + 2\right) \cdot NF
     \end{align*}
+    \begin{figure}[]
+        \includegraphics[width=0.6\linewidth]{../docs/figures/straightened_slab_mg.png}
+        \caption{AHTR fuel slab spatially discretized into 10 cells with varying 
+        TRISO particle distributions.}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -26,7 +22,7 @@
     \begin{figure}[]
         \centering
         \makebox[\textwidth][c]{\includegraphics[width=0.9\linewidth]{../docs/figures/triso_distribution_sine.png}} 
-        \caption{Above: Straightened AHTR fuel slab with varying TRISO particle 
+        \caption{Above: AHTR fuel slab with varying TRISO particle 
         distribution across ten cells based on the sine distribution. 
         Below: $PF(x) = (0.5\ sin(\frac{\pi}{3}x + \pi) + 2)  \times NF$ 
         sine distribution with red points indicating the packing fraction at each cell.}
@@ -38,7 +34,7 @@
     \begin{figure}
         \vspace{-0.2cm}
         \begin{minipage}[c]{0.7\textwidth}
-        \includegraphics[width=\linewidth]{figures/ii2-rollo-input.png}
+        \includegraphics[width=0.9\linewidth]{figures/ii2-rollo-input.png}
         \end{minipage}\hfill
         \begin{minipage}[c]{0.3\textwidth}
         \caption{ROLLO JSON input file to maximize $k_{eff}$ in the 
@@ -46,20 +42,19 @@
         with control variables $a$, $b$, and $c$.}
         \end{minipage}
     \end{figure}
-\begin{itemize}
-    \item OpenMC runs each simulation with 80 active cycles, 20 inactive cycles, and 
+    \scriptsize
+    OpenMC runs each simulation with 80 active cycles, 20 inactive cycles, and 
     8000 particles to reach $\sim$130pcm uncertainty.
-\end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Hyperparameter Search}
     \begin{itemize}
-        \item In a ROLLO input file, the user defines hyperparameters for the genetic 
-        algorithm. A good hyperparameter set guides the optimization process by 
+        \item A good hyperparameter set guides the optimization process by 
         balancing exploitation and exploration to find an optimal solution quickly 
-        and accurately. 
-        \item I performed the hyperparameter search with a coarse-to-fine random sampling scheme
+        and accurately
+        \item I performed the hyperparameter search with a coarse-to-fine random 
+        sampling scheme
     \end{itemize}
     \begin{figure}[]
         \centering
@@ -74,35 +69,25 @@
     \frametitle{Completed Stage II-2: Hyperparameter Search}
     \begin{itemize}
         \item I started with 25 coarse experiments and fine-tuned the hyperparameters
-        with 15 more experiments. For each genetic algorithm experiment, the number 
+        with 15 more experiments
+        \item For each genetic algorithm experiment, the number 
         of OpenMC evaluations remained constant at 600
     \end{itemize}
-    \begin{figure}
+    \begin{table}
         \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
     \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
     upper bounds for each search phase are listed.}
         \includegraphics[width=0.8\linewidth]{figures/hyperparameter-search.png} 
-    \end{figure}
+    \end{table}
 \end{frame}
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Hyperparameter Search}
     \begin{figure}[]
         \centering
-        \begin{minipage}[c]{0.6\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{../docs/figures/input_hyperparameters_sens.png} 
-        \end{minipage}\hfill
-        \begin{minipage}[c]{0.4\textwidth}
+        \includegraphics[width=0.85\linewidth]{../docs/figures/input_hyperparameters_sens.png} 
         \caption{Hyperparameters search's results for all 40 experiments (coarse 
-        and fine). I plotted the hyperparameters against: a,b,c control parameters, 
-        each experiment's final generation $k_{eff max}$, and final generation 
-        $\overline{k_{eff}}$ with a third color dimension representing each experiment's final 
-        population's $\overline{k_{eff}}$ (color bar representing the $k_{eff}$ values 
-        provided on the right side of the figure). Coarse experiments' (0 to 24) scatter points 
-        are $50\%$ transparent, while the fine experiments' (24 to 39) scatter points 
-        are opaque.}
-        \end{minipage}
+        and fine).}
     \end{figure}
 \end{frame}
 
@@ -137,12 +122,10 @@
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Results from best hyperparameter set}
-    \begin{itemize}
-        \item TRISO particle packing fraction peaks in the center 
-        of the slab, showing that if the optimization problem focuses purely on the 
-        slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the 
-        middle. 
-    \end{itemize}
+    TRISO particle packing fraction peaks in the center 
+    of the slab, showing that if the optimization problem focuses purely on the 
+    slab's neutronics by maximizing $k_{eff}$, the fuel tends to culminate in the 
+    middle. 
     \vspace{-0.2cm}
     \begin{figure}[]
         \centering
