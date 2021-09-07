@@ -35,17 +35,19 @@
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Problem Definition}
+    \begin{minipage}[c]{0.6\textwidth}
     \begin{figure}
-        \vspace{-0.2cm}
-        \begin{minipage}[c]{0.7\textwidth}
         \includegraphics[width=0.9\linewidth]{figures/ii2-rollo-input.png}
-        \end{minipage}\hfill
-        \begin{minipage}[c]{0.3\textwidth}
-        \caption{ROLLO JSON input file to maximize $k_{eff}$ in the 
-        straightened AHTR fuel slab by varying packing fraction distribution 
-        with control variables $a$, $b$, and $c$.}
-        \end{minipage}
+        \caption{ROLLO JSON input file.}
     \end{figure}
+\end{minipage}\hfill
+    \begin{minipage}[c]{0.4\textwidth}
+        \centering
+        \begin{figure}
+            \includegraphics[width=\linewidth]{figures/rollo-flow.png} 
+            \caption{ROLLO's flow.}
+        \end{figure}
+    \end{minipage}
     \scriptsize
     OpenMC runs each simulation with 80 active cycles, 20 inactive cycles, and 
     8000 particles to reach $\sim$130pcm uncertainty.
@@ -69,31 +71,31 @@
     \end{figure}
 \end{frame}
 
-%\begin{frame}
-%    \frametitle{Completed Stage II-2: Hyperparameter Search}
-%    \begin{itemize}
-%        \item I started with 25 coarse experiments and fine-tuned the hyperparameters
-%        with 15 more experiments
-%        \item For each genetic algorithm experiment, the number 
-%        of OpenMC evaluations remained constant at 600
-%    \end{itemize}
-%    \begin{table}
-%        \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
-%    \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
-%    upper bounds for each search phase are listed.}
-%        \includegraphics[width=0.8\linewidth]{figures/hyperparameter-search.png} 
-%    \end{table}
-%\end{frame}
-
 \begin{frame}
     \frametitle{Completed Stage II-2: Hyperparameter Search}
-    \begin{figure}[]
-        \centering
-        \includegraphics[width=0.85\linewidth]{../docs/figures/input_hyperparameters_sens.png} 
-        \caption{Hyperparameters search's results for all 40 experiments (coarse 
-        and fine).}
-    \end{figure}
+    \begin{itemize}
+        \item I started with 25 coarse experiments and fine-tuned the hyperparameters
+        with 15 more experiments
+        \item For each genetic algorithm experiment, the number 
+        of OpenMC evaluations remained constant at 600
+    \end{itemize}
+    \begin{table}
+        \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
+    \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
+    upper bounds for each search phase are listed.}
+        \includegraphics[width=0.8\linewidth]{figures/hyperparameter-search.png} 
+    \end{table}
 \end{frame}
+
+%\begin{frame}
+%    \frametitle{Completed Stage II-2: Hyperparameter Search}
+%    \begin{figure}[]
+%        \centering
+%        \includegraphics[width=0.85\linewidth]{../docs/figures/input_hyperparameters_sens.png} 
+%        \caption{Hyperparameters search's results for all 40 experiments (coarse 
+%        and fine).}
+%    \end{figure}
+%\end{frame}
 
 \begin{frame}
     \frametitle{Completed Stage II-2: Results from best hyperparameter set}
@@ -110,7 +112,7 @@
     \begin{figure}[]
         \centering
         \includegraphics[width=\linewidth]{../docs/figures/keff_conv_39.png}
-        \caption{keff evolution.}
+        \caption{39$^{th}$ Experiment's $k_{eff}$ evolution.}
     \end{figure}
 \end{frame}
 
