@@ -63,30 +63,9 @@
         and accurately
         \item I performed the hyperparameter search with a coarse-to-fine random 
         sampling scheme
-    \end{itemize}
-    \begin{figure}[]
-        \centering
-        \includegraphics[width=0.5\linewidth]{../docs/figures/random_vs_grid_sampling.png} 
-        \caption{The impact of grid sampling vs random sampling on coverage of projections 
-        into subspaces (reproduced from \cite{jordan_hyperparameter_2017}). 
-        Random sampling has better coverage in the subspaces.}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Completed Stage 2-2: Hyperparameter Search}
-    \begin{itemize}
         \item I started with 25 coarse experiments and fine-tuned the hyperparameters
         with 15 more experiments
-        \item For each genetic algorithm experiment, the number 
-        of OpenMC evaluations remained constant at 600
     \end{itemize}
-    \begin{table}
-        \caption{Hyperparameter search is conducted in three phases: \textit{Coarse Search}, 
-    \textit{Fine Search 1}, \textit{Fine Search 2}. Each hyperparameter's lower and
-    upper bounds for each search phase are listed.}
-        \includegraphics[width=0.8\linewidth]{figures/hyperparameter-search.png} 
-    \end{table}
 \end{frame}
 
 %\begin{frame}
