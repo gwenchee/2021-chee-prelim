@@ -18,18 +18,17 @@
             \node [noblock] (e) [above of=b] {Stage 2-2};
             \node [noblock] (e) [above of=c] {Stage 2-3};
             \node [noblock] (e) [above of=d] {Stage 2-4};
-            \node [greyblock] (e) [below of=a, yshift= -0.35cm, font=\small] 
+            \node [greyblock] (e) [below of=a, yshift= -0.5cm, font=\small] 
             {Build first version of ROLLO based on design specifications};
-            \node [lgreyblock] (e) [below of=b, yshift= -0.85cm, font=\small] 
-            {Demonstrate ROLLO's capabilities with a single objective reactor 
-            design problem: vary TRISO particle distribution in AHTR fuel slab 
-            to maximize keff};
+            \node [lgreyblock] (e) [below of=b, yshift= -0.7cm, font=\small] 
+            {\tabitem Demonstrate ROLLO's capabilities \\ \tabitem Vary TRISO 
+            distribution in AHTR fuel slab to maximize $k_{eff}$};
             \node [llgreyblock] (e) [below of=c, xshift=1.8cm, yshift= -0.7cm, font=\small] 
-            {Explore non-conventional reactor designs by varying TRISO particle 
-            distribution, total fuel packing fraction, and FliBe coolant channel
-            shape with the following objectives alone and in combination: 
-            minimize fuel amount, maximize heat transfer, minimize power peaking 
-            factor.};
+            {\tabitem Explore non-conventional reactor designs \\ 
+            \tabitem Control Parameters: TRISO distribution, total fuel, and coolant channel
+            shape \\ 
+            \tabitem Objectives:  minimize fuel amount, maximize heat transfer, 
+            minimize power peaking factor};
             \draw [arrow] (a) -- (b);
             \draw [arrow] (b) -- (c);
             \draw [arrow] (c) -- (d);

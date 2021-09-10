@@ -1,4 +1,4 @@
-manuscript = 2021-chee-prelim
+manuscript = helo
 references = $(wildcard *.bib)
 latexopt   = -shell-escape -halt-on-error -file-line-error 
 
