@@ -12,3 +12,17 @@
         \includegraphics[width=0.55\linewidth]{figures/triso-dimensions.png} 
     \end{table}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Appendix}
+    \begin{itemize}
+        \item  In each ROLLO simulation, each generation runs a population size 
+        number of individual OpenMC simulations
+        \item Each OpenMC simulation takes approximately 13 minutes to run on 
+        a single BlueWaters XE node
+        \item With approximately 600 OpenMC evaluations per ROLLO simulation, the
+        ROLLO simulation takes about 130 BlueWaters node-hours
+        \item The hyperparameter search ran 40 ROLLO simulations, thus using 
+        approximately 5200 node-hours.
+    \end{itemize}
+\end{frame}
