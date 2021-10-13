@@ -5,6 +5,7 @@ document.
 ### TRISO Homogenization
 `/triso_homogenization` contains 2 FHR slab OpenMC simulations with and without 
 TRISO homogenization. Results are in Table 5.1 of my prelim. 
+
 `/triso_homogenization/fhr_plank_as_is`: homogenized
 `/triso_homogenization/fhr_plank_as_is_5_layers`: no homogenization
 
