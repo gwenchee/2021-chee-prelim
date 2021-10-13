@@ -1,0 +1,275 @@
+----------------------------------------
+Begin Torque Prologue on nid25257
+at Mon Apr 12 11:58:49 CDT 2021
+Job Id:			12074904.bw
+Username:		chee1
+Group:			ILL_bbcc
+Job name:		runpy
+Requested resources:	nodes=1:ppn=32:xe,walltime=00:30:00,gres=ccm,neednodes=1:ppn=32:xe
+Queue:			normal
+Account:		bbcc
+End Torque Prologue:  0.123 elapsed
+----------------------------------------
+In CCM JOB:  12074904.bw  JID  12074904  USER  chee1  GROUP  ILL_bbcc  WLM  torque
+Initializing CCM environment, Please Wait
+Warning: The -E option is deprecated and has no effect
+CCM Start success, 1 of 1 responses
+
+
+
+
+Currently Loaded Modulefiles:
+  1) modules/3.2.10.5
+  2) nodestat/2.2-1.0502.60539.1.31.gem
+  3) sdb/1.1-1.0502.63652.4.27.gem
+  4) alps/5.2.4-2.0502.9774.31.12.gem
+  5) lustre-cray_gem_s/2.5_3.0.101_0.46.1_1.0502.8871.45.1-1.0502.21728.75.4
+  6) udreg/2.3.2-1.0502.10518.2.17.gem
+  7) ugni/6.0-1.0502.10863.8.28.gem
+  8) gni-headers/4.0-1.0502.10859.9.27.gem
+  9) dmapp/7.0.1-1.0502.11080.8.74.gem
+ 10) xpmem/0.1-2.0502.64982.7.27.gem
+ 11) hss-llm/7.2.0
+ 12) Base-opts/1.0.2-1.0502.60680.2.4.gem
+ 13) gcc/6.3.0
+ 14) craype-network-gemini
+ 15) craype-interlagos
+ 16) craype/2.5.16
+ 17) cray-mpich/7.7.4
+ 18) torque/6.1.2
+ 19) moab/9.1.2.h6-sles11
+ 20) xalt/0.7.6.local
+ 21) scripts
+ 22) OpenSSL/1.0.2m
+ 23) cURL/7.59.0
+ 24) git/2.17.0
+ 25) wget/1.19.4
+ 26) user-paths
+ 27) gnuplot/5.0.5
+ 28) darshan/3.1.3
+ 29) cray-libsci/18.12.1
+ 30) pmi/5.0.10-1.0000.11050.179.3.gem
+ 31) atp/2.0.4
+ 32) PrgEnv-gnu/5.2.82
+ 33) isvaccel/1.0-1.0502.60544.1.61.gem
+ 34) ccm/2.2.1-1.0502.62540.4.51
+Mon Apr 12 11:59:06 2021: [PE_0]:_pmi_alps_sync:alps response not OKAY
+Mon Apr 12 11:59:06 2021: [PE_0]:_pmi_init:_pmi_alps_sync failed -1
+                                %%%%%%%%%%%%%%%
+                           %%%%%%%%%%%%%%%%%%%%%%%%
+                        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    %%%%%%%%%%%%%%%%%%%%%%%%
+                                     %%%%%%%%%%%%%%%%%%%%%%%%
+                 ###############      %%%%%%%%%%%%%%%%%%%%%%%%
+                ##################     %%%%%%%%%%%%%%%%%%%%%%%
+                ###################     %%%%%%%%%%%%%%%%%%%%%%%
+                ####################     %%%%%%%%%%%%%%%%%%%%%%
+                #####################     %%%%%%%%%%%%%%%%%%%%%
+                ######################     %%%%%%%%%%%%%%%%%%%%
+                #######################     %%%%%%%%%%%%%%%%%%
+                 #######################     %%%%%%%%%%%%%%%%%
+                 ######################     %%%%%%%%%%%%%%%%%
+                  ####################     %%%%%%%%%%%%%%%%%
+                    #################     %%%%%%%%%%%%%%%%%
+                     ###############     %%%%%%%%%%%%%%%%
+                       ############     %%%%%%%%%%%%%%%
+                          ########     %%%%%%%%%%%%%%
+                                      %%%%%%%%%%%
+
+                   | The OpenMC Monte Carlo Code
+         Copyright | 2011-2020 MIT and OpenMC contributors
+           License | https://docs.openmc.org/en/latest/license.html
+           Version | 0.12.0
+          Git SHA1 | 93d6165ecb455fc57242cd03a3f0805089c0e0b9
+         Date/Time | 2021-04-12 11:59:12
+    OpenMP Threads | 32
+
+ Reading settings XML file...
+ Reading cross sections XML file...
+ Reading materials XML file...
+ Reading geometry XML file...
+ Reading U235 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/U235.h5
+ Reading U235 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/092235.h5
+ Reading U238 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/U238.h5
+ Reading U238 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/092238.h5
+ Reading O16 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/O16.h5
+ Reading O16 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/008016.h5
+ Reading C0 from /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/C0.h5
+ Reading C0 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/006000.h5
+ Reading Si28 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/Si28.h5
+ Reading Si28 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/014028.h5
+ Reading Si29 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/Si29.h5
+ Reading Si29 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/014029.h5
+ Reading Si30 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/Si30.h5
+ Reading Si30 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/014030.h5
+ Reading Li6 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/Li6.h5
+ Reading Li6 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/003006.h5
+ Reading Li7 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/Li7.h5
+ Reading Li7 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/003007.h5
+ Reading Be9 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/Be9.h5
+ Reading Be9 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/004009.h5
+ Reading F19 from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/F19.h5
+ Reading F19 WMP data from
+ /projects/sciteam/bbcc/projects/openmc/data/endfb71_hdf5/wmp/009019.h5
+ Minimum neutron data temperature: 900.000000 K
+ Maximum neutron data temperature: 1200.000000 K
+ Preparing distributed cell instances...
+ Writing summary.h5 file...
+ Maximum neutron transport energy: 20000000.000000 eV for U235
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.37293
+        2/1    1.36886
+        3/1    1.36446
+        4/1    1.41308
+        5/1    1.39443
+        6/1    1.39652
+        7/1    1.39947
+        8/1    1.40368
+        9/1    1.37613
+       10/1    1.38901
+       11/1    1.38521
+       12/1    1.40244
+       13/1    1.37545
+       14/1    1.39509
+       15/1    1.36937
+       16/1    1.39628
+       17/1    1.37670
+       18/1    1.38529
+       19/1    1.36648
+       20/1    1.42868
+       21/1    1.38779
+       22/1    1.40123    1.39451 +/- 0.00672
+       23/1    1.37533    1.38812 +/- 0.00748
+       24/1    1.37915    1.38587 +/- 0.00574
+       25/1    1.38877    1.38645 +/- 0.00449
+       26/1    1.38420    1.38608 +/- 0.00368
+       27/1    1.41194    1.38977 +/- 0.00483
+       28/1    1.38367    1.38901 +/- 0.00425
+       29/1    1.34482    1.38410 +/- 0.00618
+       30/1    1.39504    1.38519 +/- 0.00563
+       31/1    1.37975    1.38470 +/- 0.00512
+       32/1    1.40125    1.38608 +/- 0.00487
+       33/1    1.38924    1.38632 +/- 0.00449
+       34/1    1.38132    1.38596 +/- 0.00417
+       35/1    1.39276    1.38642 +/- 0.00391
+       36/1    1.36902    1.38533 +/- 0.00382
+       37/1    1.38264    1.38517 +/- 0.00359
+       38/1    1.37497    1.38460 +/- 0.00343
+       39/1    1.40271    1.38556 +/- 0.00338
+       40/1    1.39493    1.38603 +/- 0.00324
+       41/1    1.40661    1.38701 +/- 0.00324
+       42/1    1.39811    1.38751 +/- 0.00313
+       43/1    1.38702    1.38749 +/- 0.00299
+       44/1    1.39486    1.38780 +/- 0.00288
+       45/1    1.37461    1.38727 +/- 0.00281
+       46/1    1.37920    1.38696 +/- 0.00272
+       47/1    1.40172    1.38750 +/- 0.00267
+       48/1    1.38155    1.38729 +/- 0.00258
+       49/1    1.38735    1.38729 +/- 0.00249
+       50/1    1.38982    1.38738 +/- 0.00241
+       51/1    1.37484    1.38697 +/- 0.00236
+       52/1    1.37655    1.38665 +/- 0.00231
+       53/1    1.40117    1.38709 +/- 0.00228
+       54/1    1.39355    1.38728 +/- 0.00222
+       55/1    1.39301    1.38744 +/- 0.00217
+       56/1    1.39985    1.38779 +/- 0.00213
+       57/1    1.40099    1.38814 +/- 0.00210
+       58/1    1.40773    1.38866 +/- 0.00211
+       59/1    1.39414    1.38880 +/- 0.00206
+       60/1    1.41334    1.38941 +/- 0.00210
+       61/1    1.36852    1.38890 +/- 0.00211
+       62/1    1.38091    1.38871 +/- 0.00207
+       63/1    1.41783    1.38939 +/- 0.00213
+       64/1    1.36331    1.38880 +/- 0.00217
+       65/1    1.36885    1.38835 +/- 0.00216
+       66/1    1.42035    1.38905 +/- 0.00223
+       67/1    1.42946    1.38991 +/- 0.00234
+       68/1    1.39315    1.38998 +/- 0.00229
+       69/1    1.36044    1.38937 +/- 0.00233
+       70/1    1.34238    1.38843 +/- 0.00247
+       71/1    1.40940    1.38884 +/- 0.00245
+       72/1    1.40991    1.38925 +/- 0.00244
+       73/1    1.37012    1.38889 +/- 0.00242
+       74/1    1.39702    1.38904 +/- 0.00238
+       75/1    1.36559    1.38861 +/- 0.00237
+       76/1    1.41143    1.38902 +/- 0.00237
+       77/1    1.40871    1.38937 +/- 0.00235
+       78/1    1.41486    1.38981 +/- 0.00235
+       79/1    1.39834    1.38995 +/- 0.00231
+       80/1    1.37991    1.38978 +/- 0.00228
+       81/1    1.40927    1.39010 +/- 0.00227
+       82/1    1.37158    1.38980 +/- 0.00225
+       83/1    1.39178    1.38983 +/- 0.00221
+       84/1    1.38237    1.38972 +/- 0.00218
+       85/1    1.39373    1.38978 +/- 0.00215
+       86/1    1.39535    1.38986 +/- 0.00212
+       87/1    1.37875    1.38970 +/- 0.00209
+       88/1    1.37502    1.38948 +/- 0.00207
+       89/1    1.37394    1.38926 +/- 0.00205
+       90/1    1.43199    1.38987 +/- 0.00212
+       91/1    1.38888    1.38985 +/- 0.00209
+       92/1    1.39276    1.38989 +/- 0.00206
+       93/1    1.36931    1.38961 +/- 0.00205
+       94/1    1.35251    1.38911 +/- 0.00208
+       95/1    1.43076    1.38967 +/- 0.00213
+       96/1    1.39223    1.38970 +/- 0.00210
+       97/1    1.40300    1.38987 +/- 0.00208
+       98/1    1.35703    1.38945 +/- 0.00209
+       99/1    1.37897    1.38932 +/- 0.00207
+      100/1    1.38432    1.38926 +/- 0.00205
+ Creating state point statepoint.100.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 6.1864e+00 seconds
+   Reading cross sections          = 5.3684e+00 seconds
+ Total time in simulation          = 1.6220e+02 seconds
+   Time in transport only          = 1.6174e+02 seconds
+   Time in inactive batches        = 3.3235e+01 seconds
+   Time in active batches          = 1.2897e+02 seconds
+   Time synchronizing fission bank = 2.7813e-01 seconds
+     Sampling source sites         = 2.4905e-01 seconds
+     SEND/RECV source sites        = 2.8814e-02 seconds
+   Time accumulating tallies       = 1.6968e-04 seconds
+ Total time for finalization       = 2.6730e-06 seconds
+ Total time elapsed                = 1.6846e+02 seconds
+ Calculation Rate (inactive)       = 5416.01 particles/second
+ Calculation Rate (active)         = 5582.83 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.38652 +/- 0.00141
+ k-effective (Track-length)  = 1.38926 +/- 0.00205
+ k-effective (Absorption)    = 1.38587 +/- 0.00113
+ Combined k-effective        = 1.38625 +/- 0.00109
+ Leakage Fraction            = 0.00000 +/- 0.00000
+
+Application 97994355 resources: utime ~4862s, stime ~91s, Rss ~116540, inblocks ~190680, outblocks ~3192
